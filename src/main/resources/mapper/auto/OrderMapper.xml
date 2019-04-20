@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.auto.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
+    <result column="order_status" jdbcType="CHAR" property="orderStatus" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_type" jdbcType="CHAR" property="payType" />
+    <result column="send_express_time" jdbcType="TIMESTAMP" property="sendExpressTime" />
+    <result column="get_goods_time" jdbcType="TIMESTAMP" property="getGoodsTime" />
+    <result column="shopping_addr_id" jdbcType="BIGINT" property="shoppingAddrId" />
+    <result column="shipping_province" jdbcType="VARCHAR" property="shippingProvince" />
+    <result column="shipping_city" jdbcType="VARCHAR" property="shippingCity" />
+    <result column="shipping_county" jdbcType="VARCHAR" property="shippingCounty" />
+    <result column="shipping_street" jdbcType="VARCHAR" property="shippingStreet" />
+    <result column="shipping_address" jdbcType="VARCHAR" property="shippingAddress" />
+    <result column="shipping_person" jdbcType="VARCHAR" property="shippingPerson" />
+    <result column="shipping_phone" jdbcType="VARCHAR" property="shippingPhone" />
+    <result column="shipping_mobile" jdbcType="VARCHAR" property="shippingMobile" />
+    <result column="invoice_title" jdbcType="VARCHAR" property="invoiceTitle" />
+    <result column="invoice_content" jdbcType="VARCHAR" property="invoiceContent" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="invoice_type" jdbcType="CHAR" property="invoiceType" />
+    <result column="customer_remark" jdbcType="VARCHAR" property="customerRemark" />
+    <result column="order_integral" jdbcType="BIGINT" property="orderIntegral" />
+    <result column="evaluate_flag" jdbcType="CHAR" property="evaluateFlag" />
+    <result column="express_price" jdbcType="DECIMAL" property="expressPrice" />
+    <result column="shipping_postcode" jdbcType="VARCHAR" property="shippingPostcode" />
+    <result column="order_cancel_time" jdbcType="TIMESTAMP" property="orderCancelTime" />
+    <result column="order_cancel_remark" jdbcType="VARCHAR" property="orderCancelRemark" />
+    <result column="back_price" jdbcType="DECIMAL" property="backPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="send_person" jdbcType="VARCHAR" property="sendPerson" />
+    <result column="send_mobile" jdbcType="VARCHAR" property="sendMobile" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, customer_id, order_code, order_price, order_status, pay_time, pay_type, send_express_time, 
+    get_goods_time, shopping_addr_id, shipping_province, shipping_city, shipping_county, 
+    shipping_street, shipping_address, shipping_person, shipping_phone, shipping_mobile, 
+    invoice_title, invoice_content, del_flag, invoice_type, customer_remark, order_integral, 
+    evaluate_flag, express_price, shipping_postcode, order_cancel_time, order_cancel_remark, 
+    back_price, create_time, send_person, send_mobile
+  </sql>
+  <select id="selectByExample" parameterType="com.gow.beau.storage.auto.model.OrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gow_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gow_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gow_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gow.beau.storage.auto.model.OrderExample">
+    delete from gow_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.Order" useGeneratedKeys="true">
+    insert into gow_order (customer_id, order_code, order_price, 
+      order_status, pay_time, pay_type, 
+      send_express_time, get_goods_time, shopping_addr_id, 
+      shipping_province, shipping_city, shipping_county, 
+      shipping_street, shipping_address, shipping_person, 
+      shipping_phone, shipping_mobile, invoice_title, 
+      invoice_content, del_flag, invoice_type, 
+      customer_remark, order_integral, evaluate_flag, 
+      express_price, shipping_postcode, order_cancel_time, 
+      order_cancel_remark, back_price, create_time, 
+      send_person, send_mobile)
+    values (#{customerId,jdbcType=BIGINT}, #{orderCode,jdbcType=VARCHAR}, #{orderPrice,jdbcType=DECIMAL}, 
+      #{orderStatus,jdbcType=CHAR}, #{payTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=CHAR}, 
+      #{sendExpressTime,jdbcType=TIMESTAMP}, #{getGoodsTime,jdbcType=TIMESTAMP}, #{shoppingAddrId,jdbcType=BIGINT}, 
+      #{shippingProvince,jdbcType=VARCHAR}, #{shippingCity,jdbcType=VARCHAR}, #{shippingCounty,jdbcType=VARCHAR}, 
+      #{shippingStreet,jdbcType=VARCHAR}, #{shippingAddress,jdbcType=VARCHAR}, #{shippingPerson,jdbcType=VARCHAR}, 
+      #{shippingPhone,jdbcType=VARCHAR}, #{shippingMobile,jdbcType=VARCHAR}, #{invoiceTitle,jdbcType=VARCHAR}, 
+      #{invoiceContent,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}, #{invoiceType,jdbcType=CHAR}, 
+      #{customerRemark,jdbcType=VARCHAR}, #{orderIntegral,jdbcType=BIGINT}, #{evaluateFlag,jdbcType=CHAR}, 
+      #{expressPrice,jdbcType=DECIMAL}, #{shippingPostcode,jdbcType=VARCHAR}, #{orderCancelTime,jdbcType=TIMESTAMP}, 
+      #{orderCancelRemark,jdbcType=VARCHAR}, #{backPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{sendPerson,jdbcType=VARCHAR}, #{sendMobile,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.Order" useGeneratedKeys="true">
+    insert into gow_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="orderPrice != null">
+        order_price,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="sendExpressTime != null">
+        send_express_time,
+      </if>
+      <if test="getGoodsTime != null">
+        get_goods_time,
+      </if>
+      <if test="shoppingAddrId != null">
+        shopping_addr_id,
+      </if>
+      <if test="shippingProvince != null">
+        shipping_province,
+      </if>
+      <if test="shippingCity != null">
+        shipping_city,
+      </if>
+      <if test="shippingCounty != null">
+        shipping_county,
+      </if>
+      <if test="shippingStreet != null">
+        shipping_street,
+      </if>
+      <if test="shippingAddress != null">
+        shipping_address,
+      </if>
+      <if test="shippingPerson != null">
+        shipping_person,
+      </if>
+      <if test="shippingPhone != null">
+        shipping_phone,
+      </if>
+      <if test="shippingMobile != null">
+        shipping_mobile,
+      </if>
+      <if test="invoiceTitle != null">
+        invoice_title,
+      </if>
+      <if test="invoiceContent != null">
+        invoice_content,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="invoiceType != null">
+        invoice_type,
+      </if>
+      <if test="customerRemark != null">
+        customer_remark,
+      </if>
+      <if test="orderIntegral != null">
+        order_integral,
+      </if>
+      <if test="evaluateFlag != null">
+        evaluate_flag,
+      </if>
+      <if test="expressPrice != null">
+        express_price,
+      </if>
+      <if test="shippingPostcode != null">
+        shipping_postcode,
+      </if>
+      <if test="orderCancelTime != null">
+        order_cancel_time,
+      </if>
+      <if test="orderCancelRemark != null">
+        order_cancel_remark,
+      </if>
+      <if test="backPrice != null">
+        back_price,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="sendPerson != null">
+        send_person,
+      </if>
+      <if test="sendMobile != null">
+        send_mobile,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=CHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=CHAR},
+      </if>
+      <if test="sendExpressTime != null">
+        #{sendExpressTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="getGoodsTime != null">
+        #{getGoodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shoppingAddrId != null">
+        #{shoppingAddrId,jdbcType=BIGINT},
+      </if>
+      <if test="shippingProvince != null">
+        #{shippingProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingCity != null">
+        #{shippingCity,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingCounty != null">
+        #{shippingCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingStreet != null">
+        #{shippingStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingAddress != null">
+        #{shippingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingPerson != null">
+        #{shippingPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingPhone != null">
+        #{shippingPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingMobile != null">
+        #{shippingMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTitle != null">
+        #{invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceContent != null">
+        #{invoiceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="invoiceType != null">
+        #{invoiceType,jdbcType=CHAR},
+      </if>
+      <if test="customerRemark != null">
+        #{customerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIntegral != null">
+        #{orderIntegral,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateFlag != null">
+        #{evaluateFlag,jdbcType=CHAR},
+      </if>
+      <if test="expressPrice != null">
+        #{expressPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingPostcode != null">
+        #{shippingPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCancelTime != null">
+        #{orderCancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderCancelRemark != null">
+        #{orderCancelRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="backPrice != null">
+        #{backPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendPerson != null">
+        #{sendPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="sendMobile != null">
+        #{sendMobile,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gow.beau.storage.auto.model.OrderExample" resultType="java.lang.Long">
+    select count(*) from gow_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gow_order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderCode != null">
+        order_code = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderPrice != null">
+        order_price = #{record.orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderStatus != null">
+        order_status = #{record.orderStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.payTime != null">
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=CHAR},
+      </if>
+      <if test="record.sendExpressTime != null">
+        send_express_time = #{record.sendExpressTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.getGoodsTime != null">
+        get_goods_time = #{record.getGoodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shoppingAddrId != null">
+        shopping_addr_id = #{record.shoppingAddrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.shippingProvince != null">
+        shipping_province = #{record.shippingProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingCity != null">
+        shipping_city = #{record.shippingCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingCounty != null">
+        shipping_county = #{record.shippingCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingStreet != null">
+        shipping_street = #{record.shippingStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingAddress != null">
+        shipping_address = #{record.shippingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingPerson != null">
+        shipping_person = #{record.shippingPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingPhone != null">
+        shipping_phone = #{record.shippingPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingMobile != null">
+        shipping_mobile = #{record.shippingMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceTitle != null">
+        invoice_title = #{record.invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceContent != null">
+        invoice_content = #{record.invoiceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.invoiceType != null">
+        invoice_type = #{record.invoiceType,jdbcType=CHAR},
+      </if>
+      <if test="record.customerRemark != null">
+        customer_remark = #{record.customerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderIntegral != null">
+        order_integral = #{record.orderIntegral,jdbcType=BIGINT},
+      </if>
+      <if test="record.evaluateFlag != null">
+        evaluate_flag = #{record.evaluateFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.expressPrice != null">
+        express_price = #{record.expressPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.shippingPostcode != null">
+        shipping_postcode = #{record.shippingPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCancelTime != null">
+        order_cancel_time = #{record.orderCancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderCancelRemark != null">
+        order_cancel_remark = #{record.orderCancelRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backPrice != null">
+        back_price = #{record.backPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sendPerson != null">
+        send_person = #{record.sendPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendMobile != null">
+        send_mobile = #{record.sendMobile,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gow_order
+    set id = #{record.id,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      order_code = #{record.orderCode,jdbcType=VARCHAR},
+      order_price = #{record.orderPrice,jdbcType=DECIMAL},
+      order_status = #{record.orderStatus,jdbcType=CHAR},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      pay_type = #{record.payType,jdbcType=CHAR},
+      send_express_time = #{record.sendExpressTime,jdbcType=TIMESTAMP},
+      get_goods_time = #{record.getGoodsTime,jdbcType=TIMESTAMP},
+      shopping_addr_id = #{record.shoppingAddrId,jdbcType=BIGINT},
+      shipping_province = #{record.shippingProvince,jdbcType=VARCHAR},
+      shipping_city = #{record.shippingCity,jdbcType=VARCHAR},
+      shipping_county = #{record.shippingCounty,jdbcType=VARCHAR},
+      shipping_street = #{record.shippingStreet,jdbcType=VARCHAR},
+      shipping_address = #{record.shippingAddress,jdbcType=VARCHAR},
+      shipping_person = #{record.shippingPerson,jdbcType=VARCHAR},
+      shipping_phone = #{record.shippingPhone,jdbcType=VARCHAR},
+      shipping_mobile = #{record.shippingMobile,jdbcType=VARCHAR},
+      invoice_title = #{record.invoiceTitle,jdbcType=VARCHAR},
+      invoice_content = #{record.invoiceContent,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      invoice_type = #{record.invoiceType,jdbcType=CHAR},
+      customer_remark = #{record.customerRemark,jdbcType=VARCHAR},
+      order_integral = #{record.orderIntegral,jdbcType=BIGINT},
+      evaluate_flag = #{record.evaluateFlag,jdbcType=CHAR},
+      express_price = #{record.expressPrice,jdbcType=DECIMAL},
+      shipping_postcode = #{record.shippingPostcode,jdbcType=VARCHAR},
+      order_cancel_time = #{record.orderCancelTime,jdbcType=TIMESTAMP},
+      order_cancel_remark = #{record.orderCancelRemark,jdbcType=VARCHAR},
+      back_price = #{record.backPrice,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      send_person = #{record.sendPerson,jdbcType=VARCHAR},
+      send_mobile = #{record.sendMobile,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gow.beau.storage.auto.model.Order">
+    update gow_order
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderCode != null">
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        order_price = #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=CHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=CHAR},
+      </if>
+      <if test="sendExpressTime != null">
+        send_express_time = #{sendExpressTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="getGoodsTime != null">
+        get_goods_time = #{getGoodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shoppingAddrId != null">
+        shopping_addr_id = #{shoppingAddrId,jdbcType=BIGINT},
+      </if>
+      <if test="shippingProvince != null">
+        shipping_province = #{shippingProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingCity != null">
+        shipping_city = #{shippingCity,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingCounty != null">
+        shipping_county = #{shippingCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingStreet != null">
+        shipping_street = #{shippingStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingAddress != null">
+        shipping_address = #{shippingAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingPerson != null">
+        shipping_person = #{shippingPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingPhone != null">
+        shipping_phone = #{shippingPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingMobile != null">
+        shipping_mobile = #{shippingMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTitle != null">
+        invoice_title = #{invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceContent != null">
+        invoice_content = #{invoiceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="invoiceType != null">
+        invoice_type = #{invoiceType,jdbcType=CHAR},
+      </if>
+      <if test="customerRemark != null">
+        customer_remark = #{customerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIntegral != null">
+        order_integral = #{orderIntegral,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateFlag != null">
+        evaluate_flag = #{evaluateFlag,jdbcType=CHAR},
+      </if>
+      <if test="expressPrice != null">
+        express_price = #{expressPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingPostcode != null">
+        shipping_postcode = #{shippingPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCancelTime != null">
+        order_cancel_time = #{orderCancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderCancelRemark != null">
+        order_cancel_remark = #{orderCancelRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="backPrice != null">
+        back_price = #{backPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendPerson != null">
+        send_person = #{sendPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="sendMobile != null">
+        send_mobile = #{sendMobile,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gow.beau.storage.auto.model.Order">
+    update gow_order
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      order_price = #{orderPrice,jdbcType=DECIMAL},
+      order_status = #{orderStatus,jdbcType=CHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_type = #{payType,jdbcType=CHAR},
+      send_express_time = #{sendExpressTime,jdbcType=TIMESTAMP},
+      get_goods_time = #{getGoodsTime,jdbcType=TIMESTAMP},
+      shopping_addr_id = #{shoppingAddrId,jdbcType=BIGINT},
+      shipping_province = #{shippingProvince,jdbcType=VARCHAR},
+      shipping_city = #{shippingCity,jdbcType=VARCHAR},
+      shipping_county = #{shippingCounty,jdbcType=VARCHAR},
+      shipping_street = #{shippingStreet,jdbcType=VARCHAR},
+      shipping_address = #{shippingAddress,jdbcType=VARCHAR},
+      shipping_person = #{shippingPerson,jdbcType=VARCHAR},
+      shipping_phone = #{shippingPhone,jdbcType=VARCHAR},
+      shipping_mobile = #{shippingMobile,jdbcType=VARCHAR},
+      invoice_title = #{invoiceTitle,jdbcType=VARCHAR},
+      invoice_content = #{invoiceContent,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      invoice_type = #{invoiceType,jdbcType=CHAR},
+      customer_remark = #{customerRemark,jdbcType=VARCHAR},
+      order_integral = #{orderIntegral,jdbcType=BIGINT},
+      evaluate_flag = #{evaluateFlag,jdbcType=CHAR},
+      express_price = #{expressPrice,jdbcType=DECIMAL},
+      shipping_postcode = #{shippingPostcode,jdbcType=VARCHAR},
+      order_cancel_time = #{orderCancelTime,jdbcType=TIMESTAMP},
+      order_cancel_remark = #{orderCancelRemark,jdbcType=VARCHAR},
+      back_price = #{backPrice,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      send_person = #{sendPerson,jdbcType=VARCHAR},
+      send_mobile = #{sendMobile,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

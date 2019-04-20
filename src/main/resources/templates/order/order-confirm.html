@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>确认订单</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="../../js/rem.js"></script> 
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/loading.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+			<a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
+			<p>确认订单</p>
+	    </header>
+		<form action="/order/saveOrder" method="post">
+			<input type="hidden" name="customerId" value="1">
+	    <div id="main" class="mui-clearfix">
+	    	<div class="plist confirm clearfloat">
+				<ul>
+					<li class="clearfloat" th:if="${orderConfirmInfo.OrderConfirmAddressRsp != null}">
+						<a href="#">
+							<i class="iconfont icon-dizhi icon-dizhitwo fl"></i>
+							<p class="fl">
+								<input type="hidden" name="addressId" th:value="${orderConfirmInfo.OrderConfirmAddressRsp.id}">
+								<span th:text="${orderConfirmInfo.OrderConfirmAddressRsp.addressName}"></span>
+								<span th:text="${orderConfirmInfo.OrderConfirmAddressRsp.addressPhone}"></span>
+								<br>
+								<span th:text="${orderConfirmInfo.OrderConfirmAddressRsp.addressProvince}"></span>
+								<span th:text="${orderConfirmInfo.OrderConfirmAddressRsp.addressCity}"></span>
+								<span th:text="${orderConfirmInfo.OrderConfirmAddressRsp.addressCounty}"></span>
+								<span th:text="${orderConfirmInfo.OrderConfirmAddressRsp.addressStreet}"></span>
+								<span th:text="${orderConfirmInfo.OrderConfirmAddressRsp.addressDetail}"></span>
+							</p>
+							<!--<i class="iconfont icon-qianjin fr"></i>-->
+						</a>
+					</li>
+					<li class="clearfloat" th:if="${orderConfirmInfo.OrderConfirmAddressRsp == null}">
+						<a href="/addressPage/address2-list-page">
+							<i class="iconfont icon-dizhi icon-dizhitwo fl"></i>
+							<p class="fl">
+								请选择地址
+							</p>
+							<i class="iconfont icon-qianjin fr"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="order-list order-listtwo clearfloat">
+	    		<div class="list clearfloat fl box-s" th:each="goods,iterStat: ${orderConfirmInfo.orderConfirmGoodsRspList}">
+					<input type="hidden" th:value="${goods.shoppingCartId}" th:name="'goodsReqs['+${iterStat.index}+'].shoppingCartId'">
+					<input type="hidden" th:value="${goods.id}" th:name="'goodsReqs['+${iterStat.index}+'].goodsId'">
+					<input type="hidden" th:value="${goods.goodsNumber}" th:name="'goodsReqs['+${iterStat.index}+'].goodsNumber'">
+	    			<a th:href="'/goodsDetailPage/goods-detail-page?goodsId='+${goods.id}">
+		    			<div class="tu fl clearfloat">
+		    				<img th:src="${goods.goodsImg}"/>
+		    			</div>
+		    			<div class="middle clearfloat fl">
+		    				<p class="tit" th:text="${goods.goodsName}">XXX夏季女装性感流行</p>
+							<p class="fu-tit" th:text="${goods.goodsSpec}">
+								粉红性感流行L尺寸
+							</p>
+		    				<p class="price clearfloat">
+		    					<span class="xprice fl">¥<span th:text="${goods.goodsPrice}"></span></span>
+		    					<span class="yprice fl">¥0</span>
+		    					<span class="shu">×<span th:text="${goods.goodsNumber}"></span></span>
+		    				</p>
+		    			</div>
+	    			</a>
+	    		</div>
+	    	</div>
+	    	
+	    	<div class="plist clearfloat data confirm-list box-s contaniner">
+				<ul>
+					<li class="clearfloat" onClick="toshare()">
+						<a href="javascript:void(0)">
+							<p class="fl">配送方式&nbsp&nbsp:&nbsp&nbsp<span>快递</span></p>
+							<i class="fr iconfont icon-right icon-qianjin"></i>
+						</a>
+					</li>
+					<!--这里是配送方式内容-->
+					<div class="am-share">
+					  <h3 class="am-share-title">配送方式</h3>
+					  <div class="am-share-sns box-s">
+					    <div class="am-list">
+					    	<div class="addlist clearfloat">
+					    		<div class="bottom clearfloat box-s">
+					    			<section class="shopcar clearfloat">
+					    				<span class="fl">快递</span>
+										<div class="shopcar-checkbox fr">
+											<label for="shopcar" onselectstart="return false" class="shopcar-checkd"></label>
+											<input type="checkbox" id="shopcar" name="expressWay" value="快递"/>
+										</div>
+									</section>
+					    		</div>
+					    	</div>
+					    </div>
+					  </div>
+					  <div class="am-share-footer"><div class="share_btn">关闭</div></div>
+					</div>
+					<li class="clearfloat">
+						<p class="fl">订单留言</p>
+						<input type="text" class="fr shuru" name="orderMessage" id="" value="" placeholder="限50字以内" />
+					</li>
+				</ul>
+			</div>
+	    	
+	    	<div class="clearfloat data confirm-list confirm-listwo box-s">
+				<ul>
+					<li class="clearfloat">
+						<a href="#">
+							<p class="fl">商品件数：</p>
+							<span class="fr" th:text="${orderConfirmInfo.goodsSumNumber}">2</span>
+						</a>
+					</li>
+					<li class="clearfloat">
+						<a href="#">
+							<p class="fl">总商品金额：</p>
+							<span class="fr" th:text="${orderConfirmInfo.sumPrice}">¥598</span>
+						</a>
+					</li>
+					<li class="clearfloat">
+						<a href="#">
+							<p class="fl">运费：</p>
+							<span class="fr" th:text="${orderConfirmInfo.expressPrice}">¥0.00</span>
+							<input type="hidden" name="expressPrice" th:value="${orderConfirmInfo.expressPrice}">
+						</a>
+					</li>
+				</ul>
+			</div>
+	    </div>
+		</form>
+	    
+	    <footer class="page-footer fixed-footer" id="footer">
+	     	<p class="confirm-price fl box-s">
+	     		合计：<span>¥<span th:text="${orderConfirmInfo.sumPrice+orderConfirmInfo.expressPrice}"></span></span>
+	     	</p>
+	     	<a href="#" class="confirm-submit fl" data="0">
+	     		提交订单
+	     	</a>
+			<input type="hidden" id="uuid" th:value="${uuid}">
+	    </footer>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js" ></script>
+	<script type="text/javascript" src="../../js/jquery.form.js" ></script>
+	<script src="../../js/fastclick.js"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/hmt.js" ></script>
+	<script type="text/javascript" src="../../js/psong.js" ></script>
+	<script type="text/javascript">
+
+		//提交订单
+		$(".confirm-submit").on('click',function () {
+		    var uuid = $("#uuid").val();
+		    if(uuid) {
+                $("#uuid").attr("value","");
+                var token = localStorage.getItem("token");
+                $("form").ajaxSubmit({
+                    headers: {
+                        "token": token
+                    },
+                    type: "post",
+                    url: "/order/saveOrder",
+                    success: function (data) {
+                        if (data) {
+                            window.location.href = "/orderPage/order-pay-page?orderCode=" + data.orderCode;
+                        }
+                    }
+                });
+            }else{
+		        alert("不能重复提交订单");
+			}
+        });
+
+	</script>
+</html>

@@ -1,0 +1,73 @@
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<footer class="page-footer fixed-footer" id="footer" th:fragment="footer">
+    <ul>
+        <li data="index">
+            <a href="/indexPage/index-page" id="indexPage_index-page">
+                <img src="../../img/footer001.png"/>
+                <p>首页</p>
+            </a>
+        </li>
+        <li data="category">
+            <a href="/categoryPage/category-page" id="categoryPage_category-page">
+                <img src="../../img/footer002.png"/>
+                <p>分类</p>
+            </a>
+        </li>
+        <li data="shoppingcart">
+            <a href="/shoppingCartPage/shopping-cart-page" id="shoppingCartPage_shopping-cart-page">
+                <img src="../../img/footer003.png"/>
+                <p>购物车</p>
+            </a>
+        </li>
+        <li data="pcenter">
+            <a href="/pcenterPage/pcenter2-page" id="pcenterPage_pcenter-page">
+                <img src="../../img/footer004.png"/>
+                <p id="my" data="not-login">未登录</p>
+            </a>
+        </li>
+    </ul>
+    <script>
+
+        $(function () {
+
+            function isToken() {
+                var token = localStorage.getItem("token");
+                if(token){
+                    $.ajax({
+                        type : "post",
+                        url : "/login/isTokenToUser",
+                        headers : {"token":token},
+                        success : function (user) {
+                            if(user){
+                                $("#my").text("我的");
+                                $("#my").attr("data","login");
+                                //保存新的token
+                                localStorage.setItem("token",token);
+                            }else{
+                                localStorage.removeItem("token");
+                            }
+                        }
+
+                    })
+                }
+            }
+            isToken();
+
+
+            //我的
+            /*$("#pcenterPage_pcenter-page").on('click',function () {
+                var token = localStorage.getItem("token");
+                var isLogin = $("#my").attr("data");
+                if(!token && isLogin==='not-login'){
+                    window.location.href = "/login/login-page";
+                }else {
+                    window.location.href = "/pcenterPage/pcenter2-page";
+                }
+            });*/
+
+
+        });
+
+
+    </script>
+</footer>

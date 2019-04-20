@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.CustomerExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Customer">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_username" jdbcType="VARCHAR" property="customerUsername" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="customer_password" jdbcType="VARCHAR" property="customerPassword" />
+    <result column="customer_nickname" jdbcType="VARCHAR" property="customerNickname" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="customer_realname" jdbcType="VARCHAR" property="customerRealname" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="customer_img" jdbcType="VARCHAR" property="customerImg" />
+    <result column="captcha" jdbcType="VARCHAR" property="captcha" />
+    <result column="aead_time" jdbcType="TIMESTAMP" property="aeadTime" />
+    <result column="pwd_captcha" jdbcType="VARCHAR" property="pwdCaptcha" />
+    <result column="pwd_aead_time" jdbcType="TIMESTAMP" property="pwdAeadTime" />
+    <result column="login_error_count" jdbcType="BIGINT" property="loginErrorCount" />
+    <result column="user_salt_val" jdbcType="VARCHAR" property="userSaltVal" />
+    <result column="customer_referee" jdbcType="VARCHAR" property="customerReferee" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="selectCustomerNameAndPaddByName" resultType="com.gow.beau.model.rsp.login.LoginRsp">
+    SELECT
+      id as customerId
+      ,customer_username as customerUsername
+      ,customer_password as customerPassword
+    from gow_customer WHERE customer_username = #{name}
+  </select>
+
+  <select id="selectCountByName" resultType="java.lang.Integer">
+    SELECT
+      count(0)
+    from gow_customer WHERE customer_username = #{customerUsername}
+  </select>
+
+</mapper>

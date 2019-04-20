@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.GoodsCollectionExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.GoodsCollection">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_spec" jdbcType="VARCHAR" property="goodsSpec" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="goods_img" jdbcType="VARCHAR" property="goodsImg" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="selectCountBycustomerIdAndGoodsId" resultType="java.lang.Integer">
+    SELECT count(0) FROM gow_goods_collection WHERE customer_id = #{customerId} and goods_id = #{goodsId}
+  </select>
+
+  <select id="selectGoodsCollectionListBycustomerId" resultMap="BaseResultMap">
+    SELECT * FROM gow_goods_collection WHERE customer_id = #{customerId} ORDER BY create_time DESC
+  </select>
+
+</mapper>

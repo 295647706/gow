@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.auto.mapper.CustomerAddressMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.CustomerAddress">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="address_name" jdbcType="VARCHAR" property="addressName" />
+    <result column="address_province" jdbcType="VARCHAR" property="addressProvince" />
+    <result column="address_city" jdbcType="VARCHAR" property="addressCity" />
+    <result column="address_county" jdbcType="VARCHAR" property="addressCounty" />
+    <result column="address_street" jdbcType="VARCHAR" property="addressStreet" />
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="address_phone" jdbcType="VARCHAR" property="addressPhone" />
+    <result column="is_default" jdbcType="CHAR" property="isDefault" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="address_telephone" jdbcType="VARCHAR" property="addressTelephone" />
+    <result column="address_email" jdbcType="VARCHAR" property="addressEmail" />
+    <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, customer_id, address_name, address_province, address_city, address_county, address_street, 
+    address_detail, address_phone, is_default, create_time, address_telephone, address_email, 
+    is_delete
+  </sql>
+  <select id="selectByExample" parameterType="com.gow.beau.storage.auto.model.CustomerAddressExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gow_customer_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gow_customer_address
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gow_customer_address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gow.beau.storage.auto.model.CustomerAddressExample">
+    delete from gow_customer_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.CustomerAddress" useGeneratedKeys="true">
+    insert into gow_customer_address (customer_id, address_name, address_province, 
+      address_city, address_county, address_street, 
+      address_detail, address_phone, is_default, 
+      create_time, address_telephone, address_email, 
+      is_delete)
+    values (#{customerId,jdbcType=BIGINT}, #{addressName,jdbcType=VARCHAR}, #{addressProvince,jdbcType=VARCHAR}, 
+      #{addressCity,jdbcType=VARCHAR}, #{addressCounty,jdbcType=VARCHAR}, #{addressStreet,jdbcType=VARCHAR}, 
+      #{addressDetail,jdbcType=VARCHAR}, #{addressPhone,jdbcType=VARCHAR}, #{isDefault,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{addressTelephone,jdbcType=VARCHAR}, #{addressEmail,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.CustomerAddress" useGeneratedKeys="true">
+    insert into gow_customer_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="addressName != null">
+        address_name,
+      </if>
+      <if test="addressProvince != null">
+        address_province,
+      </if>
+      <if test="addressCity != null">
+        address_city,
+      </if>
+      <if test="addressCounty != null">
+        address_county,
+      </if>
+      <if test="addressStreet != null">
+        address_street,
+      </if>
+      <if test="addressDetail != null">
+        address_detail,
+      </if>
+      <if test="addressPhone != null">
+        address_phone,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="addressTelephone != null">
+        address_telephone,
+      </if>
+      <if test="addressEmail != null">
+        address_email,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="addressName != null">
+        #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressProvince != null">
+        #{addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null">
+        #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCounty != null">
+        #{addressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="addressStreet != null">
+        #{addressStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPhone != null">
+        #{addressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addressTelephone != null">
+        #{addressTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="addressEmail != null">
+        #{addressEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gow.beau.storage.auto.model.CustomerAddressExample" resultType="java.lang.Long">
+    select count(*) from gow_customer_address
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gow_customer_address
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.addressName != null">
+        address_name = #{record.addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressProvince != null">
+        address_province = #{record.addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressCity != null">
+        address_city = #{record.addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressCounty != null">
+        address_county = #{record.addressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressStreet != null">
+        address_street = #{record.addressStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressDetail != null">
+        address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressPhone != null">
+        address_phone = #{record.addressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDefault != null">
+        is_default = #{record.isDefault,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.addressTelephone != null">
+        address_telephone = #{record.addressTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressEmail != null">
+        address_email = #{record.addressEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gow_customer_address
+    set id = #{record.id,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      address_name = #{record.addressName,jdbcType=VARCHAR},
+      address_province = #{record.addressProvince,jdbcType=VARCHAR},
+      address_city = #{record.addressCity,jdbcType=VARCHAR},
+      address_county = #{record.addressCounty,jdbcType=VARCHAR},
+      address_street = #{record.addressStreet,jdbcType=VARCHAR},
+      address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      address_phone = #{record.addressPhone,jdbcType=VARCHAR},
+      is_default = #{record.isDefault,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      address_telephone = #{record.addressTelephone,jdbcType=VARCHAR},
+      address_email = #{record.addressEmail,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gow.beau.storage.auto.model.CustomerAddress">
+    update gow_customer_address
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="addressName != null">
+        address_name = #{addressName,jdbcType=VARCHAR},
+      </if>
+      <if test="addressProvince != null">
+        address_province = #{addressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null">
+        address_city = #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCounty != null">
+        address_county = #{addressCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="addressStreet != null">
+        address_street = #{addressStreet,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null">
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressPhone != null">
+        address_phone = #{addressPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addressTelephone != null">
+        address_telephone = #{addressTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="addressEmail != null">
+        address_email = #{addressEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gow.beau.storage.auto.model.CustomerAddress">
+    update gow_customer_address
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      address_name = #{addressName,jdbcType=VARCHAR},
+      address_province = #{addressProvince,jdbcType=VARCHAR},
+      address_city = #{addressCity,jdbcType=VARCHAR},
+      address_county = #{addressCounty,jdbcType=VARCHAR},
+      address_street = #{addressStreet,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      address_phone = #{addressPhone,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      address_telephone = #{addressTelephone,jdbcType=VARCHAR},
+      address_email = #{addressEmail,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

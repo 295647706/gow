@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.ShoppingCartExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.ShoppingCart">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="goods_pre_price" jdbcType="BIGINT" property="goodsPrePrice" />
+    <result column="goods_number" jdbcType="INTEGER" property="goodsNumber" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="shopping_cart_time" jdbcType="TIMESTAMP" property="shoppingCartTime" />
+    <result column="is_shop" jdbcType="CHAR" property="isShop" />
+  </resultMap>
+
+  <select id="selectShoppingCartListByCustomerId" resultMap="BaseResultMap">
+    select * from gow_shopping_cart where customer_id = #{customerId} and del_flag = '0' AND is_shop = '0'
+  </select>
+
+  <select id="selectShoppingCartByCustomerIdAndGoodsId" resultMap="BaseResultMap">
+    select * from gow_shopping_cart where customer_id = #{customerId} and goods_id = #{goodsId} and del_flag = '0' AND is_shop = '0'
+  </select>
+
+</mapper>

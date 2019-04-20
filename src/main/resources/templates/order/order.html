@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>全部订单</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="../../js/rem.js"></script> 
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/loading.css"/>
+<script type="text/javascript">
+	$(window).load(function(){
+		$(".loading").addClass("loader-chanage")
+		$(".loading").fadeOut(300)
+	})
+</script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+	<div class="loader">
+        <div class="loader-inner pacman">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+	</div>
+</div>
+<!--loading页结束-->
+	<body>
+		<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+			<a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
+			<p>全部订单</p>
+	    </header>
+	    <div id="main" class="mui-clearfix">
+	    	<div class="order-top clearfloat">
+	    		<ul>
+	    			<li class="clearfloat cur"><a href="#" data="">全部</a></li>
+	    			<li class="clearfloat"><a href="#" data="0">待付款</a></li>
+	    			<li class="clearfloat"><a href="#" data="1">待发货</a></li>
+	    			<li class="clearfloat"><a href="#" data="2">待收货</a></li>
+	    			<!--<li class="clearfloat"><a href="#" data="3">待评价</a></li>-->
+	    		</ul>
+	    	</div>
+			<div id="order-list">
+				<!-- 订单列表内容 -->
+			</div>
+	    </div>
+	</body>
+	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js" ></script>
+	<script src="../../js/fastclick.js"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/hmt.js" ></script>
+
+<script>
+
+	$(function () {
+
+	    //查询订单列表
+		function selectOrderList(orderStatus) {
+            var divContent = "";
+
+		    var customerId = 1;
+			$.ajax({
+				type : "post",
+				url : "/order/orderList",
+				data : {"customerId":customerId,"orderStatus":orderStatus},
+				success : function (data) {
+					if(!data){
+                        divContent = divContent
+                            +"<div class='clearfloat'><p class='ordernum box-s' style='text-align: center;font-size: 20px;'>暂无订单</p></div>";
+					}else {
+                        $.each(data, function (index, order) {
+                            divContent = divContent
+                                + "<div class='order-list clearfloat'>"
+                                + "<p class='ordernum box-s'>"
+                                + "订单&nbsp;&nbsp;" + order.orderCode
+                            if (order.orderStatus == '0') {
+                                divContent = divContent + "<span>待付款</span>"
+                            } else if (order.orderStatus == '1') {
+                                divContent = divContent + "<span style='background-color: #d28739;'>待发货</span>"
+                            } else if (order.orderStatus == '2') {
+                                divContent = divContent + "<span style='background-color: #a5d239'>待收货</span>"
+                            }
+                            divContent = divContent + "</p>"
+                            $.each(order.orderListGoodsRsps, function (index2, goods) {
+                                divContent = divContent
+                                    + "<div class='list clearfloat fl box-s'>"
+                                    + "<a href=''>"
+                                    + "<div class='tu fl clearfloat'>"
+                                    + "<img src='" + goods.goodsImg + "'/>"
+                                    + "</div>"
+                                    + "<div class='middle clearfloat fl'>"
+                                    + "<p class='tit'>" + goods.goodsName + "</p>"
+                                    + "<p class='fu-tit'>" + goods.goodsSpec + "</p>"
+                                    + "<p class='price clearfloat'>"
+                                    + "<span class='xprice fl'>¥" + goods.goodsPrice + "</span>"
+                                    + "<span class='yprice fl'>¥0</span>"
+                                    + "<span class='shu'>×" + goods.goodsNumber + "</span>"
+                                    + "</p>"
+                                    + "</div>"
+                                    + "</a>"
+                                    + "</div>"
+                            });
+                            if (order.orderStatus == '0') {
+                                divContent = divContent + "<a href='#' class='gopay-btn fr'>"+"立即支付"
+                            } else if (order.orderStatus == '1') {
+                                divContent = divContent + "<a href='#' class='gopay-btn fr' style='background-color: #d28739;'>"+"提醒发货"
+                            } else if (order.orderStatus == '2') {
+                                divContent = divContent + "<a href='#' class='gopay-btn fr' style='background-color: #a5d239''>"+"确认收货"
+                            }
+                            divContent = divContent
+                                + "</a>"
+                                + "</div>"
+                        });
+                    }
+
+					$("#order-list").html(divContent);
+                }
+			});
+        }
+
+        //查询订单列表
+        selectOrderList("");
+
+
+		//状态点击事件
+		$(".order-top a").on('click',function () {
+		    $(".order-top li").removeClass("cur");
+		    $(this).parents().addClass("cur");
+			var orderStatus = $(this).attr("data");
+            selectOrderList(orderStatus);
+        });
+
+    });
+
+
+</script>
+</html>

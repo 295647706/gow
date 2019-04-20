@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.CategoryExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Category">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cat_name" jdbcType="VARCHAR" property="catName" />
+    <result column="cat_parent_id" jdbcType="BIGINT" property="catParentId" />
+    <result column="cat_sort" jdbcType="INTEGER" property="catSort" />
+    <result column="cat_is_show" jdbcType="CHAR" property="catIsShow" />
+    <result column="cat_delflag" jdbcType="CHAR" property="catDelflag" />
+  </resultMap>
+
+  <select id="categoryGoodsListAll" resultType="com.gow.beau.model.rsp.category.CategoryListRsp">
+    select id as categoryId,cat_name as categoryName from gow_category where cat_is_show = '0' and cat_delflag = '0'
+  </select>
+
+  <select id="categoryNumber" resultType="java.lang.Integer">
+    select count(0) from gow_category where cat_delflag = '0'
+  </select>
+
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.GoodsRecommendedExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.GoodsRecommended">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="title_captions" jdbcType="VARCHAR" property="titleCaptions" />
+    <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="pageGoodsRecommendedList" resultMap="BaseResultMap">
+    SELECT * FROM gow_goods_recommended WHERE is_delete = '0'
+  </select>
+
+</mapper>

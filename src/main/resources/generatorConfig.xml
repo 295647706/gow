@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry location="C:\soft\project\gow\m2\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar"/>
+    <context id="context1" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>-->
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/gow?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+                        userId="root" password=""/>
+
+        <javaModelGenerator targetPackage="com.gow.beau.storage.auto.model"
+                            targetProject="../gow2/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper.auto"
+                         targetProject="../gow2/src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.gow.beau.storage.auto.mapper"
+                             targetProject="../gow2/src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+            <!--<property name="rootInterface" value="com.sq580.ms.common.dao.BaseDaoMybatis"/>-->
+        </javaClientGenerator>
+
+        <!---
+            1、如果表id字段为主键自增曾配置：<generatedKey column="id" sqlStatement="JDBC"/>
+            2、如果当表列出现大对象(如列blob)时请使用:<columnOverride column="blob" jdbcType="VARCHAR"/>
+        -->
+
+        <!--<table tableName="gow_category" domainObjectName="Category">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_customer" domainObjectName="Customer">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_customer_address" domainObjectName="CustomerAddress">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_goods" domainObjectName="Goods">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_goods_collection" domainObjectName="GoodsCollection">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_order" domainObjectName="Order">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_order_goods" domainObjectName="OrderGoods">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_shopping_cart" domainObjectName="ShoppingCart">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_goods_image" domainObjectName="GoodsImage">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_goods_recommended" domainObjectName="GoodsRecommended">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_message" domainObjectName="Message">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_contact_us" domainObjectName="ContactUS">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+    </context>
+</generatorConfiguration>

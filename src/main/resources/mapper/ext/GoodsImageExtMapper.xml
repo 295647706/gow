@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.GoodsImageExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.GoodsImage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+  </resultMap>
+
+  <select id="selectGoodsImageListByGoodsId" resultType="com.gow.beau.model.rsp.goods.GoodsImageRsp">
+    select id as id,image_url as imageUrl from gow_goods_image where goods_id = #{goodsId}
+  </select>
+
+</mapper>

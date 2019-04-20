@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<title>手机注册</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+<link rel="stylesheet" href="../../new/lib/weui.min.css">
+<link rel="stylesheet" href="../../new/css/jquery-weui.css">
+<link rel="stylesheet" href="../../new/css/style.css">
+</head>
+<body ontouchstart>
+<!--主体-->
+<header class="wy-header">
+  <a href="javascript:history.go(-1)" class="wy-header-icon-back"><span></span></a>
+  <div class="wy-header-title">手机注册</div>
+</header>
+<div class="weui-content">
+  <div class="weui-cells weui-cells_form wy-address-edit">
+    <div class="weui-cell">
+      <div class="weui-cell__hd"><label class="weui-label wy-lab">手机号码</label></div>
+      <div class="weui-cell__bd"><input class="weui-input" id="username" type="number" pattern="[0-9]*" placeholder="请输入手机号码"></div>
+    </div>
+    <div class="weui-cell">
+      <div class="weui-cell__hd"><label class="weui-label wy-lab">设置密码</label></div>
+      <div class="weui-cell__bd"><input class="weui-input" id="password1" type="password" pattern="[0-9]*" placeholder="请输入新密码"></div>
+    </div>
+    <div class="weui-cell">
+      <div class="weui-cell__hd"><label class="weui-label wy-lab">确认密码</label></div>
+      <div class="weui-cell__bd"><input class="weui-input" id="password2" type="password" pattern="[0-9]*" placeholder="请再次输入新密码"></div>
+    </div>
+  </div>
+  <label for="weuiAgree" class="weui-agree">
+    <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" checked="checked">
+    <span class="weui-agree__text">阅读并同意<a href="javascript:void(0);">《注册协议》</a></span>
+  </label>
+  <div class="weui-btn-area"><a href="javascript:void(0);" class="weui-btn weui-btn_warn">注册并登陆</a></div>
+  <div class="weui-cells__tips t-c font-12">登陆账号为您输入的手机号码</div>
+  <div class="weui-cells__tips t-c pd-10"><a href="/registPage/xieyi" class="weui-cell_link font-12">查看注册协议</a></div>
+  
+</div>
+
+<script src="../../new/lib/jquery-2.1.4.js"></script> 
+<script src="../../new/lib/fastclick.js"></script> 
+<script type="text/javascript" src="../../new/js/jquery.Spinner.js"></script>
+<!-- 使用搜狐接口 获取ip等 -->
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+
+
+
+    //注册并登陆
+      $(".weui-btn_warn").on('click',function () {
+         var username = $("#username").val();
+         var password = $("#password1").val();
+         var password2 = $("#password2").val();
+         var ip = returnCitySN["cip"];
+         if(password != password2){
+             alert("两次输入的密码不一致！")
+             return;
+         }
+
+         $.ajax({
+            type : "post",
+             url : "/customer/isExistCustomerUsername",
+             data : {"username":username},
+             success : function (data) {
+                 if(!data){
+                     alert("此用户已存在，请用其他账号注册！")
+                     return;
+                 }else{
+                     //注册,登陆
+                     $.ajax({
+                         type : "post",
+                         url : "/regist/registUsername",
+                         data : {
+                             "username":username,"password":password,"ip":ip
+                         },
+                         success : function (data) {
+                             if(data){
+                                 if(data.token){
+                                     localStorage.setItem("token", data.token);
+                                     window.location.href = "/indexPage/index-page";
+                                 }
+                             }
+                         }
+                     });
+                 }
+             }
+         });
+
+      });
+
+  });
+</script>
+
+<script src="../../new/js/jquery-weui.js"></script>
+</body>
+</html>

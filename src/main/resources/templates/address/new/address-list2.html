@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<title>地址管理</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+<link rel="stylesheet" href="../../new/lib/weui.min.css">
+<link rel="stylesheet" href="../../new/css/jquery-weui.css">
+<link rel="stylesheet" href="../../new/css/style.css">
+
+  <!---->
+  <link rel="stylesheet" type="text/css" href="../../css/base.css"/>
+</head>
+<body ontouchstart>
+<!--主体-->
+<header class="wy-header">
+  <a href="javascript:history.go(-1)" class="wy-header-icon-back"><span></span></a>
+  <div class="wy-header-title">地址管理</div>
+</header>
+<div class="weui-content">
+  <div class="weui-panel address-box" id="address-list">
+
+    <div class="weui-panel__bd" th:each="address,iterStat: ${addressList}">
+      <div class="weui-media-box weui-media-box_text address-list-box">
+        <a th:href="'/addressPage/address2-edid-page?addressId='+${address.id}" class="address-edit"></a>
+        <h4 class="weui-media-box__title"><span th:text="${address.addressName}">陈大鹏</span><span th:text="${address.addressPhone}">189****3850</span></h4>
+        <p class="weui-media-box__desc address-txt">
+          <span th:text="${address.addressProvince}"></span>
+          <span th:text="${address.addressCity}"></span>
+          <span th:text="${address.addressCounty}"></span>
+          <span th:text="${address.addressStreet}"></span>
+          <span th:text="${address.addressDetail}"></span>
+        </p>
+        <span class="default-add" th:if="${address.isDefault=='1'}">默认地址</span>
+      </div>
+    </div>
+    
+  </div>
+  <div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="/addressPage/address-add-page" id="showTooltips">添加收货地址</a>
+  </div>
+</div>
+
+<script src="../../new/lib/jquery-2.1.4.js"></script> 
+<script src="../../new/lib/fastclick.js"></script> 
+<script type="text/javascript" src="../../new/js/jquery.Spinner.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+
+
+    //地址列表
+     function addressList() {
+         var divContent = "";
+
+         var token = localStorage.getItem("token");
+         $.ajax({
+             headers : {
+                 "token":token
+             },
+            type : "post",
+             url: "/customerAddress/customerAddressList",
+             success : function (data) {
+                 if(data){
+                     $.each(data,function (index,address) {
+                         divContent = divContent +
+                                 "<div class='weui-panel__bd'>"+
+                                      "<div class='weui-media-box weui-media-box_text address-list-box'>"+
+                                          "<a href='/addressPage/address2-edid-page?addressId="+address.id+"' class='address-edit'></a>"+
+                                          "<h4 class='weui-media-box__title'><span>"+(null == address.addressName?"":address.addressName)+"</span><span>"+(null == address.addressPhone?"":address.addressPhone)+"</span></h4>"+
+                                          "<p class='weui-media-box__desc address-txt'>"+
+                                                "<span>"+(null == address.addressProvince?"":address.addressProvince)+"</span>"+
+                                               "<span>"+(null == address.addressCity?"":address.addressCity)+"</span>"+
+                                               "<span>"+(null == address.addressCounty?"":address.addressCounty)+"</span>"+
+                                               "<span>"+(null == address.addressStreet?"":address.addressStreet)+"</span>"+
+                                               "<span>"+(null == address.addressDetail?"":address.addressDetail)+"</span>"+
+                                          "</p>"
+                                          if(address.isDefault=='1'){
+                                            divContent = divContent+"<span class='default-add'>默认地址</span>"
+                                          }
+                                          divContent = divContent+
+                                      "</div>"+
+                                "</div>"
+                     });
+                 }
+                 $("#address-list").html(divContent);
+             }
+         });
+     }
+     addressList();
+
+  });
+</script>
+<script src="../../new/js/jquery-weui.js"></script>
+</body>
+</html>

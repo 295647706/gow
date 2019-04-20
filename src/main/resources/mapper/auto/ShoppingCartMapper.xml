@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.auto.mapper.ShoppingCartMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.ShoppingCart">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="goods_pre_price" jdbcType="BIGINT" property="goodsPrePrice" />
+    <result column="goods_number" jdbcType="INTEGER" property="goodsNumber" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="shopping_cart_time" jdbcType="TIMESTAMP" property="shoppingCartTime" />
+    <result column="is_shop" jdbcType="CHAR" property="isShop" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, customer_id, goods_id, goods_price, goods_pre_price, goods_number, del_flag, 
+    shopping_cart_time, is_shop
+  </sql>
+  <select id="selectByExample" parameterType="com.gow.beau.storage.auto.model.ShoppingCartExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gow_shopping_cart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gow_shopping_cart
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gow_shopping_cart
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gow.beau.storage.auto.model.ShoppingCartExample">
+    delete from gow_shopping_cart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.ShoppingCart" useGeneratedKeys="true">
+    insert into gow_shopping_cart (customer_id, goods_id, goods_price, 
+      goods_pre_price, goods_number, del_flag, 
+      shopping_cart_time, is_shop)
+    values (#{customerId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{goodsPrice,jdbcType=DECIMAL}, 
+      #{goodsPrePrice,jdbcType=BIGINT}, #{goodsNumber,jdbcType=INTEGER}, #{delFlag,jdbcType=CHAR}, 
+      #{shoppingCartTime,jdbcType=TIMESTAMP}, #{isShop,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.ShoppingCart" useGeneratedKeys="true">
+    insert into gow_shopping_cart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="goodsPrice != null">
+        goods_price,
+      </if>
+      <if test="goodsPrePrice != null">
+        goods_pre_price,
+      </if>
+      <if test="goodsNumber != null">
+        goods_number,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="shoppingCartTime != null">
+        shopping_cart_time,
+      </if>
+      <if test="isShop != null">
+        is_shop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customerId != null">
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPrePrice != null">
+        #{goodsPrePrice,jdbcType=BIGINT},
+      </if>
+      <if test="goodsNumber != null">
+        #{goodsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="shoppingCartTime != null">
+        #{shoppingCartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isShop != null">
+        #{isShop,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gow.beau.storage.auto.model.ShoppingCartExample" resultType="java.lang.Long">
+    select count(*) from gow_shopping_cart
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gow_shopping_cart
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.customerId != null">
+        customer_id = #{record.customerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsPrice != null">
+        goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.goodsPrePrice != null">
+        goods_pre_price = #{record.goodsPrePrice,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodsNumber != null">
+        goods_number = #{record.goodsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.shoppingCartTime != null">
+        shopping_cart_time = #{record.shoppingCartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isShop != null">
+        is_shop = #{record.isShop,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gow_shopping_cart
+    set id = #{record.id,jdbcType=BIGINT},
+      customer_id = #{record.customerId,jdbcType=BIGINT},
+      goods_id = #{record.goodsId,jdbcType=BIGINT},
+      goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
+      goods_pre_price = #{record.goodsPrePrice,jdbcType=BIGINT},
+      goods_number = #{record.goodsNumber,jdbcType=INTEGER},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      shopping_cart_time = #{record.shoppingCartTime,jdbcType=TIMESTAMP},
+      is_shop = #{record.isShop,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gow.beau.storage.auto.model.ShoppingCart">
+    update gow_shopping_cart
+    <set>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsPrice != null">
+        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPrePrice != null">
+        goods_pre_price = #{goodsPrePrice,jdbcType=BIGINT},
+      </if>
+      <if test="goodsNumber != null">
+        goods_number = #{goodsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="shoppingCartTime != null">
+        shopping_cart_time = #{shoppingCartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isShop != null">
+        is_shop = #{isShop,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gow.beau.storage.auto.model.ShoppingCart">
+    update gow_shopping_cart
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      goods_id = #{goodsId,jdbcType=BIGINT},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      goods_pre_price = #{goodsPrePrice,jdbcType=BIGINT},
+      goods_number = #{goodsNumber,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      shopping_cart_time = #{shoppingCartTime,jdbcType=TIMESTAMP},
+      is_shop = #{isShop,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

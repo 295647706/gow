@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>登陆</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <script src="../../js/rem.js"></script>
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/page.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/loaders.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/loading.css"/>
+    <script type="text/javascript">
+        $(window).load(function(){
+            $(".loading").addClass("loader-chanage")
+            $(".loading").fadeOut(300)
+
+        })
+    </script>
+</head>
+<!--loading页开始-->
+<div class="loading">
+    <div class="loader">
+        <div class="loader-inner pacman">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+<!--loading页结束-->
+<body>
+<header class="mui-bar mui-bar-nav report-header box-s" id="header">
+    <a href="javascript:history.go(-1)"><i class="iconfont icon-fanhui fl"></i></a>
+    <p>登陆</p>
+</header>
+    <div id="main" class="mui-clearfix">
+        <div class="plist clearfloat data">
+            <ul>
+                <li class="clearfloat touxiang">
+                    <a href="#">
+                        <p class="fl">账号</p>
+                        <input type="text" class="fr shuru" name="" id="name" value="13542330243" placeholder="账号" />
+                    </a>
+                </li>
+                <li class="clearfloat touxiang">
+                    <a href="#">
+                        <p class="fl">密码</p>
+                        <input type="text" class="fr shuru" name="" id="pass" value="123456" placeholder="密码" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <a href="javascript:volid(0);" class="tui-btn" id="login">
+            登陆
+        </a>
+    </div>
+</body>
+
+<script src="../../js/jquery.min.js" type="text/javascript"></script>
+<script src="../../js/fastclick.js"></script>
+<script src="../../js/mui.min.js"></script>
+<script type="text/javascript" src="../../js/hmt.js" ></script>
+<script type="text/javascript">
+    //登陆
+    $("#login").on("click",function () {
+        var name = $("#name").val();
+        var pass = $("#pass").val();
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/login/login",
+            processData:true,
+            data:{"name":name,"pass":pass},
+            success: function(data,status,request){
+                if(data.token){
+                    var url = document.location;
+                    console.log(url.pathname+url.search)
+                    //window.location.href=url.pathname+url.search+"&object="+data.token;
+                    /*$.ajax({
+                        url:url.pathname,
+                        data:url.search,
+                        async:false,
+                        beforeSend: function (XMLHttpRequest) {
+                            XMLHttpRequest.setRequestHeader("token", data.token);
+                        },
+                        success:function (e) {
+
+                        }
+                    });*/
+                }else if(data.message){
+                    alert(data.message)
+                }
+            }
+        });
+    });
+</script>
+</html>

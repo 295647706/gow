@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.MessageExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Message">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="pageMessageList" resultType="com.gow.beau.model.rsp.message.PageMessageListRsp">
+    SELECT title AS title FROM gow_message WHERE is_delete = '0'
+  </select>
+
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.CustomerAddressExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.CustomerAddress">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="address_name" jdbcType="VARCHAR" property="addressName" />
+    <result column="address_province" jdbcType="VARCHAR" property="addressProvince" />
+    <result column="address_city" jdbcType="VARCHAR" property="addressCity" />
+    <result column="address_county" jdbcType="VARCHAR" property="addressCounty" />
+    <result column="address_street" jdbcType="VARCHAR" property="addressStreet" />
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="address_phone" jdbcType="VARCHAR" property="addressPhone" />
+    <result column="is_default" jdbcType="CHAR" property="isDefault" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="address_telephone" jdbcType="VARCHAR" property="addressTelephone" />
+    <result column="address_email" jdbcType="VARCHAR" property="addressEmail" />
+  </resultMap>
+
+  <resultMap id="CustomerAddressListRspMap" type="com.gow.beau.model.rsp.customer.CustomerAddressListRsp">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="address_name" jdbcType="VARCHAR" property="addressName" />
+    <result column="address_province" jdbcType="VARCHAR" property="addressProvince" />
+    <result column="address_city" jdbcType="VARCHAR" property="addressCity" />
+    <result column="address_county" jdbcType="VARCHAR" property="addressCounty" />
+    <result column="address_street" jdbcType="VARCHAR" property="addressStreet" />
+    <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="address_phone" jdbcType="VARCHAR" property="addressPhone" />
+    <result column="is_default" jdbcType="CHAR" property="isDefault" />
+  </resultMap>
+
+  <select id="customerAddressList" resultMap="CustomerAddressListRspMap">
+    select
+      *
+    from gow_customer_address where customer_id = #{customerId} and is_delete = '0' order by is_default desc,create_time DESC
+  </select>
+
+  <update id="editCustomerAddressIsDefault">
+    update gow_customer_address set is_default = '0' where customer_id = #{customerId}
+  </update>
+
+  <select id="selectIsDefaultAddressByCustomerId" resultType="com.gow.beau.model.rsp.order.OrderConfirmAddressRsp">
+    SELECT
+      id as id
+      ,address_name as addressName
+      ,address_province as addressProvince
+      ,address_city as addressCity
+      ,address_county as addressCounty
+      ,address_street as addressStreet
+      ,address_detail as addressDetail
+      ,address_phone as addressPhone
+    FROM gow_customer_address WHERE is_default = '1' AND is_delete = '0' AND customer_id = #{customerId}
+  </select>
+
+  <select id="selectLatestAddressByCustomerId" resultType="com.gow.beau.model.rsp.order.OrderConfirmAddressRsp">
+    SELECT
+      id as id
+      ,address_name as addressName
+      ,address_province as addressProvince
+      ,address_city as addressCity
+      ,address_county as addressCounty
+      ,address_street as addressStreet
+      ,address_detail as addressDetail
+      ,address_phone as addressPhone
+    FROM gow_customer_address WHERE is_delete = '0' AND customer_id = #{customerId} ORDER BY create_time DESC
+    LIMIT 1
+  </select>
+
+</mapper>

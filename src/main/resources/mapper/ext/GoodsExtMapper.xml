@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.GoodsExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Goods">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_spec" jdbcType="VARCHAR" property="goodsSpec" />
+    <result column="goods_subtitle" jdbcType="VARCHAR" property="goodsSubtitle" />
+    <result column="goods_no" jdbcType="VARCHAR" property="goodsNo" />
+    <result column="goods_keywords" jdbcType="VARCHAR" property="goodsKeywords" />
+    <result column="goods_brief" jdbcType="VARCHAR" property="goodsBrief" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="goods_img" jdbcType="VARCHAR" property="goodsImg" />
+    <result column="goods_score" jdbcType="DECIMAL" property="goodsScore" />
+    <result column="goods_deno" jdbcType="VARCHAR" property="goodsDeno" />
+    <result column="goods_number" jdbcType="INTEGER" property="goodsNumber" />
+    <result column="goods_detail_desc" jdbcType="LONGVARCHAR" property="goodsDetailDesc" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords,
+    goods_brief, goods_price, goods_img, goods_score, goods_deno, goods_number,
+    goods_detail_desc
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from gow_goods
+    where id = #{id}
+  </select>
+
+  <select id="selectPageGoodsList" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from gow_goods
+  </select>
+
+  <select id="selectCategoryGoodsListByCatId" resultType="com.gow.beau.model.rsp.category.CategoryGoodsListRsp">
+    select
+      id as goodsId
+      ,goods_name as goodsName
+      ,goods_spec as goodsSpec
+      ,goods_price as goodsPrice
+      ,goods_deno as goodsDeno
+      ,goods_img as goodsImg
+     from gow_goods where category_id = #{categoryId}
+  </select>
+
+  <select id="searchGoodsList" resultType="com.gow.beau.model.rsp.goods.SearchListRsp">
+    select
+      id as id
+      ,goods_name as goodsName
+      ,goods_spec as goodsSpec
+      ,goods_price as goodsPrice
+      ,goods_img as goodsImg
+     from gow_goods
+     where 1=1
+     and (
+            goods_name LIKE CONCAT('%',#{search},'%')
+            OR goods_spec LIKE CONCAT('%',#{search},'%')
+            OR goods_subtitle LIKE CONCAT('%',#{search},'%')
+            OR goods_keywords LIKE CONCAT('%',#{search},'%')
+            OR goods_brief LIKE CONCAT('%',#{search},'%')
+            OR goods_detail_desc LIKE CONCAT('%',#{search},'%')
+          )
+  </select>
+
+</mapper>

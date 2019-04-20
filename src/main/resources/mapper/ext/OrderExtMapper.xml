@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.OrderExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
+    <result column="order_status" jdbcType="CHAR" property="orderStatus" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="send_express_time" jdbcType="TIMESTAMP" property="sendExpressTime" />
+    <result column="get_goods_time" jdbcType="TIMESTAMP" property="getGoodsTime" />
+    <result column="shopping_addr_id" jdbcType="BIGINT" property="shoppingAddrId" />
+    <result column="shipping_province" jdbcType="VARCHAR" property="shippingProvince" />
+    <result column="shipping_city" jdbcType="VARCHAR" property="shippingCity" />
+    <result column="shipping_county" jdbcType="VARCHAR" property="shippingCounty" />
+    <result column="shipping_street" jdbcType="VARCHAR" property="shippingStreet" />
+    <result column="shipping_address" jdbcType="VARCHAR" property="shippingAddress" />
+    <result column="shipping_person" jdbcType="VARCHAR" property="shippingPerson" />
+    <result column="shipping_phone" jdbcType="VARCHAR" property="shippingPhone" />
+    <result column="shipping_mobile" jdbcType="VARCHAR" property="shippingMobile" />
+    <result column="invoice_title" jdbcType="VARCHAR" property="invoiceTitle" />
+    <result column="invoice_content" jdbcType="VARCHAR" property="invoiceContent" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="invoice_type" jdbcType="CHAR" property="invoiceType" />
+    <result column="customer_remark" jdbcType="VARCHAR" property="customerRemark" />
+    <result column="order_integral" jdbcType="BIGINT" property="orderIntegral" />
+    <result column="evaluate_flag" jdbcType="CHAR" property="evaluateFlag" />
+    <result column="express_price" jdbcType="DECIMAL" property="expressPrice" />
+    <result column="shipping_postcode" jdbcType="VARCHAR" property="shippingPostcode" />
+    <result column="order_cancel_time" jdbcType="TIMESTAMP" property="orderCancelTime" />
+    <result column="order_cancel_remark" jdbcType="VARCHAR" property="orderCancelRemark" />
+    <result column="back_price" jdbcType="DECIMAL" property="backPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="send_person" jdbcType="VARCHAR" property="sendPerson" />
+    <result column="send_mobile" jdbcType="VARCHAR" property="sendMobile" />
+  </resultMap>
+
+  <select id="selectShoppingCartIdByCustomerId" resultType="java.lang.Long">
+    SELECT shopping_addr_id FROM gow_order WHERE customer_id = #{customerId} ORDER BY create_time DESC LIMIT 1
+  </select>
+
+  <select id="orderList" resultMap="BaseResultMap" parameterType="com.gow.beau.model.req.order.OrderListReq">
+    SELECT * from gow_order WHERE 1=1
+    AND customer_id = #{customerId}
+    <if test="orderStatus != null and orderStatus !='' ">
+      AND order_status = #{orderStatus}
+    </if>
+    <if test="evaluateFlag != null and evaluateFlag !='' ">
+      AND order_status = #{orderStatus}
+      AND evaluate_flag = #{evaluateFlag}
+    </if>
+    ORDER BY create_time DESC
+  </select>
+
+  <select id="orderStatusNumbers" resultType="java.lang.Integer">
+    SELECT count(0)FROM gow_order WHERE 1=1
+    AND customer_id = #{customerId}
+    <if test="orderStatus != null and orderStatus !='' ">
+      AND order_status = #{orderStatus}
+    </if>
+    <if test="evaluateFlag != null and evaluateFlag !='' ">
+      AND evaluate_flag = #{evaluateFlag}
+    </if>
+  </select>
+
+  <update id="updateOrderStatusByOederCode" parameterType="com.gow.beau.storage.auto.model.Order">
+    UPDATE gow_order
+    SET
+    order_status = #{orderStatus},
+    pay_time = #{payTime}
+    WHERE
+    order_code = #{orderCode}
+  </update>
+
+
+  <!-- 根据订单编号（orderCode）查询订单信息 -->
+  <select id="selectOrderByOederCode" resultMap="BaseResultMap">
+    SELECT id,order_price,customer_id FROM gow_order WHERE order_code = #{orderCode}
+  </select>
+
+  <!-- 根据订单编号查询订单金额 -->
+  <select id="selectOrderPriceByorderCode" resultType="java.math.BigDecimal">
+    SELECT order_price FROM gow_order WHERE order_code = #{orderCode}
+  </select>
+
+</mapper>

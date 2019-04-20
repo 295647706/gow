@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.ContactUSExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.ContactUS">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+  </resultMap>
+
+
+  <select id="lxwmList" resultType="com.gow.beau.model.rsp.lxwm.LxwmRsp">
+    SELECT name as name,contact as contact FROM gow_contact_us
+  </select>
+
+</mapper>

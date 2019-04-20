@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<title>编辑地址</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+<link rel="stylesheet" href="../../new/lib/weui.min.css">
+<link rel="stylesheet" href="../../new/css/jquery-weui.css">
+<link rel="stylesheet" href="../../new/css/style.css">
+</head>
+<body ontouchstart>
+<!--主体-->
+<header class="wy-header">
+  <a href="javascript:history.go(-1)" class="wy-header-icon-back"><span></span></a>
+  <div class="wy-header-title">编辑地址</div>
+</header>
+<div class="weui-content">
+  <div class="weui-cells weui-cells_form wy-address-edit">
+    <div class="weui-cell">
+      <div class="weui-cell__hd"><label class="weui-label wy-lab">收货人</label></div>
+      <div class="weui-cell__bd"><input class="weui-input" type="number" pattern="[0-9]*" th:placeholder="(${addressInfo.addressName}?${addressInfo.addressName})" th:value="(${addressInfo.addressName}?${addressInfo.addressName})" id="addressName"></div>
+    </div>
+    <div class="weui-cell">
+      <div class="weui-cell__hd"><label class="weui-label wy-lab">手机号</label></div>
+      <div class="weui-cell__bd"><input class="weui-input" type="number" pattern="[0-9]*" th:placeholder="(${addressInfo.addressPhone}?${addressInfo.addressPhone})" th:value="(${addressInfo.addressPhone}?${addressInfo.addressPhone})" id="addressPhone"></div>
+    </div>
+    <div class="weui-cell">
+      <div class="weui-cell__hd"><label for="name" class="weui-label wy-lab">所在地区</label></div>
+      <div class="weui-cell__bd"><input class="weui-input" id="address" type="text" th:value="(${addressInfo.addressProvince}?${addressInfo.addressProvince})+' '+(${addressInfo.addressCity}?${addressInfo.addressCity})+' '+(${addressInfo.addressCounty}?${addressInfo.addressCounty})" readonly="" data-code="420106" data-codes="420000,420100,420106"></div>
+    </div>
+    <div class="weui-cell">
+      <div class="weui-cell__hd"><label class="weui-label wy-lab">详细地址</label></div>
+      <div class="weui-cell__bd">
+        <textarea class="weui-textarea" th:placeholder="(${addressInfo.addressDetail}?${addressInfo.addressDetail})" th:text="(${addressInfo.addressDetail}?${addressInfo.addressDetail})"></textarea>
+      </div>
+    </div>
+    <div class="weui-cell weui-cell_switch">
+      <div class="weui-cell__bd">设为默认地址</div>
+      <div class="weui-cell__ft"><input class="weui-switch" type="checkbox" th:value="(${addressInfo.isDefault}?${addressInfo.isDefault})" id="isDefault"></div>
+    </div>
+  </div> 
+  <div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="#" id="showTooltips" th:data="${addressInfo.id}">保存地址</a>
+    <a href="#" class="weui-btn weui-btn_warn" th:data="${addressInfo.id}">删除地址</a>
+  </div>
+
+</div>
+
+<script src="../../new/lib/jquery-2.1.4.js"></script> 
+<script src="../../new/lib/fastclick.js"></script> 
+<script type="text/javascript" src="../../new/js/jquery.Spinner.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+
+<script src="../../new/js/jquery-weui.js"></script>
+<script src="../../new/js/city-picker.js"></script>
+<script>
+      $("#address").cityPicker({
+        title: "选择出发地",
+        onChange: function (picker, values, displayValues) {
+          console.log(values, displayValues);
+        }
+      });
+
+      $(function () {
+
+          //删除
+          $(".weui-btn_warn").on('click',function () {
+              var addressId = $(this).attr("data");
+              console.log(addressId)
+              $.ajax({
+                  type : "post",
+                  url : "/customerAddress/deleteAddress",
+                  data : {"addressId":addressId},
+                  success : function (data) {
+                      if(data == 1) {
+                          alert("删除成功");
+                      }
+                  }
+              })
+          });
+
+          //保存
+          $(".weui-btn_primary").click(function (e) {
+              var token = localStorage.getItem("token");
+              var addressId = $(this).attr("data");
+              var isDefault = $("#isDefault").val();
+              var addressName = $("#addressName").val();
+              var addressPhone = $("#addressPhone").val();
+              var addressDetail = $(".weui-textarea").val();
+              var address = $("#address").val();
+              $.ajax({
+                  headers : {
+                      "token":token
+                  },
+                  type: "post",
+                  dataType: "json",
+                  url: "/customerAddress/editCustomerAddress",
+                  processData:true,
+                  data:{"addressId":addressId,"isDefault":isDefault,"addressName":addressName,"addressPhone":addressPhone
+                      ,"addressDetail":addressDetail,"address":address},
+                  success: function(data){
+                      //alert(data)
+                  }
+              });
+          });
+
+      })
+
+
+    </script>
+</body>
+</html>
