@@ -1,0 +1,142 @@
+2019-04-20 13:51:00.781  INFO 16388 --- [main] com.gow.GowApplication                   : Starting GowApplication on DESKTOP-O0HQQEB with PID 16388 (C:\soft\project\gow\gitgow\gow\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 13:51:00.786  INFO 16388 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-04-20 13:51:03.775  INFO 16388 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-04-20 13:51:03.806  INFO 16388 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-04-20 13:51:03.807  INFO 16388 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-04-20 13:51:03.816  INFO 16388 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\soft\soft\JDK\jdk1.8.0_05\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\soft\soft\git\TortoiseGit\bin;C:\WINDOWS\System32\OpenSSH\;C:\Users\29564\AppData\Local\Microsoft\WindowsApps;C:\soft\soft\JDK\jdk1.8.0_05\bin;C:\soft\soft\JDK\jdk1.8.0_05\jre\bin;C:\soft\soft\maven\apache-maven-3.2.5\bin;C:\soft\soft\WebService\apache-cxf-3.1.1\bin;;.]
+2019-04-20 13:51:04.159  INFO 16388 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-04-20 13:51:04.160  INFO 16388 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3304 ms
+2019-04-20 13:51:04.281  INFO 16388 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 13:51:04.501  INFO 16388 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-04-20 13:51:05.399  INFO 16388 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-04-20 13:51:05.729  INFO 16388 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-04-20 13:51:05.914  INFO 16388 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-04-20 13:51:05.918  INFO 16388 --- [main] com.gow.GowApplication                   : Started GowApplication in 5.861 seconds (JVM running for 7.004)
+2019-04-20 14:22:48.582  INFO 16388 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-04-20 14:22:48.584  INFO 16388 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-04-20 14:22:48.620  INFO 16388 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 33 ms
+2019-04-20 20:08:37.514  INFO 19720 --- [main] com.boss.BossApplication                 : Starting BossApplication on DESKTOP-O0HQQEB with PID 19720 (C:\soft\project\gow\gitgow\boss\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:08:37.520  INFO 19720 --- [main] com.boss.BossApplication                 : No active profile set, falling back to default profiles: default
+2019-04-20 20:08:38.118 ERROR 19720 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalArgumentException: At least one base package must be specified
+	at org.springframework.util.Assert.notEmpty(Assert.java:372) ~[spring-core-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.annotation.ClassPathBeanDefinitionScanner.doScan(ClassPathBeanDefinitionScanner.java:272) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.mybatis.spring.mapper.ClassPathMapperScanner.doScan(ClassPathMapperScanner.java:164) ~[mybatis-spring-1.3.0.jar:1.3.0]
+	at org.mybatis.spring.annotation.MapperScannerRegistrar.registerBeanDefinitions(MapperScannerRegistrar.java:105) ~[mybatis-spring-1.3.0.jar:1.3.0]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:364) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader$$Lambda$119/2082509879.accept(Unknown Source) ~[na:na]
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:676) ~[na:1.8.0_05]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:363) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:145) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:117) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:327) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:232) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:275) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:95) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:705) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:531) ~[spring-context-5.1.6.RELEASE.jar:5.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775) [spring-boot-2.1.4.RELEASE.jar:2.1.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397) [spring-boot-2.1.4.RELEASE.jar:2.1.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316) [spring-boot-2.1.4.RELEASE.jar:2.1.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260) [spring-boot-2.1.4.RELEASE.jar:2.1.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248) [spring-boot-2.1.4.RELEASE.jar:2.1.4.RELEASE]
+	at com.boss.BossApplication.main(BossApplication.java:14) [classes/:na]
+
+2019-04-20 20:09:03.050  INFO 5292 --- [main] com.boss.BossApplication                 : Starting BossApplication on DESKTOP-O0HQQEB with PID 5292 (C:\soft\project\gow\gitgow\boss\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:09:03.055  INFO 5292 --- [main] com.boss.BossApplication                 : No active profile set, falling back to default profiles: default
+2019-04-20 20:09:03.654  WARN 5292 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.boss]' package. Please check your configuration.
+2019-04-20 20:09:04.044  INFO 5292 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 20:09:04.185  INFO 5292 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-04-20 20:09:04.356  WARN 5292 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-04-20 20:09:04.424  INFO 5292 --- [main] com.boss.BossApplication                 : Started BossApplication in 1.861 seconds (JVM running for 2.516)
+2019-04-20 20:09:04.429  INFO 5292 --- [Thread-2] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-04-20 20:10:17.085  INFO 17692 --- [main] com.boss.BossApplication                 : Starting BossApplication on DESKTOP-O0HQQEB with PID 17692 (C:\soft\project\gow\gitgow\boss\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:10:17.089  INFO 17692 --- [main] com.boss.BossApplication                 : No active profile set, falling back to default profiles: default
+2019-04-20 20:10:17.669  WARN 17692 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.boss]' package. Please check your configuration.
+2019-04-20 20:10:18.039  INFO 17692 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 20:10:18.182  INFO 17692 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-04-20 20:10:18.342  WARN 17692 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-04-20 20:10:18.436  INFO 17692 --- [main] com.boss.BossApplication                 : Started BossApplication in 1.861 seconds (JVM running for 2.528)
+2019-04-20 20:10:18.447  INFO 17692 --- [Thread-2] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-04-20 20:10:40.304  INFO 13564 --- [main] com.boss.BossApplication                 : Starting BossApplication on DESKTOP-O0HQQEB with PID 13564 (C:\soft\project\gow\gitgow\boss\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:10:40.308  INFO 13564 --- [main] com.boss.BossApplication                 : No active profile set, falling back to default profiles: default
+2019-04-20 20:10:40.901  WARN 13564 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.boss]' package. Please check your configuration.
+2019-04-20 20:10:41.290  INFO 13564 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 20:10:41.431  INFO 13564 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-04-20 20:10:41.597  WARN 13564 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-04-20 20:10:41.667  INFO 13564 --- [main] com.boss.BossApplication                 : Started BossApplication in 1.866 seconds (JVM running for 2.483)
+2019-04-20 20:10:41.672  INFO 13564 --- [Thread-2] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-04-20 20:12:31.318  INFO 5972 --- [main] com.boss.BossApplication                 : Starting BossApplication on DESKTOP-O0HQQEB with PID 5972 (C:\soft\project\gow\gitgow\boss\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:12:31.321  INFO 5972 --- [main] com.boss.BossApplication                 : No active profile set, falling back to default profiles: default
+2019-04-20 20:12:31.963  WARN 5972 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.boss]' package. Please check your configuration.
+2019-04-20 20:12:32.408  INFO 5972 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 20:12:32.555  INFO 5972 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-04-20 20:12:32.707  WARN 5972 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2019-04-20 20:12:32.775  INFO 5972 --- [main] com.boss.BossApplication                 : Started BossApplication in 1.97 seconds (JVM running for 2.609)
+2019-04-20 20:12:32.781  INFO 5972 --- [Thread-2] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-04-20 20:12:50.454  INFO 18748 --- [main] com.boss.BossApplication                 : Starting BossApplication on DESKTOP-O0HQQEB with PID 18748 (C:\soft\project\gow\gitgow\boss\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:12:50.457  INFO 18748 --- [main] com.boss.BossApplication                 : No active profile set, falling back to default profiles: default
+2019-04-20 20:12:51.014  WARN 18748 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.boss]' package. Please check your configuration.
+2019-04-20 20:12:51.385  INFO 18748 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 20:12:51.517  INFO 18748 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-04-20 20:12:51.776  INFO 18748 --- [main] com.boss.BossApplication                 : Started BossApplication in 1.807 seconds (JVM running for 2.453)
+2019-04-20 20:12:51.782  INFO 18748 --- [Thread-2] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-04-20 20:13:21.879  INFO 16452 --- [main] com.boss.BossApplication                 : Starting BossApplication on DESKTOP-O0HQQEB with PID 16452 (C:\soft\project\gow\gitgow\boss\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:13:21.883  INFO 16452 --- [main] com.boss.BossApplication                 : No active profile set, falling back to default profiles: default
+2019-04-20 20:13:22.453  WARN 16452 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.boss]' package. Please check your configuration.
+2019-04-20 20:13:22.840  INFO 16452 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 20:13:22.902  WARN 16452 --- [main] s.c.a.AnnotationConfigApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/alibaba/druid/spring/boot/autoconfigure/DruidDataSourceAutoConfigure.class]: Invocation of init method failed; nested exception is org.springframework.boot.autoconfigure.jdbc.DataSourceProperties$DataSourceBeanCreationException: Failed to determine a suitable driver class
+2019-04-20 20:13:22.911  INFO 16452 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-04-20 20:13:22.921 ERROR 16452 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
+
+2019-04-20 20:16:13.550  INFO 2444 --- [main] com.gow.GowApplication                   : Starting GowApplication on DESKTOP-O0HQQEB with PID 2444 (C:\soft\project\gow\gitgow\gow\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:16:13.555  INFO 2444 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-04-20 20:16:16.659  INFO 2444 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-04-20 20:16:16.683  INFO 2444 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-04-20 20:16:16.684  INFO 2444 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-04-20 20:16:16.691  INFO 2444 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\soft\soft\JDK\jdk1.8.0_05\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\soft\soft\git\TortoiseGit\bin;C:\WINDOWS\System32\OpenSSH\;C:\Users\29564\AppData\Local\Microsoft\WindowsApps;C:\soft\soft\JDK\jdk1.8.0_05\bin;C:\soft\soft\JDK\jdk1.8.0_05\jre\bin;C:\soft\soft\maven\apache-maven-3.2.5\bin;C:\soft\soft\WebService\apache-cxf-3.1.1\bin;;.]
+2019-04-20 20:16:16.844  INFO 2444 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-04-20 20:16:16.844  INFO 2444 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3213 ms
+2019-04-20 20:16:16.973  INFO 2444 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 20:16:17.337  INFO 2444 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-04-20 20:16:18.150  INFO 2444 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-04-20 20:16:18.399  INFO 2444 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-04-20 20:16:18.607  INFO 2444 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-04-20 20:16:18.617  INFO 2444 --- [main] com.gow.GowApplication                   : Started GowApplication in 5.607 seconds (JVM running for 6.364)
+2019-04-20 20:17:05.274  INFO 2444 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-04-20 20:17:05.277  INFO 2444 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-04-20 20:17:05.299  INFO 2444 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 20 ms
+2019-04-20 20:17:45.852  INFO 19796 --- [main] com.gow.GowApplication                   : Starting GowApplication on DESKTOP-O0HQQEB with PID 19796 (C:\soft\project\gow\gitgow\gow\target\classes started by 29564 in C:\soft\project\gow\gitgow\gow)
+2019-04-20 20:17:45.855  INFO 19796 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-04-20 20:17:48.312  INFO 19796 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-04-20 20:17:48.332  INFO 19796 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-04-20 20:17:48.334  INFO 19796 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-04-20 20:17:48.338  INFO 19796 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\soft\soft\JDK\jdk1.8.0_05\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\soft\soft\git\TortoiseGit\bin;C:\WINDOWS\System32\OpenSSH\;C:\Users\29564\AppData\Local\Microsoft\WindowsApps;C:\soft\soft\JDK\jdk1.8.0_05\bin;C:\soft\soft\JDK\jdk1.8.0_05\jre\bin;C:\soft\soft\maven\apache-maven-3.2.5\bin;C:\soft\soft\WebService\apache-cxf-3.1.1\bin;;.]
+2019-04-20 20:17:48.488  INFO 19796 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-04-20 20:17:48.489  INFO 19796 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2575 ms
+2019-04-20 20:17:48.590  INFO 19796 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-04-20 20:17:48.887  INFO 19796 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-04-20 20:17:49.563  INFO 19796 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-04-20 20:17:49.702  INFO 19796 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-04-20 20:17:49.876  INFO 19796 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-04-20 20:17:49.879  INFO 19796 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.533 seconds (JVM running for 5.211)
