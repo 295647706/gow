@@ -1,0 +1,33 @@
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<div class="layui-side layui-bg-black" th:fragment="boss-left">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <li class="layui-nav-item"><a href="index.html">控制台</a></li>
+            <li class="layui-nav-item">
+                <a class="" href="javascript:;">商品管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/goodsBoss/goods-list-page">商品列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;">用户管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a class="layui-this" href="goodsList.html">用户列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">订单管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="rule.html">订单列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">会员管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="member.html">会员列表</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
