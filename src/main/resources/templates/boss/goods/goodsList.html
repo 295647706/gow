@@ -22,13 +22,25 @@
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">
             <fieldset class="layui-elem-field">
-                <legend>用户管理 - 用户列表</legend>
+                <legend>商品管理 - 商品列表</legend>
                 <div class="layui-field-box">
                   <form class="layui-form" action="">
                     <div class="layui-form-item" style="text-align:center;">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品品牌:</label>
+                            <div class="layui-input-inline">
+                                <select name="catId" lay-verify="" id="catId">
+                                    <option value="">品牌</option>
+                                    <option value="010">北京</option>
+                                    <option value="021">上海</option>
+                                    <option value="0571">杭州</option>
+                                </select>
+                            </div>
+                        </div>
                       <div class="layui-inline">
+                        <label class="layui-form-label">商品名称:</label>
                         <div class="layui-input-inline">
-                          <input autocomplete="off" class="layui-input" placeholder="请输入名称" type="text" name="name" value="">
+                          <input autocomplete="off" class="layui-input" placeholder="商品名称" type="text" name="goodsName" id="goodsName" value="">
                         </div>
                       </div>
                       <div class="layui-inline" style="text-align:left;">
@@ -53,37 +65,44 @@
                   <hr>
                   <table class="layui-table">
                       <colgroup>
+                          <col width="50">
                           <col width="150">
                           <col width="150">
-                          <col width="200">
-                          <col>
-                          <col>
+                          <col width="150">
+                          <col width="150">
+                          <col width="150">
+                          <col width="150">
+                          <col width="150">
                       </colgroup>
                       <thead>
                           <tr>
-                          <th class="selectAll"><input type="checkbox"></th>
-                          <th>昵称</th>
-                          <th>加入时间</th>
-                          <th>签名</th>
-                          <th style="text-align:center;">操作</th>
+                              <th class="selectAll"><input type="checkbox"></th>
+                              <th>商品编号</th>
+                              <th>商品名称</th>
+                              <th>商品规格</th>
+                              <th>商品副标题</th>
+                              <th>商品数量</th>
+                              <th>销售价</th>
+                              <th>计价单位</th>
+                              <th style="text-align:center;">操作</th>
                           </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="goodsContent">
                           <tr>
-                          <td><input type="checkbox" name="id" value="1"></td>
-                          <td>贤心</td>
-                          <td>2016-11-29</td>
-                          <td>人生就像是一场修行</td>
-                          <td class="text-center">
-                            <div class="layui-btn-group">
-                              <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="create.html?id=1" dw-title="编辑用户">
-                                <i class="layui-icon">&#xe642;</i>编辑
-                              </button>
-                              <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" dw-url="delete.html?id=1" dw-title="小明">
-                                <i class="layui-icon">&#xe640;</i>删除
-                              </button>
-                            </div>
-                          </td>
+                              <td><input type="checkbox" name="id" value="1"></td>
+                              <td>贤心</td>
+                              <td>2016-11-29</td>
+                              <td>人生就像是一场修行</td>
+                              <td class="text-center">
+                                <div class="layui-btn-group">
+                                  <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="create.html?id=1" dw-title="编辑用户">
+                                    <i class="layui-icon">&#xe642;</i>编辑
+                                  </button>
+                                  <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" dw-url="delete.html?id=1" dw-title="小明">
+                                    <i class="layui-icon">&#xe640;</i>删除
+                                  </button>
+                                </div>
+                              </td>
                           </tr>
                           <tr>
                           <td><input type="checkbox" name="id" value="2"></td>
@@ -120,6 +139,7 @@
                       </tbody>
                   </table>
                 </div>
+                <div id="page"></div>
             </fieldset>
         </div>
       </div>
@@ -133,4 +153,82 @@
 <script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
 <script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
 </body>
+
+<script>
+
+    $(function () {
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+
+        //分页
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;
+
+            //执行一个laypage实例
+            laypage.render({
+                elem: 'page'
+                ,count: 700 //数据总数，从服务端得到
+                ,limits: [10,15,20,30,50]
+                ,groups: 10
+                ,jump: function(obj, first){
+                    //obj包含了当前分页的所有参数，比如：
+                    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                    console.log(obj.limit); //得到每页显示的条数
+
+                    //首次不执行
+                    if(!first){
+                        //do something
+                    }
+                }
+            });
+        });
+
+
+        function selectOrderList(pageNo) {
+            var divContent = "";
+
+            var goodsName = $("#goodsName").val();
+            var catId = $("#catId").val();
+            $.ajax({
+                type : "post",
+                url : "/goodsBoss/goodsList",
+                data : {"pageNo":pageNo,"goodsName":goodsName,"catId":catId},
+                success : function (data) {
+                    console.log(data.list)
+                    if(!data.list){
+                        $.each(data.list, function (index, goods) {
+                            console.log(goods.id)
+                            divContent = divContent
+                            +"<tr>"
+                                +"<td><input type='checkbox' name='id' value='"+goods.id+"'></td>"
+                                +"<td>"+goods.goodsNo+"</td>"
+                                +"<td>"+goods.goodsName+"</td>"
+                                +"<td>"+goods.goodsSpec+"</td>"
+                                +"<td>"+goods.goodsSubtitle+"</td>"
+                                +"<td>"+goods.goodsNumber+"</td>"
+                                +"<td>"+goods.goodsPrice+"</td>"
+                                +"<td>"+goods.goodsDeno+"</td>"
+                                +"<td>"+goods.goodsNo+"</td>"
+                            +"</tr>"
+                        })
+                    }
+                    $("#goodsContent").html(divContent);
+                }
+            });
+        }
+        selectOrderList(1);
+
+
+    });
+
+</script>
+
 </html>

@@ -67,4 +67,27 @@
           )
   </select>
 
+
+  <select id="getGoodsList" resultType="com.gow.beau.model.rsp.goods.GoodsListRsp">
+    SELECT
+      g.id AS id
+      , g.goods_name AS goodsName
+      , g.goods_spec AS goodsSpec
+      , g.goods_no AS goodsNo
+      , g.goods_score AS goodsScore
+      , g.goods_deno AS goodsDeno
+      , g.goods_number AS goodsNumber
+      , g.goods_subtitle AS goodsSubtitle
+      , g.goods_price as goodsPrice
+      , c.cat_name AS catName
+    FROM gow_goods AS g INNER JOIN gow_category c ON g.category_id = c.id
+    <if test="goodsName != null and goodsName !='' ">
+      and g.goods_name LIKE CONCAT('%',#{goodsName},'%')
+    </if>
+    <if test="catId != null">
+      and g.category_id = #{catId}
+    </if>
+    Limit #{startRowNum},#{endRowNum}
+  </select>
+
 </mapper>

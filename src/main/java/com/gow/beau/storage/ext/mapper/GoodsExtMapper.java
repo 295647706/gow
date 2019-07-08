@@ -1,7 +1,9 @@
 package com.gow.beau.storage.ext.mapper;
 
+import com.gow.beau.model.req.goods.GoodsListReq;
 import com.gow.beau.model.req.goods.SearchListReq;
 import com.gow.beau.model.rsp.category.CategoryGoodsListRsp;
+import com.gow.beau.model.rsp.goods.GoodsListRsp;
 import com.gow.beau.model.rsp.goods.SearchListRsp;
 import com.gow.beau.storage.auto.model.Goods;
 import com.gow.beau.storage.auto.model.GoodsExample;
@@ -27,4 +29,9 @@ public interface GoodsExtMapper {
      * 搜索列表
      */
     List<SearchListRsp> searchGoodsList(SearchListReq req);
+
+    /**
+     * 商品管理 - 商品列表
+     * */
+    List<GoodsListRsp> getGoodsList(GoodsListReq req);
 }

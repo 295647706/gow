@@ -1,9 +1,12 @@
 package com.gow.beau.service.goods;
 
+import com.gow.beau.model.data.PageInfo;
+import com.gow.beau.model.req.goods.GoodsListReq;
 import com.gow.beau.model.req.goods.SearchListReq;
 import com.gow.beau.model.rsp.goods.GoodsDetailRsp;
 import com.gow.beau.model.req.goods.GoodsDetailReq;
 import com.gow.beau.model.rsp.goods.GoodsImageRsp;
+import com.gow.beau.model.rsp.goods.GoodsListRsp;
 import com.gow.beau.model.rsp.goods.SearchListRsp;
 import com.gow.beau.service.collection.GoodsCollectionService;
 import com.gow.beau.storage.auto.mapper.GoodsMapper;
@@ -105,5 +108,20 @@ public class GoodsService {
             return null;
         }
         return rspList;
+    }
+
+    /**
+     * 商品管理 - 商品列表
+     * */
+    public PageInfo getGoodsList(GoodsListReq req) {
+        //计算分页信息
+        PageInfo pageInfo = new PageInfo(req.getPageNo());
+        req.setStartRowNum(pageInfo.getStartRowNum());
+        req.setEndRowNum(pageInfo.getEndRowNum());
+
+        //查询商品列表
+        List<GoodsListRsp> rsps = goodsExtMapper.getGoodsList(req);
+        pageInfo.setList(rsps);
+        return pageInfo;
     }
 }
