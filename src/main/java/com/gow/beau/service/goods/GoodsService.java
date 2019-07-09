@@ -122,6 +122,14 @@ public class GoodsService {
         //查询商品列表
         List<GoodsListRsp> rsps = goodsExtMapper.getGoodsList(req);
         pageInfo.setList(rsps);
+        pageInfo.setRows(this.getGoodsRows(req));
         return pageInfo;
+    }
+
+    /**
+     * 商品总数
+     * */
+    private int getGoodsRows(GoodsListReq req){
+        return goodsExtMapper.goodsRows(req);
     }
 }

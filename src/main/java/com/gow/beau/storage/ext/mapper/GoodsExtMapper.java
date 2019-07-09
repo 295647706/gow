@@ -34,4 +34,9 @@ public interface GoodsExtMapper {
      * 商品管理 - 商品列表
      * */
     List<GoodsListRsp> getGoodsList(GoodsListReq req);
+
+    /**
+     * 商品总数
+     * */
+    int goodsRows(GoodsListReq req);
 }

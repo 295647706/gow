@@ -90,4 +90,16 @@
     Limit #{startRowNum},#{endRowNum}
   </select>
 
+  <select id="goodsRows" resultType="java.lang.Integer">
+    SELECT
+        count(0)
+    FROM gow_goods AS g INNER JOIN gow_category c ON g.category_id = c.id
+    <if test="goodsName != null and goodsName !='' ">
+      and g.goods_name LIKE CONCAT('%',#{goodsName},'%')
+    </if>
+    <if test="catId != null">
+      and g.category_id = #{catId}
+    </if>
+  </select>
+
 </mapper>
