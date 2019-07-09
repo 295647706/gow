@@ -132,4 +132,11 @@ public class GoodsService {
     private int getGoodsRows(GoodsListReq req){
         return goodsExtMapper.goodsRows(req);
     }
+
+    /**
+     * 删除商品
+     * */
+    public int deleteGoods(Long[] goodsIds) {
+        return 0;
+    }
 }

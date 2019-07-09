@@ -146,10 +146,10 @@
                                 +"<td>"+goods.goodsDeno+"</td>"
                                 +"<td class='text-center'>"
                                     +"<div class='layui-btn-group'>"
-                                        +"<button class='layui-btn layui-btn-xs layui-btn-normal dw-dailog' dw-url='create.html?id="+goods.id+" dw-title='"+goods.goodsName+">"
+                                        +"<button class='layui-btn layui-btn-xs layui-btn-normal dw-dailog' value='"+goods.id+"' dw-url='create.html?id="+goods.id+" dw-title='"+goods.goodsName+">"
                                             +"<i class='layui-icon'>&#xe642;</i>编辑"
                                         +"</button>"
-                                        +"<button class='layui-btn layui-btn-xs layui-btn-danger dw-delete' dw-url='delete.html?id="+goods.id+" dw-title='"+goods.goodsName+">"
+                                        +"<button class='layui-btn layui-btn-xs layui-btn-danger dw-delete' value='"+goods.id+"' dw-url='delete.html?id="+goods.id+" dw-title='"+goods.goodsName+">"
                                             +"<i class='layui-icon'>&#xe640;</i>删除"
                                         +"</button>"
                                     +"</div>"
@@ -190,6 +190,23 @@
         /**查询按钮*/
         $("#selectGoodsBtn").on('click',function () {
             selectOrderList(1,10);
+        });
+
+        /**
+         * 编辑
+         * */
+        $(".layui-btn-group .dw-dailog").delegate('click',function () {
+            var goodsId = $(this).val();
+            alert(goodsId)
+        });
+
+        /**
+         * 删除
+         * */
+        $("body").on('click','dw-delete',function () {
+            alert(1)
+            var goodsId = $(this).val();
+            alert(goodsId)
         });
 
     });

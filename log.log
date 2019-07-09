@@ -12107,3 +12107,251 @@ org.apache.ibatis.binding.BindingException: Mapper method 'com.gow.beau.storage.
 2019-07-09 17:05:45.248  INFO 11956 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2019-07-09 17:05:45.249  INFO 11956 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2019-07-09 17:05:45.261  INFO 11956 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2019-07-09 17:21:46.934  INFO 11956 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:21:46.939  INFO 11956 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:21:55.180  INFO 13396 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 13396 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:21:55.186  INFO 13396 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:21:57.563  INFO 13396 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:21:57.587  INFO 13396 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:21:57.587  INFO 13396 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:21:57.595  INFO 13396 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:21:57.712  INFO 13396 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:21:57.712  INFO 13396 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2436 ms
+2019-07-09 17:21:57.873  INFO 13396 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:21:58.069  INFO 13396 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:21:58.867  INFO 13396 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:21:59.041  INFO 13396 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:21:59.431  INFO 13396 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:21:59.435  INFO 13396 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.936 seconds (JVM running for 5.926)
+2019-07-09 17:22:03.178  INFO 13396 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:22:03.178  INFO 13396 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:22:03.189  INFO 13396 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2019-07-09 17:22:44.114  INFO 13396 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:22:44.118  INFO 13396 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:22:49.278  INFO 13920 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 13920 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:22:49.282  INFO 13920 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:22:51.828  INFO 13920 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:22:51.860  INFO 13920 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:22:51.860  INFO 13920 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:22:51.869  INFO 13920 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:22:52.159  INFO 13920 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:22:52.159  INFO 13920 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2812 ms
+2019-07-09 17:22:52.308  INFO 13920 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:22:52.527  INFO 13920 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:22:53.504  INFO 13920 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:22:53.681  INFO 13920 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:22:53.928  INFO 13920 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:22:53.932  INFO 13920 --- [main] com.gow.GowApplication                   : Started GowApplication in 6.184 seconds (JVM running for 7.332)
+2019-07-09 17:22:55.729  INFO 13920 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:22:55.730  INFO 13920 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:22:55.746  INFO 13920 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2019-07-09 17:25:00.442  INFO 13920 --- [Thread-14] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:25:00.447  INFO 13920 --- [Thread-14] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:25:05.735  INFO 14172 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 14172 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:25:05.739  INFO 14172 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:25:07.495  INFO 14172 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:25:07.518  INFO 14172 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:25:07.518  INFO 14172 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:25:07.526  INFO 14172 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:25:07.780  INFO 14172 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:25:07.780  INFO 14172 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1967 ms
+2019-07-09 17:25:07.915  INFO 14172 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:25:08.118  INFO 14172 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:25:09.001  INFO 14172 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:25:09.188  INFO 14172 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:25:09.378  INFO 14172 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:25:09.383  INFO 14172 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.768 seconds (JVM running for 6.208)
+2019-07-09 17:25:11.418  INFO 14172 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:25:11.419  INFO 14172 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:25:11.431  INFO 14172 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2019-07-09 17:26:56.351  INFO 14172 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:26:56.356  INFO 14172 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:27:01.527  INFO 10396 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 10396 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:27:01.531  INFO 10396 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:27:03.756  INFO 10396 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:27:03.778  INFO 10396 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:27:03.779  INFO 10396 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:27:03.787  INFO 10396 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:27:04.014  INFO 10396 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:27:04.015  INFO 10396 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2410 ms
+2019-07-09 17:27:04.136  INFO 10396 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:27:04.313  INFO 10396 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:27:05.157  INFO 10396 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:27:05.339  INFO 10396 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:27:05.562  INFO 10396 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:27:05.566  INFO 10396 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.651 seconds (JVM running for 5.676)
+2019-07-09 17:27:11.341  INFO 10396 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:27:11.341  INFO 10396 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:27:11.352  INFO 10396 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2019-07-09 17:28:24.045  INFO 10396 --- [Thread-11] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:28:24.049  INFO 10396 --- [Thread-11] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:28:29.045  INFO 13600 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 13600 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:28:29.049  INFO 13600 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:28:30.890  INFO 13600 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:28:30.914  INFO 13600 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:28:30.915  INFO 13600 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:28:30.921  INFO 13600 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:28:31.021  INFO 13600 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:28:31.021  INFO 13600 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1875 ms
+2019-07-09 17:28:31.145  INFO 13600 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:28:31.496  INFO 13600 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:28:32.330  INFO 13600 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:28:32.517  INFO 13600 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:28:32.714  INFO 13600 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:28:32.718  INFO 13600 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.567 seconds (JVM running for 6.117)
+2019-07-09 17:28:37.183  INFO 13600 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:28:37.184  INFO 13600 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:28:37.195  INFO 13600 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2019-07-09 17:29:10.748  INFO 13600 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:29:10.752  INFO 13600 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:29:15.561  INFO 13720 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 13720 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:29:15.567  INFO 13720 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:29:17.770  INFO 13720 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:29:17.797  INFO 13720 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:29:17.798  INFO 13720 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:29:17.807  INFO 13720 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:29:17.928  INFO 13720 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:29:17.928  INFO 13720 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2245 ms
+2019-07-09 17:29:18.103  INFO 13720 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:29:18.543  INFO 13720 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:29:19.449  INFO 13720 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:29:19.632  INFO 13720 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:29:19.816  INFO 13720 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:29:19.820  INFO 13720 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.918 seconds (JVM running for 6.242)
+2019-07-09 17:29:22.206  INFO 13720 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:29:22.207  INFO 13720 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:29:22.220  INFO 13720 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2019-07-09 17:30:18.692  INFO 13720 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:30:18.696  INFO 13720 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:30:24.232  INFO 13536 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 13536 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:30:24.236  INFO 13536 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:30:25.928  INFO 13536 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:30:25.949  INFO 13536 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:30:25.949  INFO 13536 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:30:25.955  INFO 13536 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:30:26.231  INFO 13536 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:30:26.231  INFO 13536 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1948 ms
+2019-07-09 17:30:26.356  INFO 13536 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:30:26.605  INFO 13536 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:30:27.371  INFO 13536 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:30:27.559  INFO 13536 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:30:27.746  INFO 13536 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:30:27.749  INFO 13536 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.787 seconds (JVM running for 6.192)
+2019-07-09 17:30:29.528  INFO 13536 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:30:29.528  INFO 13536 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:30:29.539  INFO 13536 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2019-07-09 17:30:50.341  INFO 13536 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:30:50.345  INFO 13536 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:30:55.667  INFO 4324 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 4324 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:30:55.672  INFO 4324 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:30:57.811  INFO 4324 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:30:57.834  INFO 4324 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:30:57.835  INFO 4324 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:30:57.841  INFO 4324 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:30:57.943  INFO 4324 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:30:57.943  INFO 4324 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2206 ms
+2019-07-09 17:30:58.072  INFO 4324 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:30:58.422  INFO 4324 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:30:59.196  INFO 4324 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:30:59.371  INFO 4324 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:30:59.580  INFO 4324 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:30:59.587  INFO 4324 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.764 seconds (JVM running for 6.233)
+2019-07-09 17:31:02.016  INFO 4324 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:31:02.016  INFO 4324 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:31:02.030  INFO 4324 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2019-07-09 17:31:29.571  INFO 4324 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:31:29.575  INFO 4324 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:31:36.199 DEBUG 14176 --- [background-preinit] org.jboss.logging                        : Logging Provider: org.jboss.logging.Log4j2LoggerProvider
+2019-07-09 17:31:36.362  INFO 14176 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 14176 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:31:36.362  INFO 14176 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:31:38.499  INFO 14176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:31:38.529  INFO 14176 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:31:38.530  INFO 14176 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:31:38.539  INFO 14176 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:31:38.815  INFO 14176 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:31:38.816  INFO 14176 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2348 ms
+2019-07-09 17:31:38.941  INFO 14176 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:31:39.128  INFO 14176 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:31:39.946  INFO 14176 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:31:40.320  INFO 14176 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:31:40.520  INFO 14176 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:31:40.525  INFO 14176 --- [main] com.gow.GowApplication                   : Started GowApplication in 5.032 seconds (JVM running for 8.23)
+2019-07-09 17:31:44.443  INFO 14176 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:31:44.444  INFO 14176 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:31:44.457  INFO 14176 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2019-07-09 17:32:13.013  INFO 14176 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:32:13.018  INFO 14176 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:32:18.255  INFO 9968 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 9968 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:32:18.259  INFO 9968 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:32:20.290  INFO 9968 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:32:20.313  INFO 9968 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:32:20.313  INFO 9968 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:32:20.320  INFO 9968 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:32:20.421  INFO 9968 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:32:20.421  INFO 9968 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2065 ms
+2019-07-09 17:32:20.692  INFO 9968 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:32:20.870  INFO 9968 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:32:21.689  INFO 9968 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:32:21.879  INFO 9968 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:32:22.091  INFO 9968 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:32:22.096  INFO 9968 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.537 seconds (JVM running for 6.479)
+2019-07-09 17:32:24.753  INFO 9968 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:32:24.753  INFO 9968 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:32:24.763  INFO 9968 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-07-09 17:34:46.221  INFO 9968 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:34:46.225  INFO 9968 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:34:51.348  INFO 11392 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 11392 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:34:51.353  INFO 11392 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:34:53.313  INFO 11392 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:34:53.348  INFO 11392 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:34:53.348  INFO 11392 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:34:53.355  INFO 11392 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:34:53.460  INFO 11392 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:34:53.461  INFO 11392 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2028 ms
+2019-07-09 17:34:53.587  INFO 11392 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:34:53.973  INFO 11392 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:34:54.795  INFO 11392 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:34:54.990  INFO 11392 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:34:55.181  INFO 11392 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:34:55.185  INFO 11392 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.879 seconds (JVM running for 6.186)
+2019-07-09 17:35:05.043  INFO 11392 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:35:05.043  INFO 11392 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:35:05.059  INFO 11392 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2019-07-09 17:35:42.912  INFO 11392 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:35:42.917  INFO 11392 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:35:49.099  INFO 14120 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 14120 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:35:49.122  INFO 14120 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:35:50.957  INFO 14120 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:35:51.141  INFO 14120 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:35:51.141  INFO 14120 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:35:51.148  INFO 14120 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:35:51.261  INFO 14120 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:35:51.262  INFO 14120 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2075 ms
+2019-07-09 17:35:51.388  INFO 14120 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:35:51.713  INFO 14120 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:35:52.500  INFO 14120 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:35:52.687  INFO 14120 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:35:52.888  INFO 14120 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:35:52.893  INFO 14120 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.821 seconds (JVM running for 6.038)
+2019-07-09 17:35:58.367  INFO 14120 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:35:58.368  INFO 14120 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:35:58.378  INFO 14120 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-07-09 17:37:23.114  INFO 14120 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:37:23.118  INFO 14120 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-07-09 17:37:28.504  INFO 13140 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 13140 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-07-09 17:37:28.508  INFO 13140 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-07-09 17:37:30.270  INFO 13140 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-07-09 17:37:30.442  INFO 13140 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-07-09 17:37:30.442  INFO 13140 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-07-09 17:37:30.450  INFO 13140 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;;.]
+2019-07-09 17:37:30.564  INFO 13140 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-07-09 17:37:30.565  INFO 13140 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1996 ms
+2019-07-09 17:37:30.682  INFO 13140 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-07-09 17:37:30.925  INFO 13140 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-07-09 17:37:31.678  INFO 13140 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-07-09 17:37:31.895  INFO 13140 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-07-09 17:37:32.091  INFO 13140 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-07-09 17:37:32.095  INFO 13140 --- [main] com.gow.GowApplication                   : Started GowApplication in 4.799 seconds (JVM running for 6.275)
+2019-07-09 17:37:34.693  INFO 13140 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-07-09 17:37:34.693  INFO 13140 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-07-09 17:37:34.705  INFO 13140 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms

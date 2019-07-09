@@ -44,4 +44,13 @@ public class GoodsBossController {
     public PageInfo getGoodsList(GoodsListReq req){
         return goodsService.getGoodsList(req);
     }
+
+    /**
+     * 删除商品
+     * */
+    @RequestMapping("/deleteGoods")
+    @ResponseBody
+    public int deleteGoods(Long[] goodsIds){
+        return goodsService.deleteGoods(goodsIds);
+    }
 }
