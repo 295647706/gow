@@ -49,7 +49,7 @@
                     </div>
                   </form>
                   <hr>
-                  <div class="layui-btn-group">
+                  <!--<div class="layui-btn-group">
                       <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="create.html" dw-title="新增用户" dw-width="100%" dw-height="100%">
                           <i class="layui-icon">&#xe654;</i>新增
                       </button>
@@ -59,7 +59,18 @@
                       <button class="layui-btn layui-btn-xs dw-refresh">
                           <i class="layui-icon">&#x1002;</i>刷新
                       </button>
-                  </div>
+                  </div>-->
+                    <div class="layui-btn-group">
+                        <button type="button" class="layui-btn layui-btn-sm goodsAddPage">
+                            <i class="layui-icon">&#xe654;</i>
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-sm">
+                            <i class="layui-icon">&#xe640;</i>
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-sm dw-refresh">
+                            <i class="layui-icon">&#x1002;</i>
+                        </button>
+                    </div>
                   <hr>
                   <table class="layui-table">
                       <colgroup>
@@ -71,6 +82,7 @@
                           <col width="250">
                           <col width="150">
                           <col width="100">
+                          <col width="150">
                           <col width="100">
                       </colgroup>
                       <thead>
@@ -145,12 +157,13 @@
                                 +"<td>"+goods.goodsPrice+"</td>"
                                 +"<td>"+goods.goodsDeno+"</td>"
                                 +"<td class='text-center'>"
-                                    +"<div class='layui-btn-group'>"
-                                        +"<button class='layui-btn layui-btn-xs layui-btn-normal dw-dailog' value='"+goods.id+"' dw-url='create.html?id="+goods.id+" dw-title='"+goods.goodsName+">"
-                                            +"<i class='layui-icon'>&#xe642;</i>编辑"
+                                    +"<div>"
+                                        +"<button type='button' class='layui-btn layui-btn-sm goodsEdit' value='"+goods.id+"'>"
+                                            +"<i class='layui-icon'>&#xe642;</i>"
                                         +"</button>"
-                                        +"<button class='layui-btn layui-btn-xs layui-btn-danger dw-delete' value='"+goods.id+"' dw-url='delete.html?id="+goods.id+" dw-title='"+goods.goodsName+">"
-                                            +"<i class='layui-icon'>&#xe640;</i>删除"
+                                        +"<hr/>"
+                                        +"<button type='button' class='layui-btn layui-btn-sm goodsDelete' value='"+goods.id+"'>"
+                                            +"<i class='layui-icon'>&#xe640;</i>"
                                         +"</button>"
                                     +"</div>"
                                 +"</td>"
@@ -193,20 +206,44 @@
         });
 
         /**
-         * 编辑
+         * 编辑-跳转页面
          * */
-        $(".layui-btn-group .dw-dailog").delegate('click',function () {
+        $(document).on('click','.goodsEdit',function () {
             var goodsId = $(this).val();
-            alert(goodsId)
+            if(goodsId){
+                $.ajax({
+                    type: "post",
+                    url: "/goodsBoss/getEditGoodsInfo",
+                    data: {"goodsId": goodsId},
+                    success: function (data) {
+                        console.log(data)
+                    }
+                });
+            }
         });
 
         /**
          * 删除
          * */
-        $("body").on('click','dw-delete',function () {
-            alert(1)
+        $(document).on('click','.goodsDelete',function () {
             var goodsId = $(this).val();
-            alert(goodsId)
+            if(goodsId){
+                $.ajax({
+                    type: "post",
+                    url: "/goodsBoss/deleteGoods",
+                    data: {"goodsIds": goodsId},
+                    success: function (data) {
+
+                    }
+                });
+            }
+        });
+
+        /**
+         * 进入新增页面
+         * */
+        $(".goodsAddPage").on('click',function () {
+            window.location.href="/goodsBoss/goods-add-page";
         });
 
     });

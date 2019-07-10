@@ -1,17 +1,16 @@
 package com.gow.beau.service.goods;
 
 import com.gow.beau.model.data.PageInfo;
+import com.gow.beau.model.req.goods.GoodsAddReq;
 import com.gow.beau.model.req.goods.GoodsListReq;
 import com.gow.beau.model.req.goods.SearchListReq;
-import com.gow.beau.model.rsp.goods.GoodsDetailRsp;
+import com.gow.beau.model.rsp.goods.*;
 import com.gow.beau.model.req.goods.GoodsDetailReq;
-import com.gow.beau.model.rsp.goods.GoodsImageRsp;
-import com.gow.beau.model.rsp.goods.GoodsListRsp;
-import com.gow.beau.model.rsp.goods.SearchListRsp;
 import com.gow.beau.service.collection.GoodsCollectionService;
 import com.gow.beau.storage.auto.mapper.GoodsMapper;
 import com.gow.beau.storage.auto.model.Goods;
 import com.gow.beau.storage.ext.mapper.GoodsExtMapper;
+import com.gow.beau.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -137,6 +136,32 @@ public class GoodsService {
      * 删除商品
      * */
     public int deleteGoods(Long[] goodsIds) {
+        if(goodsIds.length > 0){
+            int count = 0;
+            for(Long goodsId : goodsIds){
+                count += goodsExtMapper.deleteGoodsByGoodsId(goodsId);
+            }
+            return count;
+        }
         return 0;
+    }
+
+    /**
+     * 编辑商品的查询详情
+     * */
+    public EditGoodsInfoRsp getEditGoodsInfo(Long goodsId) {
+        if(null != goodsId){
+            return goodsExtMapper.getEditGoodsInfoBygoodsId(goodsId);
+        }
+        return null;
+    }
+
+    /**
+     * 新增商品
+     * */
+    public int addGoods(GoodsAddReq req) {
+        Goods goods = new Goods();
+        BeanUtil.copyProperties(req,goods);
+        return goodsMapper.insertSelective(goods);
     }
 }

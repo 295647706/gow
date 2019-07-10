@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>商品管理</title>
+  <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+  <link rel="stylesheet" href="../boss/layui/css/global.css">
+  <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="boss\index\top::boss-top">
+        <!-- 头部 -->
+    </div>
+
+    <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+        <!-- 左边导航栏 -->
+    </div>
+  
+      <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <fieldset class="layui-elem-field">
+                <legend>商品管理 - 商品新增</legend>
+                <div class="layui-field-box">
+                  <form class="layui-form" method="post" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品品牌 :</label>
+                            <div class="layui-input-inline">
+                                <select name="catId" lay-verify="" id="catId">
+                                    <option value="">品牌</option>
+                                    <option th:each="cat,iterStat: ${categoryList}" th:value="${cat.categoryId}" th:text="${cat.categoryName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品名称 :</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="商品名称" type="text" name="" id="goodsName" value="">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">销售价 :</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="销售价 " type="text" name="" id="goodsPrice" value="">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">计价单位  :</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="计价单位  " type="text" name="" id="goodsDeno" value="盒">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品数量  :</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="商品数量  " type="text" name="" id="goodsNumber" value="">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品规格:</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="商品规格" type="text" name="" id="goodsSpec" value="">
+                            </div>
+                        </div>
+                        <br>
+                        <br/>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品副标题 :</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="商品副标题 " type="text" name="" id="goodsSubtitle" value="">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品关键词 :</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" placeholder="商品关键词 " type="text" name="" id="goodsKeywords" value="">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">详细介绍  :</label>
+                            <div class="layui-input-block">
+                                <textarea name="desc" placeholder="详细介绍" class="layui-textarea" id="goodsDetailDesc"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="layui-inline" style="text-align:left;padding: 20px;padding-left: 200px">
+                          <div class="layui-input-inline">
+                              <div class="layui-btn" id="addGoodsBtn">提交</div>
+                          </div>
+                      </div>
+                  </form>
+                </div>
+            </fieldset>
+        </div>
+      </div>
+
+    <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+        <!-- 底部 -->
+    </div>
+</div>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+</body>
+
+<script>
+
+    $(function () {
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+
+
+
+        /**
+         * 提交
+         * */
+        $("#addGoodsBtn").on('click',function () {
+            $("form").submit(function(e){
+                alert("Submitted");
+            });
+        });
+
+    });
+
+</script>
+
+</html>

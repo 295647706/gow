@@ -1,8 +1,9 @@
 package com.gow.beau.boss.goods;
 
 import com.gow.beau.model.data.PageInfo;
+import com.gow.beau.model.req.goods.GoodsAddReq;
 import com.gow.beau.model.req.goods.GoodsListReq;
-import com.gow.beau.model.rsp.goods.GoodsListRsp;
+import com.gow.beau.model.rsp.goods.EditGoodsInfoRsp;
 import com.gow.beau.service.category.CategoryService;
 import com.gow.beau.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,32 @@ public class GoodsBossController {
     @ResponseBody
     public int deleteGoods(Long[] goodsIds){
         return goodsService.deleteGoods(goodsIds);
+    }
+
+    /**
+     * 编辑商品的查询详情
+     * */
+    @RequestMapping("/getEditGoodsInfo")
+    @ResponseBody
+    public EditGoodsInfoRsp getEditGoodsInfo(Long goodsId){
+        return goodsService.getEditGoodsInfo(goodsId);
+    }
+
+    /**
+     * 商品管理 - 商品列表页面
+     * */
+    @RequestMapping("/goods-add-page")
+    public ModelAndView goodsAddPage(){
+        ModelAndView view = new ModelAndView("boss/goods/goodsAdd");
+        view.addObject("categoryList",categoryService.getCategoryList());
+        return view;
+    }
+
+    /**
+     * 新增商品
+     * */
+    @RequestMapping("/addGoods")
+    public int addGoods(GoodsAddReq req){
+        return goodsService.addGoods(req);
     }
 }
