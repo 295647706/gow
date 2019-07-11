@@ -1,20 +1,23 @@
 package com.gow.beau.service.goods;
 
 import com.gow.beau.model.data.PageInfo;
+import com.gow.beau.model.req.goods.GoodsAddReq;
 import com.gow.beau.model.req.goods.GoodsListReq;
 import com.gow.beau.model.req.goods.SearchListReq;
-import com.gow.beau.model.rsp.goods.GoodsDetailRsp;
+import com.gow.beau.model.rsp.goods.*;
 import com.gow.beau.model.req.goods.GoodsDetailReq;
-import com.gow.beau.model.rsp.goods.GoodsImageRsp;
-import com.gow.beau.model.rsp.goods.GoodsListRsp;
-import com.gow.beau.model.rsp.goods.SearchListRsp;
 import com.gow.beau.service.collection.GoodsCollectionService;
+import com.gow.beau.storage.auto.mapper.GoodsImageMapper;
 import com.gow.beau.storage.auto.mapper.GoodsMapper;
 import com.gow.beau.storage.auto.model.Goods;
+import com.gow.beau.storage.auto.model.GoodsImage;
 import com.gow.beau.storage.ext.mapper.GoodsExtMapper;
+import com.gow.beau.util.BeanUtil;
+import com.gow.beau.util.CodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +40,9 @@ public class GoodsService {
 
     @Autowired
     private GoodsCollectionService goodsCollectionService;
+
+    @Autowired
+    private GoodsImageMapper goodsImageMapper;
 
     /**
      * @Author:lzn
@@ -122,6 +128,85 @@ public class GoodsService {
         //查询商品列表
         List<GoodsListRsp> rsps = goodsExtMapper.getGoodsList(req);
         pageInfo.setList(rsps);
+        pageInfo.setRows(this.getGoodsRows(req));
         return pageInfo;
+    }
+
+    /**
+     * 商品总数
+     * */
+    private int getGoodsRows(GoodsListReq req){
+        return goodsExtMapper.goodsRows(req);
+    }
+
+    /**
+     * 删除商品
+     * */
+    public int deleteGoods(Long[] goodsIds) {
+        if(goodsIds.length > 0){
+            int count = 0;
+            for(Long goodsId : goodsIds){
+                count += goodsExtMapper.deleteGoodsByGoodsId(goodsId);
+            }
+            return count;
+        }
+        return 0;
+    }
+
+    /**
+     * 编辑商品的查询详情
+     * */
+    public EditGoodsInfoRsp getEditGoodsInfo(Long goodsId) {
+        if(null != goodsId){
+            return goodsExtMapper.getEditGoodsInfoBygoodsId(goodsId);
+        }
+        return null;
+    }
+
+    /**
+     * 新增商品
+     * */
+    public int addGoods(GoodsAddReq req) {
+        String[] goodsImgs = null;
+        Goods goods = new Goods();
+        BeanUtil.copyProperties(req,goods);
+        goods.setGoodsNo(CodeUtil.goodsCode());
+        if(null == goods.getGoodsScore()){
+            goods.setGoodsScore(new BigDecimal(90));
+        }
+        goods.setGoodsDetailImg(req.getGoodsDetailImgs());
+
+        //商品图片处理
+        if (null != req.getGoodsImgs() && !req.getGoodsImgs().equals("")) {
+            goodsImgs = req.getGoodsImgs().split(",");
+            if (goodsImgs != null && goodsImgs.length == 1) {
+                goodsImgs = req.getGoodsImgs().split("，");
+            }
+            if (goodsImgs != null && goodsImgs.length == 1) {
+                goodsImgs = req.getGoodsImgs().split(";");
+            }
+            if (goodsImgs != null && goodsImgs.length == 1) {
+                goodsImgs = req.getGoodsImgs().split("；");
+            }
+            //商品图片
+            if(null != goodsImgs && goodsImgs.length >0){
+                goods.setGoodsImg(goodsImgs[0]);
+            }
+        }
+
+        //保存商品信息
+        int count = goodsMapper.insertSelective(goods);
+        if(count > 0) {
+            //保存
+            if (null != goodsImgs && goodsImgs.length > 0) {
+                for (String imgUrl : goodsImgs) {
+                    GoodsImage goodsImage = new GoodsImage();
+                    goodsImage.setGoodsId(goods.getId());
+                    goodsImage.setImageUrl(imgUrl);
+                    goodsImageMapper.insertSelective(goodsImage);
+                }
+            }
+        }
+        return count;
     }
 }

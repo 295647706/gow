@@ -26,7 +26,7 @@ public class CategoryService {
 
     public List<CategoryListRsp> categoryGoodsListAll() {
         //分类数据列表
-        List<CategoryListRsp> categoryListRspList = categoryExtMapper.categoryGoodsListAll();
+        List<CategoryListRsp> categoryListRspList = this.getCategoryList();
         //当没有数据时处理
         if(categoryListRspList == null || categoryListRspList.size() == 0){
             //没有数据则设置一条空的数据返回
@@ -52,5 +52,12 @@ public class CategoryService {
      */
     public int categoryNumber() {
         return categoryExtMapper.categoryNumber();
+    }
+
+    /**
+     * 分类信息
+     * */
+    public List<CategoryListRsp> getCategoryList(){
+        return categoryExtMapper.categoryGoodsListAll();
     }
 }

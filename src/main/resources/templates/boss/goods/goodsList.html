@@ -31,9 +31,7 @@
                             <div class="layui-input-inline">
                                 <select name="catId" lay-verify="" id="catId">
                                     <option value="">品牌</option>
-                                    <option value="010">北京</option>
-                                    <option value="021">上海</option>
-                                    <option value="0571">杭州</option>
+                                    <option th:each="cat,iterStat: ${categoryList}" th:value="${cat.categoryId}" th:text="${cat.categoryName}"></option>
                                 </select>
                             </div>
                         </div>
@@ -45,13 +43,13 @@
                       </div>
                       <div class="layui-inline" style="text-align:left;">
                         <div class="layui-input-inline">
-                          <button class="layui-btn"><i class="layui-icon">&#xe615;</i>查询</button>
+                          <div class="layui-btn" id="selectGoodsBtn"><i class="layui-icon">&#xe615;</i>查询</div>
                         </div>
                       </div>
                     </div>
                   </form>
                   <hr>
-                  <div class="layui-btn-group">
+                  <!--<div class="layui-btn-group">
                       <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="create.html" dw-title="新增用户" dw-width="100%" dw-height="100%">
                           <i class="layui-icon">&#xe654;</i>新增
                       </button>
@@ -61,7 +59,18 @@
                       <button class="layui-btn layui-btn-xs dw-refresh">
                           <i class="layui-icon">&#x1002;</i>刷新
                       </button>
-                  </div>
+                  </div>-->
+                    <div class="layui-btn-group">
+                        <button type="button" class="layui-btn layui-btn-sm goodsAddPage">
+                            <i class="layui-icon">&#xe654;</i>
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-sm">
+                            <i class="layui-icon">&#xe640;</i>
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-sm dw-refresh">
+                            <i class="layui-icon">&#x1002;</i>
+                        </button>
+                    </div>
                   <hr>
                   <table class="layui-table">
                       <colgroup>
@@ -70,9 +79,11 @@
                           <col width="150">
                           <col width="150">
                           <col width="150">
+                          <col width="250">
                           <col width="150">
+                          <col width="100">
                           <col width="150">
-                          <col width="150">
+                          <col width="100">
                       </colgroup>
                       <thead>
                           <tr>
@@ -80,6 +91,7 @@
                               <th>商品编号</th>
                               <th>商品名称</th>
                               <th>商品规格</th>
+                              <th>商品品牌</th>
                               <th>商品副标题</th>
                               <th>商品数量</th>
                               <th>销售价</th>
@@ -88,58 +100,11 @@
                           </tr>
                       </thead>
                       <tbody id="goodsContent">
-                          <tr>
-                              <td><input type="checkbox" name="id" value="1"></td>
-                              <td>贤心</td>
-                              <td>2016-11-29</td>
-                              <td>人生就像是一场修行</td>
-                              <td class="text-center">
-                                <div class="layui-btn-group">
-                                  <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="create.html?id=1" dw-title="编辑用户">
-                                    <i class="layui-icon">&#xe642;</i>编辑
-                                  </button>
-                                  <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" dw-url="delete.html?id=1" dw-title="小明">
-                                    <i class="layui-icon">&#xe640;</i>删除
-                                  </button>
-                                </div>
-                              </td>
-                          </tr>
-                          <tr>
-                          <td><input type="checkbox" name="id" value="2"></td>
-                          <td>许闲心</td>
-                          <td>2016-11-28</td>
-                          <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-                          <td class="text-center">
-                              <div class="layui-btn-group">
-                                  <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="create.html?id=1" dw-title="编辑用户">
-                                    <i class="layui-icon">&#xe642;</i>编辑
-                                  </button>
-                                  <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" dw-url="delete.html?id=1" dw-title="小明">
-                                    <i class="layui-icon">&#xe640;</i>删除
-                                  </button>
-                                </div>
-                          </td>
-                          </tr>
-                          <tr>
-                          <td><input type="checkbox" name="id" value="3 "></td>
-                          <td>sentsin</td>
-                          <td>2016-11-27</td>
-                          <td> Life is either a daring adventure or nothing.</td>
-                          <td class="text-center">
-                              <div class="layui-btn-group">
-                                  <button class="layui-btn layui-btn-xs layui-btn-normal dw-dailog" dw-url="create.html?id=1" dw-title="编辑用户">
-                                    <i class="layui-icon">&#xe642;</i>编辑
-                                  </button>
-                                  <button class="layui-btn layui-btn-xs layui-btn-danger dw-delete" dw-url="delete.html?id=1" dw-title="小明">
-                                    <i class="layui-icon">&#xe640;</i>删除
-                                  </button>
-                                </div>
-                          </td>
-                          </tr>
+                          <!-- 列表内容 -->
                       </tbody>
                   </table>
+                  <div id="page"></div>
                 </div>
-                <div id="page"></div>
             </fieldset>
         </div>
       </div>
@@ -168,31 +133,7 @@
             });
         });
 
-        //分页
-        layui.use('laypage', function(){
-            var laypage = layui.laypage;
-
-            //执行一个laypage实例
-            laypage.render({
-                elem: 'page'
-                ,count: 700 //数据总数，从服务端得到
-                ,limits: [10,15,20,30,50]
-                ,groups: 10
-                ,jump: function(obj, first){
-                    //obj包含了当前分页的所有参数，比如：
-                    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-                    console.log(obj.limit); //得到每页显示的条数
-
-                    //首次不执行
-                    if(!first){
-                        //do something
-                    }
-                }
-            });
-        });
-
-
-        function selectOrderList(pageNo) {
+        function selectOrderList(pageNo,pageSize) {
             var divContent = "";
 
             var goodsName = $("#goodsName").val();
@@ -200,32 +141,110 @@
             $.ajax({
                 type : "post",
                 url : "/goodsBoss/goodsList",
-                data : {"pageNo":pageNo,"goodsName":goodsName,"catId":catId},
+                data : {"pageNo":pageNo,"pageSize":pageSize,"goodsName":goodsName,"catId":catId},
                 success : function (data) {
-                    console.log(data.list)
-                    if(!data.list){
+                    if(data.list){
                         $.each(data.list, function (index, goods) {
-                            console.log(goods.id)
                             divContent = divContent
                             +"<tr>"
                                 +"<td><input type='checkbox' name='id' value='"+goods.id+"'></td>"
                                 +"<td>"+goods.goodsNo+"</td>"
                                 +"<td>"+goods.goodsName+"</td>"
                                 +"<td>"+goods.goodsSpec+"</td>"
+                                +"<td>"+goods.catName+"</td>"
                                 +"<td>"+goods.goodsSubtitle+"</td>"
                                 +"<td>"+goods.goodsNumber+"</td>"
                                 +"<td>"+goods.goodsPrice+"</td>"
                                 +"<td>"+goods.goodsDeno+"</td>"
-                                +"<td>"+goods.goodsNo+"</td>"
+                                +"<td class='text-center'>"
+                                    +"<div>"
+                                        +"<button type='button' class='layui-btn layui-btn-sm goodsEdit' value='"+goods.id+"'>"
+                                            +"<i class='layui-icon'>&#xe642;</i>"
+                                        +"</button>"
+                                        +"<hr/>"
+                                        +"<button type='button' class='layui-btn layui-btn-sm goodsDelete' value='"+goods.id+"'>"
+                                            +"<i class='layui-icon'>&#xe640;</i>"
+                                        +"</button>"
+                                    +"</div>"
+                                +"</td>"
                             +"</tr>"
                         })
                     }
                     $("#goodsContent").html(divContent);
+                    //分页
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'page'
+                            ,count: data.rows //数据总数，从服务端得到
+                            ,curr : data.pageNo
+                            ,pages : data.totalPages
+                            ,limit : data.pageSize
+                            ,limits: [data.pageSize]
+                            ,groups: 10
+                            ,first: '首页' //首页文本
+                            ,last: '尾页' //尾页文本
+                            ,layout: ['prev', 'page', 'next','limit','count','refresh','skip']
+                            ,jump: function(obj, first){
+                                //首次不执行
+                                if(!first){
+                                    selectOrderList(obj.curr,obj.limit);
+                                }
+                            }
+                        });
+                    });
                 }
             });
         }
-        selectOrderList(1);
+        selectOrderList(1,10);
 
+
+        /**查询按钮*/
+        $("#selectGoodsBtn").on('click',function () {
+            selectOrderList(1,10);
+        });
+
+        /**
+         * 编辑-跳转页面
+         * */
+        $(document).on('click','.goodsEdit',function () {
+            var goodsId = $(this).val();
+            if(goodsId){
+                $.ajax({
+                    type: "post",
+                    url: "/goodsBoss/getEditGoodsInfo",
+                    data: {"goodsId": goodsId},
+                    success: function (data) {
+                        console.log(data)
+                    }
+                });
+            }
+        });
+
+        /**
+         * 删除
+         * */
+        $(document).on('click','.goodsDelete',function () {
+            var goodsId = $(this).val();
+            if(goodsId){
+                $.ajax({
+                    type: "post",
+                    url: "/goodsBoss/deleteGoods",
+                    data: {"goodsIds": goodsId},
+                    success: function (data) {
+
+                    }
+                });
+            }
+        });
+
+        /**
+         * 进入新增页面
+         * */
+        $(".goodsAddPage").on('click',function () {
+            window.location.href="/goodsBoss/goods-add-page";
+        });
 
     });
 

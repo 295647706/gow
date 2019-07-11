@@ -90,4 +90,42 @@
     Limit #{startRowNum},#{endRowNum}
   </select>
 
+  <select id="goodsRows" resultType="java.lang.Integer">
+    SELECT
+        count(0)
+    FROM gow_goods AS g INNER JOIN gow_category c ON g.category_id = c.id
+    <if test="goodsName != null and goodsName !='' ">
+      and g.goods_name LIKE CONCAT('%',#{goodsName},'%')
+    </if>
+    <if test="catId != null">
+      and g.category_id = #{catId}
+    </if>
+  </select>
+
+  <update id="deleteGoodsByGoodsId">
+
+  </update>
+
+  <select id="getEditGoodsInfoBygoodsId" resultType="com.gow.beau.model.rsp.goods.EditGoodsInfoRsp">
+    SELECT
+        g.id AS id
+      , g.goods_name AS goodsName
+      , g.goods_spec AS goodsSpec
+      , g.goods_no AS goodsNo
+      , g.goods_score AS goodsScore
+      , g.goods_deno AS goodsDeno
+      , g.goods_number AS goodsNumber
+      , g.goods_subtitle AS goodsSubtitle
+      , g.goods_price AS goodsPrice
+      , g.goods_keywords AS goodsKeywords
+      , g.goods_brief AS goodsBrief
+      , g.goods_score AS goodsScore
+      , g.goods_detail_desc AS goodsDetailDesc
+      , g.category_id AS categoryId
+      , c.cat_name AS catName
+    FROM gow_goods AS g INNER JOIN gow_category c ON g.category_id = c.id
+    WHERE 1=1
+    AND g.id = #{goodsId}
+  </select>
+
 </mapper>

@@ -8,18 +8,16 @@ import com.gow.beau.service.customer.CustomerAddressService;
 import com.gow.beau.service.goods.GoodsService;
 import com.gow.beau.service.ordergoods.OrderGoodsService;
 import com.gow.beau.service.shoppingcart.ShoppingCartService;
-import com.gow.beau.storage.auto.mapper.GoodsMapper;
 import com.gow.beau.storage.auto.mapper.OrderGoodsMapper;
 import com.gow.beau.storage.auto.mapper.OrderMapper;
 import com.gow.beau.storage.auto.model.*;
 import com.gow.beau.storage.ext.mapper.OrderExtMapper;
-import com.gow.beau.util.OrderCode;
+import com.gow.beau.util.CodeUtil;
 import com.gow.beau.util.SettingValueUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -198,7 +196,7 @@ public class OrderService {
         //运费
         order.setExpressPrice(req.getExpressPrice());
         //订单编号
-        order.setOrderCode(OrderCode.orderCode(req.getCustomerId()));
+        order.setOrderCode(CodeUtil.orderCode(req.getCustomerId()));
 
         //收货地址
         CustomerAddress address = customerAddressService.getCustomerAddress(req.getAddressId());

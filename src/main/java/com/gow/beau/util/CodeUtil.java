@@ -7,13 +7,17 @@ import java.util.Random;
 /**
  * Created by lzn on 2019/3/12.
  */
-public class OrderCode {
+public class CodeUtil {
 
     public static String orderCode(Long customerId){
         if(null == customerId){
             return null;
         }
         return dateCode()+randomCode()+customerId;
+    }
+
+    public static String goodsCode(){
+        return "G"+dateCode()+randomCode();
     }
 
     /**
