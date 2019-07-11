@@ -78,6 +78,7 @@ public class GoodsBossController {
      * 新增商品
      * */
     @RequestMapping("/addGoods")
+    @ResponseBody
     public int addGoods(GoodsAddReq req){
         return goodsService.addGoods(req);
     }

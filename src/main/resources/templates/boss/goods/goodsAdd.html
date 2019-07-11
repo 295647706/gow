@@ -23,8 +23,8 @@
         <div style="padding: 15px;">
             <fieldset class="layui-elem-field">
                 <legend>商品管理 - 商品新增</legend>
-                <div class="layui-field-box">
-                  <form class="layui-form" method="post" action="">
+                <div class="layui-field-box" style="width: 700px">
+                  <form class="layui-form" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">商品品牌 :</label>
@@ -35,10 +35,12 @@
                                 </select>
                             </div>
                         </div>
+                        <br/>
+                        <br/>
                         <div class="layui-inline">
                             <label class="layui-form-label">商品名称 :</label>
                             <div class="layui-input-inline">
-                                <input autocomplete="off" class="layui-input" placeholder="商品名称" type="text" name="" id="goodsName" value="">
+                                <input autocomplete="off" class="layui-input" style="width: 514px" placeholder="商品名称" type="text" name="" id="goodsName" value="">
                             </div>
                         </div>
                         <br/>
@@ -74,7 +76,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">商品副标题 :</label>
                             <div class="layui-input-inline">
-                                <input autocomplete="off" class="layui-input" placeholder="商品副标题 " type="text" name="" id="goodsSubtitle" value="">
+                                <input autocomplete="off" style="width: 514px" class="layui-input" placeholder="商品副标题 " type="text" name="" id="goodsSubtitle" value="">
                             </div>
                         </div>
                         <br/>
@@ -82,7 +84,15 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">商品关键词 :</label>
                             <div class="layui-input-inline">
-                                <input autocomplete="off" class="layui-input" placeholder="商品关键词 " type="text" name="" id="goodsKeywords" value="">
+                                <input autocomplete="off" style="width: 514px" class="layui-input" placeholder="商品关键词 " type="text" name="" id="goodsKeywords" value="">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品简介  :</label>
+                            <div class="layui-input-block">
+                                <textarea name="desc" style="width: 514px" placeholder="商品简介" class="layui-textarea" id="goodsBrief"></textarea>
                             </div>
                         </div>
                         <br/>
@@ -90,7 +100,21 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">详细介绍  :</label>
                             <div class="layui-input-block">
-                                <textarea name="desc" placeholder="详细介绍" class="layui-textarea" id="goodsDetailDesc"></textarea>
+                                <textarea name="desc" style="width: 514px" placeholder="详细介绍" class="layui-textarea" id="goodsDetailDesc"></textarea>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品图片  :<br/>(多张图片用英文','隔开)</label>
+                            <div class="layui-input-block">
+                                <textarea name="desc" style="width: 514px" placeholder="商品图片(多张图片用英文','隔开)" class="layui-textarea" id="goodsImgs"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">详情图片  :<br/>(多张图片用英文','隔开)</label>
+                            <div class="layui-input-block">
+                                <textarea name="desc" style="width: 514px" placeholder="详情图片(多张图片用英文','隔开)" class="layui-textarea" id="goodsDetailImgs"></textarea>
                             </div>
                         </div>
                     </div>
@@ -130,13 +154,48 @@
         });
 
 
+        /**
+         * 商品名称 输入框 触发事件
+         * */
+        $("#goodsName").on('input onpropertychange',function () {
+            var thisValue = $(this).val();
+            $("#goodsSubtitle").val(thisValue);
+            $("#goodsKeywords").val(thisValue);
+        });
+
 
         /**
          * 提交
          * */
         $("#addGoodsBtn").on('click',function () {
-            $("form").submit(function(e){
-                alert("Submitted");
+            var catId = $("#catId").val();
+            var goodsName = $("#goodsName").val();
+            var goodsPrice = $("#goodsPrice").val();
+            var goodsDeno = $("#goodsDeno").val();
+            var goodsNumber = $("#goodsNumber").val();
+            var goodsSpec = $("#goodsSpec").val();
+            var goodsSubtitle = $("#goodsSubtitle").val();
+            var goodsKeywords = $("#goodsKeywords").val();
+            var goodsBrief = $("#goodsBrief").val();
+            var goodsDetailDesc = $("#goodsDetailDesc").val();
+            var goodsImgs = $("#goodsImgs").val();
+            var goodsDetailImgs = $("#goodsDetailImgs").val();
+            $.ajax({
+                type: "post",
+                url: "/goodsBoss/addGoods",
+                data: {"categoryId": catId,"goodsName":goodsName,"goodsPrice":goodsPrice,"goodsDeno":goodsDeno,"goodsNumber":goodsNumber
+                    ,"goodsSpec":goodsSpec,"goodsSubtitle":goodsSubtitle,"goodsKeywords":goodsKeywords,"goodsBrief":goodsBrief,"goodsDetailDesc":goodsDetailDesc
+                    ,"goodsImgs":goodsImgs,"goodsDetailImgs":goodsDetailImgs},
+                success: function (data) {
+                    if(data>0){
+                        layer.msg('新增成功', {
+                            icon: 1,
+                            time: 5000 //5秒关闭（如果不配置，默认是5秒）
+                        }, function(){
+                            //do something
+                        });
+                    }
+                }
             });
         });
 

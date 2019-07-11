@@ -7,13 +7,17 @@ import com.gow.beau.model.req.goods.SearchListReq;
 import com.gow.beau.model.rsp.goods.*;
 import com.gow.beau.model.req.goods.GoodsDetailReq;
 import com.gow.beau.service.collection.GoodsCollectionService;
+import com.gow.beau.storage.auto.mapper.GoodsImageMapper;
 import com.gow.beau.storage.auto.mapper.GoodsMapper;
 import com.gow.beau.storage.auto.model.Goods;
+import com.gow.beau.storage.auto.model.GoodsImage;
 import com.gow.beau.storage.ext.mapper.GoodsExtMapper;
 import com.gow.beau.util.BeanUtil;
+import com.gow.beau.util.CodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +40,9 @@ public class GoodsService {
 
     @Autowired
     private GoodsCollectionService goodsCollectionService;
+
+    @Autowired
+    private GoodsImageMapper goodsImageMapper;
 
     /**
      * @Author:lzn
@@ -160,8 +167,46 @@ public class GoodsService {
      * 新增商品
      * */
     public int addGoods(GoodsAddReq req) {
+        String[] goodsImgs = null;
         Goods goods = new Goods();
         BeanUtil.copyProperties(req,goods);
-        return goodsMapper.insertSelective(goods);
+        goods.setGoodsNo(CodeUtil.goodsCode());
+        if(null == goods.getGoodsScore()){
+            goods.setGoodsScore(new BigDecimal(90));
+        }
+        goods.setGoodsDetailImg(req.getGoodsDetailImgs());
+
+        //商品图片处理
+        if (null != req.getGoodsImgs() && !req.getGoodsImgs().equals("")) {
+            goodsImgs = req.getGoodsImgs().split(",");
+            if (goodsImgs != null && goodsImgs.length == 1) {
+                goodsImgs = req.getGoodsImgs().split("，");
+            }
+            if (goodsImgs != null && goodsImgs.length == 1) {
+                goodsImgs = req.getGoodsImgs().split(";");
+            }
+            if (goodsImgs != null && goodsImgs.length == 1) {
+                goodsImgs = req.getGoodsImgs().split("；");
+            }
+            //商品图片
+            if(null != goodsImgs && goodsImgs.length >0){
+                goods.setGoodsImg(goodsImgs[0]);
+            }
+        }
+
+        //保存商品信息
+        int count = goodsMapper.insertSelective(goods);
+        if(count > 0) {
+            //保存
+            if (null != goodsImgs && goodsImgs.length > 0) {
+                for (String imgUrl : goodsImgs) {
+                    GoodsImage goodsImage = new GoodsImage();
+                    goodsImage.setGoodsId(goods.getId());
+                    goodsImage.setImageUrl(imgUrl);
+                    goodsImageMapper.insertSelective(goodsImage);
+                }
+            }
+        }
+        return count;
     }
 }
