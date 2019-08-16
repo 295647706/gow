@@ -10,9 +10,10 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
+        <!-- com.mysql.cj.jdbc.Driver -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://127.0.0.1:3306/gow?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
-                        userId="root" password=""/>
+                        userId="root" password="root"/>
 
         <javaModelGenerator targetPackage="com.gow.beau.storage.auto.model"
                             targetProject="../gow2/src/main/java">
@@ -83,6 +84,10 @@
         <!--<table tableName="gow_contact_us" domainObjectName="ContactUS">
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>-->
+
+        <table tableName="gow_payment" domainObjectName="Payment">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
 
     </context>
 </generatorConfiguration>

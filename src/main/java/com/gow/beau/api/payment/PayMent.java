@@ -50,8 +50,8 @@ public class PayMent {
             }
         }
 
-        String notifyUrl = "http://gow.hdongx.com/order/paymentOrder?orderCode="+orderId/*+"&payType="+orderPayType*/;   // 回调通知地址 http://gow.hdongx.com/order/paymentOrder?orderCode=1
-        String returnUrl = "http://gow.hdongx.com/orderPage/order2-page";   // 支付成功页面跳转地址
+        String notifyUrl = path + "/order/paymentOrder?orderCode="+orderId/*+"&payType="+orderPayType*/;   // 回调通知地址 http://gow.hdongx.com/order/paymentOrder?orderCode=1
+        String returnUrl = path + "/orderPage/order2-page";   // 支付成功页面跳转地址
         String paramData=goodsNames+payType+priceValue+orderId+orderUid+notifyUrl+returnUrl+appSecret;
         String sign = MD5.md5(paramData);
         String sendString="name="+goodsNames+"&pay_type="+payType+"&price="+priceValue+"&order_id="+orderId

@@ -1,0 +1,12 @@
+CREATE TABLE `gow`.`gow_payment`  (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `path` varchar(255) NULL COMMENT '回调域名，此网站的域名',
+  `notify_url` varchar(255) NULL COMMENT '回调成功通知地址',
+  `return_url` varchar(255) NULL COMMENT '支付成功页面跳转地址',
+  `api_url` varchar(255) NULL COMMENT '请求支付地址',
+  `app_ecret` varchar(255) NULL COMMENT '支付key值',
+  `expire` int(255) NULL DEFAULT 0 COMMENT '订单过期时间',
+  `default_price` decimal(10, 2) NULL DEFAULT 0.01 COMMENT '默认支付金额，测试使用',
+  `is_default_price` enum('0','1') NULL COMMENT '是否开启默认支付金额（0：不开启，1：开启）',
+  PRIMARY KEY (`id`)
+);
