@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 @Data
 public class GoodsCollectionListRsp {
 
-    private Long goodsid;
+    private long collectionId;
+
+    private Long goodsId;
 
     private String goodsName;
 

@@ -11,4 +11,8 @@
     select id as id,image_url as imageUrl from gow_goods_image where goods_id = #{goodsId}
   </select>
 
+  <delete id="deleteGoodsImageByGoodsId" parameterType="java.lang.Long">
+    delete from gow_goods_image where goods_id = #{goodsId}
+  </delete>
+
 </mapper>

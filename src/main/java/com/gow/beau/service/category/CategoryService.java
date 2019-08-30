@@ -1,13 +1,24 @@
 package com.gow.beau.service.category;
 
+import com.gow.beau.model.data.PageInfo;
+import com.gow.beau.model.req.category.CategoryAddReq;
+import com.gow.beau.model.req.category.CategoryListPageReq;
 import com.gow.beau.model.rsp.category.CategoryGoodsListRsp;
+import com.gow.beau.model.rsp.category.CategoryListPageRsp;
 import com.gow.beau.model.rsp.category.CategoryListRsp;
+import com.gow.beau.service.goods.GoodsService;
+import com.gow.beau.storage.auto.mapper.CategoryMapper;
+import com.gow.beau.storage.auto.model.Category;
 import com.gow.beau.storage.ext.mapper.CategoryExtMapper;
 import com.gow.beau.storage.ext.mapper.GoodsExtMapper;
+import com.gow.beau.util.BeanUtil;
+import com.gow.beau.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +33,13 @@ public class CategoryService {
     private CategoryExtMapper categoryExtMapper;
 
     @Autowired
+    private CategoryMapper categoryMapper;
+
+    @Autowired
     private GoodsExtMapper goodsExtMapper;
+
+    @Autowired
+    private GoodsService goodsService;
 
     public List<CategoryListRsp> categoryGoodsListAll() {
         //分类数据列表
@@ -60,4 +77,76 @@ public class CategoryService {
     public List<CategoryListRsp> getCategoryList(){
         return categoryExtMapper.categoryGoodsListAll();
     }
+
+
+
+    /**
+     * 品牌管理 - 品牌列表数据
+     * */
+    public PageInfo getCategoryListPage(CategoryListPageReq req){
+        //计算分页信息
+        PageInfo pageInfo = new PageInfo(req.getPageNo());
+        req.setStartRowNum(pageInfo.getStartRowNum());
+        req.setEndRowNum(pageInfo.getEndRowNum());
+
+        List<Category> categoryList = categoryExtMapper.getCategoryListPage(req);
+        if(!CollectionUtils.isEmpty(categoryList)){
+            List<CategoryListPageRsp> rspList = new ArrayList<>();
+            for(Category category : categoryList){
+                CategoryListPageRsp rsp = new CategoryListPageRsp();
+                BeanUtil.copyProperties(category, rsp);
+                rsp.setCreateTimeF(DateUtil.dateToString2(category.getCreateTime()));
+                rspList.add(rsp);
+            }
+            pageInfo.setList(rspList);
+            pageInfo.setRows(this.getCategoryPageRows(req));
+        }
+        return pageInfo;
+    }
+
+    /**
+     * 分类管理列表总数
+     * */
+    private int getCategoryPageRows(CategoryListPageReq req){
+        return categoryExtMapper.getCategoryPageRows(req);
+    }
+
+    /**
+     * 新增品牌分类
+     * */
+    public int addCategory(CategoryAddReq req){
+        //根据分类名称查询数据库是否已存在相同的
+        int count = categoryExtMapper.selectCatByName(req.getCatName());
+        if(count > 0){
+            return -1;
+        }
+        //查询最大的排序
+        int maxSort = categoryExtMapper.selectMaxSort();
+        //保存对象
+        Category category = new Category();
+        category.setCatName(req.getCatName());
+        category.setCatIsShow(req.getCatIsShow());
+        category.setCreateTime(new Date());
+        category.setCatSort(maxSort+1);
+        category.setCatDelflag("0");
+        return categoryMapper.insertSelective(category);
+    }
+
+
+    /**
+     * 删除品牌分类
+     * */
+    public int deleteCategory(Long catId){
+        //查询商品是否存在修改的分类
+        int goodsCount = goodsService.selectGoodsCountByCatId(catId);
+        if(goodsCount > 0){
+            return -1;
+        }
+
+        Category category = new Category();
+        category.setId(catId);
+        category.setCatDelflag("1");
+        return categoryMapper.updateByPrimaryKeySelective(category);
+    }
+
 }

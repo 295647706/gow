@@ -23,6 +23,8 @@ public class GoodsDetailRsp {
 
     private BigDecimal goodsPrice;
 
+    private BigDecimal goodsOldPrice;
+
     private String goodsDeno;
 
     private Integer goodsNumber;
@@ -34,5 +36,8 @@ public class GoodsDetailRsp {
     //是否已收藏（false:没有收藏，true:已收藏）
     private Boolean isGoodsCollection = false;
 
+    //轮播图
     private List<GoodsImageRsp> goodsImageList;
+
+    private List<String> goodsDetailImgs;
 }

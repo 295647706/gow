@@ -13,4 +13,6 @@ public class LoginRsp {
     private String customerUsername;
 
     private String customerPassword;
+
+    private String isUse;
 }

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>会员管理</title>
+  <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+  <link rel="stylesheet" href="../boss/layui/css/global.css">
+  <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+    <style>
+        .layui-body{overflow-y: scroll;}
+    </style>
+</head>
+<body class="layui-layout-body">
+<!-- 左侧选中标识 -->
+<input hidden id="manage" value="categoryManage">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="boss\index\top::boss-top">
+        <!-- 头部 -->
+    </div>
+
+    <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+        <!-- 左边导航栏 -->
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <fieldset class="layui-elem-field">
+                <legend>品牌管理 - 品牌列表</legend>
+                <div class="layui-field-box">
+                    <br/>
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item" style="text-align:left;">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">品牌名称：</label>
+                                <div class="layui-input-inline">
+                                    <input autocomplete="off" class="layui-input" placeholder="品牌名称" type="text" name="catName" id="catName" value="">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">显示状态：</label>
+                                <div class="layui-input-inline">
+                                    <select name="catIsShow" lay-verify="" id="catIsShow">
+                                        <option value="">全部</option>
+                                        <option value="0">显示</option>
+                                        <option value="1">不显示</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-inline" style="text-align:right;">
+                                <div class="layui-input-inline">
+                                    <div class="layui-btn" id="selectGoodsBtn"><i class="layui-icon">&#xe615;</i>查询</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="layui-btn-group">
+                        <button type="button" class="layui-btn layui-btn-sm catAddPage">
+                            <i class="layui-icon">&#xe654;</i>
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-sm dw-refresh">
+                            <i class="layui-icon">&#x1002;</i>
+                        </button>
+                    </div>
+                    <hr>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="200">
+                            <col width="200">
+                            <col width="200">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th style='text-align: center'>品牌名称</th>
+                            <th style='text-align: center'>排序</th>
+                            <th style='text-align: center'>显示状态</th>
+                            <th style='text-align: center'>创建时间</th>
+                            <th style="text-align:center;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="categoryContent">
+                        <!-- 列表内容 -->
+                        </tbody>
+                    </table>
+                    <div id="page"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+        <!-- 底部 -->
+    </div>
+</div>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+<script type="text/javascript" src="../boss/comm/left.js"></script>
+</body>
+
+<script>
+
+    $(function () {
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //开始时间控件
+            laydate.set({
+                elem: '#startTime' //指定元素
+            });
+            //结束时间控件
+            laydate.set({
+                elem: '#endTime' //指定元素
+            });
+        });
+
+        function selectCategoryList(pageNo,pageSize) {
+            var divContent = "";
+
+            var catName = $("#catName").val();
+            var catIsShow = $("#catIsShow").val();
+
+            $.ajax({
+                type : "post",
+                url : "/categoryBoss/categoryListPage",
+                data : {"pageNo":pageNo,"pageSize":pageSize,"catName":catName,"catIsShow":catIsShow},
+                success : function (data) {
+                    if(data.list){
+                        $.each(data.list, function (index, cat) {
+                            divContent = divContent
+                            +"<tr>"
+                                +"<td style='text-align: center'>"+cat.catName+"</td>"
+                                +"<td style='text-align: center'>"+cat.catSort+"</td>"
+                                +"<td style='text-align: center'>"+(cat.catIsShow=='0'?'显示':'不显示')+"</td>"
+                                +"<td style='text-align: center'>"+cat.createTimeF+"</td>"
+                                +"<td class='text-center'>"
+                                    +"<div>"
+                                        +"<button class='layui-btn layui-btn-xs catDetail' value='"+cat.id+"'>详情</button>"
+                                        +"<button class='layui-btn layui-btn-xs catUpdate' value='"+cat.id+"'>修改</button>"
+                                        +"<button class='layui-btn layui-btn-xs layui-btn-warm catStop' value='"+cat.id+"'>停用</button>"
+                                        +"<button class='layui-btn layui-btn-xs layui-btn-danger catDelete' value='"+cat.id+"'>删除</button>"
+                                    +"</div>"
+                                +"</td>"
+                            +"</tr>"
+                        })
+                    }
+                    $("#categoryContent").html(divContent);
+                    //分页
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'page'
+                            ,count: data.rows //数据总数，从服务端得到
+                            ,curr : data.pageNo
+                            ,pages : data.totalPages
+                            ,limit : data.pageSize
+                            ,limits: [data.pageSize]
+                            ,groups: 10
+                            ,first: '首页' //首页文本
+                            ,last: '尾页' //尾页文本
+                            ,layout: ['prev', 'page', 'next','limit','count','refresh','skip']
+                            ,jump: function(obj, first){
+                                //首次不执行
+                                if(!first){
+                                    selectOrderList(obj.curr,obj.limit);
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        selectCategoryList(1,10);
+
+
+        /**查询按钮*/
+        $("#selectGoodsBtn").on('click',function () {
+            selectCategoryList(1,10);
+        });
+
+
+        /**
+         * 删除
+         * */
+        $(document).on('click','.catDelete',function () {
+           var catId = $(this).val();
+            if(catId){
+                $.ajax({
+                    type: "post",
+                    url: "/categoryBoss/deleteCategory",
+                    data: {"catId": catId},
+                    success: function (data) {
+                        if(data > 0){
+                            selectCategoryList(1,10);
+                        }else{
+                            var tip = "删除失败"
+                            if(data == -1){
+                                tip = "该品牌存在相关的商品,请移除相关商品再操作删除"
+                            }
+
+                            //提示弹窗
+                            layer.msg(tip , {
+                                icon: 1,
+                                time: 2000 //n秒关闭（如果不配置，默认是5秒）
+                            }, function(){
+
+                            });
+                            return;
+                        }
+                    }
+                });
+            }
+        });
+
+        /**
+         * 详情
+         * */
+        $(document).on('click','.catDetail',function () {
+            var catId = $(this).val();
+            //window.location.href  = "/customerBoss/detailCustomerManagePage?customerId="+customerId;
+        });
+
+        /**
+         * 进入新增页面
+         * */
+        $(".catAddPage").on('click',function () {
+           window.location.href = "/categoryBoss/category-add-page";
+        });
+
+    });
+
+</script>
+
+</html>

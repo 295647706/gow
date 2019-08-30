@@ -34,4 +34,12 @@ public interface OrderExtMapper {
      * 根据订单编号查询订单金额
      */
     BigDecimal selectOrderPriceByorderCode(@Param("orderCode") String orderCode);
+
+
+    /**
+     * 订单管理页面 - 订单列表
+     * */
+    List<Order> getOrderListPage(OrderListReq req);
+
+    int getOrderPageRows(OrderListReq req);
 }

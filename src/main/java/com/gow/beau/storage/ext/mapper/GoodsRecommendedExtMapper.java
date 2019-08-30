@@ -9,4 +9,8 @@ import java.util.List;
 public interface GoodsRecommendedExtMapper {
 
     List<GoodsRecommended> pageGoodsRecommendedList();
+
+    GoodsRecommended selectInfoByRecommendedType(String recommendedType);
+
+    Integer selectMaxLevel();
 }

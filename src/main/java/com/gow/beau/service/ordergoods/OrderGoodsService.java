@@ -1,6 +1,8 @@
 package com.gow.beau.service.ordergoods;
 
+import com.gow.beau.model.rsp.order.OrderGoodsDetailRsp;
 import com.gow.beau.model.rsp.order.OrderListGoodsRsp;
+import com.gow.beau.storage.auto.model.OrderGoods;
 import com.gow.beau.storage.ext.mapper.OrderGoodsExtMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,13 @@ public class OrderGoodsService {
      */
     public List<OrderListGoodsRsp> selectOrderGoodsListByOrderId(Long orderId) {
         return orderGoodsExtMapper.selectOrderGoodsListByOrderId(orderId);
+    }
+
+    /**
+     * 根据订单id 查询订单商品详情信息
+     * */
+    public List<OrderGoodsDetailRsp> selectOrderGoodsDetailListByOrderId(Long orderId){
+        return orderGoodsExtMapper.selectOrderGoodsDetailListByOrderId(orderId);
     }
 
     /**

@@ -3,32 +3,38 @@
     <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-            <li class="layui-nav-item"><a href="index.html">控制台</a></li>
-            <li class="layui-nav-item">
+            <li class="layui-nav-item" data="orderManage">
+                <a href="javascript:;">订单管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/orderBoss/order-list-page">订单列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" data="goodsManage">
                 <a class="" href="javascript:;">商品管理</a>
                 <dl class="layui-nav-child">
                     <dd><a href="/goodsBoss/goods-list-page">商品列表</a></dd>
                     <dd><a href="/goodsBoss/goods-add-page">新增商品</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item layui-nav-itemed">
-                <a href="javascript:;">用户管理</a>
-                <dl class="layui-nav-child">
-                    <dd><a class="layui-this" href="goodsList.html">用户列表</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">订单管理</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="rule.html">订单列表</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item">
+            <li class="layui-nav-item" data="customerManage">
                 <a href="javascript:;">会员管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="member.html">会员列表</a></dd>
+                    <dd><a href="/customerBoss/customer-list-page">会员列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" data="userManage">
+                <a href="javascript:;">用户管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a class="layui-this" href="#">用户列表</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" data="categoryManage">
+                <a href="javascript:;">品牌管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a class="layui-this" href="/categoryBoss/category-list-page">品牌列表</a></dd>
                 </dl>
             </li>
         </ul>
     </div>
 </div>
+

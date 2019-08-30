@@ -12,6 +12,8 @@ public class Order {
 
     private BigDecimal orderPrice;
 
+    private BigDecimal payPrice;
+
     private String orderStatus;
 
     private Date payTime;
@@ -19,6 +21,10 @@ public class Order {
     private String payType;
 
     private Date sendExpressTime;
+
+    private String expressName;
+
+    private String expressCode;
 
     private Date getGoodsTime;
 
@@ -102,6 +108,14 @@ public class Order {
         this.orderPrice = orderPrice;
     }
 
+    public BigDecimal getPayPrice() {
+        return payPrice;
+    }
+
+    public void setPayPrice(BigDecimal payPrice) {
+        this.payPrice = payPrice;
+    }
+
     public String getOrderStatus() {
         return orderStatus;
     }
@@ -132,6 +146,22 @@ public class Order {
 
     public void setSendExpressTime(Date sendExpressTime) {
         this.sendExpressTime = sendExpressTime;
+    }
+
+    public String getExpressName() {
+        return expressName;
+    }
+
+    public void setExpressName(String expressName) {
+        this.expressName = expressName == null ? null : expressName.trim();
+    }
+
+    public String getExpressCode() {
+        return expressCode;
+    }
+
+    public void setExpressCode(String expressCode) {
+        this.expressCode = expressCode == null ? null : expressCode.trim();
     }
 
     public Date getGetGoodsTime() {

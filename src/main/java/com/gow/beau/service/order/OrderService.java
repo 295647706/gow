@@ -2,20 +2,24 @@ package com.gow.beau.service.order;
 
 import com.auth0.jwt.JWT;
 import com.gow.beau.api.payment.PayMent;
+import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.req.order.*;
 import com.gow.beau.model.rsp.order.*;
 import com.gow.beau.service.customer.CustomerAddressService;
 import com.gow.beau.service.goods.GoodsService;
 import com.gow.beau.service.ordergoods.OrderGoodsService;
+import com.gow.beau.service.payment.PaymentService;
 import com.gow.beau.service.shoppingcart.ShoppingCartService;
 import com.gow.beau.storage.auto.mapper.OrderGoodsMapper;
 import com.gow.beau.storage.auto.mapper.OrderMapper;
 import com.gow.beau.storage.auto.model.*;
 import com.gow.beau.storage.ext.mapper.OrderExtMapper;
+import com.gow.beau.util.BeanUtil;
 import com.gow.beau.util.CodeUtil;
 import com.gow.beau.util.SettingValueUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -49,6 +53,9 @@ public class OrderService {
 
     @Autowired
     private OrderGoodsService orderGoodsService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     /**
      * lzn 2019/3/6 9:00
@@ -207,7 +214,7 @@ public class OrderService {
             order.setShippingCounty(address.getAddressCounty());
             order.setShippingStreet(address.getAddressStreet());
             order.setShippingAddress(address.getAddressDetail());
-            order.setSendPerson(address.getAddressName());
+            order.setShippingPerson(address.getAddressName());
             order.setShippingPhone(address.getAddressPhone());
             order.setSendMobile(address.getAddressPhone());
             order.setShippingPostcode(address.getAddressEmail());
@@ -426,9 +433,13 @@ public class OrderService {
         if(null == order){
             return "没有此订单信息："+req.getOrderCode();
         }
+        Payment payment = paymentService.selectFirstPaymentInfo();
+        if(null == payment){
+            return "订单支付信息错误";
+        }
         //根据订单id查询商品名称
         String goodsNames = orderGoodsService.selectGoodsNamesByorderId(order.getId());
-        String result = PayMent.httpsPost(req.getOrderCode(),req.getPayType(),order.getCustomerId().toString(),order.getOrderPrice(),goodsNames);
+        String result = PayMent.httpsPost(req.getOrderCode(),req.getPayType(),order.getCustomerId().toString(),order.getOrderPrice(),goodsNames,payment);
         return result;
     }
 
@@ -438,5 +449,96 @@ public class OrderService {
      */
     public BigDecimal selectOrderPriceByorderCode(String orderCode) {
         return orderExtMapper.selectOrderPriceByorderCode(orderCode);
+    }
+
+
+
+    /**
+     * 订单管理页面--订单列表
+     * */
+    public PageInfo getOrderListPage(OrderListReq req){
+        //计算分页信息
+        PageInfo pageInfo = new PageInfo(req.getPageNo());
+        req.setStartRowNum(pageInfo.getStartRowNum());
+        req.setEndRowNum(pageInfo.getEndRowNum());
+
+        //分页数据
+        List<Order> orderList = orderExtMapper.getOrderListPage(req);
+        if(!CollectionUtils.isEmpty(orderList)) {
+            List<OrderListPageRsp> rspList = new ArrayList<>();
+            for(Order order : orderList) {
+                OrderListPageRsp rsp = new OrderListPageRsp();
+                BeanUtil.copyProperties(order, rsp);
+                rspList.add(rsp);
+
+                rsp.setGoodsRspList(orderGoodsService.selectOrderGoodsListByOrderId(rsp.getId()));
+            }
+            pageInfo.setList(rspList);
+            pageInfo.setRows(this.getOrderPageRows(req));
+        }
+        return pageInfo;
+    }
+
+    /**
+     * 订单管理页面--订单列表总数
+     * */
+    private int getOrderPageRows(OrderListReq req){
+        return orderExtMapper.getOrderPageRows(req);
+    }
+
+
+    /**
+     * 订单管理 - 物流发货
+     * */
+    public int orderExpressSubmit(OrderExpressReq req){
+        //根据订单id 查询订单信息
+        Order order = orderMapper.selectByPrimaryKey(req.getOrderId());
+        if(null == order){
+            return -1;
+        }
+        if(null == order.getOrderStatus() || !order.getOrderStatus().equals("1")){
+            return -2;
+        }
+        //比较订单总金额和支付金额,-1表示小于，0是等于，1是大于
+        if(order.getOrderPrice().compareTo(order.getPayPrice()) != 0){
+            return -3;
+        }
+        Order saveOrder = new Order();
+        saveOrder.setId(order.getId());
+        saveOrder.setSendExpressTime(new Date());
+        saveOrder.setExpressName(req.getExpressName());
+        saveOrder.setExpressCode(req.getExpressCode());
+        //订单状态改为'2:待收货'
+        saveOrder.setOrderStatus("2");
+        //修改保存发货信息
+        return orderMapper.updateByPrimaryKeySelective(saveOrder);
+    }
+
+
+    /***/
+    public OrderDetailPageRsp getOrderDetailInfo(Long orderId){
+        //返回对象
+        OrderDetailPageRsp rsp = new OrderDetailPageRsp();
+        List<OrderGoodsDetailRsp> orderGoodsDetailRspList = new ArrayList<>();
+        rsp.setOrderGoodsDetailRspList(orderGoodsDetailRspList);
+
+        //查询订单信息
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        if(null == order){
+            return rsp;
+        }
+        BeanUtil.copyProperties(order, rsp);
+        //收货信息处理
+        rsp.setShippingPostcode(rsp.getShippingPostcode()==null?"":rsp.getShippingPostcode());
+        rsp.setShippingCity(rsp.getShippingCity()==null?"":rsp.getShippingCity());
+        rsp.setShippingCounty(rsp.getShippingCounty()==null?"":rsp.getShippingCounty());
+        rsp.setShippingStreet(rsp.getShippingStreet()==null?"":rsp.getShippingStreet());
+        rsp.setShippingAddress(rsp.getShippingAddress()==null?"":rsp.getShippingAddress());
+        rsp.setShippingPerson(rsp.getShippingPerson()==null?"":rsp.getShippingPerson());
+        rsp.setShippingPhone(rsp.getShippingPhone()==null?"":rsp.getShippingPhone());
+        //查询订单商品列表
+        orderGoodsDetailRspList = orderGoodsService.selectOrderGoodsDetailListByOrderId(orderId);
+        rsp.setOrderGoodsDetailRspList(orderGoodsDetailRspList);
+        return rsp;
     }
 }

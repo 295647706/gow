@@ -27,4 +27,11 @@ public class GoodsImageService {
     public List<GoodsImageRsp> selectGoodsImageListByGoodsId(Long goodsId) {
         return goodsImageExtMapper.selectGoodsImageListByGoodsId(goodsId);
     }
+
+    /**
+     * 根据商品id删除商品图片
+     * */
+    public int deleteGoodsImageByGoodsId(Long goodsId){
+        return goodsImageExtMapper.deleteGoodsImageByGoodsId(goodsId);
+    }
 }

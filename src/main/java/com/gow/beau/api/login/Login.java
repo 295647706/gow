@@ -59,6 +59,11 @@ public class Login {
             return tokenRsp;
         }
 
+        if(loginRsp.getIsUse().equals("1")){
+            tokenRsp.setMessage("用户已被冻结,请联系管理员解冻");
+            return tokenRsp;
+        }
+
         if(!loginRsp.getCustomerPassword().equals(req.getPass())){
             tokenRsp.setMessage("密码错误");
             return tokenRsp;

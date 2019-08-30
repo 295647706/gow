@@ -10,3 +10,81 @@ CREATE TABLE `gow`.`gow_payment`  (
   `is_default_price` enum('0','1') NULL COMMENT '是否开启默认支付金额（0：不开启，1：开启）',
   PRIMARY KEY (`id`)
 );
+
+
+
+ALTER TABLE `gow`.`gow_goods`
+ADD COLUMN `is_delete` enum('0','1') NULL DEFAULT '0' COMMENT '是否删除（0：正常，1：已删除）' AFTER `goods_number`;
+
+ALTER TABLE `gow`.`gow_goods`
+ADD COLUMN `goods_old_price` decimal(10, 2) NULL COMMENT '旧销售价' AFTER `goods_price`;
+
+ALTER TABLE `gow`.`gow_goods`
+MODIFY COLUMN `goods_detail_img` varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '详情图片' AFTER `goods_detail_desc`;
+
+
+
+ALTER TABLE `gow`.`gow_goods`
+ADD COLUMN `is_upper_lower_racks` enum('0','1') NULL DEFAULT '1' COMMENT '是否上架（0：未上架，1：已上架）' AFTER `is_delete`,
+ADD COLUMN `is_recommend` enum('0','1') NULL DEFAULT '0' COMMENT '是否推荐（0：未推荐，1：已推荐）' AFTER `is_upper_lower_racks`,
+ADD COLUMN `create_time` datetime(0) NULL COMMENT '创建时间' AFTER `is_recommend`;
+
+
+
+ALTER TABLE `gow`.`gow_goods_recommended`
+ADD COLUMN `recommended_type` enum('0','1','2','3') NULL DEFAULT '0' AFTER `create_time`;
+
+ALTER TABLE `gow`.`gow_goods_recommended`
+MODIFY COLUMN `recommended_type` enum('0','1','2','3') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '商品推荐类型（1：完美专享，2：推荐精品，3：人气热卖）' AFTER `create_time`;
+
+
+
+ALTER TABLE `gow`.`gow_goods_recommended`
+ADD COLUMN `level` int(10) NULL COMMENT '排序层级' AFTER `recommended_type`;
+
+
+ALTER TABLE `gow`.`gow_goods`
+MODIFY COLUMN `is_recommend` enum('0','1','2','3') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '是否推荐（0：未推荐，1：已推荐）' AFTER `is_upper_lower_racks`;
+
+CREATE TABLE `gow`.`gow_goods_detail_image`  (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `goods_id` bigint(10) NULL COMMENT '商品id',
+  `url` varchar(255) NULL COMMENT '详情图片',
+  PRIMARY KEY (`id`)
+);
+
+
+
+ALTER TABLE `gow`.`gow_order`
+ADD COLUMN `express_name` varchar(50) NULL COMMENT '物流名称' AFTER `send_express_time`,
+ADD COLUMN `express_code` varchar(50) NULL COMMENT '物流单号' AFTER `express_name`;
+
+
+ALTER TABLE `gow`.`gow_order`
+ADD COLUMN `pay_price` decimal(10, 2) NULL COMMENT '支付金额' AFTER `order_price`;
+
+
+ALTER TABLE `gow`.`gow_order`
+MODIFY COLUMN `order_price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '订单总金额' AFTER `order_code`,
+MODIFY COLUMN `pay_price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '支付金额' AFTER `order_price`,
+MODIFY COLUMN `back_price` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '退单金额' AFTER `order_cancel_remark`;
+
+
+
+ALTER TABLE `gow`.`gow_customer`
+ADD COLUMN `modify_time` datetime(0) NULL COMMENT '修改时间' AFTER `create_time`,
+ADD COLUMN `is_delete` enum('0','1') NULL DEFAULT '0' COMMENT '删除状态（0：正常，1：已删除）' AFTER `modify_time`,
+ADD COLUMN `integral` int(10) NULL DEFAULT 0 COMMENT '会员总积分' AFTER `is_delete`,
+ADD COLUMN `is_use` enum('0','1') NULL DEFAULT '0' COMMENT '是否冻结（0：正常，1：已冻结）' AFTER `integral`,
+ADD COLUMN `is_use_time` datetime(0) NULL COMMENT '冻结时间' AFTER `is_use`;
+
+
+ALTER TABLE `gow`.`gow_category`
+ADD COLUMN `create_time` datetime(0) NULL COMMENT '创建时间' AFTER `cat_delflag`;
+
+
+
+
+
+
+

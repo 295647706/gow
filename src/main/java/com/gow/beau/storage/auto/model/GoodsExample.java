@@ -2,6 +2,7 @@ package com.gow.beau.storage.auto.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GoodsExample {
@@ -705,6 +706,66 @@ public class GoodsExample {
             return (Criteria) this;
         }
 
+        public Criteria andGoodsOldPriceIsNull() {
+            addCriterion("goods_old_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceIsNotNull() {
+            addCriterion("goods_old_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceEqualTo(BigDecimal value) {
+            addCriterion("goods_old_price =", value, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceNotEqualTo(BigDecimal value) {
+            addCriterion("goods_old_price <>", value, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceGreaterThan(BigDecimal value) {
+            addCriterion("goods_old_price >", value, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("goods_old_price >=", value, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceLessThan(BigDecimal value) {
+            addCriterion("goods_old_price <", value, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("goods_old_price <=", value, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceIn(List<BigDecimal> values) {
+            addCriterion("goods_old_price in", values, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceNotIn(List<BigDecimal> values) {
+            addCriterion("goods_old_price not in", values, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("goods_old_price between", value1, value2, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsOldPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("goods_old_price not between", value1, value2, "goodsOldPrice");
+            return (Criteria) this;
+        }
+
         public Criteria andGoodsImgIsNull() {
             addCriterion("goods_img is null");
             return (Criteria) this;
@@ -1032,6 +1093,276 @@ public class GoodsExample {
 
         public Criteria andGoodsNumberNotBetween(Integer value1, Integer value2) {
             addCriterion("goods_number not between", value1, value2, "goodsNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteIsNull() {
+            addCriterion("is_delete is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteIsNotNull() {
+            addCriterion("is_delete is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteEqualTo(String value) {
+            addCriterion("is_delete =", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotEqualTo(String value) {
+            addCriterion("is_delete <>", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteGreaterThan(String value) {
+            addCriterion("is_delete >", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteGreaterThanOrEqualTo(String value) {
+            addCriterion("is_delete >=", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteLessThan(String value) {
+            addCriterion("is_delete <", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteLessThanOrEqualTo(String value) {
+            addCriterion("is_delete <=", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteLike(String value) {
+            addCriterion("is_delete like", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotLike(String value) {
+            addCriterion("is_delete not like", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteIn(List<String> values) {
+            addCriterion("is_delete in", values, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotIn(List<String> values) {
+            addCriterion("is_delete not in", values, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteBetween(String value1, String value2) {
+            addCriterion("is_delete between", value1, value2, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotBetween(String value1, String value2) {
+            addCriterion("is_delete not between", value1, value2, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksIsNull() {
+            addCriterion("is_upper_lower_racks is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksIsNotNull() {
+            addCriterion("is_upper_lower_racks is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksEqualTo(String value) {
+            addCriterion("is_upper_lower_racks =", value, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksNotEqualTo(String value) {
+            addCriterion("is_upper_lower_racks <>", value, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksGreaterThan(String value) {
+            addCriterion("is_upper_lower_racks >", value, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksGreaterThanOrEqualTo(String value) {
+            addCriterion("is_upper_lower_racks >=", value, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksLessThan(String value) {
+            addCriterion("is_upper_lower_racks <", value, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksLessThanOrEqualTo(String value) {
+            addCriterion("is_upper_lower_racks <=", value, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksLike(String value) {
+            addCriterion("is_upper_lower_racks like", value, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksNotLike(String value) {
+            addCriterion("is_upper_lower_racks not like", value, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksIn(List<String> values) {
+            addCriterion("is_upper_lower_racks in", values, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksNotIn(List<String> values) {
+            addCriterion("is_upper_lower_racks not in", values, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksBetween(String value1, String value2) {
+            addCriterion("is_upper_lower_racks between", value1, value2, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUpperLowerRacksNotBetween(String value1, String value2) {
+            addCriterion("is_upper_lower_racks not between", value1, value2, "isUpperLowerRacks");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendIsNull() {
+            addCriterion("is_recommend is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendIsNotNull() {
+            addCriterion("is_recommend is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendEqualTo(String value) {
+            addCriterion("is_recommend =", value, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendNotEqualTo(String value) {
+            addCriterion("is_recommend <>", value, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendGreaterThan(String value) {
+            addCriterion("is_recommend >", value, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendGreaterThanOrEqualTo(String value) {
+            addCriterion("is_recommend >=", value, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendLessThan(String value) {
+            addCriterion("is_recommend <", value, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendLessThanOrEqualTo(String value) {
+            addCriterion("is_recommend <=", value, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendLike(String value) {
+            addCriterion("is_recommend like", value, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendNotLike(String value) {
+            addCriterion("is_recommend not like", value, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendIn(List<String> values) {
+            addCriterion("is_recommend in", values, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendNotIn(List<String> values) {
+            addCriterion("is_recommend not in", values, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendBetween(String value1, String value2) {
+            addCriterion("is_recommend between", value1, value2, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRecommendNotBetween(String value1, String value2) {
+            addCriterion("is_recommend not between", value1, value2, "isRecommend");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
     }

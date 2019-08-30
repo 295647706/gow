@@ -1461,6 +1461,326 @@ public class CustomerExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
+
+        public Criteria andModifyTimeIsNull() {
+            addCriterion("modify_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeIsNotNull() {
+            addCriterion("modify_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeEqualTo(Date value) {
+            addCriterion("modify_time =", value, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeNotEqualTo(Date value) {
+            addCriterion("modify_time <>", value, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeGreaterThan(Date value) {
+            addCriterion("modify_time >", value, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("modify_time >=", value, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeLessThan(Date value) {
+            addCriterion("modify_time <", value, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeLessThanOrEqualTo(Date value) {
+            addCriterion("modify_time <=", value, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeIn(List<Date> values) {
+            addCriterion("modify_time in", values, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeNotIn(List<Date> values) {
+            addCriterion("modify_time not in", values, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeBetween(Date value1, Date value2) {
+            addCriterion("modify_time between", value1, value2, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andModifyTimeNotBetween(Date value1, Date value2) {
+            addCriterion("modify_time not between", value1, value2, "modifyTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteIsNull() {
+            addCriterion("is_delete is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteIsNotNull() {
+            addCriterion("is_delete is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteEqualTo(String value) {
+            addCriterion("is_delete =", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotEqualTo(String value) {
+            addCriterion("is_delete <>", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteGreaterThan(String value) {
+            addCriterion("is_delete >", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteGreaterThanOrEqualTo(String value) {
+            addCriterion("is_delete >=", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteLessThan(String value) {
+            addCriterion("is_delete <", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteLessThanOrEqualTo(String value) {
+            addCriterion("is_delete <=", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteLike(String value) {
+            addCriterion("is_delete like", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotLike(String value) {
+            addCriterion("is_delete not like", value, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteIn(List<String> values) {
+            addCriterion("is_delete in", values, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotIn(List<String> values) {
+            addCriterion("is_delete not in", values, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteBetween(String value1, String value2) {
+            addCriterion("is_delete between", value1, value2, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeleteNotBetween(String value1, String value2) {
+            addCriterion("is_delete not between", value1, value2, "isDelete");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralIsNull() {
+            addCriterion("integral is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralIsNotNull() {
+            addCriterion("integral is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralEqualTo(Integer value) {
+            addCriterion("integral =", value, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralNotEqualTo(Integer value) {
+            addCriterion("integral <>", value, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralGreaterThan(Integer value) {
+            addCriterion("integral >", value, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralGreaterThanOrEqualTo(Integer value) {
+            addCriterion("integral >=", value, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralLessThan(Integer value) {
+            addCriterion("integral <", value, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralLessThanOrEqualTo(Integer value) {
+            addCriterion("integral <=", value, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralIn(List<Integer> values) {
+            addCriterion("integral in", values, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralNotIn(List<Integer> values) {
+            addCriterion("integral not in", values, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralBetween(Integer value1, Integer value2) {
+            addCriterion("integral between", value1, value2, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntegralNotBetween(Integer value1, Integer value2) {
+            addCriterion("integral not between", value1, value2, "integral");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseIsNull() {
+            addCriterion("is_use is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseIsNotNull() {
+            addCriterion("is_use is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseEqualTo(String value) {
+            addCriterion("is_use =", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseNotEqualTo(String value) {
+            addCriterion("is_use <>", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseGreaterThan(String value) {
+            addCriterion("is_use >", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseGreaterThanOrEqualTo(String value) {
+            addCriterion("is_use >=", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseLessThan(String value) {
+            addCriterion("is_use <", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseLessThanOrEqualTo(String value) {
+            addCriterion("is_use <=", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseLike(String value) {
+            addCriterion("is_use like", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseNotLike(String value) {
+            addCriterion("is_use not like", value, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseIn(List<String> values) {
+            addCriterion("is_use in", values, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseNotIn(List<String> values) {
+            addCriterion("is_use not in", values, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseBetween(String value1, String value2) {
+            addCriterion("is_use between", value1, value2, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseNotBetween(String value1, String value2) {
+            addCriterion("is_use not between", value1, value2, "isUse");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeIsNull() {
+            addCriterion("is_use_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeIsNotNull() {
+            addCriterion("is_use_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeEqualTo(Date value) {
+            addCriterion("is_use_time =", value, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeNotEqualTo(Date value) {
+            addCriterion("is_use_time <>", value, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeGreaterThan(Date value) {
+            addCriterion("is_use_time >", value, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("is_use_time >=", value, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeLessThan(Date value) {
+            addCriterion("is_use_time <", value, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeLessThanOrEqualTo(Date value) {
+            addCriterion("is_use_time <=", value, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeIn(List<Date> values) {
+            addCriterion("is_use_time in", values, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeNotIn(List<Date> values) {
+            addCriterion("is_use_time not in", values, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeBetween(Date value1, Date value2) {
+            addCriterion("is_use_time between", value1, value2, "isUseTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsUseTimeNotBetween(Date value1, Date value2) {
+            addCriterion("is_use_time not between", value1, value2, "isUseTime");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

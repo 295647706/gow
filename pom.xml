@@ -94,6 +94,34 @@
         </dependency>
 
 
+        <!-- https -->
+        <!--<dependency>
+             <groupId>org.apache.httpcomponents</groupId>
+             <artifactId>httpcore</artifactId>
+             <version>4.4.8</version>
+         </dependency>
+         <dependency>
+             <groupId>org.apache.httpcomponents</groupId>
+             <artifactId>httpclient</artifactId>
+             <version>4.5.3</version>
+         </dependency>
+         <dependency>
+             <groupId>org.testng</groupId>
+             <artifactId>testng</artifactId>
+             <version>6.11</version>
+             <scope>test</scope>
+         </dependency>-->
+
+        <!--<dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-ext-jdk15on</artifactId>
+            <version>1.62</version>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.52</version>
+        </dependency>-->
 
     </dependencies>
 

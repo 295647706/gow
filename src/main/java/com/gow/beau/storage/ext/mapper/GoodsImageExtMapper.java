@@ -15,4 +15,6 @@ public interface GoodsImageExtMapper {
      * 商品图片列表
      */
     List<GoodsImageRsp> selectGoodsImageListByGoodsId(Long goodsId);
+
+    int deleteGoodsImageByGoodsId(Long goodsId);
 }

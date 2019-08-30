@@ -58,14 +58,19 @@ public class GoodsBossController {
     /**
      * 编辑商品的查询详情
      * */
-    @RequestMapping("/getEditGoodsInfo")
+    @RequestMapping("/goods-edip-page")
     @ResponseBody
-    public EditGoodsInfoRsp getEditGoodsInfo(Long goodsId){
-        return goodsService.getEditGoodsInfo(goodsId);
+    public ModelAndView getEditGoodsInfo(Long goodsId){
+        ModelAndView view = new ModelAndView("boss/goods/goodsEdit");
+        EditGoodsInfoRsp rsp = goodsService.getEditGoodsInfo(goodsId);
+        view.addObject("goods",rsp);
+        //品牌
+        view.addObject("categoryList",categoryService.getCategoryList());
+        return view;
     }
 
     /**
-     * 商品管理 - 商品列表页面
+     * 商品管理 - 商品新增页面
      * */
     @RequestMapping("/goods-add-page")
     public ModelAndView goodsAddPage(){
@@ -81,5 +86,15 @@ public class GoodsBossController {
     @ResponseBody
     public int addGoods(GoodsAddReq req){
         return goodsService.addGoods(req);
+    }
+
+
+    /**
+     * 商品管理 - 商品编辑
+     * */
+    @RequestMapping("/editGoods")
+    @ResponseBody
+    public int editGoods(GoodsAddReq req){
+        return goodsService.editGoods(req);
     }
 }

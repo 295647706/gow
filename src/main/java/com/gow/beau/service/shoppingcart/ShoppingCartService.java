@@ -47,7 +47,7 @@ public class ShoppingCartService {
 
     public ShoppingCartRsp shoppingCartInfo(HttpServletRequest request, ShoppingCartReq req) {
         String token = request.getHeader("token");
-        if(null == token){
+        if(null == token || token.equals("") || token.equals("null")){
             return null;
         }
 
@@ -95,7 +95,7 @@ public class ShoppingCartService {
      */
     public int addShoppingCart(HttpServletRequest request,AddShoppingCartReq req) {
         String token = request.getHeader("token");
-        if(null == token){
+        if(null == token || token.equals("") || token.equals("null")){
             return 0;
         }
         Long customerId = JWT.decode(token).getClaim("id").asLong();

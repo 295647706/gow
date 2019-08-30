@@ -70,26 +70,56 @@
 							divContent = divContent
 							+"<div class='list clearfloat box-s'>"
 								+"<div class='tu clearfloat fl'>"
-									+"<img src='"+goods.goodsImg+"'/>"
+									+"<a href='/goodsDetailPage/goods-detail-page?goodsId="+goods.goodsId+"'><img src='"+goods.goodsImg+"'/></a>"
 								+"</div>"
 								+"<div class='ctent clearfloat fl'>"
-									+"<p class='tit'>"+goods.goodsName+"</p>"
+									+"<a href='/goodsDetailPage/goods-detail-page?goodsId="+goods.goodsId+"'><p class='tit'>"+goods.goodsName+"</p></a>"
 									+"<p class='fu-tit'>"+goods.goodsSpec+"</p>"
 									+"<div class='price clearfloat'>"
 										+"<span class='fl'><samp>¥</samp>"+goods.goodsPrice+"</span>"
-										+"<i class='iconfont icon-shenglve fr'></i>"
+                                        +"<span class='fr deleteCollectionGoods' data='"+goods.collectionId+"'>删除</span>"
 									+"</div>"
 								+"</div>"
 							+"</div>"
                         })
-					}
+					}else {
+                        divContent = "<div style='text-align:center;font-size:15px'><br/>暂无收藏信息~~！</div>"
+                    }
 					$("#goods-list").html(divContent);
                 }
 			});
         }
-
         //商品收藏列表
         goodsCollectionList();
+
+
+		/**
+         * 删除收藏列表信息
+         * */
+        $(document).on('click','.deleteCollectionGoods',function () {
+            var collectionId = $(this).attr("data");
+            if(collectionId){
+                var token = localStorage.getItem("token");
+                $.ajax({
+                    headers: {
+                        "token": token
+                    },
+                    type: "post",
+                    url: "/goodsCollection/deleteGoodsCollection",
+                    data:{"collectionId":collectionId},
+                    success: function (data) {
+                        if(data === -1){
+                            alert("未登录,请登录后再操作")
+                        }else if(data === 0){
+                            alert("删除失败")
+                        }else if(data === 1){
+                            //商品收藏列表
+                            goodsCollectionList();
+                        }
+                    }
+                });
+            }
+        })
 
     });
 

@@ -50,4 +50,6 @@ public interface GoodsExtMapper {
      * 编辑商品的查询详情
      * */
     EditGoodsInfoRsp getEditGoodsInfoBygoodsId(Long goodsId);
+
+    int selectGoodsCountByCatId(Long catId);
 }

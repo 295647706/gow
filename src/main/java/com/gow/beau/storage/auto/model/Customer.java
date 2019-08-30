@@ -1,9 +1,8 @@
 package com.gow.beau.storage.auto.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Customer implements Serializable {
+public class Customer {
     private Long id;
 
     private String customerUsername;
@@ -44,7 +43,15 @@ public class Customer implements Serializable {
 
     private Date createTime;
 
-    private static final long serialVersionUID = 1L;
+    private Date modifyTime;
+
+    private String isDelete;
+
+    private Integer integral;
+
+    private String isUse;
+
+    private Date isUseTime;
 
     public Long getId() {
         return id;
@@ -204,5 +211,45 @@ public class Customer implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Date getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
+    }
+
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
+
+    public String getIsUse() {
+        return isUse;
+    }
+
+    public void setIsUse(String isUse) {
+        this.isUse = isUse == null ? null : isUse.trim();
+    }
+
+    public Date getIsUseTime() {
+        return isUseTime;
+    }
+
+    public void setIsUseTime(Date isUseTime) {
+        this.isUseTime = isUseTime;
     }
 }

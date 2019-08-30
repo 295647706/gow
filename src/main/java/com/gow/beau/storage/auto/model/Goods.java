@@ -1,6 +1,7 @@
 package com.gow.beau.storage.auto.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Goods {
     private Long id;
@@ -21,6 +22,8 @@ public class Goods {
 
     private BigDecimal goodsPrice;
 
+    private BigDecimal goodsOldPrice;
+
     private String goodsImg;
 
     private BigDecimal goodsScore;
@@ -30,6 +33,14 @@ public class Goods {
     private String goodsDetailImg;
 
     private Integer goodsNumber;
+
+    private String isDelete;
+
+    private String isUpperLowerRacks;
+
+    private String isRecommend;
+
+    private Date createTime;
 
     private String goodsDetailDesc;
 
@@ -105,6 +116,14 @@ public class Goods {
         this.goodsPrice = goodsPrice;
     }
 
+    public BigDecimal getGoodsOldPrice() {
+        return goodsOldPrice;
+    }
+
+    public void setGoodsOldPrice(BigDecimal goodsOldPrice) {
+        this.goodsOldPrice = goodsOldPrice;
+    }
+
     public String getGoodsImg() {
         return goodsImg;
     }
@@ -143,6 +162,38 @@ public class Goods {
 
     public void setGoodsNumber(Integer goodsNumber) {
         this.goodsNumber = goodsNumber;
+    }
+
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete == null ? null : isDelete.trim();
+    }
+
+    public String getIsUpperLowerRacks() {
+        return isUpperLowerRacks;
+    }
+
+    public void setIsUpperLowerRacks(String isUpperLowerRacks) {
+        this.isUpperLowerRacks = isUpperLowerRacks == null ? null : isUpperLowerRacks.trim();
+    }
+
+    public String getIsRecommend() {
+        return isRecommend;
+    }
+
+    public void setIsRecommend(String isRecommend) {
+        this.isRecommend = isRecommend == null ? null : isRecommend.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getGoodsDetailDesc() {

@@ -142,12 +142,13 @@
 					</div>
 				</div>
 			</div>
-			
+
+			<!-- 完美专享,人气热卖,推荐精品 -->
 			<div class="soffer clearfloat">
 				<div class="list fl" th:each="goodsRecommended,iterStat: ${goodsRecommendedList}">
 					<a th:href="'/goodsDetailPage/goods-detail-page?goodsId='+${goodsRecommended.goodsId}">
 						<p class="tit" th:text="${goodsRecommended.title}">推荐精品</p>
-						<p class="fu-tit" th:text="${goodsRecommended.titleCaptions}">天天特价，爽不停</p>
+						<p class="fu-tit" th:text="${goodsRecommended.titleCaptions}"></p>
 						<img th:src="${goodsRecommended.goodsImg}"/>
 					</a>
 				</div>

@@ -1,8 +1,8 @@
 package com.gow.beau.storage.ext.mapper;
 
+import com.gow.beau.model.req.category.CategoryListPageReq;
 import com.gow.beau.model.rsp.category.CategoryListRsp;
 import com.gow.beau.storage.auto.model.Category;
-import com.gow.beau.storage.auto.model.CategoryExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,4 +16,18 @@ public interface CategoryExtMapper {
      * 分类数量
      */
     int categoryNumber();
+
+    /**
+     * 品牌管理 - 品牌列表数据
+     * */
+    List<Category> getCategoryListPage(CategoryListPageReq req);
+
+    /**
+     * 品牌管理 - 品牌列表总数量
+     * */
+    int getCategoryPageRows(CategoryListPageReq req);
+
+    int selectCatByName(String catName);
+
+    int selectMaxSort();
 }

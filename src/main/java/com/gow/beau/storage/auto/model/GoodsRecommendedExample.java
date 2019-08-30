@@ -494,6 +494,136 @@ public class GoodsRecommendedExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
+
+        public Criteria andRecommendedTypeIsNull() {
+            addCriterion("recommended_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeIsNotNull() {
+            addCriterion("recommended_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeEqualTo(String value) {
+            addCriterion("recommended_type =", value, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeNotEqualTo(String value) {
+            addCriterion("recommended_type <>", value, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeGreaterThan(String value) {
+            addCriterion("recommended_type >", value, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("recommended_type >=", value, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeLessThan(String value) {
+            addCriterion("recommended_type <", value, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeLessThanOrEqualTo(String value) {
+            addCriterion("recommended_type <=", value, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeLike(String value) {
+            addCriterion("recommended_type like", value, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeNotLike(String value) {
+            addCriterion("recommended_type not like", value, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeIn(List<String> values) {
+            addCriterion("recommended_type in", values, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeNotIn(List<String> values) {
+            addCriterion("recommended_type not in", values, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeBetween(String value1, String value2) {
+            addCriterion("recommended_type between", value1, value2, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRecommendedTypeNotBetween(String value1, String value2) {
+            addCriterion("recommended_type not between", value1, value2, "recommendedType");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIsNull() {
+            addCriterion("level is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIsNotNull() {
+            addCriterion("level is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelEqualTo(Integer value) {
+            addCriterion("level =", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotEqualTo(Integer value) {
+            addCriterion("level <>", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelGreaterThan(Integer value) {
+            addCriterion("level >", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelGreaterThanOrEqualTo(Integer value) {
+            addCriterion("level >=", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelLessThan(Integer value) {
+            addCriterion("level <", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelLessThanOrEqualTo(Integer value) {
+            addCriterion("level <=", value, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelIn(List<Integer> values) {
+            addCriterion("level in", values, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotIn(List<Integer> values) {
+            addCriterion("level not in", values, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelBetween(Integer value1, Integer value2) {
+            addCriterion("level between", value1, value2, "level");
+            return (Criteria) this;
+        }
+
+        public Criteria andLevelNotBetween(Integer value1, Integer value2) {
+            addCriterion("level not between", value1, value2, "level");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

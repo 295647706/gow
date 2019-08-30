@@ -6,9 +6,13 @@
     <result column="customer_id" jdbcType="BIGINT" property="customerId" />
     <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
     <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
+    <result column="pay_price" jdbcType="DECIMAL" property="payPrice" />
     <result column="order_status" jdbcType="CHAR" property="orderStatus" />
     <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_type" jdbcType="CHAR" property="payType" />
     <result column="send_express_time" jdbcType="TIMESTAMP" property="sendExpressTime" />
+    <result column="express_name" jdbcType="VARCHAR" property="expressName" />
+    <result column="express_code" jdbcType="VARCHAR" property="expressCode" />
     <result column="get_goods_time" jdbcType="TIMESTAMP" property="getGoodsTime" />
     <result column="shopping_addr_id" jdbcType="BIGINT" property="shoppingAddrId" />
     <result column="shipping_province" jdbcType="VARCHAR" property="shippingProvince" />
@@ -82,6 +86,62 @@
   <!-- 根据订单编号查询订单金额 -->
   <select id="selectOrderPriceByorderCode" resultType="java.math.BigDecimal">
     SELECT order_price FROM gow_order WHERE order_code = #{orderCode}
+  </select>
+
+  <select id="getOrderListPage" resultMap="BaseResultMap">
+    select
+        *
+    from gow_order
+    where 1=1
+    and del_flag = '0'
+    <if test="orderCode != null and orderCode !='' ">
+      and order_code = #{orderCode}
+    </if>
+    <if test="orderStatus != null and orderStatus !='' ">
+      and order_status = #{orderStatus}
+    </if>
+    <if test="evaluateFlag != null and evaluateFlag !='' ">
+      and evaluate_flag = #{evaluateFlag}
+    </if>
+    <if test="payType != null and payType !='' ">
+      and pay_type = #{payType}
+    </if>
+    <if test="startTime != null and startTime !='' and (endTime == null or endTime =='') ">
+      and DATE(create_time) = #{startTime}
+    </if>
+    <if test="startTime != null and startTime !='' and endTime != null and endTime !='' ">
+      and DATE(create_time) >= #{startTime}
+      and #{endTime} >= DATE(create_time)
+    </if>
+    order by create_time desc
+    Limit #{startRowNum},#{endRowNum}
+  </select>
+
+  <select id="getOrderPageRows" resultType="java.lang.Integer">
+    select
+        count(0)
+    from gow_order
+    where 1=1
+    and del_flag = '0'
+    <if test="orderCode != null and orderCode !='' ">
+      and order_code = #{orderCode}
+    </if>
+    <if test="orderStatus != null and orderStatus !='' ">
+      and order_status = #{orderStatus}
+    </if>
+    <if test="evaluateFlag != null and evaluateFlag !='' ">
+      and evaluate_flag = #{evaluateFlag}
+    </if>
+    <if test="payType != null and payType !='' ">
+      and pay_type = #{payType}
+    </if>
+    <if test="startTime != null and startTime !='' and (endTime == null or endTime =='') ">
+      and DATE(create_time) = #{startTime}
+    </if>
+    <if test="startTime != null and startTime !='' and endTime != null and endTime !='' ">
+      and DATE(create_time) >= #{startTime}
+      and #{endTime} >= DATE(create_time)
+    </if>
   </select>
 
 </mapper>

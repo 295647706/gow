@@ -104,7 +104,8 @@ public class GoodsCollectionService {
             GoodsCollectionListRsp rsp = new GoodsCollectionListRsp();
             goodsCollectionListRspList.add(rsp);
 
-            rsp.setGoodsid(goodsCollection.getGoodsId());
+            rsp.setCollectionId(goodsCollection.getId());
+            rsp.setGoodsId(goodsCollection.getGoodsId());
             rsp.setGoodsImg(goodsCollection.getGoodsImg());
             rsp.setGoodsName(goodsCollection.getGoodsName());
             rsp.setGoodsPrice(goodsCollection.getGoodsPrice());
@@ -135,5 +136,16 @@ public class GoodsCollectionService {
             return false;
         }
         return false;
+    }
+
+    /**
+     * 删除收藏商品信息
+     * */
+    public int deleteGoodsCollection(HttpServletRequest request,Long collectionId){
+        String token = request.getHeader("token");
+        if (null == token || token.equals("") || token.equals("null")){
+            return -1;
+        }
+        return goodsCollectionMapper.deleteByPrimaryKey(collectionId);
     }
 }

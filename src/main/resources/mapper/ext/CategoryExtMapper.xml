@@ -8,6 +8,7 @@
     <result column="cat_sort" jdbcType="INTEGER" property="catSort" />
     <result column="cat_is_show" jdbcType="CHAR" property="catIsShow" />
     <result column="cat_delflag" jdbcType="CHAR" property="catDelflag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 
   <select id="categoryGoodsListAll" resultType="com.gow.beau.model.rsp.category.CategoryListRsp">
@@ -16,6 +17,41 @@
 
   <select id="categoryNumber" resultType="java.lang.Integer">
     select count(0) from gow_category where cat_delflag = '0'
+  </select>
+
+  <select id="getCategoryListPage" resultMap="BaseResultMap">
+    select * from gow_category where 1=1
+    and cat_delflag = '0'
+    <if test="catName != null and catName !='' ">
+      and cat_name like CONCAT('%',#{catName},'%')
+    </if>
+    <if test="catIsShow != null and catIsShow !='' ">
+      and cat_is_show = #{catIsShow}
+    </if>
+    order by create_time desc
+    Limit #{startRowNum},#{endRowNum}
+  </select>
+
+  <select id="getCategoryPageRows" resultType="java.lang.Integer">
+    select count(0) from gow_category where 1=1
+    and cat_delflag = '0'
+    <if test="catName != null and catName !='' ">
+      and cat_name like CONCAT('%',#{catName},'%')
+    </if>
+    <if test="catIsShow != null and catIsShow !='' ">
+      and cat_is_show = #{catIsShow}
+    </if>
+  </select>
+
+  <select id="selectCatByName" resultType="java.lang.Integer">
+    select count(0) from gow_category where 1=1
+    and cat_delflag = '0'
+    and cat_name = #{catName}
+  </select>
+
+  <select id="selectMaxSort" resultType="java.lang.Integer">
+    select max(cat_sort) from gow_category where 1=1
+    and cat_delflag = '0'
   </select>
 
 </mapper>

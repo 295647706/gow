@@ -11,17 +11,22 @@
     <result column="goods_keywords" jdbcType="VARCHAR" property="goodsKeywords" />
     <result column="goods_brief" jdbcType="VARCHAR" property="goodsBrief" />
     <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="goods_old_price" jdbcType="DECIMAL" property="goodsOldPrice" />
     <result column="goods_img" jdbcType="VARCHAR" property="goodsImg" />
     <result column="goods_score" jdbcType="DECIMAL" property="goodsScore" />
     <result column="goods_deno" jdbcType="VARCHAR" property="goodsDeno" />
+    <result column="goods_detail_img" jdbcType="VARCHAR" property="goodsDetailImg" />
     <result column="goods_number" jdbcType="INTEGER" property="goodsNumber" />
-    <result column="goods_detail_desc" jdbcType="LONGVARCHAR" property="goodsDetailDesc" />
+    <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+    <result column="is_upper_lower_racks" jdbcType="CHAR" property="isUpperLowerRacks" />
+    <result column="is_recommend" jdbcType="CHAR" property="isRecommend" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
 
   <sql id="Base_Column_List">
     id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords,
-    goods_brief, goods_price, goods_img, goods_score, goods_deno, goods_number,
-    goods_detail_desc
+    goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img,
+    goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -29,12 +34,17 @@
     <include refid="Base_Column_List" />
     from gow_goods
     where id = #{id}
+    and is_delete = '0'
   </select>
 
   <select id="selectPageGoodsList" resultMap="BaseResultMap">
     select
       <include refid="Base_Column_List" />
     from gow_goods
+    where 1=1
+    and is_delete = '0'
+    and is_upper_lower_racks = '1'
+    order by create_time desc
   </select>
 
   <select id="selectCategoryGoodsListByCatId" resultType="com.gow.beau.model.rsp.category.CategoryGoodsListRsp">
@@ -46,6 +56,8 @@
       ,goods_deno as goodsDeno
       ,goods_img as goodsImg
      from gow_goods where category_id = #{categoryId}
+     and is_delete = '0'
+     order by create_time desc
   </select>
 
   <select id="searchGoodsList" resultType="com.gow.beau.model.rsp.goods.SearchListRsp">
@@ -57,6 +69,7 @@
       ,goods_img as goodsImg
      from gow_goods
      where 1=1
+     and is_delete = '0'
      and (
             goods_name LIKE CONCAT('%',#{search},'%')
             OR goods_spec LIKE CONCAT('%',#{search},'%')
@@ -65,6 +78,7 @@
             OR goods_brief LIKE CONCAT('%',#{search},'%')
             OR goods_detail_desc LIKE CONCAT('%',#{search},'%')
           )
+    order by create_time desc
   </select>
 
 
@@ -87,6 +101,7 @@
     <if test="catId != null">
       and g.category_id = #{catId}
     </if>
+    and is_delete = '0'
     Limit #{startRowNum},#{endRowNum}
   </select>
 
@@ -100,10 +115,13 @@
     <if test="catId != null">
       and g.category_id = #{catId}
     </if>
+    and is_delete = '0'
   </select>
 
   <update id="deleteGoodsByGoodsId">
-
+    update gow_goods
+    set is_delete = '1'
+    where id = #{goodsId}
   </update>
 
   <select id="getEditGoodsInfoBygoodsId" resultType="com.gow.beau.model.rsp.goods.EditGoodsInfoRsp">
@@ -117,15 +135,26 @@
       , g.goods_number AS goodsNumber
       , g.goods_subtitle AS goodsSubtitle
       , g.goods_price AS goodsPrice
+      , g.goods_old_price AS goodsOldPrice
       , g.goods_keywords AS goodsKeywords
       , g.goods_brief AS goodsBrief
       , g.goods_score AS goodsScore
       , g.goods_detail_desc AS goodsDetailDesc
       , g.category_id AS categoryId
+      , g.is_recommend AS isRecommend
+      , g.is_upper_lower_racks AS isUpperLowerRacks
       , c.cat_name AS catName
+      , c.id AS catId
     FROM gow_goods AS g INNER JOIN gow_category c ON g.category_id = c.id
     WHERE 1=1
     AND g.id = #{goodsId}
+    and is_delete = '0'
+  </select>
+
+  <select id="selectGoodsCountByCatId" resultType="java.lang.Integer">
+    select count(0) from gow_goods where 1=1
+    and is_delete = '0'
+    and category_id = #{catId}
   </select>
 
 </mapper>

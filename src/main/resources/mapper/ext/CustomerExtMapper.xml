@@ -22,6 +22,11 @@
     <result column="user_salt_val" jdbcType="VARCHAR" property="userSaltVal" />
     <result column="customer_referee" jdbcType="VARCHAR" property="customerReferee" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="is_use" jdbcType="CHAR" property="isUse" />
+    <result column="is_use_time" jdbcType="TIMESTAMP" property="isUseTime" />
   </resultMap>
 
   <select id="selectCustomerNameAndPaddByName" resultType="com.gow.beau.model.rsp.login.LoginRsp">
@@ -29,13 +34,66 @@
       id as customerId
       ,customer_username as customerUsername
       ,customer_password as customerPassword
+      ,is_use as isUse
     from gow_customer WHERE customer_username = #{name}
+    and is_delete = '0'
   </select>
 
   <select id="selectCountByName" resultType="java.lang.Integer">
     SELECT
       count(0)
     from gow_customer WHERE customer_username = #{customerUsername}
+    and is_delete = '0'
+  </select>
+
+  <select id="getCustomerListPage" resultMap="BaseResultMap">
+    select * from gow_customer where 1=1
+    and is_delete = '0'
+    <if test="customerUsername != null and customerUsername !='' ">
+      and customer_username = #{customerUsername}
+    </if>
+    <if test="customerRealname != null and customerRealname !='' ">
+      and customer_realname = #{customerRealname}
+    </if>
+    <if test="isUse != null and isUse !='' ">
+      and is_use = #{isUse}
+    </if>
+    <if test="sex != null and sex !='' ">
+      and sex = #{sex}
+    </if>
+    <if test="startTime != null and startTime !='' and (endTime == null or endTime =='') ">
+      and DATE(create_time) = #{startTime}
+    </if>
+    <if test="startTime != null and startTime !='' and endTime != null and endTime !='' ">
+      and DATE(create_time) >= #{startTime}
+      and #{endTime} >= DATE(create_time)
+    </if>
+    order by create_time desc
+    Limit #{startRowNum},#{endRowNum}
+  </select>
+
+  <select id="getCustomerCount" resultType="java.lang.Integer">
+    select count(0) from gow_customer where 1=1
+    and is_delete = '0'
+    <if test="customerUsername != null and customerUsername !='' ">
+      and customer_username = #{customerUsername}
+    </if>
+    <if test="customerRealname != null and customerRealname !='' ">
+      and customer_realname = #{customerRealname}
+    </if>
+    <if test="isUse != null and isUse !='' ">
+      and is_use = #{isUse}
+    </if>
+    <if test="sex != null and sex !='' ">
+      and sex = #{sex}
+    </if>
+    <if test="startTime != null and startTime !='' and (endTime == null or endTime =='') ">
+      and DATE(create_time) = #{startTime}
+    </if>
+    <if test="startTime != null and startTime !='' and endTime != null and endTime !='' ">
+      and DATE(create_time) >= #{startTime}
+      and #{endTime} >= DATE(create_time)
+    </if>
   </select>
 
 </mapper>

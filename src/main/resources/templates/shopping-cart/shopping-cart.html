@@ -44,9 +44,7 @@
 	    </header>
 	    <div id="main" class="mui-clearfix">
 	    	<div class="contaniner fixed-contb" id="shoppingcart-list">
-				<section class="shopcar">
-					<div style='text-align: center;font-size: 20px;'>暂无购物车商品</div>
-				</section>
+
 
 				<!--<section class="shopcar" th:each="shopCartGoods,iterStat: ${shoppingCartInfo.shoppingCartGoodsListRsp}">
 					<div class="shopcar-checkbox">
@@ -100,6 +98,12 @@
 				//拼接购物车列表信息
 				function shoppingCartList() {
                     var token = localStorage.getItem("token");
+                    if(!token){
+						divContent = "<section><br/><div style='text-align: center;font-size: 20px;'><a href='/login/login-page'>去登录</a></div></section>"
+						$("#shoppingcart-list").html(divContent);
+						return;
+					}
+
 				    var divContent = "";
 					$.ajax({
 						headers : {
@@ -108,7 +112,10 @@
 						type : "post",
 						url : "/shoppingCart/shoppingCartInfo",
 						success : function (data) {
-						    if(! data && !data.shoppingCartGoodsListRsp){
+							console.log(data)
+						    if(!data || !data.shoppingCartGoodsListRsp){
+						    	divContent = "<section><br/><div style='text-align: center;font-size: 15px;'>暂无购物车商品</div></section>"
+								$("#shoppingcart-list").html(divContent);
 						        return;
 							}
 							$.each(data.shoppingCartGoodsListRsp,function (index,shopCartGoods) {

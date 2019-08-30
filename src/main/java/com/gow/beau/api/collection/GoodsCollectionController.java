@@ -53,4 +53,13 @@ public class GoodsCollectionController {
         return goodsCollectionService.isCollectionGoods(request,req);
     }
 
+    /**
+     * 删除收藏信息
+     */
+    @RequestMapping("/deleteGoodsCollection")
+    @ResponseBody
+    public int deleteGoodsCollection(HttpServletRequest request,Long collectionId){
+        return goodsCollectionService.deleteGoodsCollection(request,collectionId);
+    }
+
 }

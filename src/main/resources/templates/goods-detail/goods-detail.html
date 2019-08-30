@@ -53,7 +53,7 @@
 	        	<div class="left clearfloat fl">
 	        		<!--<p class="tit" th:text="${goodsDetail.goodsName}">XXX夏季流行女装</p>-->
 					<p class="" th:text="${goodsDetail.goodsName}">XXX夏季流行女装</p>
-	        		<p class="price"><span th:text="${goodsDetail.goodsPrice}">500</span>元<samp>￥0.00元</samp></p>
+	        		<p class="price"><span th:text="${goodsDetail.goodsPrice}">500</span>元<samp>￥<apana th:text="${goodsDetail.goodsOldPrice}"></apana>元</samp></p>
 	        	</div>
 	        	<div class="right clearfloat fr" id="goods_collection" th:data="${goodsDetail.isGoodsCollection}">
 	        		<i th:class="${goodsDetail.isGoodsCollection==false}?'iconfont icon-shoucang':'iconfont icon-shoucang1'"></i>
@@ -72,13 +72,13 @@
 	        <article class="detail-article">
 				<nav>
 					<ul class="article">
-						<li id="talkbox1" class="article-active">商品详情</li>
-						<li id="talkbox2">商品评价(4)</li>
+						<li id="talkbox1" class="article-active">商品信息</li>
+						<!--<li id="talkbox2">商品评价(4)</li>-->
 					</ul>
 				</nav>
 
 				<section class="talkbox1">
-					<img th:src="${goodsDetail.goodsDetailImg}"/>
+					<img th:each="goodsDetailImg,iterStat: ${goodsDetail.goodsDetailImgs}" th:src="${goodsDetailImg}"/>
 				</section>
 
 				<section class="talkbox2" style="display: none;">

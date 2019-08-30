@@ -8,10 +8,24 @@
     <result column="title_captions" jdbcType="VARCHAR" property="titleCaptions" />
     <result column="is_delete" jdbcType="CHAR" property="isDelete" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="recommended_type" jdbcType="CHAR" property="recommendedType" />
+    <result column="level" jdbcType="INTEGER" property="level" />
   </resultMap>
 
+  <sql id="Base_Column_List">
+    id, goods_id, title, title_captions, is_delete, create_time, recommended_type, level
+  </sql>
+
   <select id="pageGoodsRecommendedList" resultMap="BaseResultMap">
-    SELECT * FROM gow_goods_recommended WHERE is_delete = '0'
+    SELECT goods_id,title,title_captions FROM gow_goods_recommended WHERE is_delete = '0' order by level,create_time desc limit 3
+  </select>
+
+  <select id="selectInfoByRecommendedType" resultMap="BaseResultMap">
+    select id,goods_id from gow_goods_recommended where is_delete = '0' and recommended_type = #{recommendedType} limit 1
+  </select>
+
+  <select id="selectMaxLevel" resultType="java.lang.Integer">
+    select max(level) from gow_goods_recommended where is_delete = '0'
   </select>
 
 </mapper>

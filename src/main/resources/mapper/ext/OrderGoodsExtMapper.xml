@@ -18,7 +18,7 @@
 
   <select id="selectOrderGoodsListByOrderId" resultType="com.gow.beau.model.rsp.order.OrderListGoodsRsp">
     SELECT
-       goods_id AS goodsid
+       goods_id AS goodsId
       ,goods_name AS goodsName
       ,goods_spec AS goodsSpec
       ,goods_img AS goodsImg
@@ -32,6 +32,19 @@
   <!-- 根据订单id查询商品名称 -->
   <select id="selectGoodsNamesByorderId" resultType="java.lang.String">
     SELECT group_concat(goods_name) FROM gow_order_goods WHERE order_id = #{orderId}
+  </select>
+
+  <select id="selectOrderGoodsDetailListByOrderId" resultType="com.gow.beau.model.rsp.order.OrderGoodsDetailRsp">
+    select
+        goods_id AS goodsId
+      ,goods_name AS goodsName
+      ,goods_spec AS goodsSpec
+      ,goods_img AS goodsImg
+      ,goods_number AS goodsNumber
+      ,goods_info_price AS goodsInfoPrice
+      ,goods_info_sum_price AS goodsInfoSumPrice
+      ,have_gift_status AS haveGiftStatus
+    from gow_order_goods WHERE order_id = #{orderId}
   </select>
 
 </mapper>

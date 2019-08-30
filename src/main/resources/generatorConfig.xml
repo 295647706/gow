@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-    <classPathEntry location="C:\soft\project\gow\m2\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar"/>
+    <classPathEntry location="D:\project\mgow\maven\m2\mysql\mysql-connector-java\8.0.11\mysql-connector-java-8.0.11.jar"/>
     <context id="context1" targetRuntime="MyBatis3" defaultModelType="flat">
         <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>-->
         <commentGenerator>
@@ -12,22 +12,22 @@
 
         <!-- com.mysql.cj.jdbc.Driver -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/gow?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/gow?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC&amp;useSSL=false"
                         userId="root" password="root"/>
 
         <javaModelGenerator targetPackage="com.gow.beau.storage.auto.model"
-                            targetProject="../gow2/src/main/java">
+                            targetProject="../gow/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="mapper.auto"
-                         targetProject="../gow2/src/main/resources">
+                         targetProject="../gow/src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator targetPackage="com.gow.beau.storage.auto.mapper"
-                             targetProject="../gow2/src/main/java" type="XMLMAPPER">
+                             targetProject="../gow/src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
             <!--<property name="rootInterface" value="com.sq580.ms.common.dao.BaseDaoMybatis"/>-->
         </javaClientGenerator>
@@ -85,9 +85,13 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>-->
 
-        <table tableName="gow_payment" domainObjectName="Payment">
+        <!--<table tableName="gow_payment" domainObjectName="Payment">
             <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
+        </table>-->
+
+        <!--<table tableName="gow_goods_detail_image" domainObjectName="GoodsDetailImage">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
 
     </context>
 </generatorConfiguration>

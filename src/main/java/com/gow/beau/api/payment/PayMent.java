@@ -1,5 +1,6 @@
 package com.gow.beau.api.payment;
 
+import com.gow.beau.storage.auto.model.Payment;
 import com.gow.beau.util.JsonObject;
 import com.gow.beau.util.MD5;
 import org.apache.http.HttpEntity;
@@ -22,22 +23,27 @@ import java.util.Map;
  */
 public class PayMent {
 
-    public static String httpsPost(String orderCode, String orderPayType,String order_customer_id, BigDecimal price ,String goodsNames){
-        //这里金额暂时默认未0.01
-        price = new BigDecimal(0.01);
+    public static String httpsPost(String orderCode, String orderPayType, String order_customer_id, BigDecimal price , String goodsNames, Payment payment){
+        if(null != payment.getIsDefaultPrice() && payment.getIsDefaultPrice().equals("1")) {
+            //这里金额暂时默认,测试使用
+            price = payment.getDefaultPrice();
+        }
         double priceValue = price.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
         //替换商品中有“+”的符号
         goodsNames = goodsNames.replace("+","_");
 
         //设置订单过期时间
-        int expire= 24*60*60*1000;
+        int expire = 24*60*60*1000;
+        if(null != payment.getExpire() && payment.getExpire() > 0){
+            expire = payment.getExpire();
+        }
 
         //域名
-        String path = "http://gow.hdongx.com";
+        String path = payment.getPath(); //"http://gow.hdongx.com";
 
-        String apiUrl="https://bufpay.com/api/pay/95134";
-        String appSecret="967e0dc6b34e46c082af6997253fde6c";
+        String apiUrl = payment.getApiUrl(); //"https://bufpay.com/api/pay/95134";
+        String appSecret = payment.getAppEcret(); //"967e0dc6b34e46c082af6997253fde6c";
         String orderId = orderCode;       // 自己创建的本地订单号
         String orderUid = order_customer_id;  //订单对应的用户id
 
@@ -50,8 +56,11 @@ public class PayMent {
             }
         }
 
-        String notifyUrl = path + "/order/paymentOrder?orderCode="+orderId/*+"&payType="+orderPayType*/;   // 回调通知地址 http://gow.hdongx.com/order/paymentOrder?orderCode=1
-        String returnUrl = path + "/orderPage/order2-page";   // 支付成功页面跳转地址
+        //path + "/order/paymentOrder?orderCode="+orderId/*+"&payType="+orderPayType*/;
+        // 回调通知地址 http://gow.hdongx.com/order/paymentOrder?orderCode=1
+        String notifyUrl = path + payment.getNotifyUrl() + orderId;
+        //path + "/orderPage/order2-page";   // 支付成功页面跳转地址
+        String returnUrl = path + payment.getReturnUrl();
         String paramData=goodsNames+payType+priceValue+orderId+orderUid+notifyUrl+returnUrl+appSecret;
         String sign = MD5.md5(paramData);
         String sendString="name="+goodsNames+"&pay_type="+payType+"&price="+priceValue+"&order_id="+orderId
@@ -60,6 +69,7 @@ public class PayMent {
         String responseData=null;
         try {
             responseData=HttpsUtil.https(apiUrl,sendString);
+            //responseData=HttpsUtil.doPost(apiUrl,sendString,null,null,null);
         }catch (Exception e){
         }
         System.err.println(responseData);
@@ -150,5 +160,14 @@ public class PayMent {
             }
         }
         return isSuccess;
+    }
+
+    public static void main(String[] args) {
+        Payment payment = new Payment();
+        payment.setPath("http://gow.hdongx.com");
+        payment.setApiUrl("https://bufpay.com/api/pay/95134");
+        payment.setReturnUrl("/orderPage/order2-page");
+        payment.setAppEcret("967e0dc6b34e46c082af6997253fde6c");
+        System.err.println(httpsPost("201908261310111234","wechat","1001",new BigDecimal(0.01),"商品1",payment));
     }
 }

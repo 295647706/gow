@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.PaymentExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Payment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="notify_url" jdbcType="VARCHAR" property="notifyUrl" />
+    <result column="return_url" jdbcType="VARCHAR" property="returnUrl" />
+    <result column="api_url" jdbcType="VARCHAR" property="apiUrl" />
+    <result column="app_ecret" jdbcType="VARCHAR" property="appEcret" />
+    <result column="expire" jdbcType="INTEGER" property="expire" />
+    <result column="default_price" jdbcType="DECIMAL" property="defaultPrice" />
+    <result column="is_default_price" jdbcType="CHAR" property="isDefaultPrice" />
+  </resultMap>
+  
+  <select id="selectFirstPaymentInfo" resultMap="BaseResultMap">
+    select * from gow_payment where 1=1 limit 1
+  </select>
+
+</mapper>

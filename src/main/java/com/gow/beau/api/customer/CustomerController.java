@@ -1,5 +1,6 @@
 package com.gow.beau.api.customer;
 
+import com.gow.beau.model.req.customer.CustomerEditPassReq;
 import com.gow.beau.model.req.customer.CustomerReq;
 import com.gow.beau.model.req.customer.EditCustomerInfoReq;
 import com.gow.beau.model.req.regist.RegistUsernameReq;
@@ -72,5 +73,12 @@ public class CustomerController {
     @ResponseBody
     public boolean isExistCustomerUsername(RegistUsernameReq req){
         return customerService.isExistCustomerUsername(req);
+    }
+
+
+    @RequestMapping("/editPass")
+    @ResponseBody
+    public String editPass(HttpServletRequest request, CustomerEditPassReq req){
+        return customerService.editPass(request,req);
     }
 }

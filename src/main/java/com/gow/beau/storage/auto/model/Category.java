@@ -1,8 +1,8 @@
 package com.gow.beau.storage.auto.model;
 
-import java.io.Serializable;
+import java.util.Date;
 
-public class Category implements Serializable {
+public class Category {
     private Long id;
 
     private String catName;
@@ -15,7 +15,7 @@ public class Category implements Serializable {
 
     private String catDelflag;
 
-    private static final long serialVersionUID = 1L;
+    private Date createTime;
 
     public Long getId() {
         return id;
@@ -63,5 +63,13 @@ public class Category implements Serializable {
 
     public void setCatDelflag(String catDelflag) {
         this.catDelflag = catDelflag == null ? null : catDelflag.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

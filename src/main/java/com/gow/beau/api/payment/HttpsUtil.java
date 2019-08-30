@@ -2,16 +2,24 @@ package com.gow.beau.api.payment;
 
 //import net.sf.json.JSONObject;
 
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
+
 import java.io.*;
 import java.net.URL;
+import java.security.SecureRandom;
+import java.security.Security;
+import java.security.cert.CertificateException;
 import java.util.Map;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
+import javax.net.ssl.*;
 import java.security.cert.X509Certificate;
-import javax.net.ssl.X509TrustManager;
 
 /**
  * Created by admin on 2019/3/29.
@@ -43,6 +51,8 @@ public class HttpsUtil {
         // Install the all-trusting trust manager
         try {
             SSLContext sc = SSLContext.getInstance("TLS");
+            //Security.setProperty("jdk.tls.disabledAlgorithms","SSLv3, DH keySize < 768");
+            //System.setProperty("https.protocols", "TLSv1.2");
             sc.init(null, trustAllCerts, new java.security.SecureRandom());
             HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
         } catch (Exception e) {
@@ -106,6 +116,107 @@ public class HttpsUtil {
             }
         }
         return result;
+    }
+
+
+    public static String doPost(String requestUrl, String bodyStr, Map<String, String> header, String charset, String contentType) throws Exception {
+        System.out.printf("--- https post 请求地址:%s 内容:%s", requestUrl, bodyStr);
+        charset = null == charset ? "utf-8" : charset;
+
+        // 创建SSLContext
+        SSLContext sslContext = SSLContext.getInstance("SSL");
+        TrustManager[] trustManagers = {new X509TrustManager() {
+            /*
+             * 实例化一个信任连接管理器
+             * 空实现是所有的连接都能访问
+             */
+            @Override
+            public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        }};
+        // 初始化
+        sslContext.init(null, trustManagers, new SecureRandom());
+        SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+        URL url = new URL(requestUrl);
+        HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+        httpsURLConnection.setSSLSocketFactory(sslSocketFactory);
+
+        // 以下参照http请求
+        httpsURLConnection.setDoOutput(true);
+        httpsURLConnection.setDoInput(true);
+        httpsURLConnection.setUseCaches(false);
+        httpsURLConnection.setRequestMethod("POST");
+        httpsURLConnection.setRequestProperty("Accept-Charset", charset);
+        if (null != bodyStr) {
+            httpsURLConnection.setRequestProperty("Content-Length", String.valueOf(bodyStr.length()));
+        }
+        if (contentType == null) {
+            httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        } else {
+            httpsURLConnection.setRequestProperty("Content-Type", contentType);
+        }
+        if (!header.isEmpty()) {
+            for (Map.Entry<String, String> entry : header.entrySet()) {
+                httpsURLConnection.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+        }
+        httpsURLConnection.connect();
+
+        // 读写内容
+        OutputStream outputStream = null;
+        InputStream inputStream = null;
+        InputStreamReader streamReader = null;
+        BufferedReader bufferedReader = null;
+        StringBuffer stringBuffer;
+        try {
+            if (null != bodyStr) {
+                outputStream = httpsURLConnection.getOutputStream();
+                outputStream.write(bodyStr.getBytes(charset));
+                outputStream.close();
+            }
+
+            if (httpsURLConnection.getResponseCode() >= 300) {
+                throw new Exception("https post failed, response code " + httpsURLConnection.getResponseCode());
+            }
+
+            inputStream = httpsURLConnection.getInputStream();
+            streamReader = new InputStreamReader(inputStream, charset);
+            bufferedReader = new BufferedReader(streamReader);
+            stringBuffer = new StringBuffer();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuffer.append(line);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (outputStream != null) {
+                outputStream.close();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (streamReader != null) {
+                streamReader.close();
+            }
+            if (bufferedReader != null) {
+                bufferedReader.close();
+            }
+        }
+        System.out.printf("--- https post 返回内容:%s", stringBuffer.toString());
+        return stringBuffer.toString();
     }
 
 }

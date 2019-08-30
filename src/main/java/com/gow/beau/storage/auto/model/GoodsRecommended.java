@@ -15,6 +15,10 @@ public class GoodsRecommended {
 
     private Date createTime;
 
+    private String recommendedType;
+
+    private Integer level;
+
     public Long getId() {
         return id;
     }
@@ -61,5 +65,21 @@ public class GoodsRecommended {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getRecommendedType() {
+        return recommendedType;
+    }
+
+    public void setRecommendedType(String recommendedType) {
+        this.recommendedType = recommendedType == null ? null : recommendedType.trim();
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 }
