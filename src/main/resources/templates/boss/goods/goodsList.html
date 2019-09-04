@@ -14,6 +14,7 @@
 <body class="layui-layout-body">
 <!-- 左侧选中标识 -->
 <input hidden id="manage" value="goodsManage">
+<input hidden id="check" value="goodsList">
 
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" th:include="boss\index\top::boss-top">
@@ -70,27 +71,25 @@
                   <table class="layui-table">
                       <colgroup>
                           <col width="50">
+                          <col width="120">
+                          <col>
                           <col width="150">
-                          <col width="150">
-                          <col width="150">
-                          <col width="150">
-                          <col width="250">
                           <col width="150">
                           <col width="100">
+                          <col width="80">
                           <col width="100">
-                          <col width="150">
+                          <col width="120">
                       </colgroup>
                       <thead>
                           <tr>
-                              <th class="selectAll"><input type="checkbox"></th>
-                              <th>商品编号</th>
-                              <th>商品名称</th>
-                              <th>商品规格</th>
-                              <th>商品品牌</th>
-                              <th>商品副标题</th>
-                              <th>商品数量</th>
-                              <th>销售价</th>
-                              <th>计价单位</th>
+                              <th style='text-align: center'>序号</th>
+                              <th style='text-align: center'>图片</th>
+                              <th style='text-align: center'>商品名称</th>
+                              <th style='text-align: center'>商品规格</th>
+                              <th style='text-align: center'>商品品牌</th>
+                              <th style='text-align: center'>商品数量</th>
+                              <th style='text-align: center'>销售价</th>
+                              <th style='text-align: center'>计价单位</th>
                               <th style="text-align:center;">操作</th>
                           </tr>
                       </thead>
@@ -130,6 +129,11 @@
         });
 
         function selectOrderList(pageNo,pageSize) {
+            var newPageNo = $("#page .layui-laypage-skip .layui-input").val();
+            if(newPageNo){
+                pageNo = newPageNo;
+            }
+
             var divContent = "";
 
             var goodsName = $("#goodsName").val();
@@ -143,16 +147,15 @@
                         $.each(data.list, function (index, goods) {
                             divContent = divContent
                             +"<tr>"
-                                +"<td><input type='checkbox' name='id' value='"+goods.id+"'></td>"
-                                +"<td>"+goods.goodsNo+"</td>"
-                                +"<td>"+goods.goodsName+"</td>"
-                                +"<td>"+goods.goodsSpec+"</td>"
-                                +"<td>"+goods.catName+"</td>"
-                                +"<td>"+goods.goodsSubtitle+"</td>"
-                                +"<td>"+goods.goodsNumber+"</td>"
-                                +"<td>"+goods.goodsPrice+"</td>"
-                                +"<td>"+goods.goodsDeno+"</td>"
-                                +"<td class='text-center'>"
+                                +"<td style='text-align: center'>"+(pageNo*(index+1))+"</td>"
+                                +"<td style='text-align: center'><img src='"+goods.goodsImg+"' style='width: 50px;height: 50px;'></td>"
+                                +"<td style='text-align: center'>"+goods.goodsName+"</td>"
+                                +"<td style='text-align: center'>"+goods.goodsSpec+"</td>"
+                                +"<td style='text-align: center'>"+goods.catName+"</td>"
+                                +"<td style='text-align: center'>"+goods.goodsNumber+"</td>"
+                                +"<td style='text-align: center'>"+goods.goodsPrice+"</td>"
+                                +"<td style='text-align: center'>"+goods.goodsDeno+"</td>"
+                                +"<td style='text-align: center'>"
                                     +"<div>"
                                         +"<button class='layui-btn layui-btn-xs goodsEdit' value='"+goods.id+"'>编辑</button>"
                                         +"<button class='layui-btn layui-btn-danger layui-btn-xs goodsDelete' value='"+goods.id+"'>删除</button>"

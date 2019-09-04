@@ -144,4 +144,8 @@
     </if>
   </select>
 
+  <select id="getOrder" resultMap="BaseResultMap">
+    select * from gow_order where order_code = #{orderCode}
+  </select>
+
 </mapper>

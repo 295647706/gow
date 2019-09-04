@@ -55,6 +55,7 @@
       ,goods_price as goodsPrice
       ,goods_deno as goodsDeno
       ,goods_img as goodsImg
+      ,goods_no as goodsNo
      from gow_goods where category_id = #{categoryId}
      and is_delete = '0'
      order by create_time desc
@@ -93,6 +94,7 @@
       , g.goods_number AS goodsNumber
       , g.goods_subtitle AS goodsSubtitle
       , g.goods_price as goodsPrice
+      , g.goods_img as goodsImg
       , c.cat_name AS catName
     FROM gow_goods AS g INNER JOIN gow_category c ON g.category_id = c.id
     <if test="goodsName != null and goodsName !='' ">

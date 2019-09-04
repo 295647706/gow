@@ -414,6 +414,9 @@ public class OrderService {
      * 确认支付，去支付，修改订单状态
      */
     public int paymentOrder(PaymentOrderReq req) {
+        if(null != req.getOrderid()){
+            req.setOrderCode(req.getOrderid());
+        }
         Order order = new Order();
         order.setOrderStatus("1");
         order.setPayTime(new Date());
@@ -433,7 +436,7 @@ public class OrderService {
         if(null == order){
             return "没有此订单信息："+req.getOrderCode();
         }
-        Payment payment = paymentService.selectFirstPaymentInfo();
+        Payment payment = paymentService.selectFirstPaymentInfo("pufpay");
         if(null == payment){
             return "订单支付信息错误";
         }
@@ -451,6 +454,12 @@ public class OrderService {
         return orderExtMapper.selectOrderPriceByorderCode(orderCode);
     }
 
+    /**
+     * 根据订单编号查询订单详情
+     * */
+    public Order getOrder(String orderCode){
+        return orderExtMapper.getOrder(orderCode);
+    }
 
 
     /**
@@ -502,6 +511,9 @@ public class OrderService {
         //比较订单总金额和支付金额,-1表示小于，0是等于，1是大于
         if(order.getOrderPrice().compareTo(order.getPayPrice()) != 0){
             return -3;
+        }
+        if(null != order.getExpressCode()){
+            return -4;
         }
         Order saveOrder = new Order();
         saveOrder.setId(order.getId());

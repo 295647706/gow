@@ -11,10 +11,33 @@
     <result column="expire" jdbcType="INTEGER" property="expire" />
     <result column="default_price" jdbcType="DECIMAL" property="defaultPrice" />
     <result column="is_default_price" jdbcType="CHAR" property="isDefaultPrice" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="use_type" jdbcType="CHAR" property="useType" />
   </resultMap>
   
   <select id="selectFirstPaymentInfo" resultMap="BaseResultMap">
-    select * from gow_payment where 1=1 limit 1
+    select * from gow_payment where 1=1 and use_type = #{useType} limit 1
+  </select>
+
+  <select id="getPayListPage" resultMap="BaseResultMap">
+    select * from gow_payment where 1=1
+    <if test="useType != null and useType !='' ">
+      and use_type = #{useType}
+    </if>
+    order by id desc
+    Limit #{startRowNum},#{endRowNum}
+  </select>
+
+  <select id="getPayRows" resultType="java.lang.Integer">
+    select count(0) from gow_payment where 1=1
+    <if test="useType != null and useType !='' ">
+      and use_type = #{useType}
+    </if>
+  </select>
+
+  <select id="getCountByUseType" resultType="java.lang.Integer">
+    select count(0) from gow_payment where 1=1
+    and use_type = #{useType}
   </select>
 
 </mapper>

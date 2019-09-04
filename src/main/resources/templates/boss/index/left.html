@@ -6,32 +6,39 @@
             <li class="layui-nav-item" data="orderManage">
                 <a href="javascript:;">订单管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/orderBoss/order-list-page">订单列表</a></dd>
+                    <dd><a href="/orderBoss/order-list-page" data="orderList">订单列表</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" data="goodsManage">
                 <a class="" href="javascript:;">商品管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/goodsBoss/goods-list-page">商品列表</a></dd>
-                    <dd><a href="/goodsBoss/goods-add-page">新增商品</a></dd>
+                    <dd><a href="/goodsBoss/goods-list-page" data="goodsList">商品列表</a></dd>
+                    <dd><a href="/goodsBoss/goods-add-page" data="goodsAdd">新增商品</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" data="customerManage">
                 <a href="javascript:;">会员管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="/customerBoss/customer-list-page">会员列表</a></dd>
+                    <dd><a href="/customerBoss/customer-list-page" data="customerList">会员列表</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" data="userManage">
                 <a href="javascript:;">用户管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a class="layui-this" href="#">用户列表</a></dd>
+                    <dd><a href="#">用户列表</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" data="categoryManage">
-                <a href="javascript:;">品牌管理</a>
+                <a href="javascript:;">分类管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a class="layui-this" href="/categoryBoss/category-list-page">品牌列表</a></dd>
+                    <dd><a href="/categoryBoss/category-list-page" data="categoryList">分类列表</a></dd>
+                    <dd><a href="/categoryBoss/category-add-page" data="categoryAdd">新增分类</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" data="basicinfoManage">
+                <a href="javascript:;">基础信息</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/payMentInfoBoss/pay-list-page" data="payList">支付通道配置</a></dd>
                 </dl>
             </li>
         </ul>

@@ -84,6 +84,25 @@ ADD COLUMN `create_time` datetime(0) NULL COMMENT '创建时间' AFTER `cat_delf
 
 
 
+ALTER TABLE `gow`.`gow_payment`
+MODIFY COLUMN `app_ecret` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '支付key值,token' AFTER `api_url`,
+ADD COLUMN `uid` varchar(50) NULL COMMENT '商户id' AFTER `is_default_price`;
+
+
+
+ALTER TABLE `gow`.`gow_payment`
+ADD COLUMN `use_type` enum('docpay','pufpay') NULL COMMENT '使用标识类型，标识需要使用那条数据，唯一(docpay:支付猫，pufpay：个人收款)' AFTER `uid`;
+
+
+ALTER TABLE `gow`.`gow_payment`
+MODIFY COLUMN `use_type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '使用标识类型，标识需要使用那条数据，唯一(docpay:支付猫，pufpay：个人收款)' AFTER `uid`;
+
+
+
+
+
+
+
 
 
 

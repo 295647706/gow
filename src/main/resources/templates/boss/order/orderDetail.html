@@ -14,6 +14,7 @@
 <body class="layui-layout-body">
 <!-- 左侧选中标识 -->
 <input hidden id="manage" value="orderManage">
+<input hidden id="check" value="orderList">
 
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" th:include="boss\index\top::boss-top">
@@ -67,7 +68,7 @@
                                     <span th:if="${order.orderStatus=='3'}">交易完成</span>
                                 </td>
                                 <td style='text-align: right;padding-right:1px;'>支付类型：</td>
-                                <td style="padding-left:2px;" th:text="${order.payType=='1'}?'微信':'支付宝'"></td>
+                                <td style="padding-left:2px;" th:text="${order.payType=='1'}?'支付宝':'微信'"></td>
                                 <td style='text-align: right;padding-right:1px;'>运费：</td>
                                 <td style="padding-left:2px;" th:text="${order.expressPrice}"></td>
                             </tr>

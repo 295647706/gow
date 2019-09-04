@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>会员管理</title>
+  <title>分类管理</title>
   <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
   <link rel="stylesheet" href="../boss/layui/css/global.css">
   <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
@@ -14,6 +14,7 @@
 <body class="layui-layout-body">
 <!-- 左侧选中标识 -->
 <input hidden id="manage" value="categoryManage">
+<input hidden id="check" value="categoryList">
 
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" th:include="boss\index\top::boss-top">
@@ -34,9 +35,9 @@
                     <form class="layui-form" action="">
                         <div class="layui-form-item" style="text-align:left;">
                             <div class="layui-inline">
-                                <label class="layui-form-label">品牌名称：</label>
+                                <label class="layui-form-label">分类名称：</label>
                                 <div class="layui-input-inline">
-                                    <input autocomplete="off" class="layui-input" placeholder="品牌名称" type="text" name="catName" id="catName" value="">
+                                    <input autocomplete="off" class="layui-input" placeholder="分类名称" type="text" name="catName" id="catName" value="">
                                 </div>
                             </div>
                             <div class="layui-inline">
@@ -44,8 +45,8 @@
                                 <div class="layui-input-inline">
                                     <select name="catIsShow" lay-verify="" id="catIsShow">
                                         <option value="">全部</option>
-                                        <option value="0">显示</option>
-                                        <option value="1">不显示</option>
+                                        <option value="0">启用</option>
+                                        <option value="1">禁用</option>
                                     </select>
                                 </div>
                             </div>
@@ -69,6 +70,7 @@
                     <hr>
                     <table class="layui-table">
                         <colgroup>
+                            <col width="30">
                             <col width="200">
                             <col width="200">
                             <col width="200">
@@ -77,9 +79,10 @@
                         </colgroup>
                         <thead>
                         <tr>
-                            <th style='text-align: center'>品牌名称</th>
+                            <th style='text-align: center'>序号</th>
+                            <th style='text-align: center'>分类名称</th>
                             <th style='text-align: center'>排序</th>
-                            <th style='text-align: center'>显示状态</th>
+                            <th style='text-align: center'>是否启用</th>
                             <th style='text-align: center'>创建时间</th>
                             <th style="text-align:center;">操作</th>
                         </tr>
@@ -133,6 +136,10 @@
         });
 
         function selectCategoryList(pageNo,pageSize) {
+            var newPageNo = $("#page .layui-laypage-skip .layui-input").val();
+            if(newPageNo){
+                pageNo = newPageNo;
+            }
             var divContent = "";
 
             var catName = $("#catName").val();
@@ -147,15 +154,16 @@
                         $.each(data.list, function (index, cat) {
                             divContent = divContent
                             +"<tr>"
+                                +"<td style='text-align: center'>"+(pageNo*(index+1))+"</td>"
                                 +"<td style='text-align: center'>"+cat.catName+"</td>"
                                 +"<td style='text-align: center'>"+cat.catSort+"</td>"
-                                +"<td style='text-align: center'>"+(cat.catIsShow=='0'?'显示':'不显示')+"</td>"
+                                +"<td style='text-align: center'>"+(cat.catIsShow=='0'?'启用':'禁用')+"</td>"
                                 +"<td style='text-align: center'>"+cat.createTimeF+"</td>"
                                 +"<td class='text-center'>"
                                     +"<div>"
                                         +"<button class='layui-btn layui-btn-xs catDetail' value='"+cat.id+"'>详情</button>"
                                         +"<button class='layui-btn layui-btn-xs catUpdate' value='"+cat.id+"'>修改</button>"
-                                        +"<button class='layui-btn layui-btn-xs layui-btn-warm catStop' value='"+cat.id+"'>停用</button>"
+                                        +"<button class='layui-btn layui-btn-xs layui-btn-warm catStop' value='"+cat.id+"' data='"+cat.catIsShow+"'>"+(cat.catIsShow=='0'?"禁用":"启用")+"</button>"
                                         +"<button class='layui-btn layui-btn-xs layui-btn-danger catDelete' value='"+cat.id+"'>删除</button>"
                                     +"</div>"
                                 +"</td>"
@@ -214,13 +222,13 @@
                         }else{
                             var tip = "删除失败"
                             if(data == -1){
-                                tip = "该品牌存在相关的商品,请移除相关商品再操作删除"
+                                tip = "该品牌存在相关的商品,请到[详情页面]移除相关商品再操作删除"
                             }
 
                             //提示弹窗
                             layer.msg(tip , {
                                 icon: 1,
-                                time: 2000 //n秒关闭（如果不配置，默认是5秒）
+                                time: 3000 //n秒关闭（如果不配置，默认是5秒）
                             }, function(){
 
                             });
@@ -232,11 +240,44 @@
         });
 
         /**
-         * 详情
+         * 停用 或 启用
+         * */
+        $(document).on('click','.catStop',function () {
+            var catId = $(this).val();
+            if(catId){
+                $.ajax({
+                    type: "post",
+                    url: "/categoryBoss/stopCategory",
+                    data: {"catId": catId},
+                    success: function (data) {
+                        if(data > 0){
+                            selectCategoryList(1,10);
+                        }else{
+                            var tip = "操作失败"
+                            if(data == -1){
+                                tip = "品牌分类查询异常";
+                            }
+                            //提示弹窗
+                            layer.msg(tip , {
+                                icon: 1,
+                                time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                            }, function(){
+
+                            });
+                            return;
+                        }
+                    }
+                });
+            }
+        });
+
+        /**
+         * 详情 页面
          * */
         $(document).on('click','.catDetail',function () {
             var catId = $(this).val();
-            //window.location.href  = "/customerBoss/detailCustomerManagePage?customerId="+customerId;
+            console.log(catId)
+            window.location.href  = "/categoryBoss/category-detail-page?catId="+catId;
         });
 
         /**
@@ -245,6 +286,14 @@
         $(".catAddPage").on('click',function () {
            window.location.href = "/categoryBoss/category-add-page";
         });
+
+        /**
+         * 进入编辑页面
+         * */
+        $(document).on('click','.catUpdate',function () {
+            var catId = $(this).val();
+            window.location.href = "/categoryBoss/category-edit-page?catId="+catId;
+        })
 
     });
 

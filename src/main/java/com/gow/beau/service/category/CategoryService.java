@@ -2,7 +2,9 @@ package com.gow.beau.service.category;
 
 import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.req.category.CategoryAddReq;
+import com.gow.beau.model.req.category.CategoryEditReq;
 import com.gow.beau.model.req.category.CategoryListPageReq;
+import com.gow.beau.model.rsp.category.CategoryDetailPageRsp;
 import com.gow.beau.model.rsp.category.CategoryGoodsListRsp;
 import com.gow.beau.model.rsp.category.CategoryListPageRsp;
 import com.gow.beau.model.rsp.category.CategoryListRsp;
@@ -147,6 +149,70 @@ public class CategoryService {
         category.setId(catId);
         category.setCatDelflag("1");
         return categoryMapper.updateByPrimaryKeySelective(category);
+    }
+
+    /**
+     * 停用品牌分类
+     * */
+    public int stopCategory(Long catId){
+        Category entry = categoryMapper.selectByPrimaryKey(catId);
+        if(null == entry){
+            return -1;
+        }
+
+        Category category = new Category();
+        category.setId(catId);
+        //是否显示(0:显示，1：不显示)
+        String isShow = "0";
+        if(null != entry.getCatIsShow() && entry.getCatIsShow().equals("0")){
+            isShow = "1";
+        }
+        category.setCatIsShow(isShow);
+        return categoryMapper.updateByPrimaryKeySelective(category);
+    }
+
+    /**
+     * 品牌分类信息详情
+     * */
+    public Category selectCategoryById(Long catId){
+        Category category = categoryMapper.selectByPrimaryKey(catId);
+        if(null == category){
+            return new Category();
+        }
+        return category;
+    }
+
+    /**
+     * 品牌管理 - 品牌编辑
+     * */
+    public int editCategory(CategoryEditReq req){
+        Category category = new Category();
+        category.setId(req.getCatId());
+        category.setCatName(req.getCatName());
+        category.setCatIsShow(req.getCatIsShow());
+        category.setCatSort(req.getCatSort());
+        return categoryMapper.updateByPrimaryKeySelective(category);
+    }
+
+    public CategoryDetailPageRsp categoryDetailPage(Long catId){
+        CategoryDetailPageRsp rsp = new CategoryDetailPageRsp();
+
+        Category category = categoryMapper.selectByPrimaryKey(catId);
+        if(null == category){
+            rsp.setCategoryGoodsListRspList(new ArrayList<>());
+            return rsp;
+        }
+
+        BeanUtil.copyProperties(category, rsp);
+        rsp.setCreateTimeF(DateUtil.dateToString2(category.getCreateTime()));
+
+        //品牌分类相关的商品
+        List<CategoryGoodsListRsp> goodsListRspList = goodsExtMapper.selectCategoryGoodsListByCatId(catId);
+        if(CollectionUtils.isEmpty(goodsListRspList)){
+            rsp.setCategoryGoodsListRspList(new ArrayList<>());
+        }
+        rsp.setCategoryGoodsListRspList(goodsListRspList);
+        return rsp;
     }
 
 }

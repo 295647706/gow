@@ -11,6 +11,7 @@
 <body class="layui-layout-body">
 <!-- 左侧选中标识 -->
 <input hidden id="manage" value="goodsManage">
+<input hidden id="check" value="goodsAdd">
 
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" th:include="boss\index\top::boss-top">
@@ -174,7 +175,7 @@
                           </div>
                           <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                           <div class="layui-input-inline">
-                              <a href="javascript:history.back(-1)"><div class="layui-btn">返回</div></a>
+                              <a href="javascript:history.back(-1)" class="layui-btn layui-btn-warm">取消</a>
                           </div>
                       </div>
                   </form>

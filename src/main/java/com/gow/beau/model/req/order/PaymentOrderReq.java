@@ -8,10 +8,12 @@ import lombok.Data;
 @Data
 public class PaymentOrderReq {
 
-    private Long orderId;
+    //private Long orderId;
 
     private String orderCode;
 
-    //支付类型(1:微信，2：支付宝)
     private String payType;
+
+    //支付回调orderid
+    private String orderid;
 }

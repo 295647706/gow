@@ -23,4 +23,6 @@ public class CategoryGoodsListRsp {
     private BigDecimal goodsPrice;
 
     private String goodsDeno;
+
+    private String goodsNo;
 }

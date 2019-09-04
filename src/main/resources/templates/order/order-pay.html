@@ -41,7 +41,8 @@
 	    </header>
 	    <div id="main" class="mui-clearfix contaniner sorder">	    	
 	    	<div class="warning clearfloat box-s">
-    			提示：请在24小时内完成在线支付，逾期将视为订单无效
+    			<span>提示：</span>
+				<span>请在24小时内完成在线支付，逾期将视为订单无效</span>
     		</div>
     		<div class="odernum clearfloat">
 				<input type="hidden" th:value="${saveOrderInfo.orderCode}" id="orderCode">
@@ -59,7 +60,7 @@
 	    		<div class="bottom clearfloat box-s">
 	    			<section class="shopcar clearfloat">
 						<div class="shopcar-checkbox fr">
-							<label for="weixin" onselectstart="return false" class="shopcar-checkd" data="1"></label>
+							<label for="weixin" onselectstart="return false" data="2"></label>
 							<input type="checkbox" id="weixin"/>
 						</div>
 						<div class="sorder-list clearfloat fl">
@@ -74,7 +75,7 @@
 	    		<div class="bottom clearfloat box-s">
 	    			<section class="shopcar clearfloat">
 						<div class="shopcar-checkbox fr">
-							<label for="zhifubao" onselectstart="return false" data="2"></label>
+							<label for="zhifubao" onselectstart="return false" class="shopcar-checkd" data="1"></label>
 							<input type="checkbox" id="zhifubao"/>
 						</div>
 						<div class="sorder-list clearfloat fl">
@@ -86,27 +87,26 @@
 						</div>
 					</section>
 	    		</div>
-				<!--
-	    		<div class="bottom clearfloat box-s">
-	    			<section class="shopcar clearfloat">
-						<div class="shopcar-checkbox fr">
-							<label for="shopcar" onselectstart="return false"></label>
-							<input type="checkbox" id="shopcar"/>
-						</div>
-						<div class="sorder-list clearfloat fl">
-							<i class="iconfont icon-yinxingqia fl"></i>
-							<div class="zuo fl">
-								<p class="tit">银行卡</p>
-								<p class="fu-tit">需要先开通网银</p>
-							</div>							
-						</div>
-					</section>
-	    		</div>-->
 	    	</div>
 	    	<a href="#" class="tui-btn">
 				确认支付
 			</a>
 	    </div>
+
+		<div>
+			<form style='display:none;' id='formpay' name='formpay' method='post' action='http://pay.aswe.com.cn'>
+				<input name='goodsname' id='goodsname' type='text' value='' />
+				<input name='istype' id='istype' type='text' value='' />
+				<input name='key' id='key' type='text' value=''/>
+				<input name='notify_url' id='notify_url' type='text' value=''/>
+				<input name='orderid' id='orderid' type='text' value=''/>
+				<input name='orderuid' id='orderuid' type='text' value=''/>
+				<input name='price' id='price' type='text' value=''/>
+				<input name='return_url' id='return_url' type='text' value=''/>
+				<input name='uid' id='uid' type='text' value=''/>
+				<input type='submit' id='submitPay'>
+			</form>
+		</div>
 	    
 	</body>
 	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js" ></script>
@@ -130,14 +130,27 @@
 		        var payType = $("#payType").val();
                 $.ajax({
                     type : "post",
-                    url : "/order/pay",
+                    url : "/order/doPayMentZfm",
                     data : {"orderCode":orderCode,"payType":payType},
 					success : function (data) {
-                        document.write(data);
+                    	console.log(data)
+                        if(data){
+                        	$("#formpay").attr("action",data.baseUrl);
+                        	$("#goodsname").attr("value",data.goodsname);
+							$("#istype").attr("value",data.istype);
+							$("#key").attr("value",data.key);
+							$("#notify_url").attr("value",data.notifyUrl);
+							$("#orderid").attr("value",data.orderid);
+							$("#orderuid").attr("value",data.orderuid);
+							$("#price").attr("value",data.price);
+							$("#return_url").attr("value",data.returnUrl);
+							$("#uid").attr("value",data.uid);
+							//表单请求
+							$("#formpay").submit();
+						}
                     }
                 })
             })
-
 
         })
 	</script>

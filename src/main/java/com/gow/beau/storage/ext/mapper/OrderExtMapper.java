@@ -42,4 +42,6 @@ public interface OrderExtMapper {
     List<Order> getOrderListPage(OrderListReq req);
 
     int getOrderPageRows(OrderListReq req);
+
+    Order getOrder(String orderCode);
 }

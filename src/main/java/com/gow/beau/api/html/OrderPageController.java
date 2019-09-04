@@ -3,6 +3,7 @@ package com.gow.beau.api.html;
 import com.gow.beau.api.order.OrderController;
 import com.gow.beau.model.req.order.OrderConfirmPageReq;
 import com.gow.beau.model.rsp.order.SaveOrderRsp;
+import com.gow.beau.service.ordergoods.OrderGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class OrderPageController {
 
     @Autowired
     private OrderController orderController;
+
+    @Autowired
+    private OrderGoodsService orderGoodsService;
 
     @RequestMapping("/order-page")
     public ModelAndView orderPage(){
@@ -50,11 +54,13 @@ public class OrderPageController {
      * 订单确认支付页面
      */
     @RequestMapping("/order-pay-page")
-    public ModelAndView orderPayPage(SaveOrderRsp rsp){
+    public ModelAndView orderPayPage(SaveOrderRsp rsp) throws Exception{
         BigDecimal price = orderController.selectOrderPriceByorderCode(rsp.getOrderCode());
         rsp.setOrderPrice(price);
         ModelAndView view = new ModelAndView("order/order-pay");
         view.addObject("saveOrderInfo",rsp);
+        //view.addObject("zfm",getPayMentZfm());
         return view;
     }
+
 }

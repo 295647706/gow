@@ -14,7 +14,7 @@
 <body class="layui-layout-body">
 <!-- 左侧选中标识 -->
 <input hidden id="manage" value="categoryManage">
-<input hidden id="check" value="categoryAdd">
+<input hidden id="check" value="categoryList">
 
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" th:include="boss\index\top::boss-top">
@@ -26,10 +26,12 @@
     </div>
 
     <div class="layui-body">
+        <!-- 分类id -->
+        <input hidden th:value="${category.id}" id="catId">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;align-content: center">
             <fieldset class="layui-elem-field">
-                <legend>品牌管理 - 新增</legend>
+                <legend>品牌管理 - 编辑</legend>
                 <div class="layui-field-box">
                     <table class="layui-table" lay-skin="nob" lay-size="mg">
                         <tr>
@@ -41,7 +43,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">分类名称 :</label>
                                 <div class="layui-input-inline">
-                                    <input autocomplete="off" class="layui-input" placeholder="分类名称" type="text" name="" id="catName" value="">
+                                    <input autocomplete="off" class="layui-input" placeholder="分类名称" type="text" name="" id="catName" th:value="${category.catName}">
                                 </div>
                             </div>
                         </div>
@@ -50,8 +52,8 @@
                                 <label class="layui-form-label">是否启用 :</label>
                                 <div class="layui-input-inline">
                                     <select name="catIsShow" lay-verify="" id="catIsShow">
-                                        <option value="0">启用</option>
-                                        <option value="1">禁用</option>
+                                        <option value="0" th:selected="${'0' == category.catIsShow}">启用</option>
+                                        <option value="1" th:selected="${'1' == category.catIsShow}">禁用</option>
                                     </select>
                                 </div>
                             </div>
@@ -100,12 +102,13 @@
          * 提交
          * */
         $("#addCatBtn").on('click',function () {
+            var catId = $("#catId").val();
             var catName = $("#catName").val();
             var catIsShow = $("#catIsShow").val();
             $.ajax({
                 type: "post",
-                url: "/categoryBoss/addCategory",
-                data: {"catName": catName,"catIsShow":catIsShow},
+                url: "/categoryBoss/editCategory",
+                data: {"catId":catId,"catName": catName,"catIsShow":catIsShow},
                 success: function (data) {
                     var tip = "保存失败";
                     if(data > 0){

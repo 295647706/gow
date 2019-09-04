@@ -14,6 +14,7 @@
 <body class="layui-layout-body">
 <!-- 左侧选中标识 -->
 <input hidden id="manage" value="orderManage">
+<input hidden id="check" value="orderList">
 
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header" th:include="boss\index\top::boss-top">
@@ -159,6 +160,11 @@
         });
 
         function selectOrderList(pageNo,pageSize) {
+            var newPageNo = $("#page .layui-laypage-skip .layui-input").val();
+            if(newPageNo){
+                pageNo = newPageNo;
+            }
+
             var divContent = "";
             var goodsContent = "";
 
@@ -330,6 +336,9 @@
                         tip = "非代发货状态不能提交物流信息"
                     }else if(data == -3){
                         tip = "订单总金额与支付金额不一致";
+                    }
+                    else if(data == -4){
+                        tip = "此订单已发货,不能重复发";
                     }
 
                     //提示弹窗
