@@ -29,5 +29,5 @@ public interface CategoryExtMapper {
 
     int selectCatByName(String catName);
 
-    int selectMaxSort();
+    Integer selectMaxSort();
 }

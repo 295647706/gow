@@ -67,7 +67,19 @@
                   if(data.token){
                       localStorage.setItem("token", data.token);
                       //跳回上一个地址
-                      window.location.href = document.referrer;
+                      console.log("url="+document.referrer)
+                      //上一个地址
+                      var url = document.referrer;
+                      //如果上一个地址是登陆请求，则跳转到首页
+                      var value = url.indexOf("/login/login-page");
+                      console.log(value > 0)
+                      if(value > 0) {
+                          console.log("首页")
+                          window.location.href = "/indexPage/index-page";
+                      }else{
+                          console.log("上一个地址")
+                          window.location.href = document.referrer;
+                      }
                   }else if(data.message){
                       alert(data.message)
                   }

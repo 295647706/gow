@@ -123,13 +123,13 @@ public class CategoryService {
             return -1;
         }
         //查询最大的排序
-        int maxSort = categoryExtMapper.selectMaxSort();
+        Integer maxSort = categoryExtMapper.selectMaxSort();
         //保存对象
         Category category = new Category();
         category.setCatName(req.getCatName());
         category.setCatIsShow(req.getCatIsShow());
         category.setCreateTime(new Date());
-        category.setCatSort(maxSort+1);
+        category.setCatSort(maxSort == null ? 0:maxSort+1);
         category.setCatDelflag("0");
         return categoryMapper.insertSelective(category);
     }

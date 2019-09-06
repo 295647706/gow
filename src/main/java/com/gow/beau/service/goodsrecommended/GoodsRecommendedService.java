@@ -51,7 +51,9 @@ public class GoodsRecommendedService {
         if(null == level){
             level = 0;
         }
+
         //保存一条新的推荐商品
+        recommended = new GoodsRecommended();
         recommended.setGoodsId(goodsId);
         recommended.setTitle(title);
         recommended.setTitleCaptions(titleCaptions);
