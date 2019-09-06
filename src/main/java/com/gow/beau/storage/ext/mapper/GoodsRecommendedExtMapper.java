@@ -13,4 +13,6 @@ public interface GoodsRecommendedExtMapper {
     GoodsRecommended selectInfoByRecommendedType(String recommendedType);
 
     Integer selectMaxLevel();
+
+    int deleteGoodsByGoodsId(Long goodsId);
 }

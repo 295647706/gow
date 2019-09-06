@@ -97,4 +97,12 @@ public class GoodsRecommendedService {
 
         return rspList;
     }
+
+
+    /**
+     * 删除推荐的商品
+     * */
+    public int deleteGoodsByGoodsId(Long goodsId){
+        return goodsRecommendedExtMapper.deleteGoodsByGoodsId(goodsId);
+    }
 }

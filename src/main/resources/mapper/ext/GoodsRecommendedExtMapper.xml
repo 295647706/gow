@@ -17,7 +17,15 @@
   </sql>
 
   <select id="pageGoodsRecommendedList" resultMap="BaseResultMap">
-    SELECT goods_id,title,title_captions FROM gow_goods_recommended WHERE is_delete = '0' order by level,create_time desc limit 3
+    SELECT
+      r.goods_id,
+      title,
+      title_captions
+    FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id
+    AND r.is_delete = '0'
+    AND g.is_delete = '0'
+    ORDER BY level,r.create_time DESC
+    LIMIT 3
   </select>
 
   <select id="selectInfoByRecommendedType" resultMap="BaseResultMap">
@@ -27,5 +35,9 @@
   <select id="selectMaxLevel" resultType="java.lang.Integer">
     select max(level) from gow_goods_recommended where is_delete = '0'
   </select>
+
+  <delete id="deleteGoodsByGoodsId">
+    delete from gow_goods_recommended where goods_id = #{goodsId}
+  </delete>
 
 </mapper>

@@ -172,7 +172,11 @@ public class GoodsService {
         if(goodsIds.length > 0){
             int count = 0;
             for(Long goodsId : goodsIds){
-                count += goodsExtMapper.deleteGoodsByGoodsId(goodsId);
+                count = goodsExtMapper.deleteGoodsByGoodsId(goodsId);
+                if(count > 0){
+                    //删除推荐的商品
+                    goodsRecommendedService.deleteGoodsByGoodsId(goodsId);
+                }
             }
             return count;
         }
