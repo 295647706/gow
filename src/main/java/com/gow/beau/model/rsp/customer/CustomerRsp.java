@@ -30,4 +30,18 @@ public class CustomerRsp {
 
     private String mobile;
 
+    @Override
+    public String toString() {
+        return "CustomerRsp{" +
+                "customerId=" + customerId +
+                ", customerUsername='" + customerUsername + '\'' +
+                ", customerNickname='" + customerNickname + '\'' +
+                ", customerRealname='" + customerRealname + '\'' +
+                ", customerImg='" + customerImg + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday=" + birthday +
+                ", address='" + address + '\'' +
+                ", mobile='" + mobile + '\'' +
+                '}';
+    }
 }

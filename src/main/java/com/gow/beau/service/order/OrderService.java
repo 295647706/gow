@@ -1,6 +1,7 @@
 package com.gow.beau.service.order;
 
 import com.auth0.jwt.JWT;
+import com.gow.beau.api.login.LoginCustomer;
 import com.gow.beau.api.payment.PayMent;
 import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.req.order.*;
@@ -179,11 +180,7 @@ public class OrderService {
      * 提交订单，保存订单
      */
     public SaveOrderRsp saveOrder(HttpServletRequest request,SaveOrderReq req) {
-        String token = request.getHeader("token");
-        if(null == token){
-            return null;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return null;
         }
@@ -306,12 +303,7 @@ public class OrderService {
      * 订单列表
      */
     public List<OrderListRsp> orderList(HttpServletRequest request,OrderListReq req) {
-        String token = request.getHeader("token");
-        if(null == token){
-            return null;
-        }
-
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return null;
         }
@@ -361,11 +353,7 @@ public class OrderService {
      * 查询订单各个状态的数量
      */
     public OrderStatusNumbersRsp orderStatusNumbers(HttpServletRequest request, OrderStatusNumbersReq req) {
-        String token = request.getHeader("token");
-        if(null == token){
-            return null;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return null;
         }

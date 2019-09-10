@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>支付类型设置</title>
+  <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+  <link rel="stylesheet" href="../boss/layui/css/global.css">
+  <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+    <style>
+        .layui-body{overflow-y: scroll;}
+    </style>
+</head>
+<body class="layui-layout-body">
+<!-- 左侧选中标识 -->
+<input hidden id="manage" value="basicinfoManage">
+<input hidden id="check" value="payType">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="boss\index\top::boss-top">
+        <!-- 头部 -->
+    </div>
+
+    <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+        <!-- 左边导航栏 -->
+    </div>
+  
+      <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <fieldset class="layui-elem-field">
+                <legend>支付配置 - 支付类型设置</legend>
+                <div class="layui-field-box">
+                    <table class="layui-table" lay-skin="nob" lay-size="mg">
+                        <col width="150">
+                        <col width="200">
+                        <tr>
+                            <td style='text-align: left ; color:#FFA07A'>支付设置</td>
+                            <td style='text-align: right'><a href="javascript:history.back(-1)" style="color:#FFA07A">返回</a></td>
+                        </tr>
+                    </table>
+                    <hr/>
+                    <p style='text-align: right'>
+                        <button class='layui-btn layui-btn-radius layui-btn-warm setPayType' value=''>一键生成设置</button>
+                    </p>
+                    <table class="layui-table" lay-size="lg">
+                        <colgroup>
+                            <col width="30">
+                            <col width="120">
+                            <col width="120">
+                            <col width="120">
+                            <col width="140">
+                            <col width="300">
+                            <col>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th style='text-align: center'>序号</th>
+                                <th style='text-align: center'>支付方式</th>
+                                <th style='text-align: center'>是否启用</th>
+                                <th style='text-align: center'>是否默认</th>
+                                <th style='text-align: center'>创建时间</th>
+                                <th style='text-align: center'>支付说明</th>
+                                <th style='text-align: center'>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payContent">
+                        <!-- 列表内容 -->
+                        </tbody>
+                    </table>
+                    <div id="page"></div>
+                    <br/>
+                </div>
+            </fieldset>
+        </div>
+      </div>
+
+    <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+        <!-- 底部 -->
+    </div>
+</div>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+<script type="text/javascript" src="../boss/comm/left.js"></script>
+</body>
+
+<script>
+
+    $(function () {
+
+        function selectPayTypeList(pageNo,pageSize) {
+            var newPageNo = $("#page .layui-laypage-skip .layui-input").val();
+            if(newPageNo){
+                pageNo = newPageNo;
+            }
+            var divContent = "";
+
+            $.ajax({
+                type : "post",
+                url : "/payTypeBoss/payTypeListPage",
+                data : {"pageNo":pageNo,"pageSize":pageSize},
+                success : function (data) {
+                    if(data.list){
+                        $.each(data.list, function (index, paytype) {
+                            divContent = divContent
+                                +"<tr>"
+                                    +"<td style='text-align: center'>"+(pageNo*(index+1))+"</td>"
+                                    +"<td style='text-align: center'>"+paytype.payType+"</td>"
+                                    +"<td style='text-align: center'>"+(paytype.isUse=='0'?'启用':'禁止')+"</td>"
+                                    +"<td style='text-align: center'>"+(paytype.isDefault=='0'?'NO':'<span style="color:#FFA07A">YES</span>')+"</td>"
+                                    +"<td style='text-align: center'>"+paytype.createTimeF+"</td>"
+                                    +"<td style='text-align: center'>"+paytype.content+"</td>"
+                                    +"<td style='text-align: center;padding-left:5px;'>"
+                                        +"<div>"
+                                            +"<button class='layui-btn layui-btn-xs updatePaytype' value='"+paytype.id+"'>修改</button>"
+                                            +"<button class='layui-btn layui-btn-xs "+(paytype.isDefault=='0'?' ':' layui-btn-disabled ')+" isDefault' value='"+paytype.id+"'>默认</button>"
+                                            +"<button class='layui-btn layui-btn-xs layui-btn-warm isUse' value='"+paytype.id+"'>"+(paytype.isUse=='1'?'启用':'禁止')+"</button>"
+                                            +"<button class='layui-btn layui-btn-xs layui-btn-danger payTypeDelete' value='"+paytype.id+"'>删除</button>"
+                                        +"</div>"
+                                    +"</td>"
+                                +"</tr>"
+                        })
+                    }
+                    $("#payContent").html(divContent);
+                    //分页
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'page'
+                            ,count: data.rows //数据总数，从服务端得到
+                            ,curr : data.pageNo
+                            ,pages : data.totalPages
+                            ,limit : data.pageSize
+                            ,limits: [data.pageSize]
+                            ,groups: 10
+                            ,first: '首页' //首页文本
+                            ,last: '尾页' //尾页文本
+                            ,layout: ['prev', 'page', 'next','limit','count','refresh','skip']
+                            ,jump: function(obj, first){
+                                //首次不执行
+                                if(!first){
+                                    selectOrderList(obj.curr,obj.limit);
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        selectPayTypeList(1,10);
+
+
+        /**
+         * 一键生成设置
+         * */
+        $(".setPayType").on('click',function () {
+            $.ajax({
+                type: "post",
+                url: "/payTypeBoss/setPayType",
+                success: function (data) {
+                    if(data > 0){
+                        selectPayTypeList(1,10);
+                    }else{
+                        //提示弹窗
+                        layer.msg('没有更多的支付类型设置生成' , {
+                            icon: 1,
+                            time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                        }, function(){
+
+                        });
+                        return;
+                    }
+                }
+            });
+        });
+
+        /**
+         * 删除
+         * */
+        $(document).on('click',".payTypeDelete",function () {
+            var payTypeId = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/payTypeBoss/payTypeDelete",
+                data: {"payTypeId":payTypeId},
+                success: function (data) {
+                    if(data > 0){
+                        selectPayTypeList(1,10);
+                    }else{
+                        //提示弹窗
+                        layer.msg('删除失败' , {
+                            icon: 1,
+                            time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                        }, function(){
+
+                        });
+                        return;
+                    }
+                }
+            });
+        });
+
+        /**
+         * 设置默认
+         * */
+        $(document).on('click',".isDefault",function () {
+            var payTypeId = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/payTypeBoss/isDefault",
+                data: {"payTypeId":payTypeId},
+                success: function (data) {
+                    if(data > 0){
+                        selectPayTypeList(1,10);
+                    }else{
+                        var tip = "设置失败";
+                        if(data == -1){
+                            tip = "已禁用的支付方式不能设置默认";
+                        }
+                        //提示弹窗
+                        layer.msg(tip , {
+                            icon: 1,
+                            time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                        }, function(){
+
+                        });
+                        return;
+                    }
+                }
+            });
+        });
+
+
+        /**
+         * 设置启动、禁用
+         * */
+        $(document).on('click',".isUse",function () {
+            var payTypeId = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/payTypeBoss/isUse",
+                data: {"payTypeId":payTypeId},
+                success: function (data) {
+                    if(data > 0){
+                        selectPayTypeList(1,10);
+                    }else{
+                        //提示弹窗
+                        layer.msg('设置失败' , {
+                            icon: 1,
+                            time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                        }, function(){
+
+                        });
+                        return;
+                    }
+                }
+            });
+        });
+
+        /**
+         * 修改页面
+         * */
+        $(document).on('click',".updatePaytype",function () {
+            var payTypeId = $(this).val();
+            window.location.href = "/payTypeBoss/paytype-update-page?payTypeId="+payTypeId;
+        });
+
+    });
+
+</script>
+
+</html>

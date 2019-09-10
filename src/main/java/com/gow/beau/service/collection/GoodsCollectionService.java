@@ -1,6 +1,6 @@
 package com.gow.beau.service.collection;
 
-import com.auth0.jwt.JWT;
+import com.gow.beau.api.login.LoginCustomer;
 import com.gow.beau.model.req.collection.AddGoodsCollectionReq;
 import com.gow.beau.model.req.collection.CollectionGoodsReq;
 import com.gow.beau.model.req.collection.GoodsCollectionListReq;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,11 +38,7 @@ public class GoodsCollectionService {
      * 商品收藏
      */
     public int addGoodsCollection(HttpServletRequest request,AddGoodsCollectionReq req) {
-        String token = request.getHeader("token");
-        if (null == token){
-            return 0;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return 0;
         }
@@ -85,11 +80,7 @@ public class GoodsCollectionService {
      * 商品收藏列表
      */
     public List<GoodsCollectionListRsp> goodsCollectionList(HttpServletRequest request, GoodsCollectionListReq req) {
-        String token = request.getHeader("token");
-        if(null == token){
-            return null;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return null;
         }
@@ -119,15 +110,11 @@ public class GoodsCollectionService {
      * 根据登陆会员和商品id查询此商品是否被收藏
      */
     public boolean isCollectionGoods(HttpServletRequest request, CollectionGoodsReq req) {
-        String token = request.getHeader("token");
-        if (null == token || token.equals("") || token.equals("null")){
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
+        if (null == customerId) {
             return false;
         }
         try {
-            Long customerId = JWT.decode(token).getClaim("id").asLong();
-            if (null == customerId) {
-                return false;
-            }
             int cuont = this.selectCountBycustomerIdAndGoodsId(customerId,req.getGoodsId());
             if(cuont > 0){
                 return true;
@@ -142,8 +129,8 @@ public class GoodsCollectionService {
      * 删除收藏商品信息
      * */
     public int deleteGoodsCollection(HttpServletRequest request,Long collectionId){
-        String token = request.getHeader("token");
-        if (null == token || token.equals("") || token.equals("null")){
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
+        if(null == customerId){
             return -1;
         }
         return goodsCollectionMapper.deleteByPrimaryKey(collectionId);

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.PaytypeExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Paytype">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="pay_type" jdbcType="CHAR" property="payType" />
+    <result column="is_use" jdbcType="CHAR" property="isUse" />
+    <result column="is_default" jdbcType="CHAR" property="isDefault" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+  </resultMap>
+
+  <select id="getPaytypeAll" resultMap="BaseResultMap">
+    select * from gow_paytype where 1=1
+    and is_delete = '0'
+    and is_use = '0'
+    order by id desc
+  </select>
+
+  <select id="getPayTypeListPage" resultMap="BaseResultMap">
+    select * from gow_paytype where 1=1
+    and is_delete = '0'
+    order by id desc
+    Limit #{startRowNum},#{endRowNum}
+  </select>
+
+  <select id="selectPayTypeList" resultMap="BaseResultMap">
+    select * from gow_paytype where 1=1
+  </select>
+
+  <update id="updateIsDefaultByAll" parameterType="java.lang.Integer">
+    update gow_paytype set is_default = '0' where 1=1
+  </update>
+
+</mapper>

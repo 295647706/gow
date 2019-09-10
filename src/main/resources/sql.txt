@@ -101,7 +101,11 @@ MODIFY COLUMN `use_type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci 
 
 
 
+ALTER TABLE `gow`.`gow_paytype`
+ADD COLUMN `is_use` enum('0','1') NULL DEFAULT '0' COMMENT '是否启用（0：启用，1：不启用）' AFTER `pay_type`;
 
+ALTER TABLE `gow`.`gow_paytype`
+ADD COLUMN `content` varchar(255) NULL COMMENT '内容' AFTER `is_delete`;
 
 
 

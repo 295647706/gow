@@ -93,5 +93,9 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>-->
 
+        <!--<table tableName="gow_paytype" domainObjectName="Paytype">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
     </context>
 </generatorConfiguration>

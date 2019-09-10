@@ -1,6 +1,7 @@
 package com.gow.beau.api.customer;
 
 import com.auth0.jwt.JWT;
+import com.gow.beau.api.login.LoginCustomer;
 import com.gow.beau.model.req.address.AddEditCustomerAddressReq;
 import com.gow.beau.model.req.address.AddressReq;
 import com.gow.beau.model.req.address.DeleteAddressReq;
@@ -31,11 +32,7 @@ public class CustomerAddressController {
     @RequestMapping("/customerAddressList")
     @ResponseBody
     public List<CustomerAddressListRsp> customerAddressList(HttpServletRequest request,CustomerReq req){
-        String token = request.getHeader("token");
-        if(null == token){
-            return null;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return null;
         }
@@ -51,11 +48,7 @@ public class CustomerAddressController {
 
     @RequestMapping("/editCustomerAddress")
     public int editCustomerAddress(HttpServletRequest request,AddEditCustomerAddressReq req){
-        String token = request.getHeader("token");
-        if(null == token){
-            return 0;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return 0;
         }
@@ -66,11 +59,7 @@ public class CustomerAddressController {
     @RequestMapping("/addCustomerAddress")
     @ResponseBody
     public int addCustomerAddress(HttpServletRequest request,AddEditCustomerAddressReq req){
-        String token = request.getHeader("token");
-        if(null == token){
-            return 0;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return 0;
         }

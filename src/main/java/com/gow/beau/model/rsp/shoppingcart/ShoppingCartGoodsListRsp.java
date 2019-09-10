@@ -24,6 +24,8 @@ public class ShoppingCartGoodsListRsp {
 
     private BigDecimal goodsPrice;
 
+    private BigDecimal goodsOldPrice;
+
     private String goodsDeno;
 
     private Integer goodsNumber;

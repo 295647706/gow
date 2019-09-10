@@ -51,9 +51,9 @@
 	        </div>
 	        <div class="inte-top clearfloat box-s">
 	        	<div class="left clearfloat fl">
+					<p class="price"><span style="font-size:.9rem" th:text="${goodsDetail.goodsPrice}">500</span>元<samp>￥<apana th:text="${goodsDetail.goodsOldPrice}"></apana>元</samp></p>
 	        		<!--<p class="tit" th:text="${goodsDetail.goodsName}">XXX夏季流行女装</p>-->
-					<p class="" th:text="${goodsDetail.goodsName}">XXX夏季流行女装</p>
-	        		<p class="price"><span th:text="${goodsDetail.goodsPrice}">500</span>元<samp>￥<apana th:text="${goodsDetail.goodsOldPrice}"></apana>元</samp></p>
+					<p class="" style="color: #333333" th:text="${goodsDetail.goodsName}">XXX夏季流行女装</p>
 	        	</div>
 	        	<div class="right clearfloat fr" id="goods_collection" th:data="${goodsDetail.isGoodsCollection}">
 	        		<i th:class="${goodsDetail.isGoodsCollection==false}?'iconfont icon-shoucang':'iconfont icon-shoucang1'"></i>
@@ -66,7 +66,7 @@
 	        		<li class="fuhao"><i class="iconfont icon-jian"></i></li>
 	        		<li class="shu">1</li>
 	        		<li class="fuhao"><i class="iconfont icon-jia-copy"></i></li>
-	        		<li class="last">库存<span th:text="${goodsDetail.goodsNumber}"></span>件</li>
+	        		<li class="last">库存<span style="font-size: 1.8em" th:text="${goodsDetail.goodsNumber}"></span>件</li>
 	        	</ul>
 	        </div>
 	        <article class="detail-article">
@@ -248,22 +248,28 @@
 
                 var token = localStorage.getItem("token");
 
-                var value = $(".shu").text();
-                var goodsId = $("#goodsId").val();
+                if(token) {
+					var value = $(".shu").text();
+					var goodsId = $("#goodsId").val();
 
-                $.ajax({
-					headers : {
-					    "token":token
-					},
-					type : "post",
-					url  : "/shoppingCart/addShoppingCart",
-					data : {"goodsId":goodsId,"number":value},
-					success : function (data) {
-						if(1 == data){
-						    window.location.href="/shoppingCartPage/shopping-cart-page" ;
+					$.ajax({
+						headers: {
+							"token": token
+						},
+						type: "post",
+						url: "/shoppingCart/addShoppingCart",
+						data: {"goodsId": goodsId, "number": value},
+						success: function (data) {
+							if (1 == data) {
+								window.location.href = "/shoppingCartPage/shopping-cart-page";
+							} else if (0 == data) {
+								window.location.href = "/login/login-page";
+							}
 						}
-                    }
-				});
+					});
+				}else{
+					window.location.href = "/login/login-page";
+				}
             });
 
 
@@ -286,7 +292,9 @@
                         }
 
                     })
-                }
+                }else{
+					window.location.href="/login/login-page" ;
+				}
 
             });
 

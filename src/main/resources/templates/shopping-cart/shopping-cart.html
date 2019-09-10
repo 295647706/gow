@@ -134,7 +134,7 @@
 										"<p class='fu-tit'>"+shopCartGoods.goodsSpec+"</p>"+
 										"<div class='bottom clearfloat'>"+
 											"<span class='fl hicon'>￥<span class='goodsPrice'>"+shopCartGoods.goodsPrice+"</span></span>"+
-											"<span class='fl huicon'>￥0</span>"+
+											"<span class='fl huicon'>￥<span class='goodsOldPrice'>"+shopCartGoods.goodsOldPrice+"</span></span>"+
 											"<span class='fr shu' style='font-size: 20px;'>"+
 												"<span class='jianNumber' data='"+shopCartGoods.shoppingCartId+"'>-</span>"+
 												"<span>&nbsp;</span>"+
@@ -320,9 +320,11 @@
             //修改购物车数量
 			//参数1：显示数量的节点，参数2：购物车id,参数3：商品数量
             function updateShoppingCart(thisEnm,shoppingCartId,goodsNumber) {
+				var token = localStorage.getItem("token");
 				$.ajax({
 					type : "post",
 					url : "/shoppingCart/editShoppingCartGoodsNumber",
+					headers : {"token":token},
 					data : {"shoppingCartId":shoppingCartId,"goodsNumber":goodsNumber},
 					success : function (data) {
 						if(data == 1){

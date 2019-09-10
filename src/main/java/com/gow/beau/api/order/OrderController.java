@@ -103,7 +103,8 @@ public class OrderController {
      */
     @RequestMapping("/paymentOrder")
     @ResponseBody
-    public int paymentOrder(PaymentOrderReq req){
+    public int paymentOrder(PaymentOrderReq req,String orderid){
+        System.err.println(orderid);
         int count = orderService.paymentOrder(req);
         if(count > 0){
             try {

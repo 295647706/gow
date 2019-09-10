@@ -1,6 +1,7 @@
 package com.gow.beau.service.customer;
 
 import com.auth0.jwt.JWT;
+import com.gow.beau.api.login.LoginCustomer;
 import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.req.customer.*;
 import com.gow.beau.model.req.regist.RegistUsernameReq;
@@ -19,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -74,11 +74,7 @@ public class CustomerService {
      * 查询会员的信息
      */
     public CustomerInfoRsp selectCustomerInfo(HttpServletRequest request) {
-        String token = request.getHeader("token");
-        if(null == token){
-            return null;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null==customerId){
             return null;
         }

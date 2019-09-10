@@ -4,12 +4,17 @@ import com.gow.beau.api.order.OrderController;
 import com.gow.beau.model.req.order.OrderConfirmPageReq;
 import com.gow.beau.model.rsp.order.SaveOrderRsp;
 import com.gow.beau.service.ordergoods.OrderGoodsService;
+import com.gow.beau.service.payment.PayTypeService;
+import com.gow.beau.storage.auto.model.Paytype;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -25,7 +30,7 @@ public class OrderPageController {
     private OrderController orderController;
 
     @Autowired
-    private OrderGoodsService orderGoodsService;
+    private PayTypeService payTypeService;
 
     @RequestMapping("/order-page")
     public ModelAndView orderPage(){
@@ -59,7 +64,26 @@ public class OrderPageController {
         rsp.setOrderPrice(price);
         ModelAndView view = new ModelAndView("order/order-pay");
         view.addObject("saveOrderInfo",rsp);
-        //view.addObject("zfm",getPayMentZfm());
+        //支付类型
+        List<Paytype> paytypeList = payTypeService.getPaytypeAll();
+        //找出默认类型
+        String type = "";
+        for(Paytype paytype : paytypeList){
+            if(paytype.getIsDefault().equals("1")){
+                if(paytype.getPayType().equals("alipay")){
+                    type = "1";
+                }else if(paytype.getPayType().equals("wechat")){
+                    type = "2";
+                }
+            }
+            if(paytype.getPayType().equals("alipay")){
+                paytype.setPayType("1");
+            }else if(paytype.getPayType().equals("wechat")){
+                paytype.setPayType("2");
+            }
+        }
+        view.addObject("paytypeList", paytypeList);
+        view.addObject("type",type);
         return view;
     }
 

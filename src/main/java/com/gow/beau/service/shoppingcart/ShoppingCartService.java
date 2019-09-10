@@ -1,6 +1,7 @@
 package com.gow.beau.service.shoppingcart;
 
 import com.auth0.jwt.JWT;
+import com.gow.beau.api.login.LoginCustomer;
 import com.gow.beau.model.req.shoppingcart.AddShoppingCartReq;
 import com.gow.beau.model.req.shoppingcart.EditShoppingCartGoodsNumberReq;
 import com.gow.beau.model.req.shoppingcart.ShoppingCartReq;
@@ -13,6 +14,7 @@ import com.gow.beau.storage.auto.model.ShoppingCart;
 import com.gow.beau.storage.ext.mapper.ShoppingCartExtMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -46,12 +48,7 @@ public class ShoppingCartService {
     }
 
     public ShoppingCartRsp shoppingCartInfo(HttpServletRequest request, ShoppingCartReq req) {
-        String token = request.getHeader("token");
-        if(null == token || token.equals("") || token.equals("null")){
-            return null;
-        }
-
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return null;
         }
@@ -63,26 +60,32 @@ public class ShoppingCartService {
         List<ShoppingCartGoodsListRsp> goodsList = new ArrayList<>();
 
         List<ShoppingCart> shoppingCartList = shoppingCartExtMapper.selectShoppingCartListByCustomerId(req.getCustomerId());
-        for(ShoppingCart shoppingCart : shoppingCartList) {
-            ShoppingCartGoodsListRsp goodsRsp = new ShoppingCartGoodsListRsp();
-            goodsRsp.setShoppingCartId(shoppingCart.getId());
+        if(!CollectionUtils.isEmpty(shoppingCartList)) {
+            for (ShoppingCart shoppingCart : shoppingCartList) {
+                ShoppingCartGoodsListRsp goodsRsp = new ShoppingCartGoodsListRsp();
+                goodsRsp.setShoppingCartId(shoppingCart.getId());
 
-            goodsList.add(goodsRsp);
-            rsp.setShoppingCartGoodsListRsp(goodsList);
+                goodsList.add(goodsRsp);
+                rsp.setShoppingCartGoodsListRsp(goodsList);
+                //购物车数量
+                goodsRsp.setGoodsNumber(shoppingCart.getGoodsNumber()==null?0:shoppingCart.getGoodsNumber());
+                //查询商品信息，并计算总金额
+                Goods goods = goodsMapper.selectByPrimaryKey(shoppingCart.getGoodsId());
+                if(null != goods) {
+                    goodsRsp.setGoodsId(goods.getId());
+                    goodsRsp.setGoodsDeno(goods.getGoodsDeno());
+                    goodsRsp.setGoodsImage(goods.getGoodsImg());
+                    goodsRsp.setGoodsName(goods.getGoodsName());
+                    goodsRsp.setGoodsNo(goods.getGoodsNo());
+                    goodsRsp.setGoodsPrice(goods.getGoodsPrice()==null?new BigDecimal(0):goods.getGoodsPrice());
+                    goodsRsp.setGoodsOldPrice(goods.getGoodsOldPrice()==null?new BigDecimal(0):goods.getGoodsOldPrice());
+                    goodsRsp.setGoodsSpec(goods.getGoodsSpec());
 
-            Goods goods = goodsMapper.selectByPrimaryKey(shoppingCart.getGoodsId());
-            goodsRsp.setGoodsId(goods.getId());
-            goodsRsp.setGoodsDeno(goods.getGoodsDeno());
-            goodsRsp.setGoodsImage(goods.getGoodsImg());
-            goodsRsp.setGoodsName(goods.getGoodsName());
-            goodsRsp.setGoodsNo(goods.getGoodsNo());
-            goodsRsp.setGoodsPrice(goods.getGoodsPrice());
-            goodsRsp.setGoodsSpec(goods.getGoodsSpec());
-            goodsRsp.setGoodsNumber(shoppingCart.getGoodsNumber());
-
-            //计算购物车总金额
-            BigDecimal goodsPrice = goodsRsp.getGoodsPrice().multiply(new BigDecimal(goodsRsp.getGoodsNumber()));
-            shopCartSumPrice = shopCartSumPrice.add(goodsPrice);
+                    //计算购物车总金额
+                    BigDecimal goodsPrice = goodsRsp.getGoodsPrice().multiply(new BigDecimal(goodsRsp.getGoodsNumber()));
+                    shopCartSumPrice = shopCartSumPrice.add(goodsPrice);
+                }
+            }
         }
         rsp.setShopCartSumPrice(shopCartSumPrice);
 
@@ -94,11 +97,7 @@ public class ShoppingCartService {
      * 加入购物车
      */
     public int addShoppingCart(HttpServletRequest request,AddShoppingCartReq req) {
-        String token = request.getHeader("token");
-        if(null == token || token.equals("") || token.equals("null")){
-            return 0;
-        }
-        Long customerId = JWT.decode(token).getClaim("id").asLong();
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
         if(null == customerId){
             return 0;
         }
@@ -136,8 +135,8 @@ public class ShoppingCartService {
      * 修改购物车数量
      */
     public int editShoppingCartGoodsNumber(HttpServletRequest request,EditShoppingCartGoodsNumberReq req) {
-        String token = request.getHeader("token");
-        if(null == token){
+        Long customerId = LoginCustomer.getCustomerIdByToken(request);
+        if(null == customerId){
             return 0;
         }
 

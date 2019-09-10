@@ -41,7 +41,8 @@
 	    </header>
 	    <div id="main" class="mui-clearfix contaniner sorder">	    	
 	    	<div class="warning clearfloat box-s">
-    			<span>提示：</span>
+    			<span>提示</span>
+				<apan>：</apan>
 				<span>请在24小时内完成在线支付，逾期将视为订单无效</span>
     		</div>
     		<div class="odernum clearfloat">
@@ -53,26 +54,26 @@
     		</div>
     		<div class="pay-method clearfloat">
     			<ul>
-    				<li>请选择支付方式<input type="hidden" id="payType" value="1"></li>
+    				<li>请选择支付方式<input type="hidden" id="payType" th:value="${type}"></li>
     			</ul>
     		</div>
 	    	<div class="addlist clearfloat">
-	    		<div class="bottom clearfloat box-s">
+	    		<div class="bottom clearfloat box-s" th:each="paytype,iterStat: ${paytypeList}">
 	    			<section class="shopcar clearfloat">
 						<div class="shopcar-checkbox fr">
-							<label for="weixin" onselectstart="return false" data="2"></label>
+							<label for="weixin" onselectstart="return false" th:class="${paytype.isDefault=='1'}?'shopcar-checkd' " th:data="${paytype.payType}"></label>
 							<input type="checkbox" id="weixin"/>
 						</div>
 						<div class="sorder-list clearfloat fl">
-							<i class="iconfont icon-weixinzhifu fl"></i>
+							<i th:class="${paytype.payType=='2'}?'iconfont icon-weixinzhifu fl':'iconfont icon-zhifubao fl' "></i>
 							<div class="zuo fl">
-								<p class="tit">微信支付</p>
-								<p class="fu-tit">亿万用户的选择，更快更安全</p>
+								<p class="tit" th:text="${paytype.payType=='2'}?'微信支付':'支付宝'"></p>
+								<p class="fu-tit" th:text="${paytype.content}">亿万用户的选择，更快更安全</p>
 							</div>							
 						</div>
 					</section>
 	    		</div>
-	    		<div class="bottom clearfloat box-s">
+	    		<!--<div class="bottom clearfloat box-s">
 	    			<section class="shopcar clearfloat">
 						<div class="shopcar-checkbox fr">
 							<label for="zhifubao" onselectstart="return false" class="shopcar-checkd" data="1"></label>
@@ -81,12 +82,12 @@
 						<div class="sorder-list clearfloat fl">
 							<i class="iconfont icon-zhifubao fl"></i>
 							<div class="zuo fl">
-								<p class="tit">支付宝</p>
-								<p class="fu-tit">客户端支持最便捷！可银行卡支付！</p>
+								<p class="tit" th:text="${paytype.payType=='2'?'支付宝'}"></p>
+								<p class="fu-tit" th:text="${paytype.content}">客户端支持最便捷！可银行卡支付！</p>
 							</div>							
 						</div>
 					</section>
-	    		</div>
+	    		</div>-->
 	    	</div>
 	    	<a href="#" class="tui-btn">
 				确认支付
