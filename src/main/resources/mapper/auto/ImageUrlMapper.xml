@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gow.beau.storage.auto.mapper.GoodsImageMapper">
-  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.GoodsImage">
+<mapper namespace="com.gow.beau.storage.auto.mapper.ImageUrlMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.ImageUrl">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
-    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, goods_id, image_url
+    id, url, note, create_time, modify_time
   </sql>
-  <select id="selectByExample" parameterType="com.gow.beau.storage.auto.model.GoodsImageExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.gow.beau.storage.auto.model.ImageUrlExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from gow_goods_image
+    from gow_image_url
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,59 +86,79 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from gow_goods_image
+    from gow_image_url
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from gow_goods_image
+    delete from gow_image_url
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.gow.beau.storage.auto.model.GoodsImageExample">
-    delete from gow_goods_image
+  <delete id="deleteByExample" parameterType="com.gow.beau.storage.auto.model.ImageUrlExample">
+    delete from gow_image_url
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.GoodsImage" useGeneratedKeys="true">
-    insert into gow_goods_image (goods_id, image_url)
-    values (#{goodsId,jdbcType=BIGINT}, #{imageUrl,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.ImageUrl" useGeneratedKeys="true">
+    insert into gow_image_url (url, note, create_time, 
+      modify_time)
+    values (#{url,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.GoodsImage" useGeneratedKeys="true">
-    insert into gow_goods_image
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.ImageUrl" useGeneratedKeys="true">
+    insert into gow_image_url
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="goodsId != null">
-        goods_id,
+      <if test="url != null">
+        url,
       </if>
-      <if test="imageUrl != null">
-        image_url,
+      <if test="note != null">
+        note,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="goodsId != null">
-        #{goodsId,jdbcType=BIGINT},
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
       </if>
-      <if test="imageUrl != null">
-        #{imageUrl,jdbcType=VARCHAR},
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.gow.beau.storage.auto.model.GoodsImageExample" resultType="java.lang.Long">
-    select count(*) from gow_goods_image
+  <select id="countByExample" parameterType="com.gow.beau.storage.auto.model.ImageUrlExample" resultType="java.lang.Long">
+    select count(*) from gow_image_url
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update gow_goods_image
+    update gow_image_url
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.goodsId != null">
-        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
       </if>
-      <if test="record.imageUrl != null">
-        image_url = #{record.imageUrl,jdbcType=VARCHAR},
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -144,30 +166,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update gow_goods_image
+    update gow_image_url
     set id = #{record.id,jdbcType=BIGINT},
-      goods_id = #{record.goodsId,jdbcType=BIGINT},
-      image_url = #{record.imageUrl,jdbcType=VARCHAR}
+      url = #{record.url,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gow.beau.storage.auto.model.GoodsImage">
-    update gow_goods_image
+  <update id="updateByPrimaryKeySelective" parameterType="com.gow.beau.storage.auto.model.ImageUrl">
+    update gow_image_url
     <set>
-      <if test="goodsId != null">
-        goods_id = #{goodsId,jdbcType=BIGINT},
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
       </if>
-      <if test="imageUrl != null">
-        image_url = #{imageUrl,jdbcType=VARCHAR},
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.gow.beau.storage.auto.model.GoodsImage">
-    update gow_goods_image
-    set goods_id = #{goodsId,jdbcType=BIGINT},
-      image_url = #{imageUrl,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.gow.beau.storage.auto.model.ImageUrl">
+    update gow_image_url
+    set url = #{url,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

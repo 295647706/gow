@@ -97,5 +97,9 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>-->
 
+        <!--<table tableName="gow_image_url" domainObjectName="ImageUrl">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
     </context>
 </generatorConfiguration>

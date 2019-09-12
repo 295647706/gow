@@ -31,10 +31,15 @@
                 <legend>商品管理 - 商品修改</legend>
                 <div class="layui-field-box">
                     <table class="layui-table" lay-skin="nob" lay-size="mg">
+                        <col width="150">
+                        <col width="200">
                         <tr>
+                            <td style='text-align: left ; color:#FFA07A'>商品详情</td>
                             <td style='text-align: right'><a href="javascript:history.back(-1)" style="color:#FFA07A">返回</a></td>
                         </tr>
                     </table>
+                    <hr/>
+                    <br/>
                   <form class="layui-form" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
@@ -57,7 +62,7 @@
                         <br/>
                         <br/>
                         <div class="layui-inline">
-                            <label class="layui-form-label">商品名称 :</label>
+                            <label class="layui-form-label"><span style="color: #c72222;font-size: 15px;">*&nbsp;</span>商品名称 :</label>
                             <div class="layui-input-inline">
                                 <input autocomplete="off" class="layui-input" style="width: 514px" placeholder="商品名称" type="text" name="" id="goodsName" th:value="${goods.goodsName}">
                             </div>
@@ -65,15 +70,17 @@
                         <br/>
                         <br/>
                         <div class="layui-inline">
-                            <label class="layui-form-label">销售价 :</label>
+                            <label class="layui-form-label"><span style="color: #c72222;font-size: 15px;">*&nbsp;</span>销售价 :</label>
                             <div class="layui-input-inline">
                                 <input autocomplete="off" class="layui-input" placeholder="销售价 " type="text" name="" id="goodsPrice" th:value="${goods.goodsPrice}">
                             </div>
                         </div>
+                        <br>
+                        <br/>
                         <div class="layui-inline">
-                            <label class="layui-form-label">销售价2 :</label>
+                            <label class="layui-form-label">市场价 :</label>
                             <div class="layui-input-inline">
-                                <input autocomplete="off" class="layui-input" placeholder="销售价2 " type="text" name="" id="goodsOldPrice" th:value="${goods.goodsOldPrice}">
+                                <input autocomplete="off" class="layui-input" placeholder="市场价 " type="text" name="" id="goodsOldPrice" th:value="${goods.goodsOldPrice}">
                             </div>
                         </div>
                         <br/>
@@ -87,11 +94,13 @@
                         <br/>
                         <br/>
                         <div class="layui-inline">
-                            <label class="layui-form-label">商品数量  :</label>
+                            <label class="layui-form-label"><span style="color: #c72222;font-size: 15px;">*&nbsp;</span>库存数量  :</label>
                             <div class="layui-input-inline">
-                                <input autocomplete="off" class="layui-input" placeholder="商品数量  " type="text" name="" id="goodsNumber" th:value="${goods.goodsNumber}">
+                                <input autocomplete="off" class="layui-input" placeholder="库存数量  " type="text" name="" id="goodsNumber" th:value="${goods.goodsNumber}">
                             </div>
                         </div>
+                        <br>
+                        <br/>
                         <div class="layui-inline">
                             <label class="layui-form-label">商品规格:</label>
                             <div class="layui-input-inline">
@@ -109,6 +118,8 @@
                                 </select>
                             </div>
                         </div>
+                        <br>
+                        <br/>
                         <div class="layui-inline">
                             <label class="layui-form-label">是否推荐 :</label>
                             <div class="layui-input-inline">
@@ -167,13 +178,13 @@
                         <br/>
                         <br/>
                         <div class="layui-inline">
-                            <label class="layui-form-label">商品图片  :<br/>(多张图片用英文','隔开)</label>
+                            <label class="layui-form-label"><span style="color: #c72222;font-size: 15px;">*&nbsp;</span>商品图片  :<br/>(外部链接,多张图片用英文','隔开)</label>
                             <div class="layui-input-block">
                                 <textarea name="desc" style="width: 514px" placeholder="商品图片(多张图片用英文','隔开)" class="layui-textarea" id="goodsImgs"></textarea>
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">详情图片  :<br/>(多张图片用英文','隔开)</label>
+                            <label class="layui-form-label">详情图片  :<br/>(外部链接,多张图片用英文','隔开)</label>
                             <div class="layui-input-block">
                                 <textarea name="desc" style="width: 514px" placeholder="详情图片(多张图片用英文','隔开)" class="layui-textarea" id="goodsDetailImgs"></textarea>
                             </div>

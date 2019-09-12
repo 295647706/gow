@@ -13,7 +13,7 @@ public class CodeUtil {
         if(null == customerId){
             return null;
         }
-        String code = dateCode()+randomCode()+customerId;
+        String code = dateCode()+randomCode(4)+customerId;
         //如果编码不过24位，则补 0
         if(code.length()<25){
             int len = 24 - code.length();
@@ -27,7 +27,7 @@ public class CodeUtil {
     }
 
     public static String goodsCode(){
-        return "G"+dateCode()+randomCode();
+        return "G"+dateCode()+randomCode(4);
     }
 
     /**
@@ -52,11 +52,11 @@ public class CodeUtil {
      * 随机数字
      * 4 位
      */
-    private static String randomCode(){
+    public static String randomCode(int index){
         String code = "";
         Random rand = new Random();
         //循环几次，取几个
-        for(int i=0; i<4; i++) {
+        for(int i=0; i<= index; i++) {
             //0 ~ 9 的随机数
             code += rand.nextInt(10);
         }

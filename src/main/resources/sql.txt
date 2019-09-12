@@ -108,6 +108,21 @@ ALTER TABLE `gow`.`gow_paytype`
 ADD COLUMN `content` varchar(255) NULL COMMENT '内容' AFTER `is_delete`;
 
 
+ALTER TABLE `gow`.`gow_goods_image`
+ADD COLUMN `is_other_img` enum('0','1') NULL COMMENT '是否使用外部图片链接（0：不使用，1：使用）' AFTER `image_url`;
+
+
+
+CREATE TABLE `gow`.`gow_image_url`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `url` varchar(255) NULL COMMENT '地址路径',
+  `note` varchar(255) NULL COMMENT '备注',
+  `create_time` datetime(0) NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+);
+
+
 
 
 

@@ -1,15 +1,13 @@
 package com.gow.beau.storage.auto.model;
 
-import java.io.Serializable;
-
-public class GoodsImage implements Serializable {
+public class GoodsImage {
     private Long id;
 
     private Long goodsId;
 
     private String imageUrl;
 
-    private static final long serialVersionUID = 1L;
+    private String isOtherImg;
 
     public Long getId() {
         return id;
@@ -33,5 +31,13 @@ public class GoodsImage implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl == null ? null : imageUrl.trim();
+    }
+
+    public String getIsOtherImg() {
+        return isOtherImg;
+    }
+
+    public void setIsOtherImg(String isOtherImg) {
+        this.isOtherImg = isOtherImg == null ? null : isOtherImg.trim();
     }
 }
