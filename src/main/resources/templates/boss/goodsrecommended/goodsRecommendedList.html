@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>商品管理</title>
+    <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+    <link rel="stylesheet" href="../boss/layui/css/global.css">
+    <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+    <style>
+        .layui-body{overflow-y: scroll;}
+    </style>
+</head>
+<body class="layui-layout-body">
+<!-- 左侧选中标识 -->
+<input hidden id="manage" value="goodsManage">
+<input hidden id="check" value="goodsRecommendedList">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="boss\index\top::boss-top">
+        <!-- 头部 -->
+    </div>
+
+    <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+        <!-- 左边导航栏 -->
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <fieldset class="layui-elem-field">
+                <legend>推荐管理 - 列表</legend>
+                <div class="layui-field-box">
+                    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <input hidden type="text" value="1" id="isDel">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this" data="1">正在使用列表</li>
+                            <li data="2">操作列表</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <br/>
+                            <form class="layui-form" action="">
+                                <div class="layui-form-item" style="text-align:center;">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">商品品牌：</label>
+                                        <div class="layui-input-inline">
+                                            <select name="catId" lay-verify="" id="catId">
+                                                <option value="">品牌</option>
+                                                <option th:each="cat,iterStat: ${categoryList}" th:value="${cat.categoryId}" th:text="${cat.categoryName}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">商品名称：</label>
+                                        <div class="layui-input-inline">
+                                            <input autocomplete="off" class="layui-input" placeholder="商品名称" type="text" name="goodsName" id="goodsName" value="">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline" style="text-align:left;">
+                                        <div class="layui-input-inline">
+                                            <div class="layui-btn" id="selectGoodsBtn"><i class="layui-icon">&#xe615;</i>查询</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <br/>
+                        </div>
+                    </div>
+                    <div class="layui-btn-group">
+                        <button type="button" class="layui-btn layui-btn-sm">
+                            <i class="layui-icon">&#xe640;</i>
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-sm dw-refresh">
+                            <i class="layui-icon">&#x1002;</i>
+                        </button>
+                    </div>
+                    <hr>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="50">
+                            <col width="120">
+                            <col>
+                            <col width="200">
+                            <col width="200">
+                            <col width="120">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th style='text-align: center'>序号</th>
+                            <th style='text-align: center'>图片</th>
+                            <th style='text-align: center'>商品名称</th>
+                            <th style='text-align: center'>活动标题</th>
+                            <th style='text-align: center'>推荐说明</th>
+                            <th style="text-align:center;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="goodsContent">
+                        <!-- 列表内容 -->
+                        </tbody>
+                    </table>
+                    <div id="page"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+        <!-- 底部 -->
+    </div>
+</div>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+<script type="text/javascript" src="../boss/comm/left.js"></script>
+</body>
+
+<script>
+
+    $(function () {
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+
+
+        $(".layui-field-box .layui-tab .layui-tab-title li").on('click',function () {
+            var data = $(this).attr("data");
+            $("#isDel").attr("value",data);
+            if(data && data==2){
+                $(".layui-form").css("display","none");
+            }else{
+                $(".layui-form").css("display","block");
+            }
+            selectGoodsRecommendedList(1,10);
+        });
+
+        function selectGoodsRecommendedList(pageNo,pageSize) {
+            var newPageNo = $("#page .layui-laypage-skip .layui-input").val();
+            if(newPageNo){
+                pageNo = newPageNo;
+            }
+
+            var divContent = "";
+
+            var goodsName = $("#goodsName").val();
+            var catId = $("#catId").val();
+            var isDel = $("#isDel").val();
+            $.ajax({
+                type : "post",
+                url : "/goodsRecommendedBoss/getGoodsRecommendedPage",
+                data : {"pageNo":pageNo,"pageSize":pageSize,"goodsName":goodsName,"catId":catId,"isDel":isDel},
+                success : function (data) {
+                    if(data.list){
+                        $.each(data.list, function (index, goodsRecommended) {
+                            console.log(goodsRecommended)
+                            if(goodsRecommended.isUse == 0){
+                                divContent = divContent
+                                +"<tr>"
+                                    +"<td style='text-align: center'>"+(pageNo*(index+1))+"</td>"
+                                    +"<td style='text-align: center'><img src='"+goodsRecommended.goodsImg+"' style='width: 50px;height: 50px;'></td>"
+                                    +"<td style='text-align: center'>"+goodsRecommended.goodsName+"</td>"
+                                    +"<td style='text-align: center'>"+goodsRecommended.title+"</td>"
+                                    +"<td style='text-align: center'>"+goodsRecommended.titleCaptions+"</td>"
+                                    +"<td style='text-align: center'>"
+                                        +"<div>"
+                                            if(isDel == 1) {
+                                                divContent = divContent
+                                                +"<button class='layui-btn layui-btn-xs goodsRecommendedEdit' value='" + goodsRecommended.goodsRecommendedId + "'>编辑</button>"
+                                            }
+                                            divContent = divContent
+                                            +"<button class='layui-btn layui-btn-danger layui-btn-xs goodsRecommendedDelete' value='"+goodsRecommended.goodsRecommendedId+"'>删除</button>"
+                                        +"</div>"
+                                    +"</td>"
+                                +"</tr>"
+                            }else{
+                                divContent = divContent
+                                +"<tr>"
+                                    +"<td style='text-align: center'>"+(pageNo*(index+1))+"</td>"
+                                    +"<td style='text-align: center' colspan='4'><span style='color: #c72222'>[ "+(goodsRecommended.goodsName==null?'':goodsRecommended.goodsName)+" ] "+(goodsRecommended.isUse==-1?'该商品信息已被清除':(goodsRecommended.isUse==1?'该商品已被删除':(goodsRecommended.isUse==2?'该商品已下架':'')))+"</span></td>"
+                                    +"<td style='text-align: center'>"
+                                        +"<div>"
+                                            +"<button class='layui-btn layui-btn-danger layui-btn-xs goodsRecommendedDelete' value='"+goodsRecommended.goodsRecommendedId+"'>删除</button>"
+                                        +"</div>"
+                                    +"</td>"
+                                +"</tr>"
+                            }
+                        })
+                    }
+                    $("#goodsContent").html(divContent);
+                    //分页
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'page'
+                            ,count: data.rows //数据总数，从服务端得到
+                            ,curr : data.pageNo
+                            ,pages : data.totalPages
+                            ,limit : data.pageSize
+                            ,limits: [data.pageSize]
+                            ,groups: 10
+                            ,first: '首页' //首页文本
+                            ,last: '尾页' //尾页文本
+                            ,layout: ['prev', 'page', 'next','limit','count','refresh','skip']
+                            ,jump: function(obj, first){
+                                //首次不执行
+                                if(!first){
+                                    selectGoodsRecommendedList(obj.curr,obj.limit);
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        selectGoodsRecommendedList(1,10);
+
+
+        /**查询按钮*/
+        $("#selectGoodsBtn").on('click',function () {
+            selectGoodsRecommendedList(1,10);
+        });
+
+        /**
+         * 编辑-跳转页面
+         * */
+        $(document).on('click','.goodsRecommendedEdit',function () {
+            var goodsRecommendedId = $(this).val();
+            console.log(goodsRecommendedId)
+            if(goodsRecommendedId){
+                window.location.href = "/goodsRecommendedBoss/goodsRecommended-edit-page?goodsRecommendedId="+goodsRecommendedId;
+            }
+        });
+
+        /**
+         * 删除
+         * */
+        $(document).on('click','.goodsRecommendedDelete',function () {
+            var goodsRecommendedId = $(this).val();
+            if(goodsRecommendedId){
+                $.ajax({
+                    type: "post",
+                    url: "/goodsRecommendedBoss/deleteGoodsRecommendedById",
+                    data: {"goodsRecommendedId": goodsRecommendedId},
+                    success: function (data) {
+                        if(data > 0) {
+                            var pageNo = $("#page .layui-laypage-skip .layui-input").val();
+                            var pageSize = $("#page .layui-laypage-limits option").val();
+                            console.log("pageNo = " + pageNo + ",pageSize = " + pageSize)
+                            selectGoodsRecommendedList(pageNo, pageSize);
+                        }else{
+                            //提示弹窗
+                            layer.msg('删除失败', {
+                                icon: 1,
+                                time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                            }, function(){
+
+                            });
+                            return;
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+
+</script>
+
+</html>

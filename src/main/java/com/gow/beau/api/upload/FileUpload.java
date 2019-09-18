@@ -1,9 +1,11 @@
 package com.gow.beau.api.upload;
 
 import com.gow.beau.model.rsp.upload.UploadRsp;
+import com.gow.beau.service.imageurl.ImageUrlService;
 import com.gow.beau.util.Base64Utils;
 import net.sf.json.JSONObject;
 import com.gow.beau.util.CodeUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/fileUpload")
 public class FileUpload {
+
+    @Autowired
+    private ImageUrlService imageUrlService;
+
+
+    /**
+     * 图片保存域名地址
+     * */
+    private String getSaveImgPath(){
+        return imageUrlService.getSaveImgPath();
+    }
 
     /**
      * 图片上传
@@ -41,7 +54,7 @@ public class FileUpload {
             //文件格式
             String ext = StringUtils.substringAfter(originalFilename, ".");
             String name = StringUtils.substringBefore(originalFilename,".");
-            String url = "C:\\Users\\Administrator\\Desktop\\image\\gow\\";
+            String url = this.getSaveImgPath();
             //新的图片名称
             String filePath = url + name + "_" + CodeUtil.randomCode(4) + "." +ext;
             //file

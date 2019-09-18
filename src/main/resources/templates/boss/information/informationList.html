@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>资讯管理</title>
+  <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+  <link rel="stylesheet" href="../boss/layui/css/global.css">
+  <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+    <style>
+        .layui-body{overflow-y: scroll;}
+    </style>
+</head>
+<body class="layui-layout-body">
+<!-- 左侧选中标识 -->
+<input hidden id="manage" value="informationManage">
+<input hidden id="check" value="informationList">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="boss\index\top::boss-top">
+        <!-- 头部 -->
+    </div>
+
+    <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+        <!-- 左边导航栏 -->
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <fieldset class="layui-elem-field">
+                <legend>资讯管理 - 资讯列表</legend>
+                <div class="layui-field-box">
+                    <br/>
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item" style="text-align:left;">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">标题：</label>
+                                <div class="layui-input-inline">
+                                    <input autocomplete="off" class="layui-input" placeholder="标题" type="text" name="title" id="title" value="">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">提交状态：</label>
+                                <div class="layui-input-inline">
+                                    <select name="isSubmit" lay-verify="" id="isSubmit">
+                                        <option value="">全部</option>
+                                        <option value="1">提交</option>
+                                        <option value="0">草稿</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="layui-inline" style="text-align:right;">
+                                <div class="layui-input-inline">
+                                    <div class="layui-btn" id="selectGoodsBtn"><i class="layui-icon">&#xe615;</i>查询</div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <div class="layui-btn-group">
+                        <button type="button" class="layui-btn layui-btn-sm addPage">
+                            <i class="layui-icon">&#xe654;</i>
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-sm dw-refresh">
+                            <i class="layui-icon">&#x1002;</i>
+                        </button>
+                    </div>
+                    <hr>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="30">
+                            <col width="220">
+                            <col width="130">
+                            <col width="80">
+                            <col width="80">
+                            <col width="80">
+                            <col width="110">
+                            <col width="130">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th style='text-align: center'>序号</th>
+                            <th style='text-align: center'>标题</th>
+                            <th style='text-align: center'>作者</th>
+                            <th style='text-align: center'>点赞数</th>
+                            <th style='text-align: center'>评价数</th>
+                            <th style='text-align: center'>查看数</th>
+                            <th style='text-align: center'>发布状态</th>
+                            <th style='text-align: center'>创建时间</th>
+                            <th style="text-align:center;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="categoryContent">
+                        <!-- 列表内容 -->
+                        </tbody>
+                    </table>
+                    <div id="page"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+        <!-- 底部 -->
+    </div>
+</div>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+<script type="text/javascript" src="../boss/comm/left.js"></script>
+</body>
+
+<script>
+
+    $(function () {
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //开始时间控件
+            laydate.set({
+                elem: '#startTime' //指定元素
+            });
+            //结束时间控件
+            laydate.set({
+                elem: '#endTime' //指定元素
+            });
+        });
+
+        function selectInfoList(pageNo,pageSize) {
+            var newPageNo = $("#page .layui-laypage-skip .layui-input").val();
+            if(newPageNo){
+                pageNo = newPageNo;
+            }
+            var divContent = "";
+
+            var title = $("#title").val();
+            var isSubmit = $("#isSubmit").val();
+
+            $.ajax({
+                type : "post",
+                url : "/informationBoss/informationListPage",
+                data : {"pageNo":pageNo,"pageSize":pageSize,"title":title,"isSubmit":isSubmit},
+                success : function (data) {
+                    if(data.list){
+                        $.each(data.list, function (index, info) {
+                            console.log(index)
+                            divContent = divContent
+                            +"<tr>"
+                                +"<td style='text-align: center'>"+(pageNo*(index+1))+"</td>"
+                                +"<td style='text-align: center'>"+info.title+"</td>"
+                                +"<td style='text-align: center'>"+info.author+"</td>"
+                                +"<td style='text-align: center'>"+info.praiseNumber+"</td>"
+                                +"<td style='text-align: center'>"+info.evaluateNumber+"</td>"
+                                +"<td style='text-align: center'>"+info.toViewNumber+"</td>"
+                                +"<td style='text-align: center'>"+(info.isSubmit=='0'?'草稿':'已发布')+"</td>"
+                                +"<td style='text-align: center'>"+info.createTimeF+"</td>"
+                                +"<td class='padding-left: 0px;'>"
+                                    +"<div>"
+                                        +"<button class='layui-btn layui-btn-xs infoDetail' value='"+info.id+"'>详情</button>"
+                                        +"<button class='layui-btn layui-btn-xs "+(info.isSubmit=='1'?' layui-btn-disabled ':'')+" infoUpdate' value='"+info.id+"'>修改</button>"
+                                        +"<button class='layui-btn layui-btn-xs layui-btn-warm infoIssue' value='"+info.id+"' data='"+info.isSubmit+"'>"+(info.isSubmit=='1'?"下架":"发布")+"</button>"
+                                        +"<button class='layui-btn layui-btn-xs "+(info.isSubmit=='1'?' layui-btn-disabled ':' layui-btn-danger ')+" infoDelete' value='"+info.id+"'>删除</button>"
+                                    +"</div>"
+                                +"</td>"
+                            +"</tr>"
+                        })
+                    }
+                    $("#categoryContent").html(divContent);
+                    //分页
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'page'
+                            ,count: data.rows //数据总数，从服务端得到
+                            ,curr : data.pageNo
+                            ,pages : data.totalPages
+                            ,limit : data.pageSize
+                            ,limits: [data.pageSize]
+                            ,groups: 10
+                            ,first: '首页' //首页文本
+                            ,last: '尾页' //尾页文本
+                            ,layout: ['prev', 'page', 'next','limit','count','refresh','skip']
+                            ,jump: function(obj, first){
+                                //首次不执行
+                                if(!first){
+                                    selectOrderList(obj.curr,obj.limit);
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        selectInfoList(1,10);
+
+
+        /**查询按钮*/
+        $("#selectGoodsBtn").on('click',function () {
+            selectInfoList(1,10);
+        });
+
+
+        /**
+         * 删除
+         * */
+        $(document).on('click','.infoDelete',function () {
+           var id = $(this).val();
+            if(id){
+                $.ajax({
+                    type: "post",
+                    url: "/informationBoss/del",
+                    data: {"id": id},
+                    success: function (data) {
+                        if(data > 0){
+                            selectInfoList(1,10);
+                        }else{
+                            var tip = "删除失败"
+                            if(data == -1){
+                                tip = "该资讯已发布不能删除"
+                            }
+                            //提示弹窗
+                            layer.msg(tip , {
+                                icon: 1,
+                                time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                            }, function(){
+
+                            });
+                            return;
+                        }
+                    }
+                });
+            }
+        });
+
+        /**
+         * 草稿 或 发布
+         * */
+        $(document).on('click','.infoIssue',function () {
+            var id = $(this).val();
+            if(id){
+                $.ajax({
+                    type: "post",
+                    url: "/informationBoss/infoIssue",
+                    data: {"id": id},
+                    success: function (data) {
+                        if(data > 0){
+                            selectInfoList(1,10);
+                        }else{
+                            var tip = "操作失败"
+                            //提示弹窗
+                            layer.msg(tip , {
+                                icon: 1,
+                                time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                            }, function(){
+
+                            });
+                            return;
+                        }
+                    }
+                });
+            }
+        });
+
+        /**
+         * 详情 页面
+         * */
+        $(document).on('click','.infoDetail',function () {
+            var id = $(this).val();
+            window.location.href  = "/informationBoss/information-view-page?id="+id;
+        });
+
+        /**
+         * 进入新增页面
+         * */
+        $(".addPage").on('click',function () {
+           window.location.href = "/informationBoss/information-add-page";
+        });
+
+        /**
+         * 进入编辑页面
+         * */
+        $(document).on('click','.infoUpdate',function () {
+            var id = $(this).val();
+            window.location.href = "/informationBoss/information-edit-page?id="+id;
+        })
+
+    });
+
+</script>
+
+</html>

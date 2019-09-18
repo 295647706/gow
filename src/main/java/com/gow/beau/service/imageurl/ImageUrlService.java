@@ -62,4 +62,16 @@ public class ImageUrlService {
         }
         return 0;
     }
+
+
+    /**
+     * 图片保存域名地址
+     * */
+    public String getSaveImgPath(){
+        ImageUrl query = imageUrlExtMapper.getImageUrl();
+        if(null == query){
+            return null;
+        }
+        return query.getUrl();
+    }
 }

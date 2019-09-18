@@ -40,4 +40,64 @@
     delete from gow_goods_recommended where goods_id = #{goodsId}
   </delete>
 
+
+  <select id="getGoodsRecommendedPage" resultType="com.gow.beau.model.rsp.goodsrecommended.GoodsRecommendedPageRsp">
+      select
+           r.id as goodsRecommendedId
+          ,r.title as title
+          ,r.title_captions as titleCaptions
+          ,g.id as goodsId
+          ,g.goods_name as goodsName
+          ,g.goods_price as goodsPrice
+          ,g.goods_img as goodsImg
+          ,g.goods_spec as goodsSpec
+          ,g.goods_number as goodsNumber
+      from gow_goods_recommended r inner join gow_goods g on r.goods_id = g.id
+      and r.is_delete = '0'
+      and g.is_delete = '0'
+      <if test="catId != null and catId !='' ">
+        and g.category_id = #{catId}
+      </if>
+      <if test="goodsName != null and goodsName !='' ">
+        and g.goods_name = #{goodsName}
+      </if>
+      order by r.create_time desc
+      Limit #{startRowNum},#{endRowNum}
+  </select>
+
+  <select id="getGoodsRecommendedPageCount" resultType="java.lang.Integer">
+    select
+      count(0)
+    from gow_goods_recommended r inner join gow_goods g on r.goods_id = g.id
+    and r.is_delete = '0'
+    and g.is_delete = '0'
+    <if test="catId != null and catId !='' ">
+      and g.category_id = #{catId}
+    </if>
+    <if test="goodsName != null and goodsName !='' ">
+      and g.goods_name = #{goodsName}
+    </if>
+  </select>
+
+
+  <select id="getDelGoodsRecommendedPage" resultType="com.gow.beau.model.rsp.goodsrecommended.GoodsRecommendedPageRsp">
+    select
+        id as goodsRecommendedId
+        ,title as title
+        ,title_captions as titleCaptions
+        ,goods_id as goodsId
+    from gow_goods_recommended
+    where 1=1
+    and is_delete = '0'
+    order by create_time desc
+  </select>
+
+  <select id="getDelGoodsRecommendedPageCount" resultType="java.lang.Integer">
+    select
+        count(0)
+    from gow_goods_recommended
+    where 1=1
+    and is_delete = '0'
+  </select>
+
 </mapper>

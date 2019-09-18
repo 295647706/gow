@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.InformationExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.Information">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="praise_number" jdbcType="INTEGER" property="praiseNumber" />
+    <result column="evaluate_number" jdbcType="INTEGER" property="evaluateNumber" />
+    <result column="is_submit" jdbcType="CHAR" property="isSubmit" />
+    <result column="to_view_number" jdbcType="INTEGER" property="toViewNumber" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+    <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+
+  <select id="informationListPage" resultMap="BaseResultMap">
+    select * from gow_information
+    where 1=1
+    and is_delete = '0'
+    <if test="title != null and title !='' ">
+      and title LIKE CONCAT('%',#{title},'%')
+    </if>
+    <if test="isSubmit != null and isSubmit !='' ">
+      and is_submit = #{isSubmit}
+    </if>
+    order by create_time desc
+    Limit #{startRowNum},#{endRowNum}
+  </select>
+
+  <select id="informationListPageCount" resultType="java.lang.Integer">
+    select count(0) from gow_information
+    where 1=1
+    and is_delete = '0'
+    <if test="title != null and title !='' ">
+      and title LIKE CONCAT('%',#{title},'%')
+    </if>
+    <if test="isSubmit != null and isSubmit !='' ">
+      and is_submit = #{isSubmit}
+    </if>
+  </select>
+
+
+  <select id="selectCountTitle" resultType="java.lang.Integer">
+    select count(0) from gow_information
+    where 1=1
+    and title = #{title}
+    and is_delete = '0'
+    <if test="id != null ">
+      and id != #{id}
+    </if>
+  </select>
+
+
+</mapper>

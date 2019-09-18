@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>资讯管理</title>
+  <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+  <link rel="stylesheet" href="../boss/layui/css/global.css">
+  <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+    <style>
+        .layui-body{overflow-y: scroll;}
+    </style>
+</head>
+<body class="layui-layout-body">
+<!-- 左侧选中标识 -->
+<input hidden id="manage" value="informationManage">
+<input hidden id="check" value="informationAdd">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="boss\index\top::boss-top">
+        <!-- 头部 -->
+    </div>
+
+    <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+        <!-- 左边导航栏 -->
+    </div>
+  
+      <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <fieldset class="layui-elem-field">
+                <legend>资讯管理 - 新增</legend>
+                <div class="layui-field-box">
+                    <table class="layui-table" lay-skin="nob" lay-size="mg">
+                        <col width="150">
+                        <col width="200">
+                        <tr>
+                            <td style='text-align: left ; color:#FFA07A'>新增资讯</td>
+                            <td style='text-align: right'><a href="javascript:history.back(-1)" style="color:#FFA07A">返回</a></td>
+                        </tr>
+                    </table>
+                    <hr/>
+                    <table class="layui-table" lay-skin="nob" lay-size="mg">
+                        <col width="200">
+                        <col>
+                        <tr>
+                            <td style='text-align: right;padding-right:1px;'><span style="color: #c72222">*</span>标题：</td>
+                            <td style="padding-left:2px;" ><input type="text" class="layui-input" style="width: 550px" id="title" value=""></td>
+                        </tr>
+                        <tr>
+                            <td style='text-align: right;padding-right:1px;'>作者：</td>
+                            <td style="padding-left:2px;" ><input type="text" class="layui-input" style="width: 550px" id="author" value=""></td>
+                        </tr>
+                        <tr>
+                            <td style='text-align: right;padding-right:1px;'>发布状态：</td>
+                            <td style="padding-left:2px;" >
+                                <span>&nbsp;&nbsp;</span>
+                                <input type="radio" name="isSubmit" value="0" checked>草稿
+                                <span>&nbsp;&nbsp;</span>
+                                <input type="radio" name="isSubmit" value="1">发布
+                            </td>
+                         </tr>
+                        <tr>
+                            <td style='text-align: right;padding-right:1px;'><span style="color: #c72222">*</span>内容：</td>
+                            <td style="padding-left:2px;">
+                                <div id="editor">
+                                    　<!-- 富文本框显示的位置 -->
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="ueditor"></div>
+                    <br/>
+                    <div class="layui-form-item layui-form-text">
+                        <div class="layui-input-block" style="padding-left: 200px">
+                            <button class="layui-btn" id="infoAdd" >提交</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+      </div>
+    <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+        <!-- 底部 -->
+    </div>
+</div>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+<script type="text/javascript" src="../boss/comm/left.js"></script>
+
+<!-- 富文本框 -->
+<script type="text/javascript" src="../boss/wangeditor/wangEditor-3.1.1/release/wangEditor.js"></script>
+
+</body>
+
+<script>
+
+    $(function () {
+
+        //创建富文本框
+        var E = window.wangEditor;
+        //这里的id为<div id="editor"中的id.
+        var editor = new E('#editor');
+        // 配置服务器端地址,也就是controller的请求路径，不带项目路径，前面没有/
+        //editor.customConfig.uploadImgServer = 'fileUpload/image';
+        //配置属性名称，绑定请求的图片数据
+        //controller会用到，可以随便设置，但是一定要与controller一致
+        //editor.customConfig.uploadFileName = 'img';
+        //创建编辑器
+        editor.create();
+
+
+
+        /**
+         * 提交
+         * */
+        $("#infoAdd").on('click',function () {
+            var title = $("#title").val();
+            var author = $("#author").val();
+            var isSubmit = $("input[name=isSubmit]:checked").val();
+            //获取编辑器的内容，带样式
+            var content = editor.txt.html();
+            if(!title){
+                //提示弹窗
+                layer.msg("请输入标题" , {
+                    icon: 1,
+                    time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                }, function(){
+
+                });
+                return;
+            }
+            if(isSubmit==1){
+                if(!content){
+                    //提示弹窗
+                    layer.msg("请输入内容" , {
+                        icon: 1,
+                        time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                    }, function(){
+
+                    });
+                    return;
+                }
+            }
+
+            $.ajax({
+                type: "post",
+                url: "/informationBoss/add",
+                data: {"title":title,"author":author,"isSubmit":isSubmit,"content":content},
+                success: function (data) {
+                    var tip = "提交失败"
+                    if(data == -1){
+                        tip = tip+",已存在相同的标题"
+                    }
+                    if(data > 0){
+                        tip = "提交成功"
+                    }
+                    //提示弹窗
+                    layer.msg(tip , {
+                        icon: 1,
+                        time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                    }, function(){
+
+                    });
+                    return;
+                }
+            });
+        });
+
+
+    });
+
+</script>
+
+</html>

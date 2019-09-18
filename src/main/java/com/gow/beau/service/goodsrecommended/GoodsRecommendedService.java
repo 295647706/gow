@@ -1,6 +1,11 @@
 package com.gow.beau.service.goodsrecommended;
 
+import com.gow.beau.model.data.PageInfo;
+import com.gow.beau.model.req.goods.GoodsListReq;
+import com.gow.beau.model.req.goodsrecommended.GoodsRecommendedEditReq;
+import com.gow.beau.model.req.goodsrecommended.GoodsRecommendedPageReq;
 import com.gow.beau.model.rsp.goodsrecommended.GoodsRecommendedListRsp;
+import com.gow.beau.model.rsp.goodsrecommended.GoodsRecommendedPageRsp;
 import com.gow.beau.service.goods.GoodsService;
 import com.gow.beau.storage.auto.mapper.GoodsRecommendedMapper;
 import com.gow.beau.storage.auto.model.Goods;
@@ -104,5 +109,110 @@ public class GoodsRecommendedService {
      * */
     public int deleteGoodsByGoodsId(Long goodsId){
         return goodsRecommendedExtMapper.deleteGoodsByGoodsId(goodsId);
+    }
+
+
+    /**
+     * 商品管理 - 推荐商品列表
+     * */
+    public PageInfo getGoodsRecommendedPage(GoodsRecommendedPageReq req){
+        //计算分页信息
+        PageInfo pageInfo = new PageInfo(req.getPageNo());
+        req.setStartRowNum(pageInfo.getStartRowNum());
+        req.setEndRowNum(pageInfo.getEndRowNum());
+
+        if(req.getIsDel() == 1) {
+            List<GoodsRecommendedPageRsp> rspList = goodsRecommendedExtMapper.getGoodsRecommendedPage(req);
+            pageInfo.setList(rspList);
+            pageInfo.setRows(this.getGoodsRecommendedPageCount(req));
+        }else if(req.getIsDel() == 2){
+            List<GoodsRecommendedPageRsp> rspList = goodsRecommendedExtMapper.getDelGoodsRecommendedPage();
+            if(!CollectionUtils.isEmpty(rspList)){
+                for(GoodsRecommendedPageRsp rsp : rspList){
+                    Goods goods = goodsService.selectGoodsInfo(rsp.getGoodsId());
+                    if(null != goods){
+                        if(goods.getIsDelete().equals("1")){
+                            //商品已被删除
+                            rsp.setIsUse(1);
+                        }else if(goods.getIsUpperLowerRacks().equals("0")){
+                            //商品已下架
+                            rsp.setIsUse(2);
+                        }
+                        rsp.setGoodsImg(goods.getGoodsImg());
+                        rsp.setGoodsName(goods.getGoodsName());
+                        rsp.setGoodsSpec(goods.getGoodsSpec());
+                        rsp.setGoodsNumber(goods.getGoodsNumber());
+                        rsp.setGoodsPrice(goods.getGoodsPrice());
+                    }else{
+                        rsp.setIsUse(-1);
+                    }
+                }
+            }
+            pageInfo.setList(rspList);
+            pageInfo.setRows(this.getDelGoodsRecommendedPageCount());
+        }
+
+        return pageInfo;
+    }
+
+
+    /**
+     * 商品管理 - 推荐商品列表总数量
+     * */
+    public int getGoodsRecommendedPageCount(GoodsRecommendedPageReq req){
+        return goodsRecommendedExtMapper.getGoodsRecommendedPageCount(req);
+    }
+
+    /**
+     * 商品管理 - 已删除商品列表总数量
+     * */
+    public int getDelGoodsRecommendedPageCount(){
+        return goodsRecommendedExtMapper.getDelGoodsRecommendedPageCount();
+    }
+
+
+    /**
+     * 删除
+     * */
+    public int deleteGoodsRecommendedById(Long goodsRecommendedId){
+        return goodsRecommendedMapper.deleteByPrimaryKey(goodsRecommendedId);
+    }
+
+
+    public GoodsRecommendedPageRsp selectGoodsRecommendedById(Long goodsRecommendedId){
+        GoodsRecommendedPageRsp rsp = new GoodsRecommendedPageRsp();
+        GoodsRecommended goodsRecommended = goodsRecommendedMapper.selectByPrimaryKey(goodsRecommendedId);
+        if(null == goodsRecommended){
+            return rsp;
+        }
+        rsp.setGoodsRecommendedId(goodsRecommended.getId());
+        rsp.setTitle(goodsRecommended.getTitle());
+        rsp.setTitleCaptions(goodsRecommended.getTitleCaptions());
+        rsp.setGoodsId(goodsRecommended.getGoodsId());
+
+        //商品信息
+        Goods goods = goodsService.selectGoodsInfo(goodsRecommended.getGoodsId());
+        if(null != goods){
+            rsp.setGoodsImg(goods.getGoodsImg());
+            rsp.setGoodsName(goods.getGoodsName());
+            rsp.setGoodsSpec(goods.getGoodsSpec());
+            rsp.setGoodsNumber(goods.getGoodsNumber());
+            rsp.setGoodsPrice(goods.getGoodsPrice());
+        }
+        return rsp;
+    }
+
+
+    /**
+     * 编辑
+     * */
+    public int editGoodsRecommendedById(GoodsRecommendedEditReq req){
+        GoodsRecommended goodsRecommended = goodsRecommendedMapper.selectByPrimaryKey(req.getGoodsRecommendedId());
+        if(null == goodsRecommended){
+            return 0;
+        }
+        goodsRecommended.setTitle(req.getTitle());
+        goodsRecommended.setTitleCaptions(req.getTitleCaptions());
+        return goodsRecommendedMapper.updateByPrimaryKeySelective(goodsRecommended);
     }
 }
