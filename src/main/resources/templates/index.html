@@ -136,10 +136,13 @@
 				<div class="left fl clearfloat">
 					<img src="../../img/rmen.png"/>
 				</div>
-				<div class="right fl clearfloat box-s">
+				<div class="right fl clearfloat box-s" style="width: 70%;">
 					<div class="slider autoplay">
-						<div th:each="message,iterStat: ${messageList}" th:text="${message.title}">这里是新闻资讯内容可以手滑滚动</div>
+						<div class="titlediv" th:each="information,iterStat: ${informationList}" th:text="${information.title}" th:data="${information.id}"></div>
 					</div>
+				</div>
+				<div class="fl clearfloat box-s" style="width: 12%;; padding-top: 6%; color: #ee7800; font-size: .4rem;">
+					<div id="informationList">更多></div>
 				</div>
 			</div>
 
@@ -168,6 +171,7 @@
 					</a>
 				</div>
 			</div>
+		</div>
 	</div>
    
 
@@ -242,6 +246,17 @@
                     window.location.href = "/orderPage/order2-page?orderStatus=all";
                 }
             });
+
+			//资讯详情
+			$(".autoplay .titlediv").on('click',function () {
+				var informationId = $(this).attr("data");
+				window.location.href = "/informationPage/information-detail-page?informationId="+informationId;
+			});
+
+			//更多详情列表
+			$("#informationList").on('click',function () {
+				window.location.href = "/informationPage/information-list-page";
+			});
 
 	    });
 	</script>

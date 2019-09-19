@@ -16,6 +16,21 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
 
+
+
+  <select id="pageInformationList" resultMap="BaseResultMap">
+    select
+        id as id
+        ,title as title
+    from gow_information
+    where 1=1
+    and is_delete = '0'
+    and is_submit = '1'
+    order by create_time desc
+    limit 10
+  </select>
+
+
   <select id="informationListPage" resultMap="BaseResultMap">
     select * from gow_information
     where 1=1

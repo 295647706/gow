@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import javax.xml.crypto.Data;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +31,14 @@ public class InformationService {
 
     @Autowired
     private InformationMapper informationMapper;
+
+    /**
+     * 首页资讯列表
+     * */
+    public List<Information> pageInformationList(){
+        List<Information> informationList = informationExtMapper.pageInformationList();
+        return informationList;
+    }
 
 
     /**
@@ -114,6 +122,25 @@ public class InformationService {
             BeanUtil.copyProperties(information,rsp);
             rsp.setCreateTimeF(DateUtil.dateToString2(information.getCreateTime()));
             rsp.setModifyTimeF(DateUtil.dateToString2(information.getModifyTime()));
+            if(information.getToViewNumber() > 0){
+                String toViewNumberF = "阅读";
+                if(information.getToViewNumber() > 10000){
+                    BigDecimal bg = new BigDecimal((double)information.getToViewNumber()/10000);
+                    double d = bg.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+                    d = d + 0.1;
+                    String number = "";
+                    String[] numbers =  String.valueOf(d).split("\\.");
+                    if(numbers[1].equals("0")){
+                        number = numbers[0];
+                    }else{
+                        number = d+"";
+                    }
+                    toViewNumberF = number + "万" + toViewNumberF;
+                }else{
+                    toViewNumberF = information.getToViewNumber() + toViewNumberF;
+                }
+                rsp.setToViewNumberF(toViewNumberF);
+            }
         }
         return rsp;
     }
@@ -155,5 +182,21 @@ public class InformationService {
         }
         query.setModifyTime(new Date());
         return informationMapper.updateByPrimaryKeySelective(query);
+    }
+
+
+    /**
+     * 修改阅读量
+     * */
+    public int updateToViewNumberById(Long id){
+        Information query = informationMapper.selectByPrimaryKey(id);
+        if(null == query){
+            return 0;
+        }
+        Information editInformation = new Information();
+        editInformation.setId(id);
+        editInformation.setToViewNumber(query.getToViewNumber()==null?1:query.getToViewNumber()+1);
+        editInformation.setModifyTime(new Date());
+        return informationMapper.updateByPrimaryKeySelective(editInformation);
     }
 }

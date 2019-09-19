@@ -10,6 +10,11 @@ import java.util.List;
 
 public interface InformationExtMapper {
 
+    /**
+     * 首页资讯列表
+     * */
+    List<Information> pageInformationList();
+
 
     List<Information> informationListPage(InformationListPageReq req);
 

@@ -14,4 +14,6 @@ public class InformationRsp extends Information {
     private String createTimeF;
 
     private String modifyTimeF;
+
+    private String toViewNumberF;
 }

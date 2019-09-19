@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/informationBoss")
-public class InformationController {
+public class InformationBossController {
 
     @Autowired
     private InformationService informationService;
