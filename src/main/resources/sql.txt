@@ -143,3 +143,14 @@ CREATE TABLE `gow`.`gow_information`  (
 
 
 
+CREATE TABLE `gow`.`gow_information_operation`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `customer_id` bigint(0) NULL COMMENT '会员id',
+  `information_id` bigint(0) NULL COMMENT '资讯id',
+  `is_focus` enum('0','1') NULL DEFAULT '0' COMMENT '是否已关注（0：未关注，1：已关注）',
+  `focus_time` datetime(0) NULL COMMENT '关注时间',
+  `is_praise` enum('0','1') NULL DEFAULT '0' COMMENT '是否点赞（0：未点赞，1：已点赞）',
+  `praise_time` datetime(0) NULL COMMENT '点赞时间',
+  `create_time` datetime(0) NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+);

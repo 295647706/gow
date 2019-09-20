@@ -1,0 +1,14 @@
+.div_1{
+    width: 100%;
+}
+
+.div_width{
+    width: 100%;
+    display: inline;
+    background: white;
+    padding: 3%;
+}
+
+.div_width2{
+    width: 50%;
+}

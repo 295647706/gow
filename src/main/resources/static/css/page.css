@@ -84,7 +84,7 @@
 .header-right{text-align: right; font-size: 1.35em; width: 20%; padding-right: 3%;}
 .header-right a{ color: #666666;}
 
-.contaniner .shopcar{ width: 100%; position: relative; padding: 4% 0; border-bottom: 1px solid #DDDBD4; background-color: #fff;overflow: hidden;}
+.contaniner .shopcar{ width: 100%; position: relative; padding: 2% 0; border-bottom: 1px solid #DDDBD4; background-color: #fff;overflow: hidden;}
 
 .contaniner .shopcar .shopcar-checkbox{position: relative; float: left; width:10%; height: 100%; padding: 10% 0;}
 .contaniner .shopcar input[type="checkbox"]{ position: absolute; top: 0; left: 0; opacity: 0; }
@@ -103,7 +103,7 @@
 .contaniner .shopcar dl small{ position: absolute; right: 3%; bottom: 0; display: block; width: 10%;}
 .contaniner .shopcar dl small img{width: 100%;}
 
-.shopclist{width: 65%; height: 100%; margin-left: 2%; position: relative;}
+.shopclist{width: 75%; height: 100%; margin-left: 2%; position: relative;}
 .shopclist .tit,
 .shopclist .fu-tit{width: 100%; overflow: hidden; text-overflow: ellipsis; -webkit-text-overflow: ellipsis; white-space: nowrap; color: #666666; font-size: .5rem; line-height: 1.5em;}
 .shopclist .fu-tit{font-size: .35rem; line-height: 1.5em; color: #999999; margin-top: .3em;}

@@ -131,7 +131,8 @@
 					<!--<div class="weui-flex__item"><a href="Settled_in.html" class="wy-links-iconlist"><div class="img"><img src="../../new/images/icon-link4.png"></div><p>商家入驻</p></a></div>-->
 				</div>
 			</div>
-			
+
+			<!-- 资讯 -->
 			<div class="news clearfloat">
 				<div class="left fl clearfloat">
 					<img src="../../img/rmen.png"/>
@@ -156,11 +157,12 @@
 					</a>
 				</div>
 			</div>
-			<!--<div class="health clearfloat">
+			<div class="health clearfloat">
 				<div class="htop clearfloat">
-					每日必看
+					每日精选
 				</div>
-			</div>-->
+			</div>
+			<!-- 商品列表 -->
 			<div class="wy-Module-tit-line"><span>猜你喜欢</span></div>
 			<div class="pension clearfloat">
 				<div class="list fl" th:each="goods,iterStat: ${goodsList}">
@@ -173,10 +175,8 @@
 			</div>
 		</div>
 	</div>
-   
-
     <footer class="page-footer fixed-footer" id="footer" th:include="footer::footer">
-
+		<!-- 底部导航栏 -->
 	</footer>
 	</body>
 	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js" ></script>

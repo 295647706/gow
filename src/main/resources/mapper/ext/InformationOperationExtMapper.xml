@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.InformationOperationExtMapper">
+  <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.InformationOperation">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="customer_id" jdbcType="BIGINT" property="customerId" />
+    <result column="information_id" jdbcType="BIGINT" property="informationId" />
+    <result column="is_focus" jdbcType="CHAR" property="isFocus" />
+    <result column="focus_time" jdbcType="TIMESTAMP" property="focusTime" />
+    <result column="is_praise" jdbcType="CHAR" property="isPraise" />
+    <result column="praise_time" jdbcType="TIMESTAMP" property="praiseTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+
+  <select id="selectInfoByCustomerIdAndInformationId" resultMap="BaseResultMap">
+    select * from gow_information_operation where 1=1
+    and customer_id = #{customerId}
+    and information_id = #{informationId}
+  </select>
+
+</mapper>

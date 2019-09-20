@@ -40,7 +40,7 @@
         <p th:text="${info.createTimeF}"></p>
       </div>
       <div style="display: block;width: 20%;height:100%;float:right;padding-top: 30px;">
-        <button style="background: #ee7800;color: white;font-size: 16px;width: 50px;border-radius:5px;">关注</button>
+        <button style="background: #ee7800;color: white;font-size: 16px;width: 50px;border-radius:5px;" th:data="${info.id}" class="focusOn">关注</button>
       </div>
     </div>
     <!-- 内容 -->
@@ -50,10 +50,16 @@
         </section>
       </article>
     </div>
-    <!-- 阅读量 -->
-    <div style="width: 100%;float: left;padding: 20px;">
-      <p th:if="${info.toViewNumberF != null and info.toViewNumberF !='' }">
-        <span style="font-size: 15px;color: #d1c7ce;" th:text="${info.toViewNumberF}"></span>
+    <!-- 阅读量 ,评价数量-->
+    <div style="width: 100%;float: left;">
+      <p style="text-align: center" id="toPraiseNumber" th:data="${info.id}">
+        <img style="width: 50px;height: 50px;" src="../../../images/dianzan2.jpg">
+        <span th:text="${info.praiseNumber}" id="praiseNumber"></span>
+      </p>
+      <p style="padding: 10px;">
+        <span style="font-size: 15px;color: #d1c7ce;" th:if="${info.toViewNumberF != null and info.toViewNumberF !='' }" th:text="${info.toViewNumberF}"></span>
+        <span>&nbsp;&nbsp;</span>
+        <span style="font-size: 15px;color: #d1c7ce;" th:if="${info.evaluateNumberF != null and info.evaluateNumberF !='' }" th:text="${info.evaluateNumberF}"></span>
       </p>
     </div>
     <br/>
@@ -72,5 +78,89 @@
 <!-- 公共插件 -->
 <script src="../../beau/footer.js" type="text/javascript" ></script>
 <script src="../../js/jquery.form.js" type="text/javascript"></script>
+<script>
+
+  $(function () {
+
+    /**
+     * 处理关注按
+     * */
+    function toFoucsBtn(){
+      var id = $(".focusOn").attr("data");
+      var token = localStorage.getItem("token");
+      $.ajax({
+        headers : {
+          "token":token
+        },
+        type: "post",
+        url: "/information/toFoucsBtn",
+        data: {"id": id},
+        success: function (data) {
+          if(data > 0){
+            $(".focusOn").css("background","#d1c7ce")
+          }
+        }
+      });
+    }
+    toFoucsBtn();
+
+    /**
+     * 点赞
+     * */
+    $("#toPraiseNumber").on('click',function () {
+      var id = $(this).attr("data");
+      var token = localStorage.getItem("token");
+      $.ajax({
+        headers : {
+          "token":token
+        },
+        type: "post",
+        url: "/information/toPraiseNumber",
+        data: {"id": id},
+        success: function (data) {
+          if(data > 0){
+            $("#praiseNumber").text(data)
+          }
+        }
+      });
+    });
+
+    //$(".focusOn").css("background","#d1c7ce");
+
+    /**
+     * 关注
+     * */
+    $(document).on('click','.focusOn',function () {
+      var id = $(this).attr("data");
+      var token = localStorage.getItem("token");
+      if(!token){
+        window.location.href = "/login/login-page";
+        return;
+      }
+
+      $.ajax({
+        headers : {
+          "token":token
+        },
+        type: "post",
+        url: "/information/toFocusOn",
+        data: {"id": id},
+        success: function (data) {
+          console.log(data)
+          if(data > 0){
+            alert("已关注")
+            $(".focusOn").css("background","#d1c7ce")
+          }else{
+            if(data == -1){
+              window.location.href = "/login/login-page";
+            }
+          }
+        }
+      });
+    });
+
+  });
+
+</script>
 
 </html>

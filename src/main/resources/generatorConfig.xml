@@ -105,5 +105,9 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>-->
 
+        <!--<table tableName="gow_information_operation" domainObjectName="InformationOperation">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
     </context>
 </generatorConfiguration>

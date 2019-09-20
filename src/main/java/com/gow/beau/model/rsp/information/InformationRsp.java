@@ -16,4 +16,8 @@ public class InformationRsp extends Information {
     private String modifyTimeF;
 
     private String toViewNumberF;
+
+    private String evaluateNumberF;
+
+    private int isFocus = 0;
 }

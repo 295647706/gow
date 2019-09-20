@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="../../css/loaders.min.css"/>
   <link rel="stylesheet" type="text/css" href="../../css/loading.css"/>
   <link rel="stylesheet" type="text/css" href="../../slick/slick.css"/>
-  <!-- new -->
+  <!--  new -->
   <link rel="stylesheet" href="../../new/css/style.css">
   <link rel="stylesheet" href="../../new/lib/weui.min.css">
 </head>
@@ -27,11 +27,32 @@
   <br/><br/><br/><br/>
 
   <!-- 列表内容 -->
-  <div>
-    <div>
-      <p></p>
+  <div id="main" class="mui-clearfix">
+    <div class="mui-clearfix" id="info">
+      <!--<div class="contaniner fixed-contb" style="margin-bottom:1.5%;">
+        <section class="shopcar">
+          <table style="width: 100%;font-size: .40rem; line-height: 1.5em; color: #999999;">
+            <tr>
+              <td rowspan="2" style="text-align: center;"><img src="../../img/rmen.png" style="width: 60px;height: 60px;" /></td>
+              <td style="padding:2%;font-size: 20px;color: #0C0C0C" colspan="2">上海自贸区拟将临港新片区打造成“外国人才试验区”上海自贸区拟将临港新片区打造成“外国人才试验区”</td>
+            </tr>
+            <tr style="width: 100%;">
+              <td style="padding:2%;">
+                <p style="text-align: left">央视新闻</p>
+                <p>2019-09-20 14:10:00</p>
+                <p style="text-align: left">
+                  <span>1000阅读</span>
+                  <span>9000评价</span>
+                </p>
+              </td>
+              <td style="text-align: center">
+                <button style="background: #ee7800;color: white;font-size: 16px;width: 50px;border-radius:5px;">关注</button>
+              </td>
+            </tr>
+          </table>
+        </section>
+      </div>-->
     </div>
-
   </div>
 
 </body>
@@ -48,5 +69,117 @@
 <!-- 公共插件 -->
 <script src="../../beau/footer.js" type="text/javascript" ></script>
 <script src="../../js/jquery.form.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+  $(function () {
+
+    //资讯列表信息
+    function selectInfoList(pageNo,pageSize) {
+      var divInfo = "";
+      var token = localStorage.getItem("token");
+
+      if(!pageNo || pageNo <= 0){
+        pageNo = 1;
+      }
+      if(!pageSize || pageSize <= 0){
+        pageSize = 10;
+      }
+      $.ajax({
+        headers : {
+          "token":token
+        },
+        type : "post",
+        url : "/information/selectInfoformationPage",
+        data : {"pageNo":pageNo,"pageSize":pageSize},
+        success : function (data) {
+          if(data.list){
+            $.each(data.list, function (index, info) {
+              divInfo = divInfo
+              +"<div class='contaniner fixed-contb' style='margin-bottom:1.5%;'>"
+                +"<section class='shopcar'>"
+                  +"<table border='0' style='width: 100%;font-size: .40rem; line-height: 1.5em; color: #999999;'>"
+                    +"<tr class='btnInfo' data='"+info.id+"'>"
+                      +"<td rowspan='2' style='text-align: center;width: 20%;'>"
+                        +"<img src='../../img/rmen.png' style='width: 60px;height: 60px;' />"
+                      +"</td>"
+                      +"<td style='padding:2%;font-size: 20px;color: #0C0C0C' colspan='2'>"+info.title+"</td>"
+                    +"</tr>"
+                    +"<tr style='width: 100%;'>"
+                      +"<td style='padding:2%;' class='btnInfo' data='"+info.id+"'>"
+                        +"<p style='text-align: left'>"+info.author+"</p>"
+                        +"<p>"+info.createTimeF+"</p>"
+                        +"<p style='text-align: left'>"
+                          +"<span>"+((info.toViewNumberF != null && info.toViewNumberF !='')?info.toViewNumberF:'')+"</span>"
+                          +"<span>&nbsp;</span>"
+                          +"<span>"+((info.evaluateNumberF != null && info.evaluateNumberF !='')?info.evaluateNumberF:'')+"</span>"
+                        +"</p>"
+                      +"</td>"
+                      +"<td style='text-align: center;width: 20%;'>"
+                          if(info.isFocus == 0) {
+                            divInfo = divInfo
+                              +"<button style='background: #ee7800;color: white;font-size: 16px;width: 50px;border-radius:5px;' data='" + info.id + "' class='focusOn'>关注</button>"
+                          }else if(info.isFocus == 1){
+                            divInfo = divInfo
+                              +"<button style='background: #d1c7ce;color: white;font-size: 16px;width: 50px;border-radius:5px;' data='" + info.id + "' class='focusOn'>关注</button>"
+                          }
+                      divInfo = divInfo
+                      +"</td>"
+                    +"</tr>"
+                  +"</table>"
+                +"</section>"
+              +"</div>"
+            });
+          }
+          $("#info").html(divInfo);
+        }
+      });
+    }
+    selectInfoList(1,10)
+
+
+    /**
+     * 详情
+     * */
+    $(document).on('click','.btnInfo',function () {
+      var id = $(this).attr("data");
+      window.location.href = "/informationPage/information-detail-page?informationId="+id;
+    });
+
+
+    /**
+     * 关注
+     * */
+    $(document).on('click','.focusOn',function () {
+      var id = $(this).attr("data");
+      var token = localStorage.getItem("token");
+      if(!token){
+        window.location.href = "/login/login-page";
+        return;
+      }
+
+      $.ajax({
+        headers : {
+          "token":token
+        },
+        type: "post",
+        url: "/information/toFocusOn",
+        data: {"id": id},
+        success: function (data) {
+          console.log(data)
+          if(data > 0){
+            alert("已关注")
+            $(this).css("background","#d1c7ce")
+          }else{
+            if(data == -1){
+              window.location.href = "/login/login-page";
+            }
+          }
+        }
+      });
+    });
+
+  });
+
+</script>
 
 </html>
