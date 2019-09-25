@@ -3586,3 +3586,485 @@ java.lang.NullPointerException: null
 2019-09-25 17:00:05.802 DEBUG 14352 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.informationListPageCount   : <==      Total: 1
 2019-09-25 17:00:55.167  INFO 14352 --- [Thread-15] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
 2019-09-25 17:00:55.179  INFO 14352 --- [Thread-15] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-09-25 17:06:21.502  INFO 13288 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 13288 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-09-25 17:06:21.507  INFO 13288 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-09-25 17:06:23.778  INFO 13288 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-09-25 17:06:23.989  INFO 13288 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-25 17:06:23.990  INFO 13288 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-09-25 17:06:24.001  INFO 13288 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;D:\soft\mysql\mysql8\mysql-8.0.16-winx64\bin;;.]
+2019-09-25 17:06:24.154  INFO 13288 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-25 17:06:24.154  INFO 13288 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2550 ms
+2019-09-25 17:06:24.348  INFO 13288 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-25 17:06:24.619  INFO 13288 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-25 17:06:26.150  INFO 13288 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-25 17:06:26.359  INFO 13288 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-25 17:06:26.627  INFO 13288 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-09-25 17:06:26.633  INFO 13288 --- [main] com.gow.GowApplication                   : Started GowApplication in 5.843 seconds (JVM running for 7.157)
+2019-09-25 17:06:28.305  INFO 13288 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-25 17:06:28.305  INFO 13288 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-25 17:06:28.320  INFO 13288 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
+2019-09-25 17:06:28.840 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.e.m.I.informationListPage        : ==>  Preparing: select * from gow_information where 1=1 and is_delete = '0' order by create_time desc Limit ?,? 
+2019-09-25 17:06:28.865 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.e.m.I.informationListPage        : ==> Parameters: 0(Integer), 10(Integer)
+2019-09-25 17:06:28.895 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.e.m.I.informationListPage        : <==      Total: 4
+2019-09-25 17:06:28.906 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.e.m.I.informationListPageCount   : ==>  Preparing: select count(0) from gow_information where 1=1 and is_delete = '0' 
+2019-09-25 17:06:28.906 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.e.m.I.informationListPageCount   : ==> Parameters: 
+2019-09-25 17:06:28.909 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.e.m.I.informationListPageCount   : <==      Total: 1
+2019-09-25 17:06:30.010 DEBUG 13288 --- [http-nio-8999-exec-9] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:06:30.011 DEBUG 13288 --- [http-nio-8999-exec-9] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:06:30.015 DEBUG 13288 --- [http-nio-8999-exec-9] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:06:30.039 DEBUG 13288 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:06:30.041 DEBUG 13288 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:06:30.046 DEBUG 13288 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:06:32.293 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:06:32.294 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:06:32.305 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:06:32.306 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:06:32.308 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:06:32.313 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:06:32.314 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:06:32.314 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:06:32.316 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:06:32.317 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:06:32.318 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:06:32.320 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:06:32.320 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:06:32.321 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:06:32.323 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:06:32.324 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:06:32.325 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:06:32.326 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:06:33.016 DEBUG 13288 --- [http-nio-8999-exec-7] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:06:33.018 DEBUG 13288 --- [http-nio-8999-exec-7] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:06:33.020 DEBUG 13288 --- [http-nio-8999-exec-7] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:06:33.054 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:06:33.055 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:06:33.056 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:06:34.573 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.searchGoodsList            : ==>  Preparing: select id as id ,goods_name as goodsName ,goods_spec as goodsSpec ,goods_price as goodsPrice ,goods_img as goodsImg from gow_goods where 1=1 and is_delete = '0' and ( goods_name LIKE CONCAT('%',?,'%') OR goods_spec LIKE CONCAT('%',?,'%') OR goods_subtitle LIKE CONCAT('%',?,'%') OR goods_keywords LIKE CONCAT('%',?,'%') OR goods_brief LIKE CONCAT('%',?,'%') OR goods_detail_desc LIKE CONCAT('%',?,'%') ) order by create_time desc 
+2019-09-25 17:06:34.575 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.searchGoodsList            : ==> Parameters: (String), (String), (String), (String), (String), (String)
+2019-09-25 17:06:34.579 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.searchGoodsList            : <==      Total: 4
+2019-09-25 17:06:37.613 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:06:37.614 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:06:37.617 DEBUG 13288 --- [http-nio-8999-exec-1] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:06:37.640 DEBUG 13288 --- [http-nio-8999-exec-6] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:06:37.641 DEBUG 13288 --- [http-nio-8999-exec-6] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:06:37.643 DEBUG 13288 --- [http-nio-8999-exec-6] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:06:42.273 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.searchGoodsList            : ==>  Preparing: select id as id ,goods_name as goodsName ,goods_spec as goodsSpec ,goods_price as goodsPrice ,goods_img as goodsImg from gow_goods where 1=1 and is_delete = '0' and ( goods_name LIKE CONCAT('%',?,'%') OR goods_spec LIKE CONCAT('%',?,'%') OR goods_subtitle LIKE CONCAT('%',?,'%') OR goods_keywords LIKE CONCAT('%',?,'%') OR goods_brief LIKE CONCAT('%',?,'%') OR goods_detail_desc LIKE CONCAT('%',?,'%') ) order by create_time desc 
+2019-09-25 17:06:42.275 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.searchGoodsList            : ==> Parameters: (String), (String), (String), (String), (String), (String)
+2019-09-25 17:06:42.279 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.e.m.G.searchGoodsList            : <==      Total: 4
+2019-09-25 17:06:44.218 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:06:44.219 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:06:44.223 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:06:44.224 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.e.m.G.selectListByGoodsId        : ==>  Preparing: select url from gow_goods_detail_image where goods_id = ? 
+2019-09-25 17:06:44.225 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.e.m.G.selectListByGoodsId        : ==> Parameters: 2082(Long)
+2019-09-25 17:06:44.232 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.e.m.G.selectListByGoodsId        : <==      Total: 7
+2019-09-25 17:06:44.233 DEBUG 13288 --- [http-nio-8999-exec-4] .b.s.e.m.G.selectGoodsImageListByGoodsId : ==>  Preparing: select id as id,image_url as imageUrl from gow_goods_image where goods_id = ? 
+2019-09-25 17:06:44.233 DEBUG 13288 --- [http-nio-8999-exec-4] .b.s.e.m.G.selectGoodsImageListByGoodsId : ==> Parameters: 2082(Long)
+2019-09-25 17:06:44.235 DEBUG 13288 --- [http-nio-8999-exec-4] .b.s.e.m.G.selectGoodsImageListByGoodsId : <==      Total: 4
+2019-09-25 17:06:44.426 DEBUG 13288 --- [http-nio-8999-exec-8] .e.m.G.selectCountBycustomerIdAndGoodsId : ==>  Preparing: SELECT count(0) FROM gow_goods_collection WHERE customer_id = ? and goods_id = ? 
+2019-09-25 17:06:44.427 DEBUG 13288 --- [http-nio-8999-exec-8] .e.m.G.selectCountBycustomerIdAndGoodsId : ==> Parameters: 2472(Long), 2082(Long)
+2019-09-25 17:06:44.430 DEBUG 13288 --- [http-nio-8999-exec-8] .e.m.G.selectCountBycustomerIdAndGoodsId : <==      Total: 1
+2019-09-25 17:06:45.422 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.e.m.G.searchGoodsList            : ==>  Preparing: select id as id ,goods_name as goodsName ,goods_spec as goodsSpec ,goods_price as goodsPrice ,goods_img as goodsImg from gow_goods where 1=1 and is_delete = '0' and ( goods_name LIKE CONCAT('%',?,'%') OR goods_spec LIKE CONCAT('%',?,'%') OR goods_subtitle LIKE CONCAT('%',?,'%') OR goods_keywords LIKE CONCAT('%',?,'%') OR goods_brief LIKE CONCAT('%',?,'%') OR goods_detail_desc LIKE CONCAT('%',?,'%') ) order by create_time desc 
+2019-09-25 17:06:45.423 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.e.m.G.searchGoodsList            : ==> Parameters: (String), (String), (String), (String), (String), (String)
+2019-09-25 17:06:45.430 DEBUG 13288 --- [http-nio-8999-exec-4] c.g.b.s.e.m.G.searchGoodsList            : <==      Total: 4
+2019-09-25 17:06:46.295 DEBUG 13288 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:06:46.296 DEBUG 13288 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:06:46.302 DEBUG 13288 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:06:46.329 DEBUG 13288 --- [http-nio-8999-exec-3] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:06:46.329 DEBUG 13288 --- [http-nio-8999-exec-3] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:06:46.330 DEBUG 13288 --- [http-nio-8999-exec-3] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:22:23.826 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:22:23.830 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:22:23.834 DEBUG 13288 --- [http-nio-8999-exec-2] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:22:23.864 DEBUG 13288 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:22:23.865 DEBUG 13288 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:22:23.866 DEBUG 13288 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:28:13.720  INFO 13288 --- [Thread-14] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-09-25 17:28:13.728  INFO 13288 --- [Thread-14] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-09-25 17:28:29.791  INFO 16284 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 16284 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-09-25 17:28:29.795  INFO 16284 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-09-25 17:28:32.617  INFO 16284 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-09-25 17:28:32.651  INFO 16284 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-25 17:28:32.652  INFO 16284 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-09-25 17:28:32.662  INFO 16284 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;D:\soft\mysql\mysql8\mysql-8.0.16-winx64\bin;;.]
+2019-09-25 17:28:32.821  INFO 16284 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-25 17:28:32.821  INFO 16284 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2959 ms
+2019-09-25 17:28:33.009  INFO 16284 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-25 17:28:33.571  INFO 16284 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-25 17:28:34.863  INFO 16284 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-25 17:28:35.057  INFO 16284 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-25 17:28:35.267  INFO 16284 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-09-25 17:28:35.271  INFO 16284 --- [main] com.gow.GowApplication                   : Started GowApplication in 7.84 seconds (JVM running for 11.454)
+2019-09-25 17:28:50.154  INFO 16284 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-25 17:28:50.154  INFO 16284 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-25 17:28:50.187  INFO 16284 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 33 ms
+2019-09-25 17:28:50.981 DEBUG 16284 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:28:50.996 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:28:51.016 DEBUG 16284 --- [http-nio-8999-exec-5] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:28:51.026 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:28:51.026 DEBUG 16284 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:28:51.027 DEBUG 16284 --- [http-nio-8999-exec-5] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:28:51.036 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:28:51.037 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:28:51.046 DEBUG 16284 --- [http-nio-8999-exec-10] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:28:51.047 DEBUG 16284 --- [http-nio-8999-exec-10] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:28:51.071 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:28:51.072 DEBUG 16284 --- [http-nio-8999-exec-5] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:28:51.072 DEBUG 16284 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:28:51.073 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:28:51.076 DEBUG 16284 --- [http-nio-8999-exec-10] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:28:51.081 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:28:51.082 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:28:51.090 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:28:51.091 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:28:51.092 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:28:51.098 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:28:51.099 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:28:51.099 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:28:51.106 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:28:56.207 DEBUG 16284 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.informationListPage        : ==>  Preparing: select * from gow_information where 1=1 and is_delete = '0' order by create_time desc Limit ?,? 
+2019-09-25 17:28:56.209 DEBUG 16284 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.informationListPage        : ==> Parameters: 0(Integer), 10(Integer)
+2019-09-25 17:28:56.218 DEBUG 16284 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.informationListPage        : <==      Total: 4
+2019-09-25 17:28:56.233 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:28:56.233 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 10(Long)
+2019-09-25 17:28:56.237 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:28:56.238 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:28:56.239 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 9(Long)
+2019-09-25 17:28:56.240 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:28:56.242 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:28:56.242 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 8(Long)
+2019-09-25 17:28:56.244 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:28:56.245 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:28:56.246 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 7(Long)
+2019-09-25 17:28:56.247 DEBUG 16284 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:28:56.248 DEBUG 16284 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.informationListPageCount   : ==>  Preparing: select count(0) from gow_information where 1=1 and is_delete = '0' 
+2019-09-25 17:28:56.248 DEBUG 16284 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.informationListPageCount   : ==> Parameters: 
+2019-09-25 17:28:56.249 DEBUG 16284 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.informationListPageCount   : <==      Total: 1
+2019-09-25 17:28:57.494 DEBUG 16284 --- [http-nio-8999-exec-3] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:28:57.495 DEBUG 16284 --- [http-nio-8999-exec-3] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:28:57.507 DEBUG 16284 --- [http-nio-8999-exec-3] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:28:57.526 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:28:57.527 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:28:57.530 DEBUG 16284 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:28:57.530 DEBUG 16284 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:28:57.530 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:28:57.530 DEBUG 16284 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:28:57.530 DEBUG 16284 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:28:57.530 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:28:57.533 DEBUG 16284 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:28:57.868 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:28:57.870 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:28:57.870 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:28:57.870 DEBUG 16284 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:28:57.873 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:28:57.873 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:28:57.874 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:28:57.876 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:28:57.885 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:28:57.887 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:28:57.889 DEBUG 16284 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:28:57.895 DEBUG 16284 --- [http-nio-8999-exec-7] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:30:34.773  INFO 16284 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-09-25 17:30:34.784  INFO 16284 --- [Thread-12] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-09-25 17:30:44.383  INFO 4968 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 4968 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-09-25 17:30:44.386  INFO 4968 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-09-25 17:30:46.570  INFO 4968 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-09-25 17:30:46.595  INFO 4968 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-25 17:30:46.596  INFO 4968 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-09-25 17:30:46.604  INFO 4968 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;D:\soft\mysql\mysql8\mysql-8.0.16-winx64\bin;;.]
+2019-09-25 17:30:47.353  INFO 4968 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-25 17:30:47.354  INFO 4968 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2912 ms
+2019-09-25 17:30:47.498  INFO 4968 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-25 17:30:47.670  INFO 4968 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-25 17:30:48.888  INFO 4968 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-25 17:30:49.113  INFO 4968 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-25 17:30:49.354  INFO 4968 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-09-25 17:30:49.365  INFO 4968 --- [main] com.gow.GowApplication                   : Started GowApplication in 5.64 seconds (JVM running for 8.895)
+2019-09-25 17:30:53.270  INFO 4968 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-25 17:30:53.271  INFO 4968 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-25 17:30:53.291  INFO 4968 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 18 ms
+2019-09-25 17:30:54.063 DEBUG 4968 --- [http-nio-8999-exec-7] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:30:54.065 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:30:54.071 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:30:54.077 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:30:54.083 DEBUG 4968 --- [http-nio-8999-exec-8] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:30:54.096 DEBUG 4968 --- [http-nio-8999-exec-8] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:30:54.096 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:30:54.097 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:30:54.096 DEBUG 4968 --- [http-nio-8999-exec-7] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:30:54.098 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:30:54.131 DEBUG 4968 --- [http-nio-8999-exec-8] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:30:54.132 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:30:54.133 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:30:54.133 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:54.135 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:30:54.136 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:30:54.136 DEBUG 4968 --- [http-nio-8999-exec-7] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:30:54.144 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:54.145 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:30:54.146 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:30:54.149 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:54.150 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:30:54.151 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:30:54.153 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:55.057 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:30:55.058 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 10(Long)
+2019-09-25 17:30:55.061 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:55.083 DEBUG 4968 --- [http-nio-8999-exec-1] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==>  Preparing: update gow_information SET to_view_number = ?, modify_time = ? where id = ? 
+2019-09-25 17:30:55.086 DEBUG 4968 --- [http-nio-8999-exec-1] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==> Parameters: 41(Integer), 2019-09-25 17:30:55.062(Timestamp), 10(Long)
+2019-09-25 17:30:55.093 DEBUG 4968 --- [http-nio-8999-exec-1] .g.b.s.a.m.I.updateByPrimaryKeySelective : <==    Updates: 1
+2019-09-25 17:30:55.093 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:30:55.094 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 10(Long)
+2019-09-25 17:30:55.095 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:55.437 DEBUG 4968 --- [http-nio-8999-exec-10] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:30:55.438 DEBUG 4968 --- [http-nio-8999-exec-10] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 10(Long)
+2019-09-25 17:30:55.441 DEBUG 4968 --- [http-nio-8999-exec-10] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:30:57.887 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:30:57.888 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:30:57.893 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:57.927 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:30:57.928 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:30:57.930 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:30:57.928 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:30:57.942 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:30:57.947 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:30:57.948 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:30:57.949 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:30:57.952 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:57.953 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:30:57.954 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:30:57.956 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:30:57.957 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:57.957 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:30:57.959 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:30:57.959 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:30:57.962 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:57.963 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:30:57.966 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:30:57.966 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:30:57.968 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:30:59.021 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:30:59.022 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 9(Long)
+2019-09-25 17:30:59.025 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:59.031 DEBUG 4968 --- [http-nio-8999-exec-2] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==>  Preparing: update gow_information SET to_view_number = ?, modify_time = ? where id = ? 
+2019-09-25 17:30:59.033 DEBUG 4968 --- [http-nio-8999-exec-2] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==> Parameters: 311(Integer), 2019-09-25 17:30:59.031(Timestamp), 9(Long)
+2019-09-25 17:30:59.049 DEBUG 4968 --- [http-nio-8999-exec-2] .g.b.s.a.m.I.updateByPrimaryKeySelective : <==    Updates: 1
+2019-09-25 17:30:59.049 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:30:59.050 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 9(Long)
+2019-09-25 17:30:59.056 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:30:59.194 DEBUG 4968 --- [http-nio-8999-exec-10] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:30:59.195 DEBUG 4968 --- [http-nio-8999-exec-10] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 9(Long)
+2019-09-25 17:30:59.196 DEBUG 4968 --- [http-nio-8999-exec-10] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:31:00.619 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:31:00.620 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:31:00.622 DEBUG 4968 --- [http-nio-8999-exec-4] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:00.645 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:31:00.649 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:31:00.651 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:31:00.651 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:31:00.653 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:31:00.653 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:00.654 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:31:00.656 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:00.656 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:31:00.656 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:00.657 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:31:00.657 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:31:00.658 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:31:00.659 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:31:00.660 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:31:00.663 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:31:00.665 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:00.666 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:00.666 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:31:00.666 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:31:00.668 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:01.809 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:31:01.810 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 7(Long)
+2019-09-25 17:31:01.812 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:01.813 DEBUG 4968 --- [http-nio-8999-exec-10] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==>  Preparing: update gow_information SET to_view_number = ?, modify_time = ? where id = ? 
+2019-09-25 17:31:01.815 DEBUG 4968 --- [http-nio-8999-exec-10] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==> Parameters: 23(Integer), 2019-09-25 17:31:01.813(Timestamp), 7(Long)
+2019-09-25 17:31:01.828 DEBUG 4968 --- [http-nio-8999-exec-10] .g.b.s.a.m.I.updateByPrimaryKeySelective : <==    Updates: 1
+2019-09-25 17:31:01.828 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:31:01.828 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 7(Long)
+2019-09-25 17:31:01.830 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:01.935 DEBUG 4968 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:31:01.936 DEBUG 4968 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 7(Long)
+2019-09-25 17:31:01.938 DEBUG 4968 --- [http-nio-8999-exec-8] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:31:03.422 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:31:03.423 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:31:03.428 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:03.457 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:31:03.458 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:31:03.459 DEBUG 4968 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:31:03.459 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:31:03.460 DEBUG 4968 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:31:03.464 DEBUG 4968 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:31:03.465 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:31:03.465 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:31:03.466 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:31:03.469 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:31:03.470 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:31:03.475 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:31:03.475 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:03.476 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:31:03.479 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:03.479 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:03.480 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:31:03.482 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:03.486 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:03.487 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:31:03.489 DEBUG 4968 --- [http-nio-8999-exec-10] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:04.541 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:31:04.542 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 10(Long)
+2019-09-25 17:31:04.545 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:04.547 DEBUG 4968 --- [http-nio-8999-exec-1] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==>  Preparing: update gow_information SET to_view_number = ?, modify_time = ? where id = ? 
+2019-09-25 17:31:04.549 DEBUG 4968 --- [http-nio-8999-exec-1] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==> Parameters: 42(Integer), 2019-09-25 17:31:04.546(Timestamp), 10(Long)
+2019-09-25 17:31:04.559 DEBUG 4968 --- [http-nio-8999-exec-1] .g.b.s.a.m.I.updateByPrimaryKeySelective : <==    Updates: 1
+2019-09-25 17:31:04.560 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:31:04.561 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 10(Long)
+2019-09-25 17:31:04.562 DEBUG 4968 --- [http-nio-8999-exec-1] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:04.698 DEBUG 4968 --- [http-nio-8999-exec-7] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:31:04.698 DEBUG 4968 --- [http-nio-8999-exec-7] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 10(Long)
+2019-09-25 17:31:04.699 DEBUG 4968 --- [http-nio-8999-exec-7] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:31:11.506 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:31:11.506 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:31:11.508 DEBUG 4968 --- [http-nio-8999-exec-3] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:11.536 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:31:11.536 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:31:11.537 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:31:11.537 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:31:11.536 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:31:11.537 DEBUG 4968 --- [http-nio-8999-exec-2] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:31:11.538 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:31:11.539 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:31:11.539 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:11.540 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:31:11.540 DEBUG 4968 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:31:11.540 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:31:11.540 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:31:11.545 DEBUG 4968 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:31:11.545 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:11.545 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:11.546 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:31:11.547 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:31:11.548 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:31:11.548 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:31:11.550 DEBUG 4968 --- [http-nio-8999-exec-9] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:41:58.084  INFO 4968 --- [Thread-13] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-09-25 17:41:58.095  INFO 4968 --- [Thread-13] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2019-09-25 17:42:18.271  INFO 5044 --- [main] com.gow.GowApplication                   : Starting GowApplication on PC201604182259 with PID 5044 (D:\project\mgow\gow\target\classes started by Administrator in D:\project\mgow\gow)
+2019-09-25 17:42:18.276  INFO 5044 --- [main] com.gow.GowApplication                   : No active profile set, falling back to default profiles: default
+2019-09-25 17:42:22.243  INFO 5044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8999 (http)
+2019-09-25 17:42:22.289  INFO 5044 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-25 17:42:22.290  INFO 5044 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-09-25 17:42:22.302  INFO 5044 --- [main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\soft\JDK\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;D:\install\Git\Git\cmd;C:\Program Files\TortoiseGit\bin;D:\install\redis\;D:\soft\JDK\jdk1.8.0_05\bin;D:\soft\maven\apache-maven-3.2.5\bin;D:\soft\mysql\mysql8\mysql-8.0.16-winx64\bin;;.]
+2019-09-25 17:42:22.533  INFO 5044 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-25 17:42:22.533  INFO 5044 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 4148 ms
+2019-09-25 17:42:22.777  INFO 5044 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2019-09-25 17:42:24.081  INFO 5044 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-09-25 17:42:30.423  INFO 5044 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-25 17:42:30.717  INFO 5044 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-09-25 17:42:31.161  INFO 5044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8999 (http) with context path ''
+2019-09-25 17:42:31.167  INFO 5044 --- [main] com.gow.GowApplication                   : Started GowApplication in 13.563 seconds (JVM running for 22.86)
+2019-09-25 17:42:32.021  INFO 5044 --- [http-nio-8999-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-25 17:42:32.022  INFO 5044 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-25 17:42:32.048  INFO 5044 --- [http-nio-8999-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 26 ms
+2019-09-25 17:42:33.806 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:42:33.827 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:42:33.829 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:42:33.853 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:42:33.855 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:42:33.855 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:42:33.896 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:42:33.897 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:42:33.905 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:42:33.905 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:42:33.906 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:42:33.912 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:42:33.913 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:42:33.914 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:42:33.922 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:42:33.925 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:42:33.925 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:42:33.928 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:42:33.929 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:42:33.929 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:42:33.931 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:42:33.932 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:42:33.936 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:42:33.940 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:42:34.541 DEBUG 5044 --- [http-nio-8999-exec-10] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:42:34.541 DEBUG 5044 --- [http-nio-8999-exec-10] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:42:34.545 DEBUG 5044 --- [http-nio-8999-exec-10] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:42:35.240 DEBUG 5044 --- [http-nio-8999-exec-1] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:42:35.241 DEBUG 5044 --- [http-nio-8999-exec-1] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:42:35.260 DEBUG 5044 --- [http-nio-8999-exec-1] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:43:39.226 DEBUG 5044 --- [http-nio-8999-exec-2] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:43:39.227 DEBUG 5044 --- [http-nio-8999-exec-2] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 10(Long)
+2019-09-25 17:43:39.230 DEBUG 5044 --- [http-nio-8999-exec-2] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:44:01.676 DEBUG 5044 --- [http-nio-8999-exec-1] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:44:01.677 DEBUG 5044 --- [http-nio-8999-exec-1] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:44:01.681 DEBUG 5044 --- [http-nio-8999-exec-1] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:01.817 DEBUG 5044 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:44:01.818 DEBUG 5044 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:44:01.819 DEBUG 5044 --- [http-nio-8999-exec-10] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:44:01.871 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time from gow_goods where 1=1 and is_delete = '0' and is_upper_lower_racks = '1' order by create_time desc 
+2019-09-25 17:44:01.872 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : ==> Parameters: 
+2019-09-25 17:44:01.880 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.selectPageGoodsList        : <==      Total: 4
+2019-09-25 17:44:01.882 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==>  Preparing: SELECT r.goods_id, title, title_captions FROM gow_goods_recommended AS r INNER JOIN gow_goods AS g ON r.goods_id = g.id AND r.is_delete = '0' AND g.is_delete = '0' ORDER BY level,r.create_time DESC LIMIT 3 
+2019-09-25 17:44:01.883 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.pageGoodsRecommendedList   : ==> Parameters: 
+2019-09-25 17:44:01.889 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.G.pageGoodsRecommendedList   : <==      Total: 3
+2019-09-25 17:44:01.891 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:44:01.892 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2074(Long)
+2019-09-25 17:44:01.895 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:01.896 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:44:01.896 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2081(Long)
+2019-09-25 17:44:01.917 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:01.918 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : ==>  Preparing: select id, category_id, goods_name, goods_spec, goods_subtitle, goods_no, goods_keywords, goods_brief, goods_price, goods_old_price, goods_img, goods_score, goods_deno, goods_detail_img, goods_number, is_delete, is_upper_lower_racks, is_recommend, create_time , goods_detail_desc from gow_goods where id = ? 
+2019-09-25 17:44:01.919 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : ==> Parameters: 2082(Long)
+2019-09-25 17:44:01.927 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.a.m.G.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:01.928 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : ==>  Preparing: select id as id ,title as title from gow_information where 1=1 and is_delete = '0' and is_submit = '1' order by create_time desc limit 10 
+2019-09-25 17:44:01.928 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : ==> Parameters: 
+2019-09-25 17:44:01.941 DEBUG 5044 --- [http-nio-8999-exec-6] c.g.b.s.e.m.I.pageInformationList        : <==      Total: 4
+2019-09-25 17:44:02.435 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : ==>  Preparing: select id, customer_username, mobile, customer_password, customer_nickname, sex, birthday, customer_realname, address, login_ip, login_time, customer_img, captcha, aead_time, pwd_captcha, pwd_aead_time, login_error_count, user_salt_val, customer_referee, create_time, modify_time, is_delete, integral, is_use, is_use_time from gow_customer where id = ? 
+2019-09-25 17:44:02.436 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : ==> Parameters: 2472(Long)
+2019-09-25 17:44:02.443 DEBUG 5044 --- [http-nio-8999-exec-8] c.g.b.s.a.m.C.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:02.536 DEBUG 5044 --- [http-nio-8999-exec-4] c.g.b.s.e.m.C.categoryNumber             : ==>  Preparing: select count(0) from gow_category where cat_delflag = '0' 
+2019-09-25 17:44:02.537 DEBUG 5044 --- [http-nio-8999-exec-4] c.g.b.s.e.m.C.categoryNumber             : ==> Parameters: 
+2019-09-25 17:44:02.537 DEBUG 5044 --- [http-nio-8999-exec-4] c.g.b.s.e.m.C.categoryNumber             : <==      Total: 1
+2019-09-25 17:44:08.923 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:44:08.924 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 9(Long)
+2019-09-25 17:44:08.927 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:08.953 DEBUG 5044 --- [http-nio-8999-exec-5] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==>  Preparing: update gow_information SET to_view_number = ?, modify_time = ? where id = ? 
+2019-09-25 17:44:08.956 DEBUG 5044 --- [http-nio-8999-exec-5] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==> Parameters: 312(Integer), 2019-09-25 17:44:08.927(Timestamp), 9(Long)
+2019-09-25 17:44:08.970 DEBUG 5044 --- [http-nio-8999-exec-5] .g.b.s.a.m.I.updateByPrimaryKeySelective : <==    Updates: 1
+2019-09-25 17:44:08.970 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:44:08.971 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 9(Long)
+2019-09-25 17:44:08.972 DEBUG 5044 --- [http-nio-8999-exec-5] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:09.262 DEBUG 5044 --- [http-nio-8999-exec-9] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:44:09.263 DEBUG 5044 --- [http-nio-8999-exec-9] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 9(Long)
+2019-09-25 17:44:09.265 DEBUG 5044 --- [http-nio-8999-exec-9] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:44:12.992 DEBUG 5044 --- [http-nio-8999-exec-7] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:44:12.993 DEBUG 5044 --- [http-nio-8999-exec-7] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 7(Long)
+2019-09-25 17:44:12.997 DEBUG 5044 --- [http-nio-8999-exec-7] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:12.999 DEBUG 5044 --- [http-nio-8999-exec-7] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==>  Preparing: update gow_information SET to_view_number = ?, modify_time = ? where id = ? 
+2019-09-25 17:44:13.000 DEBUG 5044 --- [http-nio-8999-exec-7] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==> Parameters: 24(Integer), 2019-09-25 17:44:12.998(Timestamp), 7(Long)
+2019-09-25 17:44:13.016 DEBUG 5044 --- [http-nio-8999-exec-7] .g.b.s.a.m.I.updateByPrimaryKeySelective : <==    Updates: 1
+2019-09-25 17:44:13.017 DEBUG 5044 --- [http-nio-8999-exec-7] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:44:13.018 DEBUG 5044 --- [http-nio-8999-exec-7] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 7(Long)
+2019-09-25 17:44:13.021 DEBUG 5044 --- [http-nio-8999-exec-7] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:13.407 DEBUG 5044 --- [http-nio-8999-exec-2] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:44:13.407 DEBUG 5044 --- [http-nio-8999-exec-2] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 7(Long)
+2019-09-25 17:44:13.412 DEBUG 5044 --- [http-nio-8999-exec-2] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1
+2019-09-25 17:44:16.242 DEBUG 5044 --- [http-nio-8999-exec-3] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:44:16.243 DEBUG 5044 --- [http-nio-8999-exec-3] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 10(Long)
+2019-09-25 17:44:16.247 DEBUG 5044 --- [http-nio-8999-exec-3] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:16.249 DEBUG 5044 --- [http-nio-8999-exec-3] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==>  Preparing: update gow_information SET to_view_number = ?, modify_time = ? where id = ? 
+2019-09-25 17:44:16.251 DEBUG 5044 --- [http-nio-8999-exec-3] .g.b.s.a.m.I.updateByPrimaryKeySelective : ==> Parameters: 43(Integer), 2019-09-25 17:44:16.248(Timestamp), 10(Long)
+2019-09-25 17:44:16.274 DEBUG 5044 --- [http-nio-8999-exec-3] .g.b.s.a.m.I.updateByPrimaryKeySelective : <==    Updates: 1
+2019-09-25 17:44:16.275 DEBUG 5044 --- [http-nio-8999-exec-3] c.g.b.s.a.m.I.selectByPrimaryKey         : ==>  Preparing: select id, title, author, praise_number, evaluate_number, is_submit, to_view_number, create_time, is_delete, delete_time, modify_time , content from gow_information where id = ? 
+2019-09-25 17:44:16.275 DEBUG 5044 --- [http-nio-8999-exec-3] c.g.b.s.a.m.I.selectByPrimaryKey         : ==> Parameters: 10(Long)
+2019-09-25 17:44:16.279 DEBUG 5044 --- [http-nio-8999-exec-3] c.g.b.s.a.m.I.selectByPrimaryKey         : <==      Total: 1
+2019-09-25 17:44:16.649 DEBUG 5044 --- [http-nio-8999-exec-1] I.selectInfoByCustomerIdAndInformationId : ==>  Preparing: select * from gow_information_operation where 1=1 and customer_id = ? and information_id = ? 
+2019-09-25 17:44:16.649 DEBUG 5044 --- [http-nio-8999-exec-1] I.selectInfoByCustomerIdAndInformationId : ==> Parameters: 2472(Long), 10(Long)
+2019-09-25 17:44:16.651 DEBUG 5044 --- [http-nio-8999-exec-1] I.selectInfoByCustomerIdAndInformationId : <==      Total: 1

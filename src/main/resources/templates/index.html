@@ -41,6 +41,8 @@
 	<body>
 		<!-- 标识当前页面选中状态 -->
 		<input type="hidden" value="index" id="footer-active">
+		<!-- 标识当前页面是否请求了数据 -->
+		<input type="hidden" th:value="${newpage}" id="newpage">
 		<header class="mui-bar mui-bar-nav" id="header">
 			<a class="btn" href="#">
 	            <i class="iconfont icon-saomiao"></i>
@@ -209,13 +211,80 @@
 	                indicators: true,
 	                deceleration:deceleration
 	        });
+
+
+	         /**
+			  * 刷新页面
+			  * */
+	         function newpage() {
+				var newpage = $("#newpage").val();
+				if(!newpage || newpage !=='100S'){
+					window.location.href = "/indexPage/index-page";
+				}
+			 }
+			newpage();
+
+
+	         /**
+			  * 资讯列表信息
+			  * */
+	         function selectInformationList(){
+				 var infoContent = "";
+				 $.ajax({
+					 type: "post",
+					 url: "/indexPage/getPageInformationList",
+					 success: function (data) {
+						 if (data) {
+							 $.each(data, function (index, info) {
+								 infoContent = infoContent
+								 +"<div class='titlediv' data='"+info.id+"'>"+info.title+"</div>"
+							 });
+						 }
+						 $("#informationListSet").html(infoContent);
+					 }
+				 });
+			 }
+			//selectInformationList();
+
+
+			/**
+			 * 推荐 商品列表信息
+			 * */
+			function selectGoodsRecommendedList(){
+				$.ajax({
+					type: "post",
+					url: "/indexPage/getPageGoodsRecommendedList",
+					success: function (data) {
+						if (data) {
+
+						}
+					}
+				});
+			}
+			//selectGoodsRecommendedList();
+
+
+			/**
+			 * 商品列表信息
+			 * */
+			function selectGoodsList(){
+				$.ajax({
+					type: "post",
+					url: "/indexPage/getPageGoodsList",
+					success: function (data) {
+						if (data) {
+
+						}
+					}
+				});
+			}
+			//selectGoodsList();
+
+
+
+
 	        $('.top-sch-box .fdj,.top-sch-box .sch-txt,.pop-schwrap .btn-back').on('click',function () {
-	            window.location.href = "/search//search-list-page";
-	            /*$('html,body').toggleClass('holding');
-	            $('.pop-schwrap').toggleClass('on');
-	            if($('.pop-schwrap').hasClass('on')) {;
-	                $('.pop-schwrap .sch-input').focus();
-	            }*/
+	            window.location.href = "/search/search-list-page";
 	        });
 
 	        //分类数量
@@ -248,7 +317,7 @@
             });
 
 			//资讯详情
-			$(".autoplay .titlediv").on('click',function () {
+			$(document).on('click',".autoplay .titlediv",function () {
 				var informationId = $(this).attr("data");
 				window.location.href = "/informationPage/information-detail-page?informationId="+informationId;
 			});

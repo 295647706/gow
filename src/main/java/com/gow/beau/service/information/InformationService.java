@@ -44,6 +44,12 @@ public class InformationService {
      * */
     public List<Information> pageInformationList(){
         List<Information> informationList = informationExtMapper.pageInformationList();
+        if(CollectionUtils.isEmpty(informationList)){
+            informationList = new ArrayList<>();
+            Information information = new Information();
+            informationList.add(information);
+            return informationList;
+        }
         return informationList;
     }
 

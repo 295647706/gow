@@ -65,8 +65,9 @@ public class GoodsService {
      */
     public List<Goods> pageGoodsList() {
         List<Goods> goodsList = goodsExtMapper.selectPageGoodsList();
-        if(goodsList == null){
+        if(CollectionUtils.isEmpty(goodsList)){
             goodsList = new ArrayList<>();
+            goodsList.add(new Goods());
         }
         return goodsList;
     }
