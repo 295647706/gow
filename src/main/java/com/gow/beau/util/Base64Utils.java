@@ -69,4 +69,21 @@ public class Base64Utils {
             return false;
         }
     }
+
+
+
+    /**
+     * 获取src 图片
+     * */
+    public static String imageToBase64BySrc(String imgFile){
+        File file = new File(imgFile);
+        if(file.exists()) {
+            //文件格式
+            String ext = org.thymeleaf.util.StringUtils.substringAfter(imgFile, ".");
+            String base64Image = Base64Utils.imageToBase64ByLocal(imgFile);
+            base64Image = "data:image/" + ext + ";base64," + base64Image;
+            return base64Image;
+        }
+        return imgFile;
+    }
 }

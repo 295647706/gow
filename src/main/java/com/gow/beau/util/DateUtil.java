@@ -10,47 +10,22 @@ import java.util.Date;
  */
 public class DateUtil {
 
-    /**
-     * date 转 string格式
-     * */
-    public static String dateToString(Date date){
-        if(null == date){
-            return "";
-        }
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            return sdf.format(date);
-        }catch (Exception e){
-            throw new RuntimeException("日期转换成String格式异常："+e.getMessage());
-        }
-    }
+    public static final String PATTERN_YEAR = "yyyy";
+    public static final String PATTERN_YEAR_MONTH = "yyyy-MM";
+    public static final String PATTERN_YEAR_MONTH_DAY = "yyyy-MM-dd";
+    public static final String PATTERN_YEAR_MONTH_DAY_HOURS = "yyyy-MM-dd HH";
+    public static final String PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE = "yyyy-MM-dd HH:mm";
+    public static final String PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * date 转 string格式
      * */
-    public static String dateToString_HM(Date date){
+    public static String dateToString(Date date,String pattern){
         if(null == date){
             return "";
         }
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            System.err.println(sdf.format(date));
-            return sdf.format(date);
-        }catch (Exception e){
-            throw new RuntimeException("日期转换成String格式异常："+e.getMessage());
-        }
-    }
-
-    /**
-     * date 转 string格式
-     * 带时间
-     * */
-    public static String dateToString2(Date date){
-        if(null == date){
-            return "";
-        }
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
             return sdf.format(date);
         }catch (Exception e){
             throw new RuntimeException("日期转换成String格式异常："+e.getMessage());
@@ -60,48 +35,16 @@ public class DateUtil {
     /**
      * String 转 date
      * */
-    public static Date stringToDate(String date){
+    public static Date stringToDate(String date,String pattern){
         if(null == date || date.equals("")){
             return null;
         }
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
             return sdf.parse(date);
         }catch (Exception e){
             throw new RuntimeException("日期转换成String格式异常："+e.getMessage());
         }
     }
-    /**
-     * String 转 date
-     * 带时间
-     * */
-    public static Date stringToDate2(String date){
-        if(null == date || date.equals("")){
-            return null;
-        }
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            return sdf.parse(date);
-        }catch (Exception e){
-            throw new RuntimeException("日期转换成String格式异常："+e.getMessage());
-        }
-    }
-
-    /**
-     * String 转 date
-     * 带时间
-     * */
-    public static Date stringToDate3(String date){
-        if(null == date || date.equals("")){
-            return null;
-        }
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            return sdf.parse(date);
-        }catch (Exception e){
-            throw new RuntimeException("日期转换成String格式异常："+e.getMessage());
-        }
-    }
-
 
 }

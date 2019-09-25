@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>轮播图管理</title>
+  <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+  <link rel="stylesheet" href="../boss/layui/css/global.css">
+  <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+    <style>
+        .layui-body{overflow-y: scroll;}
+    </style>
+</head>
+<body class="layui-layout-body">
+<!-- 左侧选中标识 -->
+<input hidden id="manage" value="shufflingFigureManage">
+<input hidden id="check" value="shufflingFigureList">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="boss\index\top::boss-top">
+        <!-- 头部 -->
+    </div>
+
+    <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+        <!-- 左边导航栏 -->
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;align-content: center">
+            <fieldset class="layui-elem-field">
+                <legend>轮播图管理 - 编辑</legend>
+                <div class="layui-field-box">
+                    <table class="layui-table" lay-skin="nob" lay-size="mg">
+                        <tr>
+                            <td style='text-align: right'><a href="javascript:history.back(-1)" style="color:#FFA07A">返回</a></td>
+                        </tr>
+                    </table>
+                    <div class="layui-form-item" style="text-align:left;padding: 1%;width: 100%;">
+                        <div class="layui-inline" style="width: 100%;">
+                            <label class="layui-form-label" style="width: 18%;">轮播图类型&nbsp;：</label>
+                            <div class="layui-input-inline" style="width: 50%;">
+                                <label class="layui-form-label" id="type-text" style="width: 100%;text-align: left" th:text="${info.typeF}"></label>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline" style="width: 100%;">
+                            <label class="layui-form-label" style="width: 18%;">轮播图&nbsp;：</label>
+                            <div class="layui-input-inline">
+                                <button type="button" class="layui-btn lbtImage" id="lbtImage" style="display: none">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
+                                <img th:src="${info.baseImage}" id="imglbt" style="width: 300px;height: 100px;display: block">
+                                <br/>
+                                <a href="#" style="width:100%;color: #ee7800;padding-left:70%;padding-top:1px;display: block" id="cancelImg">取消</a>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline" style="width: 100%;">
+                            <label class="layui-form-label" style="width: 18%;">是否使用外部链接&nbsp;：</label>
+                            <div class="layui-input-inline">
+                                <input type="radio" name="isExternalUrl" value="0" th:checked="${info.isExternalUrl=='0'}"> 非外部链接
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="radio" name="isExternalUrl" value="1" th:checked="${info.isExternalUrl=='1'}"> 外部链接
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline" style="width: 100%;">
+                            <label class="layui-form-label" style="width: 18%;">轮播图链接&nbsp;：</label>
+                            <div class="layui-input-inline" style="width: 50%;">
+                                <input class="layui-input" placeholder="轮播图链接" type="text" id="url" th:value="${info.url}">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline" style="width: 100%;">
+                            <label class="layui-form-label" style="width: 18%;">名称&nbsp;：</label>
+                            <div class="layui-input-inline" style="width: 50%;">
+                                <input class="layui-input" placeholder="名称" type="text" id="name" th:value="${info.name}">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline" style="width: 100%;">
+                            <label class="layui-form-label" style="width: 18%;">排序&nbsp;：</label>
+                            <div class="layui-input-inline" style="width: 50%;">
+                                <input class="layui-input" placeholder="排序" type="text" id="sort" th:value="${info.sort}">
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="layui-inline" style="width: 100%;">
+                            <div class="layui-input-inline" style="width:100%;text-align: center">
+                                <button type='button' class='layui-btn submitBtn' th:value="${info.id}">提交</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+        <!-- 底部 -->
+    </div>
+</div>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+<script type="text/javascript" src="../boss/comm/left.js"></script>
+</body>
+
+<script>
+
+    $(function () {
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+
+        //上传图片
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '.lbtImage' //绑定元素
+                ,url: '/fileUpload/image' //上传接口
+                ,size: 1024
+                ,done: function(res){
+                    console.log(res)
+                    //上传完毕回调
+                    if(res.code == 0){
+                        $("#imglbt").attr("src",res.data);
+                        $("#lbtImage").css("display","none");
+                        $("#imglbt").css("display","block");
+                        $("#cancelImg").css("display","block");
+                        $("#name").attr("value",res.name);
+                        $("#url").attr("value",res.path);
+                    }else {
+                        layer.msg(res.msg, {
+                            icon: 1,
+                            time: 5000 //5秒关闭（如果不配置，默认是5秒）
+                        });
+                    }
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
+        });
+
+
+        /**
+         * 取消,取消此图片
+         * */
+        $("#cancelImg").on('click',function () {
+            $("#lbtImage").css("display","block");
+            $("#imglbt").css("display","none");
+            $("#cancelImg").css("display","none");
+            $("#name").attr("value","");
+            $("#url").attr("value","");
+        });
+
+
+        /**
+         * 提交
+         * */
+        $(".submitBtn").on('click',function () {
+           var id = $(this).val();
+            var url = $("#url").val();
+            var sort = $("#sort").val();
+            var name = $("#name").val();
+            var isExternalUrl = $("input[name='isExternalUrl']:checked").val()
+            $.ajax({
+                type: "post",
+                url: "/shufflingFigureBoss/edit",
+                data: {"id": id, "url": url, "sort": sort, "name": name, "isExternalUrl": isExternalUrl},
+                success: function (data) {
+                    var tip = "修改失败"
+                    if(data > 0){
+                        tip = "修改成功";
+                    }
+                    //提示弹窗
+                    layer.msg(tip, {
+                        icon: 1,
+                        time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                    }, function(){
+
+                    });
+                    return;
+                }
+            });
+        });
+
+    });
+
+</script>
+
+</html>

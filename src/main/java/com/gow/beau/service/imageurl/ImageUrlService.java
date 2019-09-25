@@ -32,8 +32,8 @@ public class ImageUrlService {
         }
         ImageUrlRsp rsp = new ImageUrlRsp();
         BeanUtil.copyProperties(imageUrl,rsp);
-        rsp.setCreateTimeF(DateUtil.dateToString2(imageUrl.getCreateTime()));
-        rsp.setModifyTimeF(DateUtil.dateToString2(imageUrl.getModifyTime()));
+        rsp.setCreateTimeF(DateUtil.dateToString(imageUrl.getCreateTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
+        rsp.setModifyTimeF(DateUtil.dateToString(imageUrl.getModifyTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
         return rsp;
     }
 

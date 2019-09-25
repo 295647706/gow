@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gow.beau.storage.ext.mapper.ShufflingFigureExtMapper">
+    <resultMap id="BaseResultMap" type="com.gow.beau.storage.auto.model.ShufflingFigure">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="shuffling_figure_number_id" jdbcType="INTEGER" property="shufflingFigureNumberId" />
+        <result column="type" jdbcType="CHAR" property="type" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="is_delete" jdbcType="CHAR" property="isDelete" />
+        <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
+        <result column="is_use" jdbcType="CHAR" property="isUse" />
+        <result column="validity_time" jdbcType="TIMESTAMP" property="validityTime" />
+        <result column="is_external_url" jdbcType="CHAR" property="isExternalUrl" />
+    </resultMap>
+
+  <select id="shufflingFigurePage" resultMap="BaseResultMap">
+    select * from gow_shuffling_figure f inner join gow_shuffling_figure_number n
+    where 1=1
+    and f.is_delete = '0'
+    and f.shuffling_figure_number_id = n.id
+    <if test="type != null and type !='' ">
+    and f.type = #{type}
+    </if>
+    <if test="shufflingFigureNumberId != null">
+      and n.id = #{shufflingFigureNumberId}
+    </if>
+    order by sort,f.create_time desc
+    Limit #{startRowNum},#{endRowNum}
+  </select>
+
+  <select id="shufflingFigurePageCount" resultType="java.lang.Integer">
+      select count(0) from gow_shuffling_figure f inner join gow_shuffling_figure_number n
+      where 1=1
+      and f.is_delete = '0'
+      and f.shuffling_figure_number_id = n.id
+      <if test="type != null and type !='' ">
+          and f.type = #{type}
+      </if>
+      <if test="shufflingFigureNumberId != null">
+          and n.id = #{shufflingFigureNumberId}
+      </if>
+  </select>
+
+
+  <select id="selectMaxSort" resultType="java.lang.Integer">
+    select max(sort) from gow_shuffling_figure
+    where 1=1
+    and is_delete = '0'
+  </select>
+
+
+    <select id="selectValidityTimeById" resultType="java.util.Date">
+        select validity_time from gow_shuffling_figure
+        where 1=1
+        and is_delete = '0'
+        and id = #{id}
+    </select>
+
+</mapper>

@@ -154,3 +154,57 @@ CREATE TABLE `gow`.`gow_information_operation`  (
   `create_time` datetime(0) NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 );
+
+
+
+
+
+
+##=============================== 2019-09-23 10:04 ========================================================
+
+CREATE TABLE `gow`.`gow_shuffling_figure`  (
+  `id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `name` varchar(255) NULL COMMENT '名称',
+  `url` varchar(255) NULL COMMENT '轮播图url',
+  `type` enum('1','2') NULL COMMENT '类型（1：移动端首页轮播图，2：PC端）',
+  `sort` int(0) NULL COMMENT '排序',
+  `create_time` datetime(0) NULL COMMENT '创建时间',
+  `modify_time` datetime(0) NULL COMMENT '修改时间',
+  `is_delete` enum('0','1') NULL DEFAULT '0' COMMENT '删除状态（0：正常，1：已删除）',
+  `delete_time` datetime(0) NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`)
+);
+
+
+CREATE TABLE `gow`.`gow_shuffling_figure_number`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `type` enum('1','2') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '类型（1：移动端首页轮播图，2：PC端）',
+  `number` int(0) NULL COMMENT '最多保存数量',
+  `create_time` datetime(0) NULL COMMENT '创建时间',
+  `is_use` enum('0','1') NULL DEFAULT '0' COMMENT '是否启用（0：启用，1：不启用）',
+  `is_delete` enum('0','1') NULL DEFAULT '0' COMMENT '是否删除（0：正常，1：已删除）',
+  `modify_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  `delete_time` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`)
+);
+
+
+
+##=============================== 2019-09-24 11:41 ========================================================
+
+ALTER TABLE `gow`.`gow_shuffling_figure`
+ADD COLUMN `is_use` enum('0','1') NULL DEFAULT '0' COMMENT '是否使用（0：使用，1：不使用）' AFTER `delete_time`,
+ADD COLUMN `validity_time` datetime(0) NULL COMMENT '有效期时间' AFTER `is_use`;
+
+
+
+ALTER TABLE `gow`.`gow_shuffling_figure`
+ADD COLUMN `is_external_url` enum('0','1') NULL DEFAULT '0' COMMENT '是否使用外部链接（0：不使用，1：使用）' AFTER `validity_time`;
+
+
+ALTER TABLE `gow`.`gow_shuffling_figure`
+MODIFY COLUMN `is_external_url` enum('0','1') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '是否使用外部链接（0：内容链接，1：外部链接）' AFTER `validity_time`;
+
+
+ALTER TABLE `gow`.`gow_shuffling_figure`
+ADD COLUMN `shuffling_figure_number_id` int(0) NULL COMMENT '类型id' AFTER `url`;

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>轮播图管理</title>
+  <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+  <link rel="stylesheet" href="../boss/layui/css/global.css">
+  <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+    <style>
+        .layui-body{overflow-y: scroll;}
+    </style>
+</head>
+<body class="layui-layout-body">
+<!-- 左侧选中标识 -->
+<input hidden id="manage" value="shufflingFigureManage">
+<input hidden id="check" value="shufflingFigureSet">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header" th:include="boss\index\top::boss-top">
+        <!-- 头部 -->
+    </div>
+
+    <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+        <!-- 左边导航栏 -->
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;align-content: center">
+            <fieldset class="layui-elem-field">
+                <legend>轮播图管理 - 设置数量</legend>
+                <div class="layui-field-box">
+                    <table class="layui-table" lay-skin="nob" lay-size="mg">
+                        <tr>
+                            <td style='text-align: right'><a href="javascript:history.back(-1)" style="color:#FFA07A">返回</a></td>
+                        </tr>
+                    </table>
+                    <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label" style="width: 200px;text-align: right">设置类型 :</label>
+                                <div class="layui-input-inline">
+                                    <select name="type" lay-verify="" id="type">
+                                        <option value="1">移动端首页轮播图</option>
+                                        <option value="2">PC端首页轮播图</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label" style="width: 200px;text-align: right">每个类型的轮播图最多数 :</label>
+                                <div class="layui-input-inline">
+                                    <input autocomplete="off" class="layui-input" placeholder="0" type="text" name="number" id="number" value="0">
+                                </div>
+                                <label class="layui-form-label" style="width: 200px;text-align: right;color: #c72222;padding-left: 0px;text-align: left">*0默认不限制</label>
+                            </div>
+                        </div>
+                        <div class="layui-inline" style="text-align:center;padding: 20px;padding-left: 220px">
+                            <div class="layui-input-inline">
+                                <div class="layui-btn" id="addInfoBtn">提交</div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="50">
+                            <col width="400">
+                            <col width="100">
+                            <col width="180">
+                            <col width="130">
+                            <col>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th style='text-align: center'>序号</th>
+                            <th style='text-align: center'>类型</th>
+                            <th style='text-align: center'>数量</th>
+                            <th style='text-align: center'>创建时间</th>
+                            <th style='text-align: center'>启用状态</th>
+                            <th style="text-align:center;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="infoContent">
+                        <!-- 列表内容 -->
+                        </tbody>
+                    </table>
+                    <div id="page"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+        <!-- 底部 -->
+    </div>
+</div>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+<script type="text/javascript" src="../boss/comm/left.js"></script>
+</body>
+
+<script>
+
+    $(function () {
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+
+
+        /**
+         * 列表信息
+         * */
+        function selectInfoList(pageNo,pageSize) {
+            var newPageNo = $("#page .layui-laypage-skip .layui-input").val();
+            if(newPageNo){
+                pageNo = newPageNo;
+            }
+            var divContent = "";
+            $.ajax({
+                type : "post",
+                url : "/shufflingFigureNumberBoss/shufflingFigureNumberPage",
+                data : {"pageNo":pageNo,"pageSize":pageSize},
+                success : function (data) {
+                    if(data.list) {
+                        $.each(data.list, function (index, info) {
+                            divContent = divContent
+                                + "<tr>"
+                                    + "<td style='text-align: center'>" + (pageNo * (index + 1)) + "</td>"
+                                    + "<td style='text-align: center'>" + info.typeF + "</td>"
+                                    + "<td style='text-align: center'>" + info.number + "</td>"
+                                    + "<td style='text-align: center'>" + info.createTimeF + "</td>"
+                                    + "<td style='text-align: center;color: #ee7800'>" + (info.isUse=='0'?'已启用':'未启用') + "</td>"
+                                    + "<td style='text-align: center'>"
+                                        + "<div>"
+                                            +"<button class='layui-btn layui-btn-xs infoEdit' value='" + info.id + "' data='"+info.number+"'>编辑</button>"
+                                            +"<button class='layui-btn layui-btn-xs layui-btn-warm infoIsUse' value='" + info.id + "'>"+(info.isUse=='0'?'禁用':'启用')+"</button>"
+                                            +"<button class='layui-btn layui-btn-xs layui-btn-danger infoDel' value='" + info.id + "'>删除</button>"
+                                        + "</div>"
+                                    + "</td>"
+                                + "</tr>"
+                        });
+                        $("#infoContent").html(divContent);
+                        //分页
+                        layui.use('laypage', function () {
+                            var laypage = layui.laypage;
+                            //执行一个laypage实例
+                            laypage.render({
+                                elem: 'page'
+                                , count: data.rows //数据总数，从服务端得到
+                                , curr: data.pageNo
+                                , pages: data.totalPages
+                                , limit: data.pageSize
+                                , limits: [data.pageSize]
+                                , groups: 10
+                                , first: '首页' //首页文本
+                                , last: '尾页' //尾页文本
+                                , layout: ['prev', 'page', 'next', 'limit', 'count', 'refresh', 'skip']
+                                , jump: function (obj, first) {
+                                    //首次不执行
+                                    if (!first) {
+                                        selectInfoList(obj.curr, obj.limit);
+                                    }
+                                }
+                            });
+                        });
+                    }
+                }
+            });
+        }
+        selectInfoList(1,10);
+
+        /**
+         * 提交
+         * */
+        $("#addInfoBtn").on('click',function () {
+            var type = $("#type").val();
+            var number = $("#number").val();
+            $.ajax({
+                type: "post",
+                url: "/shufflingFigureNumberBoss/add",
+                data: {"type": type,"number":number},
+                success: function (data) {
+                    var tip = "保存失败";
+                    if(data > 0){
+                        tip = "保存成功"
+                        selectInfoList(1,10);
+                    }else if(data == -1){
+                        tip = "已存在相同类型"
+                    }
+                    layer.msg(tip, {
+                        icon: 1,
+                        time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                    }, function(){
+                        //do something
+                    });
+                }
+            });
+        });
+
+
+        /**
+         * 删除
+         * */
+        $(document).on('click','.infoDel',function () {
+           var id = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/shufflingFigureNumberBoss/del",
+                data: {"id": id},
+                success: function (data) {
+                    if(data > 0){
+                        selectInfoList(1,10);
+                    }else{
+                        layer.msg("删除失败", {
+                            icon: 1,
+                            time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                        }, function(){
+                            //do something
+                        });
+                    }
+                }
+            });
+        });
+
+        /**
+         * 启用 或 不启用
+         * */
+        $(document).on('click','.infoIsUse',function () {
+            var id = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/shufflingFigureNumberBoss/isUse",
+                data: {"id": id},
+                success: function (data) {
+                    if(data > 0){
+                        selectInfoList(1,10);
+                    }else{
+                        layer.msg("设置失败", {
+                            icon: 1,
+                            time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                        }, function(){
+                            //do something
+                        });
+                    }
+                }
+            });
+        });
+
+
+        /**
+         * 编辑弹窗口
+         * */
+        $(document).on('click','.infoEdit',function () {
+            var id = $(this).val();
+            var number = $(this).attr("data");
+            var content = "";
+            content = content +"<br/><br/>"
+            +'<form class="layui-form"> '
+                +'<div class="layui-form-item" style="text-align:center;">'
+                    +'<div class="layui-inline">'
+                        +'<label class="layui-form-label">轮播图数量:</label>'
+                        +'<div class="layui-input-inline">'
+                            +'<input class="layui-input" placeholder="轮播图数量" type="text" id="editNumber" value="'+number+'">'
+                        +'</div>'
+                    +'</div>'
+                    +'<br/>'
+                    +'<br/>'
+                    +'<div class="layui-inline">'
+                        +'<div class="layui-input-inline">'
+                            +"<button type='button' class='layui-btn editBtn' value='"+id+"'>提交</button>"
+                        +'</div>'
+                    +'</div>'
+                +'</div>'
+            +'</form>'
+
+            layer.open({
+                type: 1,
+                content: content ,
+                title: ['设置轮播图数量', 'font-size:16px;'],
+                area: ['500px', '300px'],
+                shadeClose: true
+            });
+        });
+
+        /**
+         * 编辑提交
+         * */
+        $(document).on('click','.editBtn',function () {
+           var id = $(this).val();
+           var number = $("#editNumber").val();
+            $.ajax({
+                type: "post",
+                url: "/shufflingFigureNumberBoss/edit",
+                data: {"id": id,"number":number},
+                success: function (data) {
+                    var tip = ""
+                    if(data > 0){
+                        selectInfoList(1,10);
+                        tip = "成功";
+                    }else{
+                        tip = "失败";
+                    }
+                    layer.msg("修改"+tip, {
+                        icon: 1,
+                        time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                    }, function(){
+                        //do something
+                    });
+                }
+            });
+        });
+
+    });
+
+</script>
+
+</html>

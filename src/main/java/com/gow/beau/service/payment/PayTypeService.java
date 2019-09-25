@@ -63,7 +63,7 @@ public class PayTypeService {
                 }else if(rsp.getPayType().equals("wechat")){
                     rsp.setPayType("微信");
                 }
-                rsp.setCreateTimeF(DateUtil.dateToString2(paytype.getCreateTime()));
+                rsp.setCreateTimeF(DateUtil.dateToString(paytype.getCreateTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
                 rsp.setContent(rsp.getContent()==null?"":rsp.getContent());
             }
         }

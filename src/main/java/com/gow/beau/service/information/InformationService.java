@@ -87,7 +87,7 @@ public class InformationService {
             for(Information information : informationList){
                 InformationListPageRsp rsp = new InformationListPageRsp();
                 BeanUtil.copyProperties(information,rsp);
-                rsp.setCreateTimeF(DateUtil.dateToString2(information.getCreateTime()));
+                rsp.setCreateTimeF(DateUtil.dateToString(information.getCreateTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
                 rspList.add(rsp);
             }
             pageInfo.setList(rspList);
@@ -158,8 +158,8 @@ public class InformationService {
         InformationRsp rsp = new InformationRsp();
         if(null != information){
             BeanUtil.copyProperties(information,rsp);
-            rsp.setCreateTimeF(DateUtil.dateToString2(information.getCreateTime()));
-            rsp.setModifyTimeF(DateUtil.dateToString2(information.getModifyTime()));
+            rsp.setCreateTimeF(DateUtil.dateToString(information.getCreateTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
+            rsp.setModifyTimeF(DateUtil.dateToString(information.getModifyTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
             String[] forms = {"阅读","评价"};
             //阅读量
             String toViewNumber = this.getDoShuzi(information.getToViewNumber());

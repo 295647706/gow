@@ -19,4 +19,6 @@ public class UploadRsp {
     private String data;
 
     private String path;
+
+    private String name;
 }

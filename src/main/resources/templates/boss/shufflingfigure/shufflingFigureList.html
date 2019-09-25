@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>轮播图管理</title>
+    <link rel="stylesheet" href="../boss/layui/layui/css/layui.css">
+    <link rel="stylesheet" href="../boss/layui/css/global.css">
+    <link rel="stylesheet" href="../boss/layui/icheck/minimal/red.css">
+    <style>
+        .layui-body{overflow-y: scroll;}
+    </style>
+</head>
+<body class="layui-layout-body">
+    <!-- 左侧选中标识 -->
+    <input hidden id="manage" value="shufflingFigureManage">
+    <input hidden id="check" value="shufflingFigureList">
+
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" th:include="boss\index\top::boss-top">
+            <!-- 头部 -->
+        </div>
+
+        <div class="layui-side layui-bg-black" th:include="boss\index\left::boss-left">
+            <!-- 左边导航栏 -->
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <fieldset class="layui-elem-field">
+                    <legend>轮播图管理 - 新增/列表</legend>
+                    <div class="layui-field-box">
+                        <form class="layui-form" action="">
+                            <div class="layui-form-item" style="text-align:left;width: 100%;">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">选择类型：</label>
+                                    <div class="layui-input-inline">
+                                        <select name="type" lay-verify="" id="optionType" lay-filter="optionType">
+                                            <option value="">全部</option>
+                                            <option th:each="info,iterStat: ${infoList}" th:value="${info.id}" th:data="${info.number}" th:text="${info.typeF}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width: 200px;">每个类型的轮播图最多数：</label>
+                                    <div class="layui-input-inline">
+                                        <input autocomplete="off" class="layui-input" placeholder="0" type="text" name="number" id="number" value="0">
+                                    </div>
+                                </div>
+                                <div class="layui-inline" style="width: 20%;">
+                                    <div class="layui-input-inline" style="width: 100%;">
+                                        <div class="layui-btn layui-btn-warm" id="addInfoBtn"><i class="layui-icon"></i>添加轮播图</div>
+                                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <div class="layui-btn" id="selectInfoBtn"><i class="layui-icon"></i>查詢</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- 添加轮播图 -->
+                        <div class="layui-form-item" style="text-align:left;padding: 1%;width: 100%;display: none" id="addContentHtml">
+                            <div class="layui-inline" style="width: 100%;">
+                                <label class="layui-form-label" style="width: 18%;">轮播图类型&nbsp;：</label>
+                                <div class="layui-input-inline" style="width: 50%;">
+                                    <label class="layui-form-label" id="type-text" style="width: 100%;text-align: left"></label>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="layui-inline" style="width: 100%;">
+                                <label class="layui-form-label" style="width: 18%;">轮播图&nbsp;：</label>
+                                <div class="layui-input-inline">
+                                    <button type="button" class="layui-btn lbtImage" id="lbtImage">
+                                        <i class="layui-icon">&#xe67c;</i>上传图片
+                                    </button>
+                                    <img src="" id="imglbt" style="width: 300px;height: 100px;display: none">
+                                    <br/>
+                                    <a href="#" style="width:100%;color: #ee7800;padding-left:70%;padding-top:1px;display: none" id="cancelImg">取消</a>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="layui-inline" style="width: 100%;">
+                                <label class="layui-form-label" style="width: 18%;">是否使用外部链接&nbsp;：</label>
+                                <div class="layui-input-inline">
+                                    <input type="radio" name="isExternalUrl" value="0" checked> 非外部链接
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="isExternalUrl" value="1" > 外部链接
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="layui-inline" style="width: 100%;">
+                                <label class="layui-form-label" style="width: 18%;">轮播图链接&nbsp;：</label>
+                                <div class="layui-input-inline" style="width: 50%;">
+                                    <input class="layui-input" placeholder="轮播图链接" type="text" id="url" value="">
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="layui-inline" style="width: 100%;">
+                                <label class="layui-form-label" style="width: 18%;">名称&nbsp;：</label>
+                                <div class="layui-input-inline" style="width: 50%;">
+                                    <input class="layui-input" placeholder="名称" type="text" id="name" value="">
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="layui-inline" style="width: 100%;">
+                                <label class="layui-form-label" style="width: 18%;">排序&nbsp;：</label>
+                                <div class="layui-input-inline" style="width: 50%;">
+                                    <input class="layui-input" placeholder="排序" type="text" id="sort" value="0">
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <div class="layui-inline" style="width: 100%;">
+                                <div class="layui-input-inline" style="width:80%;text-align: center">
+                                    <button type='button' class='layui-btn submitBtn' value='' id="type-id">提交</button>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <a href="#" style="color: #ee7800" id="pack_up">收起</a>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <hr>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="30">
+                                <col width="250">
+                                <col width="120">
+                                <col width="200">
+                                <col width="60">
+                                <col width="110">
+                                <col width="110">
+                                <col>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th style='text-align: center'>序号</th>
+                                <th style='text-align: center'>图片</th>
+                                <th style='text-align: center'>名称</th>
+                                <th style='text-align: center'>类型</th>
+                                <th style='text-align: center'>排序</th>
+                                <th style='text-align: center'>添加时间</th>
+                                <th style='text-align: center'>过期时间</th>
+                                <th style="text-align:center;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="goodsContent">
+                            <!-- 列表内容 -->
+                            </tbody>
+                        </table>
+                        <div id="page"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="layui-footer" th:include="boss\index\footer::boss-footer">
+            <!-- 底部 -->
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../boss/layui/javascript/jquery.min.js"></script>
+<script type="text/javascript" src="../boss/layui/layui/layui.js"></script>
+<script type="text/javascript" src="../boss/layui/icheck/icheck.js"></script>
+<script type="text/javascript" src="../boss/layui/javascript/dw.js"></script>
+<script type="text/javascript" src="../boss/comm/left.js"></script>
+
+<script>
+
+    $(function () {
+
+        layui.use('form', function(){
+            var form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function(data){
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+
+            //下拉框事件
+            form.on('select(optionType)', function(data){
+                var id = data.value;
+                var text = $("#optionType option:selected").text();//获取文本
+                var da = $("#optionType option:selected").attr("data");//获取文本
+                $("#number").attr("value",da);
+                $("#type-id").attr("value",id);
+                $("#type-text").text(text);
+            });
+        });
+
+        //上传图片
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '.lbtImage' //绑定元素
+                ,url: '/fileUpload/image' //上传接口
+                ,size: 1024
+                ,done: function(res){
+                    console.log(res)
+                    //上传完毕回调
+                    if(res.code == 0){
+                        $("#imglbt").attr("src",res.data);
+                        $("#lbtImage").css("display","none");
+                        $("#imglbt").css("display","block");
+                        $("#cancelImg").css("display","block");
+                        $("#name").attr("value",res.name);
+                        $("#url").attr("value",res.path);
+                    }else {
+                        layer.msg(res.msg, {
+                            icon: 1,
+                            time: 5000 //5秒关闭（如果不配置，默认是5秒）
+                        });
+                    }
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
+        });
+
+
+        function selectInfoList(pageNo,pageSize) {
+            var newPageNo = $("#page .layui-laypage-skip .layui-input").val();
+            if(newPageNo){
+                pageNo = newPageNo;
+            }
+
+            var divContent = "";
+
+            var shufflingFigureNumberId = $("#optionType").val();
+            $.ajax({
+                type : "post",
+                url : "/shufflingFigureBoss/shufflingFigurePage",
+                data : {"pageNo":pageNo,"pageSize":pageSize,"shufflingFigureNumberId":shufflingFigureNumberId},
+                success : function (data) {
+                    if(data.list){
+                        $.each(data.list, function (index, info) {
+                            divContent = divContent
+                            +"<tr>"
+                                +"<td style='text-align: center'>"+(pageNo*(index+1))+"</td>"
+                                +"<td><img src='"+info.baseImage+"'style='max-width: 300px;max-height: 130px;'></td>"
+                                +"<td style='text-align: center'>"+info.name+"</td>"
+                                +"<td style='text-align: center'>"
+                                    +"<span>"+info.typeF+"</span>"
+                                    +"<br/>"
+                                    +"<span style='font-size:.1em;color: "+(info.isUse=='0'?'#0BB20C':'#c72222')+" '>"+(info.isUse=='0'?'已启用':'已禁用')+"</span>"
+                                    +"<br/>"
+                                    +"<span style='font-size:.1em;color: "+(info.isValidityTimeF == 0?'#00a0e9':'#FF5722')+" '>"+(info.isValidityTimeF == 0?'未过期':'已过期')+"</span>"
+                                +"</td>"
+                                +"<td style='text-align: center'>"+(info.sort==null?'':info.sort)+"</td>"
+                                +"<td style='text-align: center'>"+info.createTimeF+"</td>"
+                                +"<td style='text-align: center'>"+(info.validityTimeF==null?'':info.validityTimeF)+"</td>"
+                                +"<td style='text-align: left;padding-left: 20px;padding-right: 1px;'>"
+                                    +"<div>"
+                                        +"<p>"
+                                            +"<button class='layui-btn layui-btn-xs editInfo' value='"+info.id+"'>编辑</button>"
+                                            +"<button class='layui-btn layui-btn-xs validityTimeSet' value='"+info.id+"' data='"+(info.validityTimeF==null?'':info.validityTimeF)+"'>过期时间</button>"
+                                        +"</p>"
+                                        +"<br/>"
+                                        +"<p>"
+                                            +"<button class='layui-btn layui-btn-xs "+(info.isUse=='0'?'layui-btn-danger':'layui-btn-normal')+" isUseInfo' value='"+info.id+"'>"+(info.isUse=='0'?'禁用':'启用')+"</button>"
+                                            +"<button class='layui-btn layui-btn-xs layui-btn-danger delInfo' value='"+info.id+"'>删除</button>"
+                                        +"</p>"
+                                    +"</div>"
+                                +"</td>"
+                            +"</tr>"
+                        })
+                    }
+                    $("#goodsContent").html(divContent);
+                    //分页
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+                        //执行一个laypage实例
+                        laypage.render({
+                            elem: 'page'
+                            ,count: data.rows //数据总数，从服务端得到
+                            ,curr : data.pageNo
+                            ,pages : data.totalPages
+                            ,limit : data.pageSize
+                            ,limits: [data.pageSize]
+                            ,groups: 10
+                            ,first: '首页' //首页文本
+                            ,last: '尾页' //尾页文本
+                            ,layout: ['prev', 'page', 'next','limit','count','refresh','skip']
+                            ,jump: function(obj, first){
+                                //首次不执行
+                                if(!first){
+                                    selectInfoList(obj.curr,obj.limit);
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        selectInfoList(1,10);
+
+
+
+        /**
+         * 查詢
+         * */
+        $("#selectInfoBtn").on('click',function () {
+            selectInfoList(1,10);
+        });
+
+
+        /**
+         * 展开
+         * 添加轮播图弹窗口
+         * */
+        $("#addInfoBtn").on('click',function () {
+            var optionTypeId = $("#optionType").val();
+            if(!optionTypeId){
+                //提示弹窗
+                layer.msg('请选择类型', {
+                    icon: 1,
+                    time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                }, function(){
+
+                });
+                return;
+            }
+            $("#addContentHtml").css("display","block");
+        });
+
+        /**
+         * 收起
+         * 添加轮播图弹窗口
+         * */
+        $("#pack_up").on('click',function () {
+            $("#addContentHtml").css("display","none");
+        });
+
+
+        /**
+         * 取消,取消此图片
+         * */
+        $("#cancelImg").on('click',function () {
+            $("#lbtImage").css("display","block");
+            $("#imglbt").css("display","none");
+            $("#cancelImg").css("display","none");
+            $("#name").attr("value","");
+            $("#url").attr("value","");
+        });
+
+
+        /**
+         * 添加轮播图 - 提交
+         * */
+        $(document).on('click','.submitBtn',function () {
+            var id = $(this).val();
+            var url = $("#url").val();
+            var sort = $("#sort").val();
+            var name = $("#name").val();
+            var isExternalUrl = $("input[name='isExternalUrl']:checked").val()
+            $.ajax({
+                type: "post",
+                url: "/shufflingFigureBoss/add",
+                data: {"id": id,"url":url,"sort":sort,"name":name,"isExternalUrl":isExternalUrl},
+                success: function (data) {
+                    var tip = "新增失败"
+                    if(data > 0){
+                        tip = "新增成功"
+                        selectInfoList(1,10);
+                    }else{
+                        if(data == -1){
+                            tip = "轮播图已达到允许设置的数量";
+                        }
+                    }
+                    //提示弹窗
+                    layer.msg(tip, {
+                        icon: 1,
+                        time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                    }, function(){
+
+                    });
+                    return;
+                }
+            });
+        });
+
+
+        /**
+         * 编辑-跳转页面
+         * */
+        $(document).on('click','.editInfo',function () {
+            var id = $(this).val();
+            if(id){
+                window.location.href = "/shufflingFigureBoss/shufflingFigure-edit-page?id="+id;
+            }
+        });
+
+        /**
+         * 删除
+         * */
+        $(document).on('click','.delInfo',function () {
+            var id = $(this).val();
+            if(id){
+                $.ajax({
+                    type: "post",
+                    url: "/shufflingFigureBoss/del",
+                    data: {"id": id},
+                    success: function (data) {
+                        if(data > 0) {
+                            var pageNo = $("#page .layui-laypage-skip .layui-input").val();
+                            var pageSize = $("#page .layui-laypage-limits option").val();
+                            console.log("pageNo = " + pageNo + ",pageSize = " + pageSize)
+                            selectInfoList(pageNo, pageSize);
+                        }else{
+                            //提示弹窗
+                            layer.msg('删除失败', {
+                                icon: 1,
+                                time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                            }, function(){
+
+                            });
+                            return;
+                        }
+                    }
+                });
+            }
+        });
+
+
+        var validityTime = "";
+        /**
+         * 设置时间 弹出框
+         * */
+        $(document).on('click','.validityTimeSet',function () {
+            //设置 id
+            var id = $(this).attr("value");
+            //已设置的 过期时间
+            var validityTime = $(this).attr("data");
+            //如果未设置过期时间，则使用当前系统时间
+            if(!validityTime) {
+                //当前年、月、日
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                var day = date.getDate();
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                validityTime = year+"-"+month+"-"+day;
+            }
+            //弹出框div
+            var content = "";
+            content = content
+                +"<br/>"
+                +"<br/>"
+                +"<br/>"
+                +"<div class='layui-inline' style='width: 100%;'>"
+                +"	<label class='layui-form-label' style='width: 18%;'>过期时间&nbsp;：</label>"
+                +"	<div class='layui-input-inline' style='width: 50%;'>"
+                +"		<input class='layui-input' placeholder='过期时间' type='text' id='validityTime' value='"+validityTime+"'>"
+                +"	</div>"
+                +"	<br/>"
+                +"	<label style='color: #c72222;font-size:.3em;padding-left: 25%;'>*时间格式必须为：yyyy-MM-dd / yyyy/MM/dd</label>"
+                +"</div>"
+                +"<br/>"
+                +"<br/>"
+                +"<br/>"
+                +"<div class='layui-inline' style='width: 100%;'>"
+                +"	<div class='layui-input-inline' style='width:100%;text-align: center'>"
+                +"		<button type='button' class='layui-btn validityTimeSetBtn' value='"+id+"' id='validityTimeSet-id'>提交</button>"
+                +"	</div>"
+                +"</div>"
+
+            layer.open({
+                type: 1,
+                content: content ,
+                title: ['设置过期时间', 'font-size:16px;'],
+                area: ['500px', '300px'],
+                shadeClose: true,
+                resize: true
+            });
+        });
+
+
+        /**
+         * 设置时间 提交
+         * */
+        $(document).on('click','.validityTimeSetBtn',function () {
+            var id = $(this).val();
+            var validityTime = $("#validityTime").val();
+            if(id && validityTime) {
+                $.ajax({
+                    type: "post",
+                    url: "/shufflingFigureBoss/validityTimeSet",
+                    data: {"id": id, "validityTime": validityTime},
+                    success: function (data) {
+                        var tip = "设置失败";
+                        if(data > 0) {
+                            var pageNo = $("#page .layui-laypage-skip .layui-input").val();
+                            var pageSize = $("#page .layui-laypage-limits option").val();
+                            selectInfoList(pageNo, pageSize);
+                            tip = "设置成功";
+                        }else{
+                            if(data == -1){
+                                tip = "请输入过期时间";
+                            }else if(data == -2){
+                                tip = "过期时间不能小于当前系统时间"
+                            }else if(data == -3){
+                                tip = "过期时间格式错误"
+                            }
+                        }
+                        //提示弹窗
+                        layer.msg(tip, {
+                            icon: 1,
+                            time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                        }, function(){
+
+                        });
+                        return;
+                    }
+                });
+            }
+        });
+
+
+        /**
+         * 启用 或 禁用
+         * */
+        $(document).on('click','.isUseInfo',function () {
+           var id = $(this).val();
+           if(id){
+               $.ajax({
+                   type: "post",
+                   url: "/shufflingFigureBoss/isUseInfo",
+                   data: {"id": id},
+                   success: function (data) {
+                       if(data > 0){
+                           var pageNo = $("#page .layui-laypage-skip .layui-input").val();
+                           var pageSize = $("#page .layui-laypage-limits option").val();
+                           selectInfoList(pageNo, pageSize);
+                       }else {
+                           var tip = "设置失败";
+                           //提示弹窗
+                           layer.msg(tip, {
+                               icon: 1,
+                               time: 3000 //n秒关闭（如果不配置，默认是5秒）
+                           }, function () {
+
+                           });
+                           return;
+                       }
+                   }
+               });
+           }
+        });
+
+
+    });
+
+</script>
+
+</html>

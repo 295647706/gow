@@ -97,7 +97,7 @@ public class CategoryService {
             for(Category category : categoryList){
                 CategoryListPageRsp rsp = new CategoryListPageRsp();
                 BeanUtil.copyProperties(category, rsp);
-                rsp.setCreateTimeF(DateUtil.dateToString2(category.getCreateTime()));
+                rsp.setCreateTimeF(DateUtil.dateToString(category.getCreateTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
                 rspList.add(rsp);
             }
             pageInfo.setList(rspList);
@@ -204,7 +204,7 @@ public class CategoryService {
         }
 
         BeanUtil.copyProperties(category, rsp);
-        rsp.setCreateTimeF(DateUtil.dateToString2(category.getCreateTime()));
+        rsp.setCreateTimeF(DateUtil.dateToString(category.getCreateTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
 
         //品牌分类相关的商品
         List<CategoryGoodsListRsp> goodsListRspList = goodsExtMapper.selectCategoryGoodsListByCatId(catId);

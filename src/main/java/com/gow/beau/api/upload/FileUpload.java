@@ -56,7 +56,8 @@ public class FileUpload {
             String name = StringUtils.substringBefore(originalFilename,".");
             String url = this.getSaveImgPath();
             //新的图片名称
-            String filePath = url + name + "_" + CodeUtil.randomCode(4) + "." +ext;
+            name = name + "_" + CodeUtil.randomCode(4) + "." +ext;
+            String filePath = url + name;
             //file
             File newFile = new File(filePath);
             //保存图片
@@ -66,6 +67,7 @@ public class FileUpload {
             rsp.setCode(0);
             rsp.setMsg("上传成功");
             rsp.setPath(filePath);
+            rsp.setName(name);
             String base64Image = Base64Utils.imageToBase64ByLocal(filePath);
             base64Image = "data:image/"+ext+";base64,"+base64Image;
             rsp.setData(base64Image);

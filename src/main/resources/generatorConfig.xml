@@ -109,5 +109,13 @@
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>-->
 
+        <!--<table tableName="gow_shuffling_figure" domainObjectName="ShufflingFigure">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
+        <!--<table tableName="gow_shuffling_figure_number" domainObjectName="ShufflingFigureNumber">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>-->
+
     </context>
 </generatorConfiguration>

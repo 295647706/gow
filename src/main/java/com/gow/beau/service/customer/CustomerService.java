@@ -183,8 +183,8 @@ public class CustomerService {
                 rsp.setCustomerRealname(customer.getCustomerRealname()==null?"":customer.getCustomerRealname());
                 rsp.setIsUse(customer.getIsUse().equals("0")?"正常":"已冻结");
                 rsp.setSex(customer.getSex()==null?"":customer.getSex());
-                rsp.setBirthdayF(DateUtil.dateToString(customer.getBirthday()));
-                rsp.setCreateTimeF(DateUtil.dateToString2(customer.getCreateTime()));
+                rsp.setBirthdayF(DateUtil.dateToString(customer.getBirthday(),DateUtil.PATTERN_YEAR_MONTH_DAY));
+                rsp.setCreateTimeF(DateUtil.dateToString(customer.getCreateTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
 
                 rspList.add(rsp);
             }
@@ -225,8 +225,8 @@ public class CustomerService {
 
         rsp.setCustomerRealname(customer.getCustomerRealname()==null?"":customer.getCustomerRealname());
         rsp.setSex(customer.getSex()==null?"":customer.getSex());
-        rsp.setBirthdayF(DateUtil.dateToString(customer.getBirthday()));
-        rsp.setCreateTimeF(DateUtil.dateToString2(customer.getCreateTime()));
+        rsp.setBirthdayF(DateUtil.dateToString(customer.getBirthday(),DateUtil.PATTERN_YEAR_MONTH_DAY));
+        rsp.setCreateTimeF(DateUtil.dateToString(customer.getCreateTime(),DateUtil.PATTERN_YEAR_MONTH_DAY_HOURS_MINUTE_SECONDS));
 
         return rsp;
     }
