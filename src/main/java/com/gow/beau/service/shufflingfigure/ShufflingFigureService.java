@@ -42,7 +42,7 @@ public class ShufflingFigureService {
 
 
     /**
-     * 轮播图管理 - 轮播图列表信息
+     * 轮播图管理 - 轮播图列表信息 - 分页
      * */
     public PageInfo shufflingFigurePage(ShufflingFigurePageReq req){
         //计算分页信息
@@ -69,6 +69,23 @@ public class ShufflingFigureService {
      * */
     private int shufflingFigurePageCount(ShufflingFigurePageReq req){
         return shufflingFigureExtMapper.shufflingFigurePageCount(req);
+    }
+
+
+    /**
+     * 轮播图管理 - 轮播图列表信息 - 不分页
+     * */
+    public List<ShufflingFigureRsp> shufflingFigureList(String type){
+        List<ShufflingFigureRsp> rspList = new ArrayList<>();
+        String validityTime = DateUtil.dateToString(new Date(),DateUtil.PATTERN_YEAR_MONTH_DAY);
+        List<ShufflingFigure> shufflingFigureList = shufflingFigureExtMapper.shufflingFigureList(type,validityTime);
+        if(CollectionUtils.isEmpty(shufflingFigureList)){
+            for(ShufflingFigure shufflingFigure : shufflingFigureList){
+                ShufflingFigureRsp rsp = this.getShufflingFigureRsp(shufflingFigure);
+                rspList.add(rsp);
+            }
+        }
+        return rspList;
     }
 
 
@@ -143,6 +160,8 @@ public class ShufflingFigureService {
         shufflingFigure.setCreateTime(date);
         shufflingFigure.setModifyTime(date);
         shufflingFigure.setIsExternalUrl(req.getIsExternalUrl());
+        //过期时间为当前系统时间加一年
+        shufflingFigure.setValidityTime(DateUtil.getTimeAddOrSubtract(DateUtil.CALENDAR_YEAR,1));
         return shufflingFigureMapper.insertSelective(shufflingFigure);
     }
 

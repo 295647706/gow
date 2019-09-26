@@ -6,6 +6,7 @@ import com.gow.beau.api.information.InformationController;
 import com.gow.beau.api.message.MessageController;
 import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.rsp.goodsrecommended.GoodsRecommendedListRsp;
+import com.gow.beau.service.shufflingfigure.ShufflingFigureService;
 import com.gow.beau.storage.auto.model.Information;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,9 @@ public class IndexPageController {
     @Autowired
     private InformationController informationController;
 
+    @Autowired
+    public ShufflingFigureService shufflingFigureService;
+
     @RequestMapping("/index-page")
     public ModelAndView indexPage(){
         ModelAndView view = new ModelAndView("index");
@@ -44,6 +48,7 @@ public class IndexPageController {
         view.addObject("goodsRecommendedList",goodsRecommendedController.pageGoodsRecommendedList());
         //view.addObject("messageList",messageController.pageMessageList());
         view.addObject("informationList",informationController.pageInformationList());
+        view.addObject("shufflingFigureList",shufflingFigureService.shufflingFigureList("1"));
         return view;
     }
 

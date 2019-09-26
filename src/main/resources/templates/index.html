@@ -98,12 +98,20 @@
 	    
 		<div class="mui-content">
 	        <div class="banner swiper-container">
-	            <div class="swiper-wrapper"><!--
-	                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/banner.jpg" alt=""></a></div>
-	                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/banner.jpg" alt=""></a></div>-->
-	                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu1_3_5.jpg" alt=""></a></div>
-	                <div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu2_2.jpg" alt=""></a></div>
-					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/zyq_1_2.jpg" alt=""></a></div>
+	            <div class="swiper-wrapper">
+					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/banner.jpg" alt=""></a></div>
+					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu-m1.jpg" alt=""></a></div>
+					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu-m2.jpg" alt=""></a></div>
+					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu-m3.jpg" alt=""></a></div>
+					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu-m4.jpg" alt=""></a></div>
+					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu-m5.jpg" alt=""></a></div>
+					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu-m6.jpg" alt=""></a></div>
+					<div class="swiper-slide"><a href="javascript:void(0)"><img class="swiper-lazy" data-src="../../upload/my/lunbotu-m7.jpg" alt=""></a></div>
+					<div class="swiper-slide" th:each="shufflingFigure,iterStat: ${shufflingFigureList}">
+						<a href="javascript:void(0)">
+							<img class="swiper-lazy" th:data-src="${shufflingFigure.baseImage}" alt="">
+						</a>
+					</div>
 	            </div>
 	            <div class="swiper-pagination"></div>
 	        </div>
