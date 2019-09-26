@@ -79,7 +79,7 @@ public class ShufflingFigureService {
         List<ShufflingFigureRsp> rspList = new ArrayList<>();
         String validityTime = DateUtil.dateToString(new Date(),DateUtil.PATTERN_YEAR_MONTH_DAY);
         List<ShufflingFigure> shufflingFigureList = shufflingFigureExtMapper.shufflingFigureList(type,validityTime);
-        if(CollectionUtils.isEmpty(shufflingFigureList)){
+        if(!CollectionUtils.isEmpty(shufflingFigureList)){
             for(ShufflingFigure shufflingFigure : shufflingFigureList){
                 ShufflingFigureRsp rsp = this.getShufflingFigureRsp(shufflingFigure);
                 rspList.add(rsp);
