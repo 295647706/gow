@@ -13,6 +13,8 @@ import com.gow.beau.storage.auto.model.Payment;
 import com.gow.beau.util.PayMentUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,8 +105,7 @@ public class OrderController {
      */
     @RequestMapping("/paymentOrder")
     @ResponseBody
-    public int paymentOrder(PaymentOrderReq req,String orderid){
-        System.err.println(orderid);
+    public int paymentOrder(PaymentOrderReq req){
         int count = orderService.paymentOrder(req);
         if(count > 0){
             try {
@@ -192,4 +193,25 @@ public class OrderController {
 
         return zfm;
     }
+
+
+    /**
+     * 支付猫回调通知地址
+     * */
+    @PostMapping("/to_notity_order")
+    @ResponseBody
+    public String notifyOrder(@PathVariable("platform_trade_no")String platform_trade_no, @PathVariable("orderid")String orderid, @PathVariable("price")float price, @PathVariable("realprice")float realprice, @PathVariable("orderuid")String orderuid, @PathVariable("key")String key){
+        System.err.print("支付猫回调成功：platform_trade_no = "+platform_trade_no);
+        PaymentOrderReq req = new PaymentOrderReq();
+        req.setOrderCode(orderid);
+        req.setPayPrice(new BigDecimal(realprice));
+        int count = orderService.paymentOrder(req);
+        if(count > 0){
+            System.err.print("支付猫回调执行成功：platform_trade_no = "+platform_trade_no);
+            return "OK";
+        }
+        return null;
+    }
+
+
 }

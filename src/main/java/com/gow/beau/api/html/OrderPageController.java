@@ -9,6 +9,8 @@ import com.gow.beau.storage.auto.model.Paytype;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -84,6 +86,17 @@ public class OrderPageController {
         }
         view.addObject("paytypeList", paytypeList);
         view.addObject("type",type);
+        return view;
+    }
+
+
+    /**
+     * 支付猫支付成功，跳转地址
+     * */
+    @GetMapping("/to_return_page")
+    public ModelAndView returnPayOrderPage(@PathVariable("orderid")String orderid){
+        System.err.print("支付猫支付成功，跳转地址:orderid = " + orderid);
+        ModelAndView view = this.orderPage2("");
         return view;
     }
 

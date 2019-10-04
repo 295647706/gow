@@ -402,14 +402,15 @@ public class OrderService {
      * 确认支付，去支付，修改订单状态
      */
     public int paymentOrder(PaymentOrderReq req) {
-        if(null != req.getOrderid()){
-            req.setOrderCode(req.getOrderid());
+        if(null == req.getOrderCode()){
+            return 0;
         }
         Order order = new Order();
         order.setOrderStatus("1");
         order.setPayTime(new Date());
         order.setOrderCode(req.getOrderCode());
-        order.setPayType(req.getPayType());
+        order.setPayType(req.getPayType()==null?null:req.getPayType());
+        order.setPayPrice(req.getPayPrice()==null?null:req.getPayPrice());
         int count = orderExtMapper.updateOrderStatusByOederCode(order);
         return count;
     }

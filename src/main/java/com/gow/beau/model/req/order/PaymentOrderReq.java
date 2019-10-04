@@ -2,6 +2,8 @@ package com.gow.beau.model.req.order;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * Created by lzn on 2019/3/19.
  */
@@ -14,6 +16,6 @@ public class PaymentOrderReq {
 
     private String payType;
 
-    //支付回调orderid
-    private String orderid;
+    //支付金额
+    private BigDecimal payPrice;
 }
