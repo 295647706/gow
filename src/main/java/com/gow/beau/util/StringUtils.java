@@ -3,7 +3,7 @@ package com.gow.beau.util;
 /**
  * String工具 主要是对StringUtils一些方法进行重写,从而达到更好的应用
  *
- * @author ztt
+ * @author lzn
  *
  */
 public class StringUtils {
