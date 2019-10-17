@@ -76,6 +76,10 @@ public class Order {
 
     private String sendMobile;
 
+    private String platformTradeNo;
+
+    private String keyValue;
+
     public Long getId() {
         return id;
     }
@@ -362,5 +366,21 @@ public class Order {
 
     public void setSendMobile(String sendMobile) {
         this.sendMobile = sendMobile == null ? null : sendMobile.trim();
+    }
+
+    public String getPlatformTradeNo() {
+        return platformTradeNo;
+    }
+
+    public void setPlatformTradeNo(String platformTradeNo) {
+        this.platformTradeNo = platformTradeNo;
+    }
+
+    public String getKeyValue() {
+        return keyValue;
+    }
+
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
     }
 }

@@ -208,3 +208,24 @@ MODIFY COLUMN `is_external_url` enum('0','1') CHARACTER SET utf8 COLLATE utf8_ge
 
 ALTER TABLE `gow`.`gow_shuffling_figure`
 ADD COLUMN `shuffling_figure_number_id` int(0) NULL COMMENT '类型id' AFTER `url`;
+
+
+
+
+
+
+
+
+##=============================== 2019-10-07 11:07 ========================================================
+
+
+
+ALTER TABLE `gow`.`gow_order`
+  ADD COLUMN `platform_trade_no` VARCHAR(50) NULL  COMMENT '支付平台回调时带回的id' AFTER `send_mobile`,
+  ADD COLUMN `key` TEXT NULL  COMMENT '一定存在。我们把使用到的所有参数，连您的Token一起，按参数名字母升序排序。把参数值拼接在一起。做md5-32位加密，取字符串小写。得到key。您需要在您的服务端按照同样的算法，自己验证此key是否正确。只在正确时，执行您自己逻辑中支付成功代码,key的拼接顺序：如用到了所有参数，就按这个顺序拼接：orderid + orderuid + platform_trade_no + price + realprice + token' AFTER `platformTradeNo`;
+
+
+
+  ALTER TABLE `gow`.`gow_order`
+    CHANGE `key` `key_value` VARCHAR(255) CHARSET latin1 COLLATE latin1_swedish_ci NULL  COMMENT '一定存在。我们把使用到的所有参数，连您的Token一起，按参数名字母升序排序。把参数值拼接在一起。做md5-32位加密，取字符串小写。得到key。您需要在您的服务端按照同样的算法，自己验证此key是否正确。只在正确时，执行您自己逻辑中支付成功代码,key的拼接顺序：如用到了所有参数，就按这个顺序拼接：orderid + orderuid + platform_trade_no + price + realprice + token';
+

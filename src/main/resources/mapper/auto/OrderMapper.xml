@@ -38,6 +38,8 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="send_person" jdbcType="VARCHAR" property="sendPerson" />
     <result column="send_mobile" jdbcType="VARCHAR" property="sendMobile" />
+    <result column="platform_trade_no" jdbcType="VARCHAR" property="platformTradeNo" />
+    <result column="key_value" jdbcType="VARCHAR" property="keyValue" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -104,7 +106,7 @@
     shipping_person, shipping_phone, shipping_mobile, invoice_title, invoice_content, 
     del_flag, invoice_type, customer_remark, order_integral, evaluate_flag, express_price, 
     shipping_postcode, order_cancel_time, order_cancel_remark, back_price, create_time, 
-    send_person, send_mobile
+    send_person, send_mobile, platformTradeNo, key_value
   </sql>
   <select id="selectByExample" parameterType="com.gow.beau.storage.auto.model.OrderExample" resultMap="BaseResultMap">
     select
@@ -148,7 +150,7 @@
       customer_remark, order_integral, evaluate_flag, 
       express_price, shipping_postcode, order_cancel_time, 
       order_cancel_remark, back_price, create_time, 
-      send_person, send_mobile)
+      send_person, send_mobile, platform_trade_no, key_value)
     values (#{customerId,jdbcType=BIGINT}, #{orderCode,jdbcType=VARCHAR}, #{orderPrice,jdbcType=DECIMAL}, 
       #{payPrice,jdbcType=DECIMAL}, #{orderStatus,jdbcType=CHAR}, #{payTime,jdbcType=TIMESTAMP}, 
       #{payType,jdbcType=CHAR}, #{sendExpressTime,jdbcType=TIMESTAMP}, #{expressName,jdbcType=VARCHAR}, 
@@ -160,7 +162,7 @@
       #{customerRemark,jdbcType=VARCHAR}, #{orderIntegral,jdbcType=BIGINT}, #{evaluateFlag,jdbcType=CHAR}, 
       #{expressPrice,jdbcType=DECIMAL}, #{shippingPostcode,jdbcType=VARCHAR}, #{orderCancelTime,jdbcType=TIMESTAMP}, 
       #{orderCancelRemark,jdbcType=VARCHAR}, #{backPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{sendPerson,jdbcType=VARCHAR}, #{sendMobile,jdbcType=VARCHAR})
+      #{sendPerson,jdbcType=VARCHAR}, #{sendMobile,jdbcType=VARCHAR}, #{platformTradeNo}, #{keyValue})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gow.beau.storage.auto.model.Order" useGeneratedKeys="true">
     insert into gow_order
@@ -270,6 +272,12 @@
       <if test="sendMobile != null">
         send_mobile,
       </if>
+      <if test="platformTradeNo != null">
+        platform_trade_no,
+      </if>
+      <if test="keyValue != null">
+        key_value,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="customerId != null">
@@ -376,6 +384,12 @@
       </if>
       <if test="sendMobile != null">
         #{sendMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="platformTradeNo != null">
+        #{platformTradeNo},
+      </if>
+      <if test="keyValue != null">
+        #{keyValue},
       </if>
     </trim>
   </insert>
@@ -650,6 +664,12 @@
       </if>
       <if test="sendMobile != null">
         send_mobile = #{sendMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="platformTradeNo != null">
+        platform_trade_no = #{platformTradeNo},
+      </if>
+      <if test="keyValue != null">
+        key_value = #{keyValue},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

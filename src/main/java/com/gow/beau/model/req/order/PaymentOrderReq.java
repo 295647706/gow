@@ -18,4 +18,8 @@ public class PaymentOrderReq {
 
     //支付金额
     private BigDecimal payPrice;
+
+    private String platformTradeNo;
+
+    private String key;
 }

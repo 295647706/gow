@@ -3,19 +3,18 @@ package com.gow.beau.api.html;
 import com.gow.beau.api.order.OrderController;
 import com.gow.beau.model.req.order.OrderConfirmPageReq;
 import com.gow.beau.model.rsp.order.SaveOrderRsp;
-import com.gow.beau.service.ordergoods.OrderGoodsService;
 import com.gow.beau.service.payment.PayTypeService;
 import com.gow.beau.storage.auto.model.Paytype;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +23,7 @@ import java.util.UUID;
  *
  * @author lzn
  */
+@Api(value = "订单页面")
 @Controller
 @RequestMapping("/orderPage")
 public class OrderPageController {
@@ -40,6 +40,7 @@ public class OrderPageController {
         return view;
     }
 
+    @ApiOperation(value = "订单列表页面")
     @RequestMapping("/order2-page")
     public ModelAndView orderPage2(String orderStatus){
         ModelAndView view = new ModelAndView("order/new/orders-list");
@@ -47,6 +48,7 @@ public class OrderPageController {
         return view;
     }
 
+    @ApiOperation(value = "确认下单页面")
     @RequestMapping("/order-confirm-page")
     public ModelAndView orderConfirmPage(OrderConfirmPageReq req){
         ModelAndView view = new ModelAndView("order/order-confirm");
@@ -60,6 +62,7 @@ public class OrderPageController {
      * lzn 2019/3/18 14:41
      * 订单确认支付页面
      */
+    @ApiOperation(value = "订单确认支付页面")
     @RequestMapping("/order-pay-page")
     public ModelAndView orderPayPage(SaveOrderRsp rsp) throws Exception{
         BigDecimal price = orderController.selectOrderPriceByorderCode(rsp.getOrderCode());
@@ -93,8 +96,9 @@ public class OrderPageController {
     /**
      * 支付猫支付成功，跳转地址
      * */
+    @ApiOperation(value = "支付猫支付成功，跳转地址")
     @GetMapping("/to_return_page")
-    public ModelAndView returnPayOrderPage(@PathVariable("orderid")String orderid){
+    public ModelAndView returnPayOrderPage(String orderid){
         System.err.print("支付猫支付成功，跳转地址:orderid = " + orderid);
         ModelAndView view = this.orderPage2("");
         return view;

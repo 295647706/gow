@@ -405,14 +405,19 @@ public class OrderService {
         if(null == req.getOrderCode()){
             return 0;
         }
-        Order order = new Order();
-        order.setOrderStatus("1");
-        order.setPayTime(new Date());
-        order.setOrderCode(req.getOrderCode());
-        order.setPayType(req.getPayType()==null?null:req.getPayType());
-        order.setPayPrice(req.getPayPrice()==null?null:req.getPayPrice());
-        int count = orderExtMapper.updateOrderStatusByOederCode(order);
-        return count;
+        Order order = orderExtMapper.selectOrderByOederCode(req.getOrderCode());
+        if(null != order) {
+            order.setOrderStatus("1");
+            order.setPayTime(new Date());
+            order.setOrderCode(req.getOrderCode());
+            order.setPayType(req.getPayType() == null ? null : req.getPayType());
+            order.setPayPrice(req.getPayPrice() == null ? null : req.getPayPrice());
+            order.setPlatformTradeNo(req.getPlatformTradeNo());
+            order.setKeyValue(req.getKey());
+            int count = orderMapper.updateByPrimaryKeySelective(order);
+            return count;
+        }
+        return 0;
     }
 
     /**

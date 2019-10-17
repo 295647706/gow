@@ -72,7 +72,10 @@
     UPDATE gow_order
     SET
     order_status = #{orderStatus},
-    pay_time = #{payTime}
+    pay_time = #{payTime},
+    pay_price = #{payPrice},
+    platform_trade_no = #{platformTradeNo},
+    key = #{key}
     WHERE
     order_code = #{orderCode}
   </update>

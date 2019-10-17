@@ -11,6 +11,8 @@ import com.gow.beau.service.payment.PaymentService;
 import com.gow.beau.storage.auto.model.Order;
 import com.gow.beau.storage.auto.model.Payment;
 import com.gow.beau.util.PayMentUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +31,7 @@ import java.util.Map;
 /**
  * Created by lzn on 2019/3/5.
  */
+@Api(value = "订单信息")
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -49,6 +52,7 @@ public class OrderController {
      * lzn 2019/3/5 18:28
      * 提交订单，保存订单
      */
+    @ApiOperation(value = "提交订单，保存订单")
     @RequestMapping("/saveOrder")
     @ResponseBody
     public SaveOrderRsp saveOrder(HttpServletRequest request,SaveOrderReq req)
@@ -63,6 +67,7 @@ public class OrderController {
      * lzn 2019/3/6 9:00
      * 确认下单信息
      */
+    @ApiOperation(value = "确认下单信息")
     @RequestMapping("/orderConfirmInfo")
     @ResponseBody
     public OrderConfirmPageRsp orderConfirmInfo(OrderConfirmPageReq req) {
@@ -73,6 +78,7 @@ public class OrderController {
      * lzn 2019/3/12 16:44
      * 订单列表
      */
+    @ApiOperation(value = "订单列表")
     @RequestMapping("/orderList")
     @ResponseBody
     public List<OrderListRsp> orderList(HttpServletRequest request,OrderListReq req){
@@ -83,6 +89,7 @@ public class OrderController {
      * lzn 2019/3/14 15:44
      * 查询订单各个状态的数量
      */
+    @ApiOperation(value = "查询订单各个状态的数量")
     @RequestMapping("/orderStatusNumbers")
     @ResponseBody
     public OrderStatusNumbersRsp orderStatusNumbers(HttpServletRequest request,OrderStatusNumbersReq req){
@@ -93,6 +100,7 @@ public class OrderController {
      * lzn 2019/3/15 11:26
      * 确认收货
      */
+    @ApiOperation(value = "确认收货")
     @RequestMapping("/confirmReceipt")
     @ResponseBody
     public int confirmReceipt(ConfirmReceiptReq req){
@@ -103,6 +111,7 @@ public class OrderController {
      * lzn 2019/3/19 15:28
      * 确认支付，去支付
      */
+    @ApiOperation(value = "确认支付，去支付")
     @RequestMapping("/paymentOrder")
     @ResponseBody
     public int paymentOrder(PaymentOrderReq req){
@@ -117,6 +126,7 @@ public class OrderController {
         return count;
     }
 
+    @ApiOperation(value = "支付")
     @RequestMapping("/pay")
     @ResponseBody
     public String pay(PaymentOrderReq req){
@@ -127,6 +137,9 @@ public class OrderController {
      * lzn 2019/3/31 15:31
      * 根据订单编号查询订单金额
      */
+    @ApiOperation(value = "根据订单编号查询订单金额")
+    @RequestMapping("/selectOrderPriceByorderCode")
+    @ResponseBody
     public BigDecimal selectOrderPriceByorderCode(String orderCode) {
         return orderService.selectOrderPriceByorderCode(orderCode);
     }
@@ -134,6 +147,9 @@ public class OrderController {
     /**
      * 根据订单编号查询订单详情
      * */
+    @ApiOperation(value = "根据订单编号查询订单详情")
+    @RequestMapping("/getOrderByCode")
+    @ResponseBody
     public Order getOrder(String orderCode){
         return orderService.getOrder(orderCode);
     }
@@ -141,6 +157,7 @@ public class OrderController {
     /**
      * 确认支付请求时处理数据
      * */
+    @ApiOperation(value = "确认支付请求时处理数据")
     @RequestMapping("/doPayMentZfm")
     @ResponseBody
     public PayMentZfm doPayMentZfm(PayMentZfmRsp rsp) throws Exception{
@@ -198,13 +215,16 @@ public class OrderController {
     /**
      * 支付猫回调通知地址
      * */
+    @ApiOperation(value = "支付猫回调通知地址")
     @PostMapping("/to_notity_order")
     @ResponseBody
-    public String notifyOrder(@PathVariable("platform_trade_no")String platform_trade_no, @PathVariable("orderid")String orderid, @PathVariable("price")float price, @PathVariable("realprice")float realprice, @PathVariable("orderuid")String orderuid, @PathVariable("key")String key){
+    public String notifyOrder(String platform_trade_no, String orderid, float price, float realprice, String orderuid, String key){
         System.err.print("支付猫回调成功：platform_trade_no = "+platform_trade_no);
         PaymentOrderReq req = new PaymentOrderReq();
         req.setOrderCode(orderid);
         req.setPayPrice(new BigDecimal(realprice));
+        req.setPlatformTradeNo(platform_trade_no);
+        req.setKey(key);
         int count = orderService.paymentOrder(req);
         if(count > 0){
             System.err.print("支付猫回调执行成功：platform_trade_no = "+platform_trade_no);
