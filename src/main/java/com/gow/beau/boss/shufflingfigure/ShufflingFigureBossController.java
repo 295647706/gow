@@ -7,6 +7,7 @@ import com.gow.beau.model.req.shufflingfigure.ShufflingFigurePageReq;
 import com.gow.beau.model.req.shufflingfigure.ShufflingFigureSetTimeReq;
 import com.gow.beau.service.shufflingfigure.ShufflingFigureNumberService;
 import com.gow.beau.service.shufflingfigure.ShufflingFigureService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @Author lzn
  * @DATE 2019/9/23 10:08
  */
+@Api(tags = "后台管理 - 轮播图管理")
 @Controller
 @RequestMapping("/shufflingFigureBoss")
 public class ShufflingFigureBossController {

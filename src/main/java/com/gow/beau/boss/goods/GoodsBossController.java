@@ -6,6 +6,7 @@ import com.gow.beau.model.req.goods.GoodsListReq;
 import com.gow.beau.model.rsp.goods.EditGoodsInfoRsp;
 import com.gow.beau.service.category.CategoryService;
 import com.gow.beau.service.goods.GoodsService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2019/4/21 0021.
  */
+@Api(tags = "后台管理 - 商品")
 @Controller
 @RequestMapping("/goodsBoss")
 public class GoodsBossController {

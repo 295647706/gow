@@ -3,6 +3,7 @@ package com.gow.beau.api.html;
 import com.gow.beau.api.customer.CustomerAddressController;
 import com.gow.beau.model.req.address.AddressReq;
 import com.gow.beau.model.req.customer.CustomerReq;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author lzn
  */
+@Api(tags = "页面 - 地址")
 @Controller
 @RequestMapping("/addressPage")
 public class AddressPageController {

@@ -10,6 +10,7 @@ import com.gow.beau.model.rsp.token.TokenRsp;
 import com.gow.beau.storage.auto.model.Customer;
 import com.gow.beau.util.JsonObject;
 import io.jsonwebtoken.Jwts;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ import java.util.Map;
 /**
  * Created by lzn on 2019/2/27.
  */
+@Api(tags = "数据 - 登陆")
 @Controller
 @RequestMapping("/login")
 public class Login {

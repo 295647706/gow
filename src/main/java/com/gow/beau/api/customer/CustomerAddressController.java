@@ -9,6 +9,7 @@ import com.gow.beau.model.req.customer.CustomerReq;
 import com.gow.beau.model.rsp.address.AddressRsp;
 import com.gow.beau.model.rsp.customer.CustomerAddressListRsp;
 import com.gow.beau.service.customer.CustomerAddressService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import java.util.List;
  *
  * @author lzn
  */
+@Api(tags = "数据 - 会员地址")
 @Controller
 @RequestMapping("/customerAddress")
 public class CustomerAddressController {

@@ -4,6 +4,7 @@ import com.gow.beau.model.rsp.upload.UploadRsp;
 import com.gow.beau.service.imageurl.ImageUrlService;
 import com.gow.beau.util.Base64Utils;
 import com.gow.beau.util.ImageUtil;
+import io.swagger.annotations.Api;
 import net.sf.json.JSONObject;
 import com.gow.beau.util.CodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.List;
  * @Author lzn
  * @DATE 2019/9/12 11:03
  */
+@Api(tags = "数据 - 后台管理 - 文件上传")
 @RestController
 @RequestMapping("/fileUpload")
 public class FileUpload {

@@ -4,6 +4,7 @@ import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.req.information.InformationListPageReq;
 import com.gow.beau.service.information.InformationService;
 import com.gow.beau.storage.auto.model.Information;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @Author lzn
  * @DATE 2019/9/16 16:18
  */
+@Api(tags = "后台管理 - 资讯")
 @Controller
 @RequestMapping("/informationBoss")
 public class InformationBossController {

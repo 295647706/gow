@@ -5,6 +5,7 @@ import com.gow.beau.model.req.customer.CustomerIsUerReq;
 import com.gow.beau.model.req.customer.CustomerListPageReq;
 import com.gow.beau.model.rsp.customer.CustomerListPageRsp;
 import com.gow.beau.service.customer.CustomerService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @Author lzn
  * @DATE 2019/8/29 17:38
  */
+@Api(tags = "后台管理 - 会员")
 @Controller
 @RequestMapping("/customerBoss")
 public class CustomerBossController {

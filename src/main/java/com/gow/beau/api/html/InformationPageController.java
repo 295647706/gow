@@ -1,6 +1,7 @@
 package com.gow.beau.api.html;
 
 import com.gow.beau.api.information.InformationController;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @Author lzn
  * @DATE 2019/9/18 17:49
  */
+@Api(tags = "页面 - 资讯")
 @Controller
 @RequestMapping("/informationPage")
 public class InformationPageController {

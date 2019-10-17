@@ -5,6 +5,7 @@ import com.gow.beau.model.req.information.InformationListPageReq;
 import com.gow.beau.model.rsp.information.InformationRsp;
 import com.gow.beau.service.information.InformationService;
 import com.gow.beau.storage.auto.model.Information;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import java.util.List;
  * @Author lzn
  * @DATE 2019/9/18 17:30
  */
+@Api(tags = "数据 - 资讯")
 @Controller
 @RequestMapping("/information")
 public class InformationController {

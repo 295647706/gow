@@ -8,6 +8,7 @@ import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.rsp.goodsrecommended.GoodsRecommendedListRsp;
 import com.gow.beau.service.shufflingfigure.ShufflingFigureService;
 import com.gow.beau.storage.auto.model.Information;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import java.util.List;
  *
  * @author lzn
  */
+@Api(tags = "页面 - 首页")
 @Controller
 @RequestMapping("/indexPage")
 public class IndexPageController {

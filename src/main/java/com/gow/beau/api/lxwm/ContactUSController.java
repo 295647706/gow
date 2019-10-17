@@ -2,6 +2,7 @@ package com.gow.beau.api.lxwm;
 
 import com.gow.beau.model.rsp.lxwm.LxwmRsp;
 import com.gow.beau.service.lxwm.ContactUSService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by lzn on 2019/3/25.
  */
+@Api(tags = "数据 - 联系列表信息")
 @Controller
 @RequestMapping("/contactUs")
 public class ContactUSController {

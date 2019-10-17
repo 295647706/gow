@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * Created by lzn on 2019/3/5.
  */
-@Api(value = "订单信息")
+@Api(tags = "数据 - 订单")
 @Controller
 @RequestMapping("/order")
 public class OrderController {

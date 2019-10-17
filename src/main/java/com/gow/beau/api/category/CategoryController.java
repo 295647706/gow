@@ -2,6 +2,7 @@ package com.gow.beau.api.category;
 
 import com.gow.beau.model.rsp.category.CategoryListRsp;
 import com.gow.beau.service.category.CategoryService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author lzn
  */
+@Api(tags = "数据 - 分类")
 @Controller
 @RequestMapping("/category")
 public class CategoryController {

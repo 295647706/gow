@@ -1,6 +1,7 @@
 package com.gow.beau.api.html;
 
 import com.gow.beau.api.lxwm.ContactUSController;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Created by lzn on 2019/3/25.
  */
+@Api(tags = "页面 - 联系我们")
 @Controller
 @RequestMapping("/lxwmPage")
 public class LxwmPageController {

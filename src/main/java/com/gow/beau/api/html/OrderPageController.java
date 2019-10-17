@@ -23,7 +23,7 @@ import java.util.UUID;
  *
  * @author lzn
  */
-@Api(value = "订单页面")
+@Api(tags = "页面 - 订单")
 @Controller
 @RequestMapping("/orderPage")
 public class OrderPageController {

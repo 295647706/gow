@@ -4,6 +4,7 @@ import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.req.payment.PayMentAddEditReq;
 import com.gow.beau.model.req.payment.PayMentListReq;
 import com.gow.beau.service.payment.PaymentService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @DATE 2019/9/3 10:31
  * 支付配置管理
  */
+@Api(tags = "后台管理 - 支付配置管理")
 @Controller
 @RequestMapping("/payMentInfoBoss")
 public class PayMentInfoController {

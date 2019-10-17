@@ -1,6 +1,7 @@
 package com.gow.beau.api.html;
 
 import com.gow.beau.api.category.CategoryController;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author lzn
  */
+@Api(tags = "页面 - 分类")
 @Controller
 @RequestMapping("/categoryPage")
 public class CategoryPageController {

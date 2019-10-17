@@ -6,6 +6,7 @@ import com.gow.beau.model.req.category.CategoryEditReq;
 import com.gow.beau.model.req.category.CategoryListPageReq;
 import com.gow.beau.model.rsp.category.CategoryListRsp;
 import com.gow.beau.service.category.CategoryService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import java.util.List;
  * @DATE 2019/7/9 15:41
  * 后台分类
  */
+@Api(tags = "后台管理 - 分类")
 @Controller
 @RequestMapping("/categoryBoss")
 public class CategoryBossController {

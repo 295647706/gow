@@ -2,6 +2,7 @@ package com.gow.beau.api.payment;
 
 import com.gow.beau.model.data.GLpayApi;
 import com.gow.beau.util.PayMentUtil;
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import java.util.Map;
  * @Author lzn
  * @DATE 2019/9/2 16:10
  */
+@Api(tags = "数据 - 支付")
 @Controller
 @RequestMapping("/payment")
 public class PayMentController {

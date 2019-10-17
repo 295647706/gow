@@ -4,6 +4,7 @@ import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.req.order.OrderExpressReq;
 import com.gow.beau.model.req.order.OrderListReq;
 import com.gow.beau.service.order.OrderService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Created by Administrator on 2019/4/21 0021.
  */
+@Api(tags = "后台管理 - 订单")
 @Controller
 @RequestMapping("/orderBoss")
 public class OrderBossController {

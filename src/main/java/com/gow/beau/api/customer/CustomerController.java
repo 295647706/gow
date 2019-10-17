@@ -9,6 +9,7 @@ import com.gow.beau.model.rsp.customer.CustomerRsp;
 import com.gow.beau.model.rsp.login.LoginRsp;
 import com.gow.beau.service.customer.CustomerService;
 import com.gow.beau.storage.auto.model.Customer;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author lzn
  */
+@Api(tags = "数据 - 会员")
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {

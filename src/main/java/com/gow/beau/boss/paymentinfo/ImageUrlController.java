@@ -2,6 +2,7 @@ package com.gow.beau.boss.paymentinfo;
 
 import com.gow.beau.service.imageurl.ImageUrlService;
 import com.gow.beau.storage.auto.model.ImageUrl;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @DATE 2019/9/12 16:18
  * 图片存储路径设置
  */
+@Api(tags = "后台管理 - 图片存储路径设置")
 @Controller
 @RequestMapping("/imageUrlBoss")
 public class ImageUrlController {

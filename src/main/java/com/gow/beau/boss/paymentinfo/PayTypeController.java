@@ -4,6 +4,7 @@ import com.gow.beau.model.data.PageInfo;
 import com.gow.beau.model.req.payment.PayTypeListReq;
 import com.gow.beau.service.payment.PayTypeService;
 import com.gow.beau.storage.auto.model.Paytype;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @DATE 2019/9/9 14:02
  * 支付类型
  */
+@Api(tags = "后台管理 - 支付类型")
 @Controller
 @RequestMapping("/payTypeBoss")
 public class PayTypeController {

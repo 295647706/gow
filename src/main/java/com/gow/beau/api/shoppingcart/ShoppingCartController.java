@@ -5,6 +5,7 @@ import com.gow.beau.model.req.shoppingcart.EditShoppingCartGoodsNumberReq;
 import com.gow.beau.model.req.shoppingcart.ShoppingCartReq;
 import com.gow.beau.model.rsp.shoppingcart.ShoppingCartRsp;
 import com.gow.beau.service.shoppingcart.ShoppingCartService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author lzn
  */
+@Api(tags = "数据 - 购物车")
 @Controller
 @RequestMapping("/shoppingCart")
 public class ShoppingCartController {

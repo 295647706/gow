@@ -2,6 +2,7 @@ package com.gow.beau.api.html;
 
 import com.gow.beau.api.shoppingcart.ShoppingCartController;
 import com.gow.beau.model.req.shoppingcart.ShoppingCartReq;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author lzn
  */
+@Api(tags = "页面 - 购物车")
 @Controller
 @RequestMapping("/shoppingCartPage")
 public class ShoppingCartPageController {

@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.gow.beau.model.req.customer.CustomerReq;
 import com.gow.beau.model.rsp.customer.CustomerRsp;
 import com.gow.beau.service.customer.CustomerService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @DATE 2019/9/9 11:25
  * 登陆用户信息
  */
+@Api(tags = "数据 - 登陆token")
 @Controller
 @RequestMapping("/login")
 public class LoginCustomer {

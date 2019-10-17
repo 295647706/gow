@@ -5,6 +5,7 @@ import com.gow.beau.model.req.collection.CollectionGoodsReq;
 import com.gow.beau.model.req.collection.GoodsCollectionListReq;
 import com.gow.beau.model.rsp.collection.GoodsCollectionListRsp;
 import com.gow.beau.service.collection.GoodsCollectionService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * Created by lzn on 2019/3/5.
  */
+@Api(tags = "数据 - 商品收藏")
 @Controller
 @RequestMapping("/goodsCollection")
 public class GoodsCollectionController {

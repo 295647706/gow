@@ -7,6 +7,7 @@ import com.gow.beau.model.req.login.LoginReq;
 import com.gow.beau.model.req.regist.RegistUsernameReq;
 import com.gow.beau.model.rsp.token.TokenRsp;
 import com.gow.beau.storage.auto.model.Customer;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.util.Date;
 /**
  * Created by lzn on 2019/3/19.
  */
+@Api(tags = "数据 - 注册")
 @Controller
 @RequestMapping("/regist")
 public class RegistController {
