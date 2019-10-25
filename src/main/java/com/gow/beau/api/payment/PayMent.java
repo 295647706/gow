@@ -8,12 +8,22 @@ import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.CoreConnectionPNames;
 
+import org.apache.http.conn.ssl.SSLSocketFactory;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,13 +86,52 @@ public class PayMent {
         return responseData;
     }
 
+    /**
+     * DefaultHttpClient格式化，使之不需要SSL证书也可以打通SSL 如果不格式化会报错：
+     * javax.net.ssl.SSLPeerUnverifiedException: peer not authenticate
+     * @param base
+     * @return
+     */
+    public static DefaultHttpClient wrapClient(DefaultHttpClient base) {
+        SSLContext sslContext;
+        try {
+            sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, new TrustManager[] { new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+
+
+                public void checkClientTrusted(X509Certificate[] certs,
+                                               String authType) {
+                }
+
+
+                public void checkServerTrusted(X509Certificate[] certs,
+                                               String authType) {
+                }
+            } }, new SecureRandom());
+            SSLSocketFactory ssf = new SSLSocketFactory(sslContext,
+                    SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+            SchemeRegistry registry = new SchemeRegistry();
+            registry.register(new Scheme("https", 443, ssf));
+            ThreadSafeClientConnManager mgr = new ThreadSafeClientConnManager(
+                    registry);
+            return new DefaultHttpClient(mgr, base.getParams());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
     public static boolean httpPostWithJson(String url, String pay_type, String order_id, String order_customer_id, BigDecimal price ,String... goodsNames){
         boolean isSuccess = false;
 
         HttpPost post = null;
         try{
-            HttpClient httpClient = new DefaultHttpClient();
-
+            DefaultHttpClient httpClient = new DefaultHttpClient();
+            // 格式化打通SSL
+            httpClient = wrapClient(httpClient);
             //设置超时时间
             httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT,2000);
             httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,2000);
