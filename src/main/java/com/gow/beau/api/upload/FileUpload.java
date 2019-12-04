@@ -72,7 +72,7 @@ public class FileUpload {
                 if (width < WIDTH && height < HEIGHT) {
                     rsp.setCode(1);
                     rsp.setMsg("<span style='color: #ee7800;'>图片宽高建议在：1080*460</span>");
-                    return JSONObject.fromObject(rsp);
+                    //return JSONObject.fromObject(rsp);
                 }
                 //保存图片
                 //文件原名称
@@ -108,6 +108,7 @@ public class FileUpload {
             } catch (Exception e) {
                 rsp.setCode(-1);
                 rsp.setMsg(e.getMessage());
+                e.printStackTrace();
             }
         }
         //转json

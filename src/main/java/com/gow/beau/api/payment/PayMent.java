@@ -214,7 +214,7 @@ public class PayMent {
     public static void main(String[] args) {
         Payment payment = new Payment();
         payment.setPath("http://gow.hdongx.com");
-        payment.setApiUrl("https://bufpay.com/api/pay/95134");
+        payment.setApiUrl("http://bufpay.com/api/pay/95134");
         payment.setReturnUrl("/orderPage/order2-page");
         payment.setAppEcret("967e0dc6b34e46c082af6997253fde6c");
         System.err.println(httpsPost("201908261310111234","wechat","1001",new BigDecimal(0.01),"商品1",payment));

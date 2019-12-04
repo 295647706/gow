@@ -10,6 +10,7 @@ import com.gow.beau.storage.auto.mapper.GoodsCollectionMapper;
 import com.gow.beau.storage.auto.model.Goods;
 import com.gow.beau.storage.auto.model.GoodsCollection;
 import com.gow.beau.storage.ext.mapper.GoodsCollectionExtMapper;
+import com.gow.common.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,13 +47,13 @@ public class GoodsCollectionService {
         //查询是否已经存在此用户收藏了该商品
         int collectionCount = this.selectCountBycustomerIdAndGoodsId(req.getCustomerId(),req.getGoodsId());
         if(collectionCount > 0){
-            throw new RuntimeException("此用户已收藏了该商品");
+            throw new RestException("此用户已收藏了该商品");
         }
 
         //查询商品信息
         Goods goods = goodsService.selectGoodsInfo(req.getGoodsId());
         if(null == goods){
-            throw new RuntimeException("没有此商品信息");
+            throw new RestException("没有此商品信息");
         }
 
         //收藏商品信息

@@ -5,9 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
+@ComponentScan(basePackages = {"com.gow"})
 @MapperScan(value = {"com.gow.beau.storage.auto.mapper", "com.gow.beau.storage.ext.mapper"})
 @SpringBootApplication
 @EnableSwagger2

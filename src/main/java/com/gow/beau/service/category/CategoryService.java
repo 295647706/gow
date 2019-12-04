@@ -15,6 +15,7 @@ import com.gow.beau.storage.ext.mapper.CategoryExtMapper;
 import com.gow.beau.storage.ext.mapper.GoodsExtMapper;
 import com.gow.beau.util.BeanUtil;
 import com.gow.beau.util.DateUtil;
+import com.gow.common.exception.RestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
