@@ -278,4 +278,15 @@ public class OrderController {
     }
 
 
+    /**
+     * bufpay 支付 回调
+     * */
+    @ApiOperation(value = "bufpay 支付 回调通知地址")
+    @PostMapping("/to_bufpay_notity_url")
+    @ResponseBody
+    public String to_bufpay_notity_url(String aoid,String order_id,String order_uid,double price,double pay_price,String sign){
+        return orderService.to_bufpay_notity_url(aoid,order_id,order_uid,price,pay_price,sign);
+    }
+
+
 }

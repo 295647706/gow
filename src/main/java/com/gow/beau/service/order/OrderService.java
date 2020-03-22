@@ -18,6 +18,8 @@ import com.gow.beau.storage.ext.mapper.OrderExtMapper;
 import com.gow.beau.util.BeanUtil;
 import com.gow.beau.util.CodeUtil;
 import com.gow.beau.util.SettingValueUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -33,6 +35,8 @@ import java.util.List;
  */
 @Service
 public class OrderService {
+
+    private final static transient Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     @Autowired
     private GoodsService goodsService;
@@ -546,5 +550,23 @@ public class OrderService {
         orderGoodsDetailRspList = orderGoodsService.selectOrderGoodsDetailListByOrderId(orderId);
         rsp.setOrderGoodsDetailRspList(orderGoodsDetailRspList);
         return rsp;
+    }
+
+    /**
+     * bufpay 支付 回调
+     * */
+    public String to_bufpay_notity_url(String aoid,String order_id,String order_uid,double price,double pay_price,String sign){
+        PaymentOrderReq req = new PaymentOrderReq();
+        req.setOrderCode(order_id);
+        req.setPayPrice(new BigDecimal(pay_price));
+        req.setPlatformTradeNo(aoid);
+        req.setKey(sign);
+        //修改订单支付状态
+        int count = this.paymentOrder(req);
+        if(count > 0){
+            System.err.print("支付猫回调执行成功：aoid = "+aoid);
+            return "OK";
+        }
+        return null;
     }
 }
