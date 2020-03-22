@@ -95,7 +95,7 @@
 	    </div>
 
 		<div>
-			<form style='display:none;' id='formpay' name='formpay' method='post' action='http://pay.aswe.com.cn'>
+			<!--<form style='display:none;' id='formpay' name='formpay' method='post' action='http://pay.aswe.com.cn'>
 				<input name='goodsname' id='goodsname' type='text' value='' />
 				<input name='istype' id='istype' type='text' value='' />
 				<input name='key' id='key' type='text' value=''/>
@@ -105,6 +105,20 @@
 				<input name='price' id='price' type='text' value=''/>
 				<input name='return_url' id='return_url' type='text' value=''/>
 				<input name='uid' id='uid' type='text' value=''/>
+				<input type='submit' id='submitPay'>
+			</form>-->
+
+			<!-- bufpay 支付 -->
+			<form style='display:none;' id='formpay' name='formpay' method='post' action='http://bufpay.com/api/pay/95134' enctype="application/x-www-form-urlencoded">
+				<input name='name' id='name' type='text' value='' />
+				<input name='pay_type' id='pay_type' type='text' value='' />
+				<input name='notify_url' id='notify_url' type='text' value=''/>
+				<input name='order_id' id='order_id' type='text' value=''/>
+				<input name='order_uid' id='order_uid' type='text' value=''/>
+				<input name='price' id='price' type='text' value=''/>
+				<input name='return_url' id='return_url' type='text' value=''/>
+				<input name='sign' id='sign' type='text' value=''/>
+				<input name='expire' id='expire' type='text' value=''/>
 				<input type='submit' id='submitPay'>
 			</form>
 		</div>
@@ -119,7 +133,9 @@
             $(".shopcar-checkbox label").removeClass("shopcar-checkd")
             $(this).addClass("shopcar-checkd");
             //支付类型
-            $("#payType").val($(this).attr("data"));
+			var type = $(this).attr("data");
+            $("#payType").val(type);
+            console.log(type)
 		})
 
 		$(function () {
@@ -136,7 +152,7 @@
 					success : function (data) {
                     	console.log(data)
                         if(data){
-                        	$("#formpay").attr("action",data.baseUrl);
+                        	/*$("#formpay").attr("action",data.baseUrl);
                         	$("#goodsname").attr("value",data.goodsname);
 							$("#istype").attr("value",data.istype);
 							$("#key").attr("value",data.key);
@@ -145,7 +161,19 @@
 							$("#orderuid").attr("value",data.orderuid);
 							$("#price").attr("value",data.price);
 							$("#return_url").attr("value",data.returnUrl);
-							$("#uid").attr("value",data.uid);
+							$("#uid").attr("value",data.uid);*/
+
+                        	//bufpay 支付
+                            $("#formpay").attr("action",data.baseUrl);
+                            $("#name").attr("value",data.goodsname);
+                            $("#pay_type").attr("value",data.istype);
+                            $("#notify_url").attr("value",data.notifyUrl);
+                            $("#order_id").attr("value",data.orderid);
+                            $("#order_uid").attr("value",data.orderuid);
+                            $("#price").attr("value",data.price);
+                            $("#return_url").attr("value",data.returnUrl);
+                            $("#sign").attr("value",data.sign);
+                            $("#expire").attr("value",data.expire);
 							//表单请求
 							$("#formpay").submit();
 						}

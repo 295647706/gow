@@ -30,4 +30,8 @@ public class PayMentZfm {
     private String baseUrl;
 
     private String key;
+
+    private Integer expire;
+
+    private String sign;
 }

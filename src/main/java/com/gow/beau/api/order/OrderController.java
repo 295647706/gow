@@ -10,6 +10,7 @@ import com.gow.beau.service.ordergoods.OrderGoodsService;
 import com.gow.beau.service.payment.PaymentService;
 import com.gow.beau.storage.auto.model.Order;
 import com.gow.beau.storage.auto.model.Payment;
+import com.gow.beau.util.MD5;
 import com.gow.beau.util.PayMentUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -166,8 +167,10 @@ public class OrderController {
         //订单商品名称
         String goodsNames = orderGoodsService.selectGoodsNamesByorderId(order.getId());
         //支付配置信息
-        Payment payment = paymentService.selectFirstPaymentInfo("docpay");
-        return getPayMentZfm(order,rsp.getPayType(),goodsNames,payment);
+        //Payment payment = paymentService.selectFirstPaymentInfo("docpay");
+        //return getPayMentZfm(order,rsp.getPayType(),goodsNames,payment);
+
+        return bufpay(order,rsp.getPayType(),goodsNames);
     }
 
     private PayMentZfm getPayMentZfm(Order order, String payType, String goodsNames, Payment payment) throws Exception{
@@ -209,6 +212,47 @@ public class OrderController {
         zfm.setBaseUrl(payment.getApiUrl().trim());
 
         return zfm;
+    }
+
+
+    //bufpay 支付
+    private PayMentZfm bufpay(Order order, String payType, String goodsNames) throws Exception{
+        //支付配置信息
+        Payment payment = paymentService.selectFirstPaymentInfo("bufpay");
+        PayMentZfm pay = new PayMentZfm();
+
+        //订单金额
+        //是否开启默认支付金额（0：不开启，1：开启）
+        if(null == payment.getIsDefaultPrice() || payment.getIsDefaultPrice().equals("0")) {
+            pay.setPrice(order.getOrderPrice().toString());
+        }else if(payment.getIsDefaultPrice().equals("1")){
+            pay.setPrice(payment.getDefaultPrice().toString());
+        }
+        //支付key
+        String appSecret = payment.getAppEcret();
+        //超时时间
+        int expire = payment.getExpire();
+        pay.setExpire(expire);
+        //支付类型 (wechat:微信，alipay：支付宝)
+        if(payType.equals("1")){
+            //支付宝
+            pay.setIstype("alipay");
+        }else if(payType.equals("2")){
+            //微信
+            pay.setIstype("wechat");
+        }
+        pay.setOrderid(order.getOrderCode());
+        pay.setOrderuid(order.getCustomerId().toString());
+        pay.setGoodsname(goodsNames);
+        pay.setNotifyUrl(payment.getPath()+payment.getNotifyUrl());
+        pay.setReturnUrl(payment.getPath()+payment.getReturnUrl());
+        pay.setBaseUrl(payment.getApiUrl());
+        //顺序拼接后MD5值
+        String paramData=pay.getGoodsname()+pay.getIstype()+pay.getPrice()+pay.getOrderid()+pay.getOrderuid()+pay.getNotifyUrl()+pay.getReturnUrl()+appSecret;
+        String sign = MD5.md5(paramData);
+        pay.setSign(sign);
+
+        return pay;
     }
 
 
