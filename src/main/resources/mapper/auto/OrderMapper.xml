@@ -106,7 +106,7 @@
     shipping_person, shipping_phone, shipping_mobile, invoice_title, invoice_content, 
     del_flag, invoice_type, customer_remark, order_integral, evaluate_flag, express_price, 
     shipping_postcode, order_cancel_time, order_cancel_remark, back_price, create_time, 
-    send_person, send_mobile, platformTradeNo, key_value
+    send_person, send_mobile, platform_trade_no, key_value
   </sql>
   <select id="selectByExample" parameterType="com.gow.beau.storage.auto.model.OrderExample" resultMap="BaseResultMap">
     select

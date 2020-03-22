@@ -504,7 +504,7 @@ public class OrderService {
         }
         //比较订单总金额和支付金额,-1表示小于，0是等于，1是大于
         if(order.getOrderPrice().compareTo(order.getPayPrice()) != 0){
-            return -3;
+            //return -3;
         }
         if(null != order.getExpressCode()){
             return -4;
