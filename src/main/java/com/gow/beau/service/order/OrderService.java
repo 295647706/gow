@@ -555,7 +555,8 @@ public class OrderService {
     /**
      * bufpay 支付 回调
      * */
-    public String to_bufpay_notity_url(String aoid,String order_id,String order_uid,double price,double pay_price,String sign){
+    public int to_bufpay_notity_url(String aoid,String order_id,String order_uid,double price,double pay_price,String sign){
+        logger.info("bufpay 支付 回调执行开始：aoid = "+aoid);
         PaymentOrderReq req = new PaymentOrderReq();
         req.setOrderCode(order_id);
         req.setPayPrice(new BigDecimal(pay_price));
@@ -564,9 +565,9 @@ public class OrderService {
         //修改订单支付状态
         int count = this.paymentOrder(req);
         if(count > 0){
-            System.err.print("支付猫回调执行成功：aoid = "+aoid);
-            return "OK";
+            logger.info("bufpay 支付 回调执行成功：aoid = "+aoid);
+            return 200;
         }
-        return null;
+        return 0;
     }
 }
